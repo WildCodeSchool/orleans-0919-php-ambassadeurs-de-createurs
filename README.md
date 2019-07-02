@@ -48,7 +48,8 @@ Create a repository on Github in WildCodeSchool organization following this exem
 3. Look for your project in search bar on the left,
 4. As soon as your repository have a `.travis.yml` in root folder, Travis should detect it and run test.
 
-> You can watch this screenshot to see basic configuration : ![basic config](https://files.slack.com/files-pri/T6SG2QGG2-FL0TFUJ8L/capture_d_____cran_de_2019-07-01_16-37-04.png)
+> You can watch this screenshot to see basic configuration : ![basic config](http://images.innoveduc.fr/symfony4/travis-config.png)
+
 
 
 ### Configure you repository - Settings options
