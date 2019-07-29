@@ -82,6 +82,7 @@ Create a repository on Github in WildCodeSchool organization following this exem
 
 1. Run `./bin/phpcs` to launch PHP code sniffer
 2. Run `./bin/phpstan analyse src --level max` to launch PHPStan
+3. Run `./bin/phpmd src text phpmd.xml` to launch PHP Mess Detector
 
 ## Deployment
 
@@ -93,6 +94,7 @@ Add additional notes about how to deploy this on a live system
 * [GrumPHP](https://github.com/phpro/grumphp)
 * [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)
 * [PHPStan](https://github.com/phpstan/phpstan)
+* [PHPMD](http://phpmd.org)
 * [Travis CI](https://github.com/marketplace/travis-ci)
 
 ## Contributing

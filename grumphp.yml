@@ -10,3 +10,13 @@ parameters:
               ./vendor/autoload.php
             configuration: ./phpstan.neon
             level: max
+        phpmd:
+            whitelist_patterns:
+                - 'src'
+            ruleset:
+                - 'cleancode'
+                - 'codesize'
+                - 'controversial'
+                - 'design'
+                - 'naming'
+                - 'unusedcode'

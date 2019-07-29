@@ -13,6 +13,7 @@ before_script:
 script:
     - ./bin/phpcs
     - ./bin/phpstan analyse src --level max
+    - ./bin/phpmd src text phpmd.xml
 notifications:
     email:
         - TRAINER@wildcodeschool.fr
