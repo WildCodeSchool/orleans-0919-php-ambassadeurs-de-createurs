@@ -81,7 +81,7 @@ Create a repository on Github in WildCodeSchool organization following this exem
 ### Testing
 
 1. Run `./bin/phpcs` to launch PHP code sniffer
-2. Run `./bin/phpstan analyse src --level 5` to launch PHPStan
+2. Run `./bin/phpstan analyse src --level max` to launch PHPStan
 
 ## Deployment
 

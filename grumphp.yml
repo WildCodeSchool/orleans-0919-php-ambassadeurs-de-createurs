@@ -9,4 +9,4 @@ parameters:
               config
               ./vendor/autoload.php
             configuration: ./phpstan.neon
-            level: 5
+            level: max
