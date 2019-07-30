@@ -7,6 +7,7 @@
         "eslint-plugin-import": "^2.18.2",
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "eslint-plugin-react": "^7.14.3",
+        "sass-lint": "^1.13.1",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -19,7 +20,6 @@
     },
     "dependencies": {
         "node-sass": "^4.12.0",
-        "sass-lint": "^1.13.1",
         "sass-loader": "^7.1.0"
     }
 }
