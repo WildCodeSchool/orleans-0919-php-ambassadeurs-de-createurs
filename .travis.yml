@@ -9,10 +9,12 @@ before_install:
     - if [ $(find ./ -name .DS_Store) ]; then echo "Forbidden MacOS boring file found ! Please, ignore them globaly..."; exit 2; fi
 install:
     - composer install
+    - npm install
 script:
     - ./bin/phpcs
     - ./bin/phpstan analyse src --level max
     - ./bin/phpmd src text phpmd.xml
+    - ./bin/eslint assets/js
 notifications:
     email:
         - TRAINER@wildcodeschool.fr
