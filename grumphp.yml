@@ -14,9 +14,4 @@ parameters:
             whitelist_patterns:
                 - 'src'
             ruleset:
-                - 'cleancode'
-                - 'codesize'
-                - 'controversial'
-                - 'design'
-                - 'naming'
-                - 'unusedcode'
+                - 'phpmd.xml'
