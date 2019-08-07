@@ -83,9 +83,16 @@ Create a repository on Github in WildCodeSchool organization following this exem
 1. Run `./bin/phpcs` to launch PHP code sniffer
 2. Run `./bin/phpstan analyse src --level 5` to launch PHPStan
 
+### Windows Users
+
+If you develop on Windows, you should edit you git configuration to change your end of line rules with this command :
+
+`git config --global core.autocrlf true`
+
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
+
 
 ## Built With
 
