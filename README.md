@@ -86,9 +86,16 @@ Create a repository on Github in WildCodeSchool organization following this exem
 3. Run `./bin/eslint assets/js` to launch ESLint JS linter
 3. Run `./bin/sass-lint -c sass-linter.yml` to launch Sass-lint SASS/CSS linter
 
+### Windows Users
+
+If you develop on Windows, you should edit you git configuration to change your end of line rules with this command :
+
+`git config --global core.autocrlf true`
+
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
+
 
 ## Built With
 
