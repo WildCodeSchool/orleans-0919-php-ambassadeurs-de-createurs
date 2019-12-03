@@ -1,8 +1,13 @@
 {% extends 'base.html.twig' %}
 
-        {{ include '_navbar.html.twig' }}
-        {% block body %}
+{% block header %}
+    {{ include '_navbar.html.twig' }}
+{% endblock %}
 
-        {% endblock %}
-        {{ include '_footer.html.twig' }}
+{% block body %}
+{% endblock %}
+
+{% block footer %}
+    {{ include '_footer.html.twig' }}
+{% endblock %}
 
