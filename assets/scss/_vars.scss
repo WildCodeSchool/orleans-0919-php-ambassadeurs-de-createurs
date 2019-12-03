@@ -1,3 +1,13 @@
-$primary-color: #f76c6c;
-$secondary-color: #f99797;
-$warm-color: #ffd64f;
+$primary-color: #B08C3E;
+$secondary-color: #000000;
+$third-color: #DFECF3;
+
+$font-body: adobe-devanagari-regular;
+$font-title: AsmelinaHarley;
+
+@font-face {
+    font-family: adobe-devanagari-regular;
+    src: url("../font/adobe-devanagari.otf");
+    font-family: AsmelinaHarley;
+    src: url("../font/AsmelinaHarley.ttf");
+}
