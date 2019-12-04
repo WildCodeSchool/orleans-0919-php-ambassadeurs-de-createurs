@@ -1,8 +1,15 @@
 @import "vars";
 @import "~bootstrap/scss/bootstrap";
 @import "style_navbar";
+@import "style_footer";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
 
 
 body {
     background-color: $third-color;
 }
+
+
