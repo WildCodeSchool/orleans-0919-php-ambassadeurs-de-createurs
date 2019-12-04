@@ -26,7 +26,6 @@ class UserType extends AbstractType
             ])
             ->add('mail', EmailType::class, [
                 'label' => 'E-mail',
-                'trim' => true,
             ])
             ->add('picture', TextType::class, [
                 'label' => 'Photo',
@@ -36,7 +35,6 @@ class UserType extends AbstractType
             ])
             ->add('department', EntityType::class, [
                 'label' => 'Département',
-                'trim' => true,
                 'class' => Department::class,
                 'choice_label' => 'codeName',
             ])
