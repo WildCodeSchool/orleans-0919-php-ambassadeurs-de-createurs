@@ -26,6 +26,7 @@ class BlogType extends AbstractType
             ])
             ->add('date', DateType::class, [
                 'label' => 'Date',
+                'format' => 'ddMMMMyyyy',
             ])
             ->add('content', TextareaType::class, [
                 'label' => 'Contenu',
