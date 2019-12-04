@@ -15,3 +15,5 @@ const $ = require('jquery');
 // the bootstrap module doesn't export/return anything
 // eslint-disable-next-line import/no-extraneous-dependencies
 require('bootstrap');
+
+const imagesContext = require.context('../images', true, /\.(png|jpg|jpeg|gif|ico|svg|webp)$/);
