@@ -12,8 +12,8 @@
                 <td>{{ blog.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
-                <td>{{ blog.name }}</td>
+                <th>Title</th>
+                <td>{{ blog.title }}</td>
             </tr>
             <tr>
                 <th>Author</th>
@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <th>Date</th>
-                <td>{{ blog.date ? blog.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ blog.date ? blog.date|date('Y-m-d') }}</td>
             </tr>
         </tbody>
     </table>

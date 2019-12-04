@@ -9,7 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Title</th>
                 <th>Author</th>
                 <th>Date</th>
                 <th>actions</th>
@@ -19,9 +19,9 @@
         {% for blog in blogs %}
             <tr>
                 <td>{{ blog.id }}</td>
-                <td>{{ blog.name }}</td>
+                <td>{{ blog.title }}</td>
                 <td>{{ blog.author }}</td>
-                <td>{{ blog.date ? blog.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ blog.date ? blog.date|date('Y-m-d') }}</td>
                 <td>
                     <a href="{{ path('blog_show', {'id': blog.id}) }}">show</a>
                     <a href="{{ path('blog_edit', {'id': blog.id}) }}">edit</a>

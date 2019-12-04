@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Blog;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,17 +16,20 @@ class BlogType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, [
-                'label' => 'Titre'
+            ->add('title', TextType::class, [
+                'label' => 'Titre',
+                'trim' => true,
             ])
             ->add('author', TextType::class, [
-                'label' => 'Auteur'
+                'label' => 'Auteur',
+                'trim' => true,
             ])
-            ->add('date', DateTimeType::class, [
-                'label' => 'date'
+            ->add('date', DateType::class, [
+                'label' => 'Date',
             ])
             ->add('content', TextareaType::class, [
-                'label' => 'Contenu'
+                'label' => 'Contenu',
+                'trim' => true,
             ]);
     }
 

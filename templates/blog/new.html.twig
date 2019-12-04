@@ -4,10 +4,10 @@
 
 {% block body %}
     <div class="container">
-    <h1>Créer un nouvel article</h1>
+    <h1 class="text-center m-5">Créer un nouvel article</h1>
 
     {{ include('blog/_form.html.twig') }}
 
-    <a href="{{ path('blog_index') }}">Retour</a>
+    <a href="{{ path('blog_index') }}"><button class="btn btn-dark">Retour</button></a>
     </div>
 {% endblock %}
