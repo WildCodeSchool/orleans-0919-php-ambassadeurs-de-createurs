@@ -2,7 +2,14 @@
 @import "vars";
 @import "form";
 @import "style_navbar";
+@import "profil_user";
 
 a {
     color: $primary-color;
+}
+
+h1 {
+    font-family: $font-title;
+    color: $primary-color;
+    font-size: $font-size-title;
 }
