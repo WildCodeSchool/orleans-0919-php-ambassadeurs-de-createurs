@@ -24,9 +24,7 @@ class User
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Le champ prénom est obligatoire")
      * @Assert\Length(
-     *      min = 2,
      *      max = 255,
-     *      minMessage = "Votre prénom doit être au moins {{ limit }} caractères de long",
      *      maxMessage = "Votre prénom doit être au plus {{ limit }} caractères de long")
      */
     private $firstname;
@@ -35,9 +33,7 @@ class User
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Le champ nom est obligatoire")
      * @Assert\Length(
-     *      min = 2,
      *      max = 255,
-     *      minMessage = "Votre nom doit être au moins {{ limit }} caractères de long",
      *      maxMessage = "Votre nom doit être au plus {{ limit }} caractères de long")
      */
     private $lastname;
@@ -57,20 +53,10 @@ class User
     private $city;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(
-     *      max = 255,
-     *      maxMessage = "le nom du département ne doit pas dépasser {{ limit }} caractères")
-     */
-    private $county;
-
-    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="L'adresse mail est obligatoire")
      * @Assert\Length(
-     *      min = 2,
      *      max = 255,
-     *      minMessage = "Votre adresse mail doit être au moins {{ limit }} caractères de long",
      *      maxMessage = "Votre adresse mail doit être au plus {{ limit }} caractères de long")
      * @Assert\Email(message="Format d'adresse invalinde")
      */
@@ -83,7 +69,7 @@ class User
      *      maxMessage = "Le rôle doit être au plus {{ limit }} caractères de long")
      * @Assert\Choice(choices=User::ROLES, message="Rôle invalide")
      */
-    private $role;
+    private $roles;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -143,18 +129,6 @@ class User
         return $this;
     }
 
-    public function getCounty(): ?string
-    {
-        return $this->county;
-    }
-
-    public function setCounty(?string $county): self
-    {
-        $this->county = $county;
-
-        return $this;
-    }
-
     public function getMail(): ?string
     {
         return $this->mail;
@@ -167,14 +141,14 @@ class User
         return $this;
     }
 
-    public function getRole(): ?string
+    public function getRoles(): ?string
     {
-        return $this->role;
+        return $this->roles;
     }
 
-    public function setRole(string $role): self
+    public function setRoles(string $role): self
     {
-        $this->role = $role;
+        $this->roles = $role;
 
         return $this;
     }

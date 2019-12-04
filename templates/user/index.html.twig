@@ -13,7 +13,6 @@
                 <th>Lastname</th>
                 <th>Picture</th>
                 <th>City</th>
-                <th>County</th>
                 <th>Mail</th>
                 <th>Role</th>
                 <th>Description</th>
@@ -29,9 +28,8 @@
                 <td>{{ user.lastname }}</td>
                 <td>{{ user.picture }}</td>
                 <td>{{ user.city }}</td>
-                <td>{{ user.county }}</td>
                 <td>{{ user.mail }}</td>
-                <td>{{ user.role }}</td>
+                <td>{{ user.roles }}</td>
                 <td>{{ user.description }}</td>
                 <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
