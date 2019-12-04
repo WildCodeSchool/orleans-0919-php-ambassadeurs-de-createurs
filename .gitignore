@@ -6,7 +6,8 @@
 /public/bundles/
 /var/
 /vendor/
-/Migrations/
+/src/Migrations/
+!/src/Migrations/.gitignore
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
