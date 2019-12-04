@@ -18,32 +18,25 @@ class UserType extends AbstractType
         $builder
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
-                'trim' => true,
             ])
             ->add('lastname', TextType::class, [
                 'label' => 'Nom',
-                'trim' => true,
             ])
             ->add('picture', TextType::class, [
                 'label' => 'Photo',
-                'trim' => true
             ])
             ->add('city', TextType::class, [
                 'label' => 'Ville',
-                'trim' => true,
             ])
             ->add('mail', EmailType::class, [
                 'label' => 'E-mail',
-                'trim' => true,
             ])
             ->add('roles', ChoiceType::class, [
                 'label' => 'Rôle',
-                'trim' => true,
                 'choices' => User::ROLES,
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Biographie',
-                'trim' => true,
             ]);
     }
 

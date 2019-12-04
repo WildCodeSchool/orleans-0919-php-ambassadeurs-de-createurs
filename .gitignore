@@ -34,6 +34,3 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 /public/uploads/
-/src/Migrations/Version20191203120309.php
-/src/Migrations/Version20191203120519.php
-/src/Migrations/Version20191203152502.php
