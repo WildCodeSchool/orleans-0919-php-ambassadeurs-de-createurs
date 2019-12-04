@@ -20,6 +20,3 @@ require('bootstrap');
 
 // returns the final, public path to this file
 // path is relative to this file - e.g. assets/images/logo.png
-const logoPath = require('../images/ADC_logo_transparent.png');
-
-var html = `<img src="${logoPath}">`
