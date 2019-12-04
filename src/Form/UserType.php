@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Department;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -24,6 +26,10 @@ class UserType extends AbstractType
                 'label' => 'Nom',
                 'trim' => true,
             ])
+            ->add('mail', EmailType::class, [
+                'label' => 'E-mail',
+                'trim' => true,
+            ])
             ->add('picture', TextType::class, [
                 'label' => 'Photo',
                 'trim' => true
@@ -32,9 +38,11 @@ class UserType extends AbstractType
                 'label' => 'Ville',
                 'trim' => true,
             ])
-            ->add('mail', EmailType::class, [
-                'label' => 'E-mail',
+            ->add('department', EntityType::class, [
+                'label' => 'Département',
                 'trim' => true,
+                'class' => Department::class,
+                'choice_label' => 'codeName'
             ])
             ->add('roles', ChoiceType::class, [
                 'label' => 'Rôle',
