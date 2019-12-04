@@ -9,3 +9,12 @@ body {
 a {
     color: $primary-color;
 }
+
+.btn-gold {
+    color: $primary-color;
+    border-color: $primary-color;
+}
+
+.border-gold {
+    border: 1px solid $primary-color ;
+}

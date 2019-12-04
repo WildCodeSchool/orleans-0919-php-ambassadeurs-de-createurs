@@ -1,0 +1,5 @@
+{{ form_start(form) }}
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+    {{ form_widget(form) }}
+    <button class="btn btn-gold">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

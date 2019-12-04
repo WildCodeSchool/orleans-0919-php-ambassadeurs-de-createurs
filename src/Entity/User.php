@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User
 {
+
+    const ROLES = ['Ambassadeur' => 'Ambassadeur', 'Créateur' => 'Créateur'];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -18,36 +22,66 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le champ prénom est obligatoire")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Votre prénom doit être au moins {{ limit }} caractères de long",
+     *      maxMessage = "Votre prénom doit être au plus {{ limit }} caractères de long")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le champ nom est obligatoire")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Votre nom doit être au moins {{ limit }} caractères de long",
+     *      maxMessage = "Votre nom doit être au plus {{ limit }} caractères de long")
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * )
      */
     private $picture;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "le nom de la ville ne doit pas dépasser {{ limit }} caractères")
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "le nom du département ne doit pas dépasser {{ limit }} caractères")
      */
     private $county;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="L'adresse mail est obligatoire")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Votre adresse mail doit être au moins {{ limit }} caractères de long",
+     *      maxMessage = "Votre adresse mail doit être au plus {{ limit }} caractères de long")
+     * @Assert\Email(message="Format d'adresse invalinde")
      */
     private $mail;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *@Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Le rôle doit être au plus {{ limit }} caractères de long")
+     * @Assert\Choice(choices=User::ROLES, message="Rôle invalide")
      */
     private $role;
 
@@ -55,11 +89,6 @@ class User
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $subscription;
 
     public function getId(): ?int
     {
@@ -158,18 +187,6 @@ class User
     public function setDescription(?string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getSubscription(): ?bool
-    {
-        return $this->subscription;
-    }
-
-    public function setSubscription(bool $subscription): self
-    {
-        $this->subscription = $subscription;
 
         return $this;
     }
