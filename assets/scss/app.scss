@@ -3,10 +3,12 @@
 @import "form";
 
 
-body {
-    background-color: $third-color;
+* {
+    font-family: $font-body;
 }
 
-a {
+h1 {
+    font-family: $font-title;
+    font-size: $font-size-title;
     color: $primary-color;
 }
