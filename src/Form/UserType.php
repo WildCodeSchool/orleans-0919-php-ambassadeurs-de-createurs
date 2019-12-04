@@ -20,11 +20,9 @@ class UserType extends AbstractType
         $builder
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
-                'trim' => true,
             ])
             ->add('lastname', TextType::class, [
                 'label' => 'Nom',
-                'trim' => true,
             ])
             ->add('mail', EmailType::class, [
                 'label' => 'E-mail',
@@ -32,28 +30,27 @@ class UserType extends AbstractType
             ])
             ->add('picture', TextType::class, [
                 'label' => 'Photo',
-                'trim' => true
             ])
             ->add('city', TextType::class, [
                 'label' => 'Ville',
-                'trim' => true,
             ])
             ->add('department', EntityType::class, [
                 'label' => 'Département',
                 'trim' => true,
                 'class' => Department::class,
-                'choice_label' => 'codeName'
+                'choice_label' => 'codeName',
+            ])
+            ->add('mail', EmailType::class, [
+                'label' => 'E-mail',
             ])
             ->add('roles', ChoiceType::class, [
                 'label' => 'Rôle',
-                'trim' => true,
                 'choices' => User::ROLES,
                 'expanded' => true,
                 'help' => 'lorem ipsum'
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Biographie',
-                'trim' => true,
             ]);
     }
 
