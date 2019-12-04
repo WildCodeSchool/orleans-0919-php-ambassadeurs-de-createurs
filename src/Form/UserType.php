@@ -40,9 +40,6 @@ class UserType extends AbstractType
                 'class' => Department::class,
                 'choice_label' => 'codeName',
             ])
-            ->add('mail', EmailType::class, [
-                'label' => 'E-mail',
-            ])
             ->add('roles', ChoiceType::class, [
                 'label' => 'Rôle',
                 'choices' => User::ROLES,
