@@ -1,8 +1,8 @@
-@import "vars";
 @import "~bootstrap/scss/bootstrap";
+@import "vars";
+@import "form";
 @import "style_navbar";
 
-
-body {
-    background-color: $third-color;
+a {
+    color: $primary-color;
 }
