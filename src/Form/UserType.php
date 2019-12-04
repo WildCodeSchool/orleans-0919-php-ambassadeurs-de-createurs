@@ -47,7 +47,6 @@ class UserType extends AbstractType
                 'label' => 'Rôle',
                 'choices' => User::ROLES,
                 'expanded' => true,
-                'help' => 'lorem ipsum'
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Biographie',
