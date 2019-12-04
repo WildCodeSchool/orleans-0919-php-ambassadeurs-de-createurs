@@ -1,13 +1,12 @@
 {% extends 'layout_admin.html.twig' %}
 
-{% block title %}Créer un nouvel utilisateur{% endblock %}
+{% block title %}Créer un compte{% endblock %}
 
 {% block body %}
     <div class="container w-50">
-        <h1 class="mt-3 mb-5 text-center">Créer un nouvel utilisateur</h1>
-        <div class="border-gold p-5">
+        <h1 class="mt-3 mb-5 text-center">Créer un compte</h1>
+        <div class="border-gold p-4">
             {{ include('user/_form.html.twig') }}
         </div>
-        <a class="btn btn-gold mt-3" href="{{ path('user_index') }}">Liste des utilisateurs</a>
     </div>
 {% endblock %}
