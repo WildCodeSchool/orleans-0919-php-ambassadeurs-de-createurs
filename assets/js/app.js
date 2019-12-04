@@ -17,6 +17,3 @@ const $ = require('jquery');
 require('bootstrap');
 
 // const imagesContext = require.context('../images', true, /\.(png|jpg|jpeg|gif|ico|svg|webp)$/);
-
-// returns the final, public path to this file
-// path is relative to this file - e.g. assets/images/logo.png
