@@ -8,6 +8,12 @@
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/brands';
 
-a {
+* {
+    font-family: $font-body;
+}
+
+h1 {
+    font-family: $font-title;
+    font-size: $font-size-title;
     color: $primary-color;
 }
