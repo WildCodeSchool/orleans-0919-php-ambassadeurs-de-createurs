@@ -12,16 +12,16 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
-        $user = new User();
-        $user->setFirstname($faker->firstName);
-        $user->setLastname($faker->lastName);
-        $user->setCity($faker->city);
-        $user->setPicture($faker->imageUrl(200, 200, 'fashion'));
-        $user->setMail($faker->email);
-        $user->setRoles('Ambassadeur');
-
-        $manager->persist($user);
-
+        for ($i = 0; $i < 20; $i++) {
+            $user = new User();
+            $user->setFirstname($faker->firstName);
+            $user->setLastname($faker->lastName);
+            $user->setCity($faker->city);
+            $user->setPicture($faker->imageUrl(200, 200, 'fashion'));
+            $user->setMail($faker->email);
+            $user->setRoles('Ambassadeur');
+            $manager->persist($user);
+        }
         $manager->flush();
     }
 }
