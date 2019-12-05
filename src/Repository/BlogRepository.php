@@ -19,10 +19,7 @@ class BlogRepository extends ServiceEntityRepository
         parent::__construct($registry, Blog::class);
     }
 
-    // /**
-    //  * @return Blog[] Returns an array of Blog objects
-    //  */
-    /*
+
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('b')
@@ -34,9 +31,7 @@ class BlogRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
 
-    /*
     public function findOneBySomeField($value): ?Blog
     {
         return $this->createQueryBuilder('b')
@@ -46,5 +41,4 @@ class BlogRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
 }
