@@ -3,8 +3,20 @@
 @import "form";
 @import "style_navbar";
 @import "profil_user";
+@import "style_footer";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
 
-a {
+
+* {
+    font-family: $font-body;
+}
+
+h1 {
+    font-family: $font-title;
+    font-size: $font-size-title;
     color: $primary-color;
 }
 
