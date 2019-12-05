@@ -18,6 +18,7 @@ class BlogRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Blog::class);
     }
+
     public function findAllOrderByDate()
     {
         return $this->findBy([], ['date' => 'DESC']);
@@ -31,8 +32,7 @@ class BlogRepository extends ServiceEntityRepository
             ->orderBy('b.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     public function findOneBySomeField($value): ?Blog
@@ -41,7 +41,6 @@ class BlogRepository extends ServiceEntityRepository
             ->andWhere('b.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
     }
 }

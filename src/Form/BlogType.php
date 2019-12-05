@@ -18,7 +18,6 @@ class BlogType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Titre',
-                'trim' => true,
             ])
             ->add('author', TextType::class, [
                 'label' => 'Auteur',
