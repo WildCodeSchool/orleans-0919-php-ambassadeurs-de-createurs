@@ -1,34 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Blog{% endblock %}
+{% block title %}{{ blog.title }}{% endblock %}
 
 {% block body %}
-    <h1>Blog</h1>
+    <div class="container">
+        <h1 class="text-center m-5">{{ blog.title }}</h1>
 
-    <table class="table">
-        <tbody>
+        <table class="table">
+            <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ blog.id }}</td>
+                <th>Titre</th>
+                <td class="text-center">{{ blog.title }}</td>
             </tr>
             <tr>
-                <th>Title</th>
-                <td>{{ blog.title }}</td>
+                <th>Contenu</th>
+                <td>{{ blog.content }}</td>
             </tr>
             <tr>
-                <th>Author</th>
-                <td>{{ blog.author }}</td>
+                <th>Auteur</th>
+                <td class="text-center">{{ blog.author }}</td>
             </tr>
             <tr>
                 <th>Date</th>
-                <td>{{ blog.date ? blog.date|date('Y-m-d') }}</td>
+                <td class="text-center">{{ blog.date ? blog.date|date('d-M-Y') }}</td>
             </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('blog_index') }}">back to list</a>
+            </tbody>
+        </table>
 
-    <a href="{{ path('blog_edit', {'id': blog.id}) }}">edit</a>
+        <a href="{{ path('blog_index') }}">Retour</a>
 
-    {{ include('blog/_delete_form.html.twig') }}
+        <a href="{{ path('blog_edit', {'id': blog.id}) }}">Modifier</a>
+
+        {{ include('blog/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

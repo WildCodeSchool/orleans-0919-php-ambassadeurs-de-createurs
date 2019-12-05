@@ -1,39 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Blog index{% endblock %}
+{% block title %}Admin news{% endblock %}
 
 {% block body %}
-    <h1>Blog index</h1>
+    <div class="container">
+        <h1 class="text-center m-5">Les news</h1>
 
-    <table class="table">
-        <thead>
+        <table class="table">
+            <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
-                <th>Author</th>
+                <th>Titre</th>
+                <th>Auteur</th>
                 <th>Date</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for blog in blogs %}
-            <tr>
-                <td>{{ blog.id }}</td>
-                <td>{{ blog.title }}</td>
-                <td>{{ blog.author }}</td>
-                <td>{{ blog.date ? blog.date|date('Y-m-d') }}</td>
-                <td>
-                    <a href="{{ path('blog_show', {'id': blog.id}) }}">show</a>
-                    <a href="{{ path('blog_edit', {'id': blog.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for blog in blogs %}
+                <tr>
+                    <td>{{ blog.id }}</td>
+                    <td><a href="{{ path('blog_show', {'id': blog.id}) }}">{{ blog.title }}</a></td>
+                    <td>{{ blog.author }}</td>
+                    <td>{{ blog.date ? blog.date|date('d-M-Y') }}</td>
+                    <td>
+                        <a href="{{ path('blog_edit', {'id': blog.id}) }}" class=""><span
+                                    class="badge badge-dark badgeNews">Modifier</span></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('blog_new') }}">Create new</a>
+        <a href="{{ path('blog_new') }}">
+            <button class="btn btn-dark">Créer un article</button>
+        </a>
+    </div>
 {% endblock %}
