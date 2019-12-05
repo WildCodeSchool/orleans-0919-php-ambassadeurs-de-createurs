@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Department;
+use App\Entity\Duty;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -42,6 +44,11 @@ class UserType extends AbstractType
                 'label' => 'Rôle',
                 'choices' => User::ROLES,
                 'expanded' => true,
+            ])
+            ->add('duty', EntityType::class, [
+                'label' => 'Préférences',
+                'class' => Duty::class,
+                'choice_label' => 'duties'
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Biographie',

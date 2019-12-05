@@ -39,6 +39,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            // TODO redirection to user profile
             return $this->redirectToRoute('user_index');
         }
 

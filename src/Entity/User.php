@@ -82,6 +82,12 @@ class User
      */
     private $department;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Duty", inversedBy="user", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $duty;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -179,6 +185,18 @@ class User
     public function setDepartment(?Department $department): self
     {
         $this->department = $department;
+
+        return $this;
+    }
+
+    public function getDuty(): ?Duty
+    {
+        return $this->duty;
+    }
+
+    public function setDuty(Duty $duty): self
+    {
+        $this->duty = $duty;
 
         return $this;
     }
