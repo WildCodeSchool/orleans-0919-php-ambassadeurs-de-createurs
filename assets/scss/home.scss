@@ -1,0 +1,54 @@
+div.container-fluid.card-ambassador
+{
+  display : flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+}
+
+//div.col-md-1.col-sm-12.mt-2
+//{
+//  align-self: ;
+//}
+
+div.card.mb-3
+{
+  border : $primary-color solid 1px;
+}
+
+div.card-body
+{
+  text-align: center;
+}
+
+h5.card-title
+{
+  font-size: 20pt;
+}
+
+p.card-text
+{
+  font-size: 16pt;
+}
+
+i.fas.fa-star
+{
+  font-size: 18pt;
+  color: $primary-color;
+}
+
+@media screen and (min-width: 1000px)
+{
+
+  div.card.mb-3
+  {
+    height : 232px;
+    border : $primary-color solid 1px;
+  }
+
+  img.card-img
+  {
+    height: 230px;
+  }
+}
