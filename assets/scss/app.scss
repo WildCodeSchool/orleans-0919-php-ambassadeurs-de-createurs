@@ -1,9 +1,20 @@
-@import "vars";
 @import "~bootstrap/scss/bootstrap";
+@import "vars";
+@import "form";
 @import "style_navbar";
 @import "admin/news";
+@import "style_footer";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
 
+* {
+    font-family: $font-body;
+}
 
-body {
-    background-color: $third-color;
+h1 {
+    font-family: $font-title;
+    font-size: $font-size-title;
+    color: $primary-color;
 }

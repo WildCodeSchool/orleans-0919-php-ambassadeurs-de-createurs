@@ -1,0 +1,35 @@
+/****Footer****/
+
+.footer-link {
+    font-family: $font-body;
+    color: $secondary-color;
+    font-size: $font-size-body;
+}
+
+.footer-link:hover {
+    color: $primary-color;
+    text-decoration: none;
+}
+
+h6 {
+    font-family: $font-body;
+    font-size: $font-size-body;
+}
+
+.fb-ic, .inst-ic {
+    font-size: $font-size-icon;
+}
+
+.fb-ic:hover, .inst-ic:hover {
+    color: $primary-color;
+    text-decoration: none;
+}
+
+.page-footer {
+    box-shadow: 0 -10px $navbar-border-color;
+}
+
+.logo-footer {
+    height: 120px;
+    width: 120px;
+}
