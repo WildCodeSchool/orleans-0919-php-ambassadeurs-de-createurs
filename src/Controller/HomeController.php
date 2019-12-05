@@ -16,7 +16,7 @@ class HomeController extends AbstractController
     {
         $ambassadors = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findBy(['roles' => 'ambassadeur']);
+            ->findBy(['roles' => 'ambassadeur'], null, 3);
 
         return $this->render('/home/index.html.twig', ['ambassadors' => $ambassadors]);
     }
