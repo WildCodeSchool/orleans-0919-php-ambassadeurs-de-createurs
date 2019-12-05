@@ -27,11 +27,13 @@
 
             </tbody>
         </table>
+            <a href="{{ path('blog_index') }}" class="btn btn-gold">
+                Retour
+            </a>
 
-        <a href="{{ path('blog_index') }}">Retour</a>
-
-        <a href="{{ path('blog_edit', {'id': blog.id}) }}">Modifier</a>
-
+            <a href="{{ path('blog_edit', {'id': blog.id}) }}" class="btn btn-gold">
+                Modifier
+            </a>
         {{ include('blog/_delete_form.html.twig') }}
     </div>
 {% endblock %}

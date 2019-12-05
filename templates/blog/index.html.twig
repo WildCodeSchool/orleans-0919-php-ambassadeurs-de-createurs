@@ -9,7 +9,6 @@
         <table class="table">
             <thead>
             <tr>
-                <th>Id</th>
                 <th>Titre</th>
                 <th>Auteur</th>
                 <th>Date</th>
@@ -19,13 +18,15 @@
             <tbody>
             {% for blog in blogs %}
                 <tr>
-                    <td>{{ blog.id }}</td>
-                    <td><a href="{{ path('blog_show', {'id': blog.id}) }}">{{ blog.title }}</a></td>
+                    <td><a href="{{ path('blog_show', {'id': blog.id}) }}" class="titleForm">{{ blog.title }}</a></td>
                     <td>{{ blog.author }}</td>
                     <td>{{ blog.date ? blog.date|date('d-M-Y') }}</td>
                     <td>
-                        <a href="{{ path('blog_edit', {'id': blog.id}) }}" class=""><span
-                                    class="badge badge-dark badgeNews">Modifier</span></a>
+                        <a href="{{ path('blog_edit', {'id': blog.id}) }}" class="">
+                            <button
+                                    class="btn btn-gold">Modifier
+                            </button>
+                        </a>
                     </td>
                 </tr>
             {% else %}
@@ -36,8 +37,8 @@
             </tbody>
         </table>
 
-        <a href="{{ path('blog_new') }}">
-            <button class="btn btn-dark">Créer un article</button>
+        <a href="{{ path('blog_new') }}" class="btn btn-gold">
+            Créer un article
         </a>
     </div>
 {% endblock %}
