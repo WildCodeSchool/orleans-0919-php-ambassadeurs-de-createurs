@@ -1,86 +1,72 @@
-div.ambassador{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .mt-5.show
-  {
-    align-self: center;
-  }
-}
+div.ambassador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-
-div.container-fluid.card-ambassador
-{
-  display : flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 90%;
-
-  .card.mb-3:nth-of-type(even)
-  {
-    .row.no-gutters
-    {
-      flex-direction: row-reverse;
-      justify-content: space-between;
-
-      .col-md-1.col-sm-12.mt-2
-      {
-        flex-direction: row-reverse;
-      }
+    .mt-5.show {
+        align-self: center;
     }
-  }
 }
 
-div.row.no-gutters
-{
-  justify-content: space-between;
+
+div.container-fluid.card-ambassador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+
+    .card.mb-5:nth-of-type(even) {
+        .row.no-gutters {
+            flex-direction: row-reverse;
+            justify-content: space-between;
+
+            .col-md-1.col-sm-12.mt-2 {
+                flex-direction: row-reverse;
+            }
+        }
+    }
 }
 
-div.col-md-1.col-sm-12.mt-2
-{
-  display: flex;
-  flex-direction: row;
-  color : $primary-color;
+div.row.no-gutters {
+    justify-content: space-between;
 }
 
-div.card.mb-3
-{
-  border : $primary-color solid 1px;
+div.col-md-1.col-sm-12.mt-2 {
+    display: flex;
+    flex-direction: row;
+    color: $primary-color;
 }
 
-div.card-body
-{
-  text-align: center;
-  margin: 0;
+div.card.mb-5 {
+    border: $primary-color solid 1px;
 }
 
-h5.card-title
-{
-  font-size: 20pt;
+div.card-body {
+    text-align: center;
+    margin: 0;
 }
 
-p.card-text
-{
-  font-size: 16pt;
+h5.card-title {
+    font-size: 20pt;
 }
 
-svg.svg-inline--fa.fa-star.fa-w-18
-{
-  font-size: 25pt;
+p.card-text {
+    font-size: 16pt;
 }
 
-@media screen and (min-width: 1000px)
-{
+svg.svg-inline--fa.fa-star.fa-w-18 {
+    font-size: 25pt;
+}
 
-  div.card.mb-3
-  {
-    height : 232px;
-    border : $primary-color solid 1px;
-  }
+@media screen and (min-width: 1000px) {
 
-  img.card-img
-  {
-    height: 230px;
-  }
+    div.card.mb-5 {
+        height: 232px;
+        border: $primary-color solid 1px;
+    }
+
+    img.card-img {
+        height: 230px;
+    }
 }
