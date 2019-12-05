@@ -83,7 +83,7 @@ class User
     private $department;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Duty", inversedBy="user", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Duty", inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      */
     private $duty;

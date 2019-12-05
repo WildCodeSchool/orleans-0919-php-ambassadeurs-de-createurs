@@ -27,7 +27,7 @@ class Duty
     private $host;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="duty", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="duty")
      */
     private $user;
 
