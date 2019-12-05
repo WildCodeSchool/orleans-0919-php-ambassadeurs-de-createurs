@@ -1,7 +1,7 @@
 
 .btn-gold {
-    color: $primary-color;
-    border-color: $primary-color;
+    color: $third-color;
+    background-color: $primary-color;
 }
 
 .border-gold {

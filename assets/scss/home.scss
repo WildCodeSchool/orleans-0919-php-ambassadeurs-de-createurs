@@ -1,3 +1,14 @@
+div.ambassador{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .mt-5.show
+  {
+    align-self: center;
+  }
+}
+
+
 div.container-fluid.card-ambassador
 {
   display : flex;
@@ -5,12 +16,33 @@ div.container-fluid.card-ambassador
   align-items: center;
   justify-content: center;
   width: 90%;
+
+  .card.mb-3:nth-of-type(even)
+  {
+    .row.no-gutters
+    {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+
+      .col-md-1.col-sm-12.mt-2
+      {
+        flex-direction: row-reverse;
+      }
+    }
+  }
 }
 
-//div.col-md-1.col-sm-12.mt-2
-//{
-//  align-self: ;
-//}
+div.row.no-gutters
+{
+  justify-content: space-between;
+}
+
+div.col-md-1.col-sm-12.mt-2
+{
+  display: flex;
+  flex-direction: row;
+  color : $primary-color;
+}
 
 div.card.mb-3
 {
@@ -20,6 +52,7 @@ div.card.mb-3
 div.card-body
 {
   text-align: center;
+  margin: 0;
 }
 
 h5.card-title
@@ -32,10 +65,9 @@ p.card-text
   font-size: 16pt;
 }
 
-i.fas.fa-star
+svg.svg-inline--fa.fa-star.fa-w-18
 {
-  font-size: 18pt;
-  color: $primary-color;
+  font-size: 25pt;
 }
 
 @media screen and (min-width: 1000px)

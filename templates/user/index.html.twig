@@ -15,8 +15,8 @@
                 <th>City</th>
                 <th>Mail</th>
                 <th>Role</th>
+                <th>Department</th>
                 <th>Description</th>
-                <th>Subscription</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -30,6 +30,7 @@
                 <td>{{ user.city }}</td>
                 <td>{{ user.mail }}</td>
                 <td>{{ user.roles }}</td>
+                <td>{{ user.department.codeName }}</td>
                 <td>{{ user.description }}</td>
                 <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
