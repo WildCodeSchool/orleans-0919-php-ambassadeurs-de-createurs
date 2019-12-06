@@ -18,6 +18,8 @@ h6 {
 
 .fb-ic, .inst-ic {
     font-size: $font-size-icon;
+    color: $secondary-color;
+    margin-right: 30px;
 }
 
 .fb-ic:hover, .inst-ic:hover {
@@ -26,10 +28,9 @@ h6 {
 }
 
 .page-footer {
-    box-shadow: 0 -10px $navbar-border-color;
+    box-shadow: 0px -10px 10px $navbar-border-color;
 }
 
 .logo-footer {
     height: 120px;
-    width: 120px;
 }
