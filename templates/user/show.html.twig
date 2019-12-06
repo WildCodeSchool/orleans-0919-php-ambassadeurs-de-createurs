@@ -1,0 +1,31 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ user.roles }}{% endblock %}
+
+{% block body %}
+    <h1 class="text-center mt-5">{{ user.roles }}</h1>
+
+    <div class="container-fluid">
+        <div class="row text-center mt-5">
+            <div class="offset-1 col-4 mt-5">
+                <div class="pictureProfil">
+                    <img class="rounded-circle" src="{{ user.picture }}" alt="{{ user.firstname }}">
+                </div>
+                <br>
+                <h3 class="nameProfil">
+                    {{ user.firstname }}
+                </h3>
+                <br>
+            </div>
+            <div class="descriptionBloc col-4 offset-2 text-justify m-4 p-5 align-self-center ">
+                <p>J'habite à {{ user.city }}.</p>
+                <p>Les univers que j'aime sont : </p>
+                <p>Je suis intéressé par le status de : </p>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <button type="button" class="btn btn-gold">Me contacter</button>
+        </div>
+    </div>
+{% endblock %}

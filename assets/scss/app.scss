@@ -1,9 +1,28 @@
+@import "~bootstrap/scss/bootstrap";
 @import "vars";
+@import "form";
+@import "style_navbar";
+@import "home";
+@import "profil_user";
+@import "style_footer";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
 
-body {
-    background-color: $secondary-color;
+
+* {
+    font-family: $font-body;
 }
 
-a {
-    color: $warm-color;
+h1 {
+    font-family: $font-title;
+    font-size: $font-size-title;
+    color: $primary-color;
+}
+
+h1 {
+    font-family: $font-title;
+    color: $primary-color;
+    font-size: $font-size-title;
 }

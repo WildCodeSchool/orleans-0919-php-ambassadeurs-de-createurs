@@ -1,0 +1,4 @@
+.descriptionBloc {
+    border: 1px solid $primary-color;
+    border-radius: 1em;
+}

@@ -1,0 +1,12 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block title %}Créer un compte{% endblock %}
+
+{% block body %}
+    <div class="mt-5 container-xl container-lg container-fluid">
+        <h1 class="mt-3 mb-4 text-center">Créer un compte</h1>
+        <div class="border-gold p-4">
+            {{ include('user/_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

@@ -6,6 +6,8 @@
 /public/bundles/
 /var/
 /vendor/
+/src/Migrations/
+!/src/Migrations/.gitignore
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
@@ -32,3 +34,5 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+/public/uploads/

@@ -1,0 +1,13 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block title %}Créer un article{% endblock %}
+
+{% block body %}
+    <div class="mt-5 container-xl container-lg container-fluid">
+        <h1 class="text-center mt-3 mb-4">Créer un nouvel article</h1>
+        <div class="border-gold p-4">
+            {{ include('blog/_form.html.twig') }}
+        </div>
+
+    </div>
+{% endblock %}
