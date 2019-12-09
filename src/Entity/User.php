@@ -66,7 +66,7 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
-     *@Assert\Length(
+     * @Assert\Length(
      *      max = 255,
      *      maxMessage = "Le rôle doit être au plus {{ limit }} caractères de long")
      * @Assert\Choice(choices=User::ROLES, message="Rôle invalide")
@@ -222,5 +222,4 @@ class User
 
         return $this;
     }
-
 }
