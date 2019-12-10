@@ -20,6 +20,10 @@ class Duty
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le rôle de préférence est obligatoire")
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Votre rôle {{ limit }} caractères de long")
      */
     private $name;
 

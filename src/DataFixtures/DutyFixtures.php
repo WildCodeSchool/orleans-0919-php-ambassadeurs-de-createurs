@@ -15,6 +15,7 @@ class DutyFixtures extends Fixture
         foreach (self::DUTIES as $role) {
             $duty = new Duty();
             $duty->setName($role);
+            $this->addReference($role, $duty);
             $manager->persist($duty);
         }
         $manager->flush();
