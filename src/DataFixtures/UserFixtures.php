@@ -23,7 +23,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setMail($faker->email);
             $user->setRoles('Ambassadeur');
 
-            $user->setDepartment($this->getReference("00" . rand(1, 7)));
+            $user->setDepartment($this->getReference('department_'.rand(1, 101)));
             $manager->persist($user);
         }
         $manager->flush();
