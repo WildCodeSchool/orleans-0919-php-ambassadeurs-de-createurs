@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Category{% endblock %}
+{% block title %}Créer un univers{% endblock %}
 
 {% block body %}
-    <h1>Create new Category</h1>
-
-    {{ include('category/_form.html.twig') }}
-
-    <a href="{{ path('category_index') }}">back to list</a>
+    <div class="mt-5 container-xl container-lg container-fluid">
+        <h1 class="text-center mt-3 mb-4">Créer un nouvel univers</h1>
+        <div class="border-gold p-4">
+            {{ include('category/_form.html.twig') }}
+        </div>
+        <div class="flex d-flex justify-content-around">
+        <a class="btn btn-dark m-5" href="{{ path('category_index') }}"><i class="far fa-arrow-alt-circle-left"></i> Liste des univers</a>
+    </div>
+    </div>
 {% endblock %}
