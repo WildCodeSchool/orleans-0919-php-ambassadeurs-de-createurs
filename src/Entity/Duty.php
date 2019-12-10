@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,80 +19,62 @@ class Duty
     private $id;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string", length=255)
      */
-    private $seller;
+    private $name;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="duties")
      */
-    private $host;
+    private $users;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="duty")
-     */
-    private $user;
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getSeller(): ?bool
+    public function getName(): ?string
     {
-        return $this->seller;
+        return $this->name;
     }
 
-    public function setSeller(bool $seller): self
+    public function setName(string $name): self
     {
-        $this->seller = $seller;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getHost(): ?bool
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
     {
-        return $this->host;
+        return $this->users;
     }
 
-    public function setHost(bool $host): self
+    public function addUser(User $user): self
     {
-        $this->host = $host;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(User $user): self
-    {
-        $this->user = $user;
-
-        // set the owning side of the relation if necessary
-        if ($user->getDuty() !== $this) {
-            $user->setDuty($this);
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addDuty($this);
         }
 
         return $this;
     }
 
-    public function getDuties(): ?string
+    public function removeUser(User $user): self
     {
-        $duties ='';
-        switch (true) {
-            case ($this->host && $this->seller):
-                $duties = 'Hôte et vendeur';
-                break;
-            case ($this->host):
-                $duties = 'Hôte';
-                break;
-            case ($this->seller):
-                $duties = 'Vendeur';
-                break;
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->removeDuty($this);
         }
-        return $duties;
+
+        return $this;
     }
 }

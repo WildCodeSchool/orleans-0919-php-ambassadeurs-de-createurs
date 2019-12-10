@@ -39,8 +39,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // TODO redirection to user profile
-            return $this->redirectToRoute('user_index');
+            return $this->redirectToRoute('home_index');
         }
 
         return $this->render('user/new.html.twig', [

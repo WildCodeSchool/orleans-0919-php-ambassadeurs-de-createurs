@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -83,10 +85,14 @@ class User
     private $department;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Duty", inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Duty", inversedBy="users")
      */
-    private $duty;
+    private $duties;
+
+    public function __construct()
+    {
+        $this->duties = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -189,14 +195,28 @@ class User
         return $this;
     }
 
-    public function getDuty(): ?Duty
+    /**
+     * @return Collection|Duty[]
+     */
+    public function getDuties(): Collection
     {
-        return $this->duty;
+        return $this->duties;
     }
 
-    public function setDuty(Duty $duty): self
+    public function addDuty(Duty $duty): self
     {
-        $this->duty = $duty;
+        if (!$this->duties->contains($duty)) {
+            $this->duties[] = $duty;
+        }
+
+        return $this;
+    }
+
+    public function removeDuty(Duty $duty): self
+    {
+        if ($this->duties->contains($duty)) {
+            $this->duties->removeElement($duty);
+        }
 
         return $this;
     }
