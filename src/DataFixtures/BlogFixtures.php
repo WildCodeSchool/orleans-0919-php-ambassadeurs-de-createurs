@@ -14,7 +14,7 @@ class BlogFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
         for ($i = 0; $i < 20; $i++) {
             $blog = new Blog();
-            $blog->setTitle($faker->title);
+            $blog->setTitle($faker->sentence);
             $blog->setAuthor($faker->name);
             $blog->setContent($faker->paragraph);
             $blog->setDate($faker->dateTime);
