@@ -47,7 +47,8 @@ class UserType extends AbstractType
             ->add('duty', EntityType::class, [
                 'label' => 'Préférences',
                 'class' => Duty::class,
-                'choice_label' => 'duties'
+                'choice_label' => 'duties',
+                'expanded' => true,
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Biographie',
