@@ -5,12 +5,11 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\DutyRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
-class Duty
+class Category
 {
     /**
      * @ORM\Id()
@@ -21,15 +20,11 @@ class Duty
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le rôle de préférence est obligatoire")
-     * @Assert\Length(
-     *      max = 255,
-     *      maxMessage = "Votre rôle {{ limit }} caractères de long")
      */
-    private $name;
+    private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="duties")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="category")
      */
     private $users;
 
@@ -43,14 +38,14 @@ class Duty
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getDescription(): ?string
     {
-        return $this->name;
+        return $this->description;
     }
 
-    public function setName(string $name): self
+    public function setDescription(string $description): self
     {
-        $this->name = $name;
+        $this->description = $description;
 
         return $this;
     }
@@ -58,7 +53,7 @@ class Duty
     /**
      * @return Collection|User[]
      */
-    public function getUsers(): Collection
+    public function getUser(): Collection
     {
         return $this->users;
     }
@@ -67,7 +62,6 @@ class Duty
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addDuty($this);
         }
 
         return $this;
@@ -77,7 +71,6 @@ class Duty
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
-            $user->removeDuty($this);
         }
 
         return $this;
