@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -64,7 +66,7 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
-     *@Assert\Length(
+     * @Assert\Length(
      *      max = 255,
      *      maxMessage = "Le rôle doit être au plus {{ limit }} caractères de long")
      * @Assert\Choice(choices=User::ROLES, message="Rôle invalide")
@@ -81,6 +83,16 @@ class User
      * @ORM\JoinColumn(nullable=false)
      */
     private $department;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="users")
+     */
+    private $categories;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -179,6 +191,34 @@ class User
     public function setDepartment(?Department $department): self
     {
         $this->department = $department;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+            $category->removeUser($this);
+        }
 
         return $this;
     }
