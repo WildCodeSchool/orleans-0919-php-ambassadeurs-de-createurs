@@ -28,7 +28,7 @@ class Category
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="category")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="categories")
      */
     private $users;
 
