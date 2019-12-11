@@ -85,12 +85,18 @@ class User
     private $department;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Duty", inversedBy="users")
+     */
+    private $duties;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="users")
      */
     private $categories;
 
     public function __construct()
     {
+        $this->duties = new ArrayCollection();
         $this->categories = new ArrayCollection();
     }
 
@@ -196,6 +202,21 @@ class User
     }
 
     /**
+     * @return Collection|Duty[]
+     */
+    public function getDuties(): Collection
+    {
+        return $this->duties;
+    }
+
+    public function addDuty(Duty $duty): self
+    {
+        if (!$this->duties->contains($duty)) {
+            $this->duties[] = $duty;
+        }
+    }
+
+    /**
      * @return Collection|Category[]
      */
     public function getCategories(): Collection
@@ -209,8 +230,14 @@ class User
             $this->categories[] = $category;
             $category->addUser($this);
         }
-
         return $this;
+    }
+
+    public function removeDuty(Duty $duty): self
+    {
+        if ($this->duties->contains($duty)) {
+            $this->duties->removeElement($duty);
+        }
     }
 
     public function removeCategory(Category $category): self
@@ -219,7 +246,6 @@ class User
             $this->categories->removeElement($category);
             $category->removeUser($this);
         }
-
         return $this;
     }
 }
