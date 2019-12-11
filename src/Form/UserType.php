@@ -45,6 +45,9 @@ class UserType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Biographie',
+            ])
+            ->add('urlFacebook', TextareaType::class, [
+                'label' => 'Compte Facebook',
             ]);
     }
 

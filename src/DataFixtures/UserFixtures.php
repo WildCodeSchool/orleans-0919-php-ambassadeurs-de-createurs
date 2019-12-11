@@ -28,6 +28,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setMail($faker->email);
             $user->setRoles(self::ROLES[rand(0, 1)]);
             $user->setDepartment($this->getReference("00" . rand(1, 7)));
+            $user->setUrlFacebook($faker->url);
             $manager->persist($user);
         }
         $manager->flush();
