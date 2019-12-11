@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Department;
+use App\Entity\Duty;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -42,6 +43,13 @@ class UserType extends AbstractType
                 'label' => 'Rôle',
                 'choices' => User::ROLES,
                 'expanded' => true,
+            ])
+            ->add('duties', EntityType::class, [
+                'label' => 'Préférences',
+                'class' => Duty::class,
+                'choice_label' => 'name',
+                'expanded' => true,
+                'multiple' => true,
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Biographie',
