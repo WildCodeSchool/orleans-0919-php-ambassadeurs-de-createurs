@@ -6,13 +6,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
- * @UniqueEntity(fields={"description"}, message="Un univers avec la même description existe déjà")
+ * @ORM\Entity(repositoryClass="App\Repository\DutyRepository")
  */
-class Category
+class Duty
 {
     /**
      * @ORM\Id()
@@ -23,12 +21,15 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Le rôle de préférence est obligatoire")
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Votre rôle {{ limit }} caractères de long")
      */
-    private $description;
+    private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="categories")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="duties")
      */
     private $users;
 
@@ -42,14 +43,14 @@ class Category
         return $this->id;
     }
 
-    public function getDescription(): ?string
+    public function getName(): ?string
     {
-        return $this->description;
+        return $this->name;
     }
 
-    public function setDescription(string $description): self
+    public function setName(string $name): self
     {
-        $this->description = $description;
+        $this->name = $name;
 
         return $this;
     }
@@ -57,7 +58,7 @@ class Category
     /**
      * @return Collection|User[]
      */
-    public function getUser(): Collection
+    public function getUsers(): Collection
     {
         return $this->users;
     }
@@ -66,6 +67,7 @@ class Category
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
+            $user->addDuty($this);
         }
 
         return $this;
@@ -75,6 +77,7 @@ class Category
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
+            $user->removeDuty($this);
         }
 
         return $this;

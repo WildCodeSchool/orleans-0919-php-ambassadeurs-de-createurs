@@ -26,6 +26,19 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setCity($faker->city);
             $user->setPicture($faker->imageUrl(200, 200, 'fashion'));
             $user->setMail($faker->email);
+            $nbDuty = rand(0, 2);
+            switch ($nbDuty) {
+                case 0:
+                    $user->addDuty($this->getReference('hôte'));
+                    break;
+                case 1:
+                    $user->addDuty($this->getReference('vendeur'));
+                    break;
+                case 2:
+                    $user->addDuty($this->getReference('hôte'));
+                    $user->addDuty($this->getReference('vendeur'));
+                    break;
+            }
             $user->setRoles(self::ROLES[rand(0, 1)]);
             $user->setDepartment($this->getReference("00" . rand(1, 7)));
             $user->setUrlFacebook($faker->url);
@@ -34,9 +47,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-
     public function getDependencies()
     {
-        return [DepartmentFixtures::class];
+        return [DepartmentFixtures::class, DutyFixtures::class];
     }
 }
