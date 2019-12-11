@@ -20,7 +20,7 @@
                 <tr>
                     <td><a href="{{ path('blog_show', {'id': blog.id}) }}" class="titleForm">{{ blog.title }}</a></td>
                     <td>{{ blog.author }}</td>
-                    <td>{{ blog.date ? blog.date|date('d-M-Y') }}</td>
+                    <td>{{ blog.date ? blog.date|localizeddate('long', 'short') }}</td>
                     <td>
                         <a href="{{ path('blog_edit', {'id': blog.id}) }}" class="">
                             <button

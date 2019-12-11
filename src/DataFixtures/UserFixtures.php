@@ -11,6 +11,11 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class UserFixtures extends Fixture implements DependentFixtureInterface
 {
+    const ROLES = [
+        'Ambassadeur',
+        'Créateur',
+    ];
+
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
@@ -21,9 +26,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setCity($faker->city);
             $user->setPicture($faker->imageUrl(200, 200, 'fashion'));
             $user->setMail($faker->email);
-            $user->setRoles('Ambassadeur');
-
-            $user->setDepartment($this->getReference('department_'.rand(1, 101)));
+            $user->setRoles(self::ROLES[rand(0, 1)]);
+            $user->setDepartment($this->getReference("00" . rand(1, 7)));
             $manager->persist($user);
         }
         $manager->flush();
