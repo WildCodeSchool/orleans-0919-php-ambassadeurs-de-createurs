@@ -32,8 +32,8 @@ class Blog
     private $author;
 
     /**
-     * @ORM\Column(type="date")
-     * @Assert\Date
+     * @ORM\Column(type="datetime")
+     * @Assert\DateTime
      */
     private $date;
 

@@ -7,16 +7,16 @@
     <div class="collapse navbar-collapse " id="navbarSupportedContent-555">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link mr-5" href="#"><span class="nav-effect">AMBASSADEURS</span></a>
+                <a class="nav-link mr-5" href="{{ path('search_role', {'role': 'ambassadeur'}) }}"><span class="nav-effect">AMBASSADEURS</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link mr-5" href="#"><span class="nav-effect">CREATEURS</span></a>
+                <a class="nav-link mr-5" href="{{ path('search_role', {'role': 'createur'}) }}"><span class="nav-effect">CREATEURS</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link mr-5" href="#"><span class="nav-effect">BLOG</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link mr-5" href="#"><span class="nav-effect">S'INSCRIRE</span></a>
+                <a class="nav-link mr-5" href="{{ path('user_new') }}"><span class="nav-effect">S'INSCRIRE</span></a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto nav-flex-icons">
