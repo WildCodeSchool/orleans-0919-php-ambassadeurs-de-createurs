@@ -28,7 +28,8 @@ h6 {
 }
 
 .page-footer {
-    box-shadow: 0px -10px 10px $navbar-border-color;
+    border-top: 1px solid $navbar-border-color;
+    margin-top : 80px;
 }
 
 .logo-footer {
