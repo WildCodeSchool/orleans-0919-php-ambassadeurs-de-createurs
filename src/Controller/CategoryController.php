@@ -91,5 +91,4 @@ class CategoryController extends AbstractController
 
         return $this->redirectToRoute('category_index');
     }
-
 }
