@@ -25,7 +25,6 @@ class Event
 
     /**
      * @Assert\DateTime
-     * @var string A "Y-m-d H:i:s" formatted value
      * @ORM\Column(type="datetime")
      */
     private $dateTime;
