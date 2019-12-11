@@ -213,7 +213,9 @@ class User
     {
         if (!$this->duties->contains($duty)) {
             $this->duties[] = $duty;
+            $duty->addUser($this);
         }
+        return $this;
     }
 
     /**
