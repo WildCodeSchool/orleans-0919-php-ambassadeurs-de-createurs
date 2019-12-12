@@ -27,7 +27,6 @@ class SearchController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            dd($request);
             $data = $form->getData();
             $users = $userRepository->findSearch($data);
         }
