@@ -28,12 +28,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setMail($faker->email);
             $user->setRoles(self::ROLES[rand(0, 1)]);
             $user->setDepartment($this->getReference("00" . rand(1, 7)));
-            $categories = [];
-            for ($i = 0; $i < rand(0, 3); $i++) {
-                $categories[$i] = $this->getReference('category_' . 2);
-            }
-            $user->addCategories($categories);
-            /*$user->addCategory($this->getReference('category_' . rand(0, 5)));*/
+            $user->addCategory($this->getReference('category_' . rand(0, 5)));
             $nbDuty = rand(0, 2);
             switch ($nbDuty) {
                 case 0:
