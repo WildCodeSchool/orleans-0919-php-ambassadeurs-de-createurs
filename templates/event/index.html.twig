@@ -1,34 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Category index{% endblock %}
+{% block title %}Event index{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1 class="text-center m-5">Les univers</h1>
+    <h1>Event index</h1>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Description</th>
-                <th class="col-lg-1">actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Place</th>
+            <th>DateTime</th>
+            <th>Description</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
-        {% for category in categories %}
+        {% for event in events %}
             <tr>
-                <td><a href="{{ path('category_show', {'id': category.id}) }}" class="titleForm">{{ category.description }}</a></td>
+                <td>{{ event.id }}</td>
+                <td>{{ event.place }}</td>
+                <td>{{ event.dateTime ? event.dateTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ event.description }}</td>
                 <td>
-                    <a href="{{ path('category_edit', {'id': category.id}) }}" class="btn btn-gold">Modifier</a>
+                    <a href="{{ path('event_show', {'id': event.id}) }}">show</a>
+                    <a href="{{ path('event_edit', {'id': event.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">Aucune catégorie trouvée</td>
+                <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('category_new') }}" class="btn btn-gold">Créer un univers</a>
-</div>
+    <a href="{{ path('event_new') }}">Create new</a>
 {% endblock %}
