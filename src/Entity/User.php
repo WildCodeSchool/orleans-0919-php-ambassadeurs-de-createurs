@@ -235,6 +235,18 @@ class User
         return $this;
     }
 
+    public function addCategories($categories): self
+    {
+        foreach ($categories as $category) {
+            if (!$this->categories->contains($category)) {
+                $this->categories[] = $category;
+                $category->addUser($this);
+            }
+        }
+        return $this;
+    }
+
+
     public function removeDuty(Duty $duty): self
     {
         if ($this->duties->contains($duty)) {

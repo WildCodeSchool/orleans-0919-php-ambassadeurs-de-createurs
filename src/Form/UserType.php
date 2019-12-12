@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Department;
 use App\Entity\Duty;
 use App\Entity\User;
+use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -53,6 +54,14 @@ class UserType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Biographie',
+            ])
+            ->add('categories', EntityType::class, [
+                'label' => 'Univers',
+                'class' => Category::class,
+                'choice_label' => 'description',
+                'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false,
             ]);
     }
 
