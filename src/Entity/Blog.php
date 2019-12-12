@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BlogRepository")
@@ -24,7 +25,27 @@ class Blog
      * @Assert\NotBlank()
      */
     private $title;
+    /**
+     * @ORM\Column(length=255, unique=true)
+     * @Gedmo\Slug(fields={"title"})
+     */
+    private $slug;
 
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug): void
+    {
+        $this->slug = $slug;
+    }
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
@@ -32,8 +53,8 @@ class Blog
     private $author;
 
     /**
-     * @ORM\Column(type="date")
-     * @Assert\Date
+     * @ORM\Column(type="datetime")
+     * @Assert\DateTime
      */
     private $date;
 

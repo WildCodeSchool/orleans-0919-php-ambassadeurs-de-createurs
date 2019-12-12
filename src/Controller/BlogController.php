@@ -49,7 +49,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="blog_show", methods={"GET"})
+     * @Route("/{slug}", name="blog_show", methods={"GET"})
      */
     public function show(Blog $blog): Response
     {
@@ -59,7 +59,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="blog_edit", methods={"GET","POST"})
+     * @Route("/{slug}/edit", name="blog_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Blog $blog): Response
     {
@@ -79,7 +79,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="blog_delete", methods={"DELETE"})
+     * @Route("/{slug}", name="blog_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Blog $blog): Response
     {

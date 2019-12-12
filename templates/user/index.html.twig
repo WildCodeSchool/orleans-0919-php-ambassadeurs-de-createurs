@@ -15,6 +15,7 @@
                 <th>City</th>
                 <th>Mail</th>
                 <th>Role</th>
+                <th>Duties</th>
                 <th>Department</th>
                 <th>Description</th>
                 <th>actions</th>
@@ -30,6 +31,11 @@
                 <td>{{ user.city }}</td>
                 <td>{{ user.mail }}</td>
                 <td>{{ user.roles }}</td>
+                <td>
+                    {% for duty in user.duties %}
+                        {{ duty.name }}
+                    {% endfor %}
+                </td>
                 <td>{{ user.department.codeName }}</td>
                 <td>{{ user.description }}</td>
                 <td>

@@ -1,0 +1,11 @@
+.card-search .card {
+    border: $primary-color solid 1px;
+    width: 20%;
+}
+
+.star {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: $primary-color;
+}
