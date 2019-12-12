@@ -20,7 +20,11 @@ h1 {
     font-family: $font-title;
     font-size: $font-size-title;
     color: $primary-color;
-    margin: 20px;
+    margin: 30px;
+}
+
+h2 {
+    font-size: $font-size-second-title;
 }
 
 .primary-color {

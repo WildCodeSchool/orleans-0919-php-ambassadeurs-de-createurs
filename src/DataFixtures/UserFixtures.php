@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Department;
 use App\Entity\User;
 use Faker;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -26,6 +25,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setCity($faker->city);
             $user->setPicture($faker->imageUrl(200, 200, 'fashion'));
             $user->setMail($faker->email);
+            $user->setRoles(self::ROLES[rand(0, 1)]);
+            $user->setDepartment($this->getReference("00" . rand(1, 7)));
             $nbDuty = rand(0, 2);
             switch ($nbDuty) {
                 case 0:
@@ -39,8 +40,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     $user->addDuty($this->getReference('vendeur'));
                     break;
             }
-            $user->setRoles(self::ROLES[rand(0, 1)]);
-            $user->setDepartment($this->getReference("00" . rand(1, 7)));
             $manager->persist($user);
         }
         $manager->flush();
