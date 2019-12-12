@@ -1,3 +1,12 @@
+div.greyBack {
+    width: 100%;
+    background-color: $background-primary;
+}
+
+div.buttonRole {
+    width: 30vw;
+}
+
 div.ambassador {
     display: flex;
     flex-direction: column;
@@ -7,7 +16,6 @@ div.ambassador {
         align-self: center;
     }
 }
-
 
 div.container-fluid.card-ambassador {
     display: flex;

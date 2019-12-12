@@ -16,7 +16,7 @@
     font-family: $font-body;
 }
 
-h1 {
+h1, h2 {
     font-family: $font-title;
     font-size: $font-size-title;
     color: $primary-color;
@@ -25,6 +25,11 @@ h1 {
 
 h2 {
     font-size: $font-size-second-title;
+    margin: 10px;
+}
+
+h3 {
+    font-size: 1.5rem;
 }
 
 .primary-color {
