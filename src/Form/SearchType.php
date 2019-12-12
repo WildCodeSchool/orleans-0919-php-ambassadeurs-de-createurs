@@ -16,7 +16,7 @@ class SearchType extends AbstractType
         $builder
             ->add('department', EntityType::class, [
                 'class' => Department::class,
-                'choice_label' => 'name',
+                'choice_label' => 'codeName',
                 'required' => false,
                 'label' => false,
             ])
@@ -26,7 +26,6 @@ class SearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-//            'data_class' => SearchData::class,
             'method' => 'GET',
             'csrf_protection' => false,
         ]);

@@ -32,7 +32,6 @@ class UserRepository extends ServiceEntityRepository
                 ->where('d.id = :department')
                 ->setParameter('department', $search['department']);
         }
-
         return $query->getQuery()->getResult();
     }
 }

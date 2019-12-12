@@ -23,13 +23,12 @@ class SearchController extends AbstractController
     {
 
         $users = $userRepository->findBy(['roles' => $role]);
-
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
+            dd($request);
             $data = $form->getData();
-
             $users = $userRepository->findSearch($data);
         }
 
