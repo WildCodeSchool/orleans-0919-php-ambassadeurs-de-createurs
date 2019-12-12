@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin news{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center m-5">Les news</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for blog in blogs %}
+                <tr>
+                    <td><a href="{{ path('blog_show', {'slug': blog.slug}) }}" class="titleForm">{{ blog.title }}</a></td>
+                    <td>{{ blog.author }}</td>
+                    <td>{{ blog.date ? blog.date|localizeddate('long', 'short') }}</td>
+                    <td>
+                        <a href="{{ path('blog_edit', {'slug': blog.slug}) }}" class="">
+                            <button
+                                    class="btn btn-gold">Modifier
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('blog_new') }}" class="btn btn-gold">
+            Créer un article
+        </a>
+    </div>
+{% endblock %}
