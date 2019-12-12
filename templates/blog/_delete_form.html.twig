@@ -1,6 +1,6 @@
-<form method="post" action="{{ path('blog_delete', {'id': blog.id}) }}"
+<form method="post" action="{{ path('blog_delete', {'slug': blog.slug}) }}"
       onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cet article ?');">
     <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ blog.id) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ blog.slug) }}">
     <button class="btn btn-dark m-5"><i class="far fa-times-circle"></i> Supprimer</button>
 </form>

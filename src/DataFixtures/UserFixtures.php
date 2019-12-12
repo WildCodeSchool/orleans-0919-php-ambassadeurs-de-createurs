@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Department;
 use App\Entity\User;
 use Faker;
 use Doctrine\Bundle\FixturesBundle\Fixture;
