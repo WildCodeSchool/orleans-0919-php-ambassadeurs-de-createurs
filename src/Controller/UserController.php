@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Event;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -53,8 +54,13 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
+        $id = $user->getId();
+        $events = $this->getDoctrine()
+            ->getRepository(Event::class)
+            ->findBy(['user' => $id], null);
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'events' => $events
         ]);
     }
 
