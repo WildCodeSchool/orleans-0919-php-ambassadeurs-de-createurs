@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Department;
 use App\Entity\User;
 use Faker;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -41,6 +40,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             }
             $user->setRoles(self::ROLES[rand(0, 1)]);
             $user->setDepartment($this->getReference("00" . rand(1, 7)));
+            $user->setUrlFacebook($faker->url);
             $manager->persist($user);
         }
         $manager->flush();
