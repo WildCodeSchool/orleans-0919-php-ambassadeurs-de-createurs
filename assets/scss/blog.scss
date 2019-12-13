@@ -1,0 +1,40 @@
+.profile-card-5 .btn {
+    border-radius: 2px;
+    font-size: 12px;
+    padding: 7px 20px;
+}
+
+.profile-card-5 .card-img-block {
+    width: 91%;
+    margin: 0 auto;
+    position: relative;
+    top: -20px;
+}
+
+.profile-card-5 .card-img-block img {
+    border-radius: 5px;
+    box-shadow: 0 0 10px $secondary-color;
+}
+
+.profile-card-5 h5 {
+    color: $primary-color;
+}
+
+.profile-card-5 p {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.profile-card-5 .btn-primary {
+    background-color: $primary-color;
+    border-color: $primary-color;
+}
+
+.card {
+    border: 1.5px solid $primary-color;
+}
+
+h5.card-title {
+    font-size: 16pt;
+    min-height: 50px;
+}
