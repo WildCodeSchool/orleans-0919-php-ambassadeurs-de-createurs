@@ -16,7 +16,7 @@ class BlogFixtures extends Fixture
             $blog = new Blog();
             $blog->setTitle($faker->sentence);
             $blog->setAuthor($faker->name);
-            $blog->setContent($faker->paragraph);
+            $blog->setContent($faker->paragraph(50));
             $blog->setDate($faker->dateTime);
             $manager->persist($blog);
         }

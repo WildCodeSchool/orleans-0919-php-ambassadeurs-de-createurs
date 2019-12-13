@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
 use App\Entity\User;
 use Faker;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -27,6 +28,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setMail($faker->email);
             $user->setRoles(self::ROLES[rand(0, 1)]);
             $user->setDepartment($this->getReference("00" . rand(1, 7)));
+            $user->addCategory($this->getReference('category_' . rand(0, 5)));
             $nbDuty = rand(0, 2);
             switch ($nbDuty) {
                 case 0:
@@ -40,6 +42,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     $user->addDuty($this->getReference('vendeur'));
                     break;
             }
+            $user->setUrlFacebook($faker->url);
             $manager->persist($user);
         }
         $manager->flush();

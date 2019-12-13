@@ -20,6 +20,13 @@
             <div class="descriptionBloc col-4 offset-2 text-justify m-4 p-5 align-self-center ">
                 <p>J'habite à {{ user.city }}.</p>
                 <p>Les univers que j'aime sont : </p>
+                <ul>
+                    {% for category in user.categories %}
+                        <li>{{ category.description }}</li>
+                    {% else %}
+                        <li>Aucun univers n'a été sélectioné</li>
+                    {% endfor %}
+                </ul>
                 <p>Je suis intéressé par le status de : </p>
             </div>
         </div>
