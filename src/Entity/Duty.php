@@ -81,4 +81,3 @@ class Duty
         return $this;
     }
 }
-}
