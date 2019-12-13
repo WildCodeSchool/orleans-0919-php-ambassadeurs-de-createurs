@@ -26,6 +26,16 @@ class BlogController extends AbstractController
     }
 
     /**
+     * @Route("/admin", name="blog_admin", methods={"GET"})
+     */
+    public function indexBlog(BlogRepository $blogRepository): Response
+    {
+        return $this->render('blog/admin_blog_index.html.twig', [
+            'blogs' => $blogRepository->findBy([], ['date' => 'DESC']),
+        ]);
+    }
+
+    /**
      * @Route("/new", name="blog_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
@@ -83,12 +93,11 @@ class BlogController extends AbstractController
      */
     public function delete(Request $request, Blog $blog): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $blog->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $blog->getSlug(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($blog);
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('blog_index');
     }
 }

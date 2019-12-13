@@ -1,44 +1,44 @@
-{% extends 'layout_admin.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}Admin news{% endblock %}
+{% block title %}Blog{% endblock %}
 
 {% block body %}
     <div class="container">
         <h1 class="text-center m-5">Les news</h1>
-
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Titre</th>
-                <th>Auteur</th>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
+        <div class="row">
             {% for blog in blogs %}
-                <tr>
-                    <td><a href="{{ path('blog_show', {'slug': blog.slug}) }}" class="titleForm">{{ blog.title }}</a></td>
-                    <td>{{ blog.author }}</td>
-                    <td>{{ blog.date ? blog.date|localizeddate('long', 'short') }}</td>
-                    <td>
-                        <a href="{{ path('blog_edit', {'slug': blog.slug}) }}" class="">
-                            <button
-                                    class="btn btn-gold">Modifier
-                            </button>
-                        </a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5">no records found</td>
-                </tr>
+                {% if loop.first %}
+                    <div class="col-lg-6-md-6 mt-4">
+                        <div class="card profile-card-5">
+                            <div class="card-img-block">
+                                <img class="card-img-top" src="https://loremflickr.com/640/360"
+                                     alt="image de l'article {{ blog.title }}">
+                            </div>
+                            <div class="card-body pt-0">
+                                <h5 class="card-title">{{ blog.title|truncate(30) }}</h5>
+                                <p class="card-text text-left mt-3">{{ blog.date|localizeddate('long', 'none') }}</p>
+                                <p class="card-text">{{ blog.content|truncate(150,true)|raw }}</p>
+                                <a href="#" class="btn btn-gold">Voir l'article</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-md-6 mt-5">
+                        <div class="card profile-card-5 m-2">
+                            <div class="card-img-block">
+                                <img class="card-img-top" src="https://loremflickr.com/640/360"
+                                     alt="image de l'article {{ blog.title }}">
+                            </div>
+                            <div class="card-body pt-0">
+                                <h5 class="card-title">{{ blog.title }}</h5>
+                                <p class="card-text text-left mt-3">{{ blog.date|localizeddate('long', 'none') }}</p>
+                                <p class="card-text">{{ blog.content|truncate(150,true) }}</p>
+                                <a href="#" class="btn btn-gold">Voir l'article</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             {% endfor %}
-            </tbody>
-        </table>
-
-        <a href="{{ path('blog_new') }}" class="btn btn-gold">
-            Créer un article
-        </a>
+        </div>
     </div>
 {% endblock %}
