@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\User;
 use App\Entity\Department;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -18,7 +17,6 @@ class DepartmentFixtures extends Fixture
         "006" => "Alpes-Maritimes",
         "007" => "Ardèche",
     ];
-
     public function load(ObjectManager $manager)
     {
         foreach (self::DEPARTMENT as $number => $name) {

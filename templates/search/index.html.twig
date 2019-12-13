@@ -5,6 +5,11 @@
 {% block body %}
     <h1 class="text-center"> Recherche des {{ role }}s </h1>
     <div class="container-fluid card-search">
+        <div class="row">
+            <div class="col-3">
+                {% include 'search/_filter.html.twig' with {form: form} only %}
+            </div>
+        </div>
 
         <div class="row no-gutters justify-content-around">
             {% for user in users %}
@@ -16,7 +21,6 @@
                             <p class="m-0">100</p><i class="fas fa-star ml-2"></i>
                         </div>
                         <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
-                        <hr>
                          <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}</p>
                         <hr>
                         <p class="card-text">Vendeur / Hôte</p>
