@@ -1,0 +1,21 @@
+.descriptionBloc {
+    border: 1px solid $primary-color;
+    border-radius: 1em;
+}
+
+.btn-dark{
+    background-color: black;
+}
+
+a {transition: .25s all;}
+.card {
+    overflow: hidden;
+    @include BoxShadowHelper(1);
+    transition: .25s box-shadow;
+    &:focus,
+    &:hover {@include BoxShadowHelper(2);}
+}
+.card-inverse .card-img-overlay {
+    background-color: rgba(#333,.85);
+    border-color: rgba(#333,.85);
+}
