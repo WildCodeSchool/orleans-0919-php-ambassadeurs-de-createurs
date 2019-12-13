@@ -209,6 +209,15 @@ class User
         return $this->duties;
     }
 
+    public function addDuty(Duty $duty): self
+    {
+        if (!$this->duties->contains($duty)) {
+            $this->duties[] = $duty;
+            $duty->addUser($this);
+        }
+        return $this;
+    }
+
     /**
      * @return Collection|Category[]
      */
