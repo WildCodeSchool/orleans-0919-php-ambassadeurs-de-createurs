@@ -3,11 +3,20 @@
 {% block title %}Edit Category{% endblock %}
 
 {% block body %}
-    <h1>Edit Category</h1>
+<div class="mt-5 container-xl container-lg container-fluid">
+    <h1 class="mt-3 mb-4 text-center">Modifier un univers</h1>
+    <div class="border-gold p-4">
+    {{ include('category/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+    </div>
 
-    {{ include('category/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('category_index') }}">back to list</a>
-
+    <div class="row justify-content-between">
+        <div class="col col-lg-4">
+            <a class="btn btn-dark m-5" href="{{ path('category_index') }}"><i class="far fa-arrow-alt-circle-left"></i> Liste des univers
+            </a>
+        </div>
+        <div class="col col-lg-3">
     {{ include('category/_delete_form.html.twig') }}
+        </div>
+    </div>
+</div>
 {% endblock %}

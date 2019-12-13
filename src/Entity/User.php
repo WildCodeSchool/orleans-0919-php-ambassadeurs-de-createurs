@@ -94,6 +94,16 @@ class User
      */
     private $categories;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "URL trop longue, elle doit être au plus {{ limit }} caractères")
+     * @Assert\Url(
+     *     message="Format d'URL non valide")
+     */
+    private $urlFacebook;
+
     public function __construct()
     {
         $this->duties = new ArrayCollection();
@@ -209,6 +219,15 @@ class User
         return $this->duties;
     }
 
+    public function addDuty(Duty $duty): self
+    {
+        if (!$this->duties->contains($duty)) {
+            $this->duties[] = $duty;
+            $duty->addUser($this);
+        }
+        return $this;
+    }
+
     /**
      * @return Collection|Category[]
      */
@@ -239,6 +258,18 @@ class User
             $this->categories->removeElement($category);
             $category->removeUser($this);
         }
+        return $this;
+    }
+
+    public function getUrlFacebook(): ?string
+    {
+        return $this->urlFacebook;
+    }
+
+    public function setUrlFacebook(?string $urlFacebook): self
+    {
+        $this->urlFacebook = $urlFacebook;
+
         return $this;
     }
 }
