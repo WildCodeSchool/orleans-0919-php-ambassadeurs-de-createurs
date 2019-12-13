@@ -42,6 +42,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     $user->addDuty($this->getReference('vendeur'));
                     break;
             }
+            $user->setUrlFacebook($faker->url);
             $manager->persist($user);
         }
         $manager->flush();

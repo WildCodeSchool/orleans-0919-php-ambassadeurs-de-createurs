@@ -62,6 +62,9 @@ class UserType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false,
+            ])
+            ->add('urlFacebook', TextType::class, [
+                'label' => 'Compte Facebook',
             ]);
     }
 
