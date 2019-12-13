@@ -15,16 +15,16 @@
                                      alt="image de l'article {{ blog.title }}">
                             </div>
                             <div class="card-body pt-0">
-                                <h5 class="card-title">{{ blog.title }}</h5>
+                                <h5 class="card-title">{{ blog.title|truncate(30) }}</h5>
                                 <p class="card-text text-left mt-3">{{ blog.date|localizeddate('long', 'none') }}</p>
-                                <p class="card-text">{{ blog.content|truncate(150,true) }}</p>
+                                <p class="card-text">{{ blog.content|truncate(150,true)|raw }}</p>
                                 <a href="#" class="btn btn-gold">Voir l'article</a>
                             </div>
                         </div>
                     </div>
                 {% else %}
-                    <div class="col-md-6 mt-4">
-                        <div class="card profile-card-5">
+                    <div class="col-md-6 mt-5">
+                        <div class="card profile-card-5 m-2">
                             <div class="card-img-block">
                                 <img class="card-img-top" src="https://loremflickr.com/640/360"
                                      alt="image de l'article {{ blog.title }}">

@@ -1,7 +1,3 @@
-.profile-card-5{
-  margin:20px;
-
-}
 .profile-card-5 .btn{
   border-radius:2px;
   font-size:12px;
@@ -12,7 +8,6 @@
   margin: 0 auto;
   position: relative;
   top: -20px;
-
 }
 .profile-card-5 .card-img-block img{
   border-radius:5px;
@@ -32,7 +27,7 @@
 .card {
   border: 1.5px solid $primary-color;
 }
-.card-body {
-  min-width: 20vw;
-  min-height: 20vh;
+h5.card-title {
+  font-size: 16pt;
+  min-height: 50px;
 }
