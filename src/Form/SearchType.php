@@ -17,6 +17,7 @@ class SearchType extends AbstractType
             ->add('department', EntityType::class, [
                 'class' => Department::class,
                 'choice_label' => 'codeName',
+                'choice_value' => 'code',
                 'required' => false,
                 'label' => false,
             ])
