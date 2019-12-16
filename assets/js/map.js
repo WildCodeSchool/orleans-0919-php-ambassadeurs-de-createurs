@@ -1,2 +1,2 @@
-var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-console.log('test')
+console.log('test');
+const mymap = L.map('mapid').setView([51.505, -0.09], 13);

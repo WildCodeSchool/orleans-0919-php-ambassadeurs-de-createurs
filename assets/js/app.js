@@ -21,4 +21,8 @@ require('@fortawesome/fontawesome-free/css/all.min.css');
 // eslint-disable-next-line import/no-extraneous-dependencies
 require('@fortawesome/fontawesome-free/js/all.js');
 
-require
+// eslint-disable-next-line import/no-extraneous-dependencies
+require('leaflet');
+
+// eslint-disable-next-line import/no-unresolved
+require('./map.js');
