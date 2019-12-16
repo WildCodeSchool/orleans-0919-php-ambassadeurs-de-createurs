@@ -1,3 +1,20 @@
+.filterImage {
+    opacity: 0.8;
+}
+
+div.carousel-caption {
+    color: $secondary-color;
+}
+
+div.greyBack {
+    width: 100%;
+    background-color: $background-primary;
+}
+
+div.buttonRole {
+    width: 40vw;
+}
+
 div.ambassador {
     display: flex;
     flex-direction: column;
@@ -7,7 +24,6 @@ div.ambassador {
         align-self: center;
     }
 }
-
 
 div.container-fluid.card-ambassador {
     display: flex;
@@ -68,5 +84,22 @@ svg.svg-inline--fa.fa-star.fa-w-18 {
 
     img.card-img {
         height: 230px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    div.carousel-caption {
+        bottom: 0px;
+    }
+
+    div h1.homeTitle {
+        display: block;
+        font-size: $font-size-second-title;
+        margin: 0;
+    }
+
+    .filterImage {
+        opacity: 0.6;
     }
 }
