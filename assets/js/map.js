@@ -19,6 +19,8 @@ markers.addLayer(L.marker([42.866667, 8.333333]));
 markers.addLayer(L.marker([41.866667, 9.333333]));
 markers.addLayer(L.marker([40.866667, 10.333333]));
 markers.addLayer(L.marker([39.866667, 1.333333]));
-markers.addLayer(L.marker([38.866667, 11.333333]));
+m = L.marker([38.866667, 11.333333]);
+m.bindPopup('<p>' + 'Super event!' + '</p>');
+markers.addLayer(m);
 
 map.addLayer(markers);
