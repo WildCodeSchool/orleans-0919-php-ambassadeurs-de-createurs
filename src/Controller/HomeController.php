@@ -9,6 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+
+    const NB_CARDS = 6;
     /**
      * @Route("/", name="home_index")
      */
@@ -17,7 +19,7 @@ class HomeController extends AbstractController
         $roles = User::ROLES;
         $ambassadors = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findBy(['roles' => $roles['Ambassadeur']], null, 3);
+            ->findBy(['roles' => $roles['Ambassadeur']], null, self::NB_CARDS);
 
         return $this->render('/home/index.html.twig', ['ambassadors' => $ambassadors]);
     }
