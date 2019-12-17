@@ -3,36 +3,36 @@
 {% block title %}Blog{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container-fluid m-0">col-lg-6-md-6 mt-4
         <h1 class="text-center m-5">Les news</h1>
-        <div class="row">
-            {% for blog in blogs %}
+        <div class="row justify-content-center">
+            {% for blog in blogs|slice(0,9) %}
                 {% if loop.first %}
-                    <div class="col-lg-6-md-6 mt-4">
-                        <div class="card profile-card-5">
-                            <div class="card-img-block">
-                                <img class="card-img-top" src="https://loremflickr.com/640/360"
-                                     alt="image de l'article {{ blog.title }}">
-                            </div>
-                            <div class="card-body pt-0">
+                    <div class="row justify-content-center">
+                        <div class="m-0 col-md-5 mt-5 card-img-block">
+                            <img class="card-img-top" src="http://placeimg.com/640/360/any"
+                                 alt="image de l'article {{ blog.title }}">
+                        </div>
+                        <div class="m-0 col-md-6 mt-5 card profile-card-5">
+                            <div class="card-body">
                                 <h5 class="card-title">{{ blog.title|truncate(30) }}</h5>
-                                <p class="card-text text-left mt-3">{{ blog.date|localizeddate('long', 'none') }}</p>
-                                <p class="card-text">{{ blog.content|truncate(150,true)|raw }}</p>
+                                <p class=" text-left mt-3">{{ blog.date|localizeddate('short', 'none') }}</p>
+                                <p class="">{{ blog.content|truncate(150,true)|raw }}</p>
                                 <a href="#" class="btn btn-gold">Voir l'article</a>
                             </div>
                         </div>
                     </div>
                 {% else %}
-                    <div class="col-md-6 mt-5">
-                        <div class="card profile-card-5 m-2">
-                            <div class="card-img-block">
-                                <img class="card-img-top" src="https://loremflickr.com/640/360"
-                                     alt="image de l'article {{ blog.title }}">
-                            </div>
-                            <div class="card-body pt-0">
+                    <div class="col-md-5 mt-5">
+                        <div class="card-img-block">
+                            <img class="card-img-top" src="http://placeimg.com/640/360/any"
+                                 alt="image de l'article {{ blog.title }}">
+                        </div>
+                        <div class="card profile-card-5 card-block">
+                            <div class="card-body">
                                 <h5 class="card-title">{{ blog.title }}</h5>
-                                <p class="card-text text-left mt-3">{{ blog.date|localizeddate('long', 'none') }}</p>
-                                <p class="card-text">{{ blog.content|truncate(150,true) }}</p>
+                                <p class=" text-left mt-3 textdate">{{ blog.date|localizeddate('short', 'none') }}</p>
+                                <p class="">{{ blog.content|truncate(150,true) }}</p>
                                 <a href="#" class="btn btn-gold">Voir l'article</a>
                             </div>
                         </div>
