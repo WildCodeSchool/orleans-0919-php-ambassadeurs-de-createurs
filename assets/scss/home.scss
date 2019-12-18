@@ -80,6 +80,26 @@ svg.svg-inline--fa.fa-star.fa-w-18 {
     height: 80vh;
 }
 
+div.row.reasons {
+    display: flex;
+    justify-content: center;
+
+    .col-3.text-reasons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .icons-reasons {
+            width: 64px;
+        }
+
+        .col-md-12.reasons  {
+            text-align: center;
+        }
+    }
+}
+
 @media screen and (min-width: 1000px) {
 
     div.card.mb-5 {
