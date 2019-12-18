@@ -1,38 +1,46 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Blog{% endblock %}
+{% block title %}News{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container-fluid pt-1 mb-5">
         <h1 class="text-center m-5">Les news</h1>
-        <div class="row">
-            {% for blog in blogs %}
+        <p class="text-center m-5 firstSentence">Rencontres, news, outils, tout ce dont vous avez besoin pour vous
+            lancer dans
+            la vente privée à domicile ..</p>
+        <div class="row justify-content-center m-0">
+            {% for blog in blogs|slice(0,9) %}
                 {% if loop.first %}
-                    <div class="col-lg-6-md-6 mt-4">
-                        <div class="card profile-card-5">
-                            <div class="card-img-block">
-                                <img class="card-img-top" src="https://loremflickr.com/640/360"
+                    <h2 class="col offset-1 oneArticle">A la une</h2>
+                    <div class="row justify-content-center">
+                        <div class="col-md-5 card-img-block">
+                            <div class="card-img-block-top">
+                                <img class="card-img-top " src="http://placeimg.com/640/360/any"
                                      alt="image de l'article {{ blog.title }}">
-                            </div>
-                            <div class="card-body pt-0">
-                                <h5 class="card-title">{{ blog.title|truncate(30) }}</h5>
-                                <p class="card-text text-left mt-3">{{ blog.date|localizeddate('long', 'none') }}</p>
-                                <p class="card-text">{{ blog.content|truncate(150,true)|raw }}</p>
-                                <a href="#" class="btn btn-gold">Voir l'article</a>
                             </div>
                         </div>
-                    </div>
-                {% else %}
-                    <div class="col-md-6 mt-5">
-                        <div class="card profile-card-5 m-2">
-                            <div class="card-img-block">
-                                <img class="card-img-top" src="https://loremflickr.com/640/360"
-                                     alt="image de l'article {{ blog.title }}">
+                        <div class="col-md-5 card profile-card-5 firstblog">
+                            <div class="card-body">
+                                <h3 class="card-title firstArticleTitle mt-3">{{ blog.title }}</h3>
+                                <p class=" text-left mt-5">{{ blog.date|localizeddate('short', 'none') }}</p>
+                                <p class="textFirstArticle mt-5">{{ blog.content|truncate(200,true)|raw }}</p>
+                                <a href="#" class="btn btn-gold mt-5">Voir l'article</a>
                             </div>
-                            <div class="card-body pt-0">
+                        </div>
+                        <h2 class="col offset-2 mb-5">Nos articles</h2>
+                    </div>
+
+                {% else %}
+                    <div class="col-md-4 m-4 mb-5">
+                        <div class="card-img-block">
+                            <img class="card-img-top" src="http://placeimg.com/640/360/any"
+                                 alt="image de l'article {{ blog.title }}">
+                        </div>
+                        <div class="card profile-card-5 card-block">
+                            <div class="card-body">
                                 <h5 class="card-title">{{ blog.title }}</h5>
-                                <p class="card-text text-left mt-3">{{ blog.date|localizeddate('long', 'none') }}</p>
-                                <p class="card-text">{{ blog.content|truncate(150,true) }}</p>
+                                <p class=" text-left mt-3 textdate">{{ blog.date|localizeddate('short', 'none') }}</p>
+                                <p class="">{{ blog.content|truncate(150,true) }}</p>
                                 <a href="#" class="btn btn-gold">Voir l'article</a>
                             </div>
                         </div>

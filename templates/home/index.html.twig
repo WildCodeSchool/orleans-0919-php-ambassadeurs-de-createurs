@@ -30,25 +30,88 @@
         <div class="container-fluid card-ambassador">
             <div class="row no-gutters">
                 {% for ambassador in ambassadors %}
-                <div class="card mb-5 col-md-5 col-sm-12">
-                    <div class="row no-gutters">
-                        <div class="col-md-1 col-sm-12 mt-2" >
-                            <i class="fas fa-star"></i>
-                            <p>100</p>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ambassador.firstname}}</h5>
-                                <p class="card-text">J'habite dans le {{ambassador.department.codeName}}</p>
-                                <p class="card-text"><small class="text-muted">Je suis un {{ambassador.roles}}</small></p>
+                    <div class="card mb-5 col-md-5 col-sm-12">
+                        <div class="row no-gutters">
+                            <div class="col-md-1 col-sm-12 mt-2">
+                                <i class="fas fa-star"></i>
+                                <p>100</p>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ ambassador.firstname }}</h5>
+                                    <p class="card-text">J'habite dans le {{ ambassador.department.codeName }}</p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Je suis un {{ ambassador.roles }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="{{ ambassador.picture }}" class="card-img" alt="Image">
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <img src="{{ ambassador.picture }}" class="card-img" alt="Image">
-                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div>
+            <div class="row reasons">
+                <h1 class="m-5"> Pourquoi devenir ambassadeur ?</h1>
+            </div>
+            <div class="row reasons m-5">
+                <div class="col-3 text-reasons">
+                    <img class="icons-reasons" src="{{ asset('build/icons_social.png') }}" alt="Icone">
+                    <p class="col-md-12 reasons">
+                        Faire partie d’une communauté qui vous soutient sur son groupe privé.
+                    </p>
+                </div>
+                <div class="col-3 text-reasons">
+                    <img class="icons-reasons" src="{{ asset('build/icons_gift.png') }}" alt="Icone">
+                    <p class="col-md-12 reasons">
+                        Recevoir des cadeaux de vos créateurs favoris ou vous constituer un complément de revenu à la hauteur de vos attentes.
+                    </p>
+                </div>
+                <div class="col-3 text-reasons">
+                    <img class="icons-reasons" src="{{ asset('build/icons_first.png') }}" alt="Icone">
+                    <p class="col-md-12 reasons">
+                        Bénéficier en avant-première de leurs produits pour vos ventes privées.
+                    </p>
+                </div>
+                <div class="col-3 text-reasons">
+                    <img class="icons-reasons" src="{{ asset('build/icons_heart.png') }}" alt="Icone">
+                    <p class="col-md-12 reasons">
+                        Connaître de nouveaux créateurs.
+                    </p>
+                </div>
+            </div>
+            <div>
+                <div class="row reasons">
+                    <h1 class="m-5"> Pourquoi devenir créateur ?</h1>
+                </div>
+                <div class="row reasons m-5">
+                    <div class="col-3 text-reasons">
+                        <img class="icons-reasons" src="{{ asset('build/icons_clock.png') }}" alt="Icone">
+                        <p class="col-md-12 reasons">
+                            Gagner du temps dans l’organisation de vos ventes privées.
+                        </p>
+                    </div>
+                    <div class="col-3 text-reasons">
+                        <img class="icons-reasons" src="{{ asset('build/icons_book.png') }}" alt="Icone">
+                        <p class="col-md-12 reasons">
+                            Bénéficier du 1er annuaire d’ambassadeurs et accéder à leur profil.
+                        </p>
+                    </div>
+                    <div class="col-3 text-reasons">
+                        <img class="icons-reasons" src="{{ asset('build/icons_contact.png') }}" alt="Icone">
+                        <p class="col-md-12 reasons">
+                            Prendre contact en un clic avec vos ambassadeurs.
+                        </p>
+                    </div>
+                    <div class="col-3 text-reasons">
+                        <img class="icons-reasons" src="{{ asset('build/icons_brand.png') }}" alt="Icone">
+                        <p class="col-md-12 reasons">
+                            Profiter d’un nouvel espace pour communiquer sur votre marque.
+                        </p>
                     </div>
                 </div>
-               {% endfor %}
-        </div>
     </div>
 {% endblock %}
