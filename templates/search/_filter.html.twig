@@ -1,7 +1,14 @@
 {{ form_start(form) }}
-<h5>Départements :</h5>
-{{ form_row(form.department) }}
-
-<button type="submit" class="btn btn-gold">Filtrer</button>
+<div class="row">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-4">
+        <h5>Départements :</h5>
+        {{ form_row(form.department) }}
+    </div>
+    <div class="col-12 col-md-8 col-lg-6 col-xl-4">
+            <h5>Univers:</h5>
+            {{ form_row(form.category) }}
+        </div>
+</div>
+    <button type="submit" class="btn btn-gold">Filtrer</button>
 
 {{ form_end(form) }}

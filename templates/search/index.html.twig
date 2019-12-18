@@ -5,13 +5,11 @@
 {% block body %}
     <h1 class="text-center"> Recherche des {{ role }}s </h1>
     <div class="container-fluid card-search">
-        <div class="row">
-            <div class="col-3">
-                {% include 'search/_filter.html.twig' with {form: form} only %}
-            </div>
-        </div>
 
-        <div class="row justify-content-left">
+        {% include 'search/_filter.html.twig' with {form: form} only %}
+
+
+        <div class="row justify-content-center">
             {% for user in users %}
                 <div class="card col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">
                     <img src="{{ user.picture }}" class="card-img-top" alt="image de {{ user.firstname }}">
@@ -21,7 +19,7 @@
                             <p class="m-0">100</p><i class="fas fa-star ml-2"></i>
                         </div>
                         <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
-                         <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}</p>
+                        <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }} ({{ user.department.code }})</p>
                         <hr>
                         <p class="card-text">Vendeur / Hôte</p>
                     </div>

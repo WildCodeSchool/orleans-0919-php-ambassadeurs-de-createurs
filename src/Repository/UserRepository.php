@@ -32,6 +32,13 @@ class UserRepository extends ServiceEntityRepository
                 ->where('d.id = :department')
                 ->setParameter('department', $search['department']);
         }
+
+        if (!empty($search['category'])) {
+            $query->join('u.categories', 'c')
+                ->andWhere('c.id = :category')
+                ->setParameter('category', $search['category']);
+        }
+
         return $query->getQuery()->getResult();
     }
 }
