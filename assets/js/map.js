@@ -7,7 +7,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 L.control.scale().addTo(map);
 
-let markers = L.markerClusterGroup();
+const markers = L.markerClusterGroup();
 
 markers.addLayer(L.marker([48.866667, 2.333333]));
 markers.addLayer(L.marker([47.866667, 3.333333]));

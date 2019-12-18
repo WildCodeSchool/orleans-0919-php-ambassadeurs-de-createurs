@@ -10,6 +10,7 @@ import * as L from 'leaflet';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css';
+// eslint-disable-next-line no-unused-vars
 import { GestureHandling } from 'leaflet-gesture-handling';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import 'leaflet.markercluster';
