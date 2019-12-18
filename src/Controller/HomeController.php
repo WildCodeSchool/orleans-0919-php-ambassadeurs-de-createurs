@@ -26,6 +26,7 @@ class HomeController extends AbstractController
         $ambassadorsMarkers = $userRepository->findAll();
 
         $coordinates = [];
+        // TODO getCity can be null ???
         foreach ($ambassadorsMarkers as $ambassadorsMarker) {
             $coordinates[$ambassadorsMarker->getId()] = $coordinateService
                 ->getCoordinates($ambassadorsMarker->getCity() ?? 'Paris');
