@@ -5,16 +5,15 @@ $background-primary: #D3D7CF;
 $background-secondary : #F6F6F6;
 $navbar-border-color:#d3d3d3;
 $font-body: adobe-devanagari-regular;
-$font-title: Tangerine;
-$font-size-title: 5rem;
-$font-size-second-title: 3.5rem;
+$font-title: 'Lato', sans-serif;
+$font-size-title: 4rem;
+$font-size-second-title: 3rem;
 $font-size-body: 1.2rem;
 $font-size-icon: 2.5rem;
+
 
 
 @font-face {
     font-family: adobe-devanagari-regular;
     src: url("../font/adobe-devanagari.otf");
-    font-family: Tangerine;
-    src: url("../font/Tangerine_Regular.ttf");
 }
