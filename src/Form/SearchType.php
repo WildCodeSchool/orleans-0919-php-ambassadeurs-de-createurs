@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Department;
+use App\Entity\Duty;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -21,6 +22,7 @@ class SearchType extends AbstractType
                 'choice_value' => 'code',
                 'required' => false,
                 'label' => false,
+                'placeholder' => 'Département',
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
@@ -28,6 +30,15 @@ class SearchType extends AbstractType
                 'choice_value' => 'description',
                 'required' => false,
                 'label' => false,
+                'placeholder' => 'Univers',
+            ])
+            ->add('duty', EntityType::class, [
+                'class' => Duty::class,
+                'choice_label' => 'name',
+                'choice_value' => 'name',
+                'required' => false,
+                'label' => false,
+                'placeholder' => 'Statut',
             ])
         ;
     }
