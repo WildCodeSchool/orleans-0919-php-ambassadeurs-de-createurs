@@ -1,19 +1,16 @@
 {{ form_start(form) }}
 <div class="row">
-    <div class="col-12 col-md-8 col-lg-6 col-xl-3 offset-1">
-        <h5>Départements :</h5>
+    <div class="col-12 col-md-8 col-lg-6 col-xl-3 offset-1 select-element">
         {{ form_row(form.department) }}
     </div>
     <div class="col-12 col-md-8 col-lg-6 col-xl-3">
-            <h5>Univers :</h5>
-            {{ form_row(form.category) }}
+        {{ form_row(form.category) }}
     </div>
     <div class="col-12 col-md-8 col-lg-6 col-xl-3">
-            <h5>Statut :</h5>
-            {{ form_row(form.duty) }}
+        {{ form_row(form.duty) }}
     </div>
 
 </div>
-    <button type="submit" class="btn btn-gold offset-1">Filtrer</button>
+<button type="submit" class="btn btn-gold offset-1">Filtrer</button>
 
 {{ form_end(form) }}

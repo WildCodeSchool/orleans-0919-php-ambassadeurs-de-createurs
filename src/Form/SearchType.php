@@ -22,6 +22,7 @@ class SearchType extends AbstractType
                 'choice_value' => 'code',
                 'required' => false,
                 'label' => false,
+                'placeholder' => 'Département',
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
@@ -29,6 +30,7 @@ class SearchType extends AbstractType
                 'choice_value' => 'description',
                 'required' => false,
                 'label' => false,
+                'placeholder' => 'Univers',
             ])
             ->add('duty', EntityType::class, [
                 'class' => Duty::class,
@@ -36,6 +38,7 @@ class SearchType extends AbstractType
                 'choice_value' => 'name',
                 'required' => false,
                 'label' => false,
+                'placeholder' => 'Statut',
             ])
         ;
     }
