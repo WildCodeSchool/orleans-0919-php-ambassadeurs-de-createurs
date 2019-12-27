@@ -47,7 +47,8 @@ class User
     private $picture;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="La ville de résidence est obligatoire")
      * @Assert\Length(
      *      max = 255,
      *      maxMessage = "le nom de la ville ne doit pas dépasser {{ limit }} caractères")
@@ -86,11 +87,13 @@ class User
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Duty", inversedBy="users")
+     * @ORM\Column(type="string")
      */
     private $duties;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="users")
+     * @ORM\Column(type="string")
      */
     private $categories;
 
@@ -110,16 +113,26 @@ class User
         $this->categories = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
+    /**
+     * @param string $firstname
+     * @return $this
+     */
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
@@ -127,11 +140,18 @@ class User
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getLastname(): ?string
     {
         return $this->lastname;
     }
 
+    /**
+     * @param string $lastname
+     * @return $this
+     */
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
@@ -139,11 +159,18 @@ class User
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPicture(): ?string
     {
         return $this->picture;
     }
 
+    /**
+     * @param string $picture
+     * @return $this
+     */
     public function setPicture(string $picture): self
     {
         $this->picture = $picture;
@@ -151,11 +178,18 @@ class User
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getCity(): ?string
     {
         return $this->city;
     }
 
+    /**
+     * @param string|null $city
+     * @return $this
+     */
     public function setCity(?string $city): self
     {
         $this->city = $city;
@@ -163,11 +197,18 @@ class User
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getMail(): ?string
     {
         return $this->mail;
     }
 
+    /**
+     * @param string $mail
+     * @return $this
+     */
     public function setMail(string $mail): self
     {
         $this->mail = $mail;
@@ -175,11 +216,18 @@ class User
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getRoles(): ?string
     {
         return $this->roles;
     }
 
+    /**
+     * @param string $role
+     * @return $this
+     */
     public function setRoles(string $role): self
     {
         $this->roles = $role;
@@ -187,11 +235,18 @@ class User
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * @param string|null $description
+     * @return $this
+     */
     public function setDescription(?string $description): self
     {
         $this->description = $description;
@@ -199,11 +254,18 @@ class User
         return $this;
     }
 
+    /**
+     * @return Department|null
+     */
     public function getDepartment(): ?Department
     {
         return $this->department;
     }
 
+    /**
+     * @param Department|null $department
+     * @return $this
+     */
     public function setDepartment(?Department $department): self
     {
         $this->department = $department;
@@ -219,6 +281,10 @@ class User
         return $this->duties;
     }
 
+    /**
+     * @param Duty $duty
+     * @return $this
+     */
     public function addDuty(Duty $duty): self
     {
         if (!$this->duties->contains($duty)) {
@@ -236,6 +302,10 @@ class User
         return $this->categories;
     }
 
+    /**
+     * @param Category $category
+     * @return $this
+     */
     public function addCategory(Category $category): self
     {
         if (!$this->categories->contains($category)) {
@@ -245,6 +315,10 @@ class User
         return $this;
     }
 
+    /**
+     * @param Duty $duty
+     * @return $this
+     */
     public function removeDuty(Duty $duty): self
     {
         if ($this->duties->contains($duty)) {
@@ -252,6 +326,10 @@ class User
         }
     }
 
+    /**
+     * @param Category $category
+     * @return $this
+     */
     public function removeCategory(Category $category): self
     {
         if ($this->categories->contains($category)) {
@@ -261,11 +339,18 @@ class User
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getUrlFacebook(): ?string
     {
         return $this->urlFacebook;
     }
 
+    /**
+     * @param string|null $urlFacebook
+     * @return $this
+     */
     public function setUrlFacebook(?string $urlFacebook): self
     {
         $this->urlFacebook = $urlFacebook;

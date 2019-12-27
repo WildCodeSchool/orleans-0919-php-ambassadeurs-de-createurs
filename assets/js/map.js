@@ -1,4 +1,7 @@
-const map = L.map('map', { gestureHandling: true }).setView([48.866667, 2.333333], 6);
+// Saint Palais dans le Cher, centre de la France
+const centerFrance = [47.242419, 2.408616];
+
+const map = L.map('map', { gestureHandling: true }).setView(centerFrance, 6);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 12,
@@ -11,9 +14,8 @@ const markers = L.markerClusterGroup();
 document.addEventListener('DOMContentLoaded', () => {
     const ambassadorsCoordinates = document.querySelector('.js-coordinates');
     const coordinates = JSON.parse(ambassadorsCoordinates.dataset.coordinates);
-    console.log(coordinates);
 
-    for (coordinate in coordinates) {
+    for (const coordinate in coordinates) {
         markers.addLayer(L.marker([coordinates[coordinate][1], coordinates[coordinate][0]]));
     }
 });
