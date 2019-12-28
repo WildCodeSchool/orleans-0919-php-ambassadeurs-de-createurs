@@ -8,6 +8,7 @@ use Faker;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -15,6 +16,12 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         'Ambassadeur',
         'Créateur',
     ];
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
 
     public function load(ObjectManager $manager)
     {
@@ -26,7 +33,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setCity($faker->city);
             $user->setPicture($faker->imageUrl(200, 200, 'fashion'));
             $user->setMail($faker->email);
-            $user->setRoles(self::ROLES[rand(0, 1)]);
+            $user->setRolesLMCO(self::ROLES[rand(0, 1)]);
             $user->setDepartment($this->getReference("00" . rand(1, 7)));
             $user->addCategory($this->getReference('category_' . rand(0, 5)));
             $nbDuty = rand(0, 2);
@@ -43,6 +50,11 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     break;
             }
             $user->setUrlFacebook($faker->url);
+            $user->setRoles(['ROLES_' .$user->getRolesLMCO()]);
+            $user->setPassword($this->passwordEncoder->encodePassword(
+                $user,
+                'test'
+            ));
             $manager->persist($user);
         }
         $manager->flush();
