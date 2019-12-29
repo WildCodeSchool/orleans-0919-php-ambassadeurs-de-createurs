@@ -5,6 +5,7 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
+// eslint-disable-next-line no-unused-vars
 import * as L from 'leaflet';
 // eslint-disable-next-line import/no-unresolved
 import 'leaflet-defaulticon-compatibility';
