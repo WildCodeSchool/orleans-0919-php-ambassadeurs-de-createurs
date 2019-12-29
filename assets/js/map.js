@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
             </div> <div class="w-50 d-flex flex-column">
             <h4 class="text-center popupTitle">${ambassadors[i].firstname} ${ambassadors[i].lastname}</h4>
             <p class="m-0 ml-3 popupText">Lieu : ${ambassadors[i].city}</p>
-            <p class="m-0 ml-3 popupText">Rôles : ${duties.join()}</p>
-            <p class="m-0 ml-3 popupText"> Univers : ${categories.join()}</p>
+            <p class="m-0 ml-3 popupText">Rôles : ${duties.join(', ')}</p>
+            <p class="m-0 ml-3 popupText"> Univers : ${categories.join(', ')}</p>
             <a class="fb-ic-card" href="${ambassadors[i].urlFacebook}">
             <i class="fab fa-facebook-square ">
             </i> </a> </div> </div>`;
