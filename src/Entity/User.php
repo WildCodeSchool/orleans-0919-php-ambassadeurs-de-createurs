@@ -87,13 +87,11 @@ class User
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Duty", inversedBy="users")
-     * @ORM\Column(type="string")
      */
     private $duties;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="users")
-     * @ORM\Column(type="string")
      */
     private $categories;
 
