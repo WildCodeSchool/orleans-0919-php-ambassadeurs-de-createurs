@@ -17,8 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const a = document.querySelector('.js-ambassadors');
     const ambassadors = JSON.parse(a.dataset.ambassadors);
 
-    console.log(ambassadors);
-
     for (const i in ambassadors) {
         const duties = [];
         const categories = [];
