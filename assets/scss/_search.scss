@@ -9,3 +9,17 @@
     align-items: center;
     color: $primary-color;
 }
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;       /* Remove default arrow */
+    background-image: url('https://image.flaticon.com/icons/png/512/25/25224.png');   /* Add custom arrow */
+    background-size: 10px 15px;
+    background-repeat: no-repeat;
+    background-position: 95%;
+}
+
+.form-control {
+    border: 1px solid white;
+}
