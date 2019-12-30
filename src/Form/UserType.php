@@ -14,6 +14,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
 
 class UserType extends AbstractType
 {
@@ -40,7 +44,7 @@ class UserType extends AbstractType
                 'class' => Department::class,
                 'choice_label' => 'codeName',
             ])
-            ->add('roles', ChoiceType::class, [
+            ->add('rolesLMCO', ChoiceType::class, [
                 'label' => 'Rôle',
                 'choices' => User::ROLES,
                 'expanded' => true,
@@ -65,6 +69,25 @@ class UserType extends AbstractType
             ])
             ->add('urlFacebook', TextType::class, [
                 'label' => 'Compte Facebook',
+            ])
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'Veuillez entrer le même mot de passe.',
+                'options' => ['attr' => ['class' => 'password-field']],
+                'required' => true,
+                'first_options' => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Mot de passe'],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez entrer un mot de passe.',
+                    ]),
+                    new Length([
+                        'min' => 4,
+                        'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 255,
+                    ]),
+                ],
             ]);
     }
 
