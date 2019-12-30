@@ -237,7 +237,7 @@ class User implements UserInterface
     }
 
     /**
-     * @param string $role
+     * @param string $roleLMCO
      * @return $this
      */
     public function setRolesLMCO(string $roleLMCO): self
