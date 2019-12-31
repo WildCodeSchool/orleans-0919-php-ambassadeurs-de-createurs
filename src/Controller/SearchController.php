@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Data\SearchData;
+use App\Entity\Favorite;
 use App\Entity\User;
 use App\Form\SearchType;
+use App\Repository\FavoriteRepository;
 use App\Repository\UserRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,5 +39,54 @@ class SearchController extends AbstractController
             'role' => $role,
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     *
+     * @Route("/{id}/like", name="search_like")
+     *
+     * @param User $userFavorite
+     * @param ObjectManager $manager
+     * @param FavoriteRepository $favoriteRepository
+     * @return Response
+     */
+    public function like(User $userFavorite, ObjectManager $manager, FavoriteRepository $favoriteRepository): Response
+    {
+        $user = $this->getUser();
+
+        //$user = 1;
+
+        if (!$user) return $this->json([
+            'code' => 403,
+            'message' => 'Unauthorized'
+        ], 403);
+
+        if ($userFavorite->isLikedByUser($user)) {
+            $favorite = $favoriteRepository->findOneBy([
+                'user' => $user
+            ]);
+
+            $manager->remove($favorite);
+            $manager->flush();
+
+            return $this->json([
+                'code' => 200,
+                'message' => 'Like bien supprimé',
+                'likes' => $favoriteRepository->count(['user' => $userFavorite])
+            ], 200);
+        }
+
+        $favorite = new Favorite();
+        $favorite->setUserFavorite($userFavorite)
+            ->setUser($user);
+
+        $manager->persist($favorite);
+        $manager->flush();
+
+        return $this->json([
+            'code' => 200,
+            'message' => 'Like bien ajouté',
+            'likes' => $favoriteRepository->count(['user' => $userFavorite])
+        ], 200);
     }
 }

@@ -16,10 +16,18 @@
 
                     <div class="card-body">
                         <div class="star mb-4">
-                            <p class="m-0">100</p><i class="fas fa-star ml-2"></i>
+                            <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">
+                                <span class="js-likes">{{ user.favorites | length }}</span>
+                                {% if app.user and user.isLikedByUser(app.user) %}
+                                    <i class="fas fa-star ml-2"></i>
+                                {% else %}
+                                    <i class="far fa-star ml-2"></i>
+                                {% endif %}
+                            </a>
                         </div>
                         <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
-                        <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }} ({{ user.department.code }})</p>
+                        <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}
+                            ({{ user.department.code }})</p>
                         <hr>
                         <p class="card-text">Vendeur / Hôte</p>
                     </div>
@@ -28,4 +36,41 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        function onClickBtnLike(event) {
+            event.preventDefault();
+
+            const url = this.href;
+            const spanCount = this.querySelector('span.js-likes');
+            const icone = this.querySelector('i');
+
+
+            axios.get(url).then(function (response) {
+                spanCount.textContent = response.data.favorites;
+
+                if (icone.classList.contains('fas')) {
+                    icone.classList.replace('fas', 'far');
+                } else {
+                    icone.classList.replace('far', 'fas');
+                }
+            }).catch((function (error) {
+                if (error.response.status === 403) {
+                    window.alert("Vous ne pouvez pas ajouter en favoris si vous n'êtes pas connecté !")
+                }
+                else {
+                    window.alert("Une erreur s'est produite, réessayez plus tard");
+                }
+            }))
+        }
+
+        document.querySelectorAll('a.js-like').forEach(function (link) {
+            link.addEventListener('click', onClickBtnLike);
+        })
+
+    </script>
 {% endblock %}

@@ -104,10 +104,16 @@ class User
      */
     private $urlFacebook;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="user")
+     */
+    private $favorites;
+
     public function __construct()
     {
         $this->duties = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -271,5 +277,73 @@ class User
         $this->urlFacebook = $urlFacebook;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Favorite[]
+     */
+    public function getFavorites(): Collection
+    {
+        return $this->favorites;
+    }
+
+    public function addFavorites(Favorite $favoriteId): self
+    {
+        if (!$this->favorites->contains($favoriteId)) {
+            $this->favorites[] = $favoriteId;
+            $favoriteId->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorites(Favorite $favoriteId): self
+    {
+        if ($this->favorites->contains($favoriteId)) {
+            $this->favorites->removeElement($favoriteId);
+            // set the owning side to null (unless already changed)
+            if ($favoriteId->getUserId() === $this) {
+                $favoriteId->setUserId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function addFavorite(Favorite $favorite): self
+    {
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites[] = $favorite;
+            $favorite->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Favorite $favorite): self
+    {
+        if ($this->favorites->contains($favorite)) {
+            $this->favorites->removeElement($favorite);
+            // set the owning side to null (unless already changed)
+            if ($favorite->getUser() === $this) {
+                $favorite->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Permet de savoir si cet utilisateur est liké par un utilisateur
+     *
+     * @param \App\Entity\User $user
+     * @return bool
+     */
+    public function isLikedByUser(User $user): bool
+    {
+        foreach ($this->favorites as $favorite) {
+            if ($favorite->getUser() === $user) return true;
+        }
+        return false;
     }
 }
