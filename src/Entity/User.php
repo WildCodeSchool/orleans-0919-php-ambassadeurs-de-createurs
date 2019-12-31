@@ -291,7 +291,7 @@ class User
     {
         if (!$this->favorites->contains($favoriteId)) {
             $this->favorites[] = $favoriteId;
-            $favoriteId->setUserId($this);
+            $favoriteId->setUser($this);
         }
 
         return $this;
@@ -302,8 +302,8 @@ class User
         if ($this->favorites->contains($favoriteId)) {
             $this->favorites->removeElement($favoriteId);
             // set the owning side to null (unless already changed)
-            if ($favoriteId->getUserId() === $this) {
-                $favoriteId->setUserId(null);
+            if ($favoriteId->getUser() === $this) {
+                $favoriteId->setUser(null);
             }
         }
 
@@ -342,7 +342,9 @@ class User
     public function isLikedByUser(User $user): bool
     {
         foreach ($this->favorites as $favorite) {
-            if ($favorite->getUser() === $user) return true;
+            if ($favorite->getUser() === $user) {
+                return true;
+            }
         }
         return false;
     }

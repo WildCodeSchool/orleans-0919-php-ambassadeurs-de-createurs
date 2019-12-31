@@ -54,12 +54,12 @@ class SearchController extends AbstractController
     {
         $user = $this->getUser();
 
-        //$user = 1;
-
-        if (!$user) return $this->json([
+        if (!$user) {
+            return $this->json([
             'code' => 403,
             'message' => 'Unauthorized'
-        ], 403);
+            ], 403);
+        }
 
         if ($userFavorite->isLikedByUser($user)) {
             $favorite = $favoriteRepository->findOneBy([
