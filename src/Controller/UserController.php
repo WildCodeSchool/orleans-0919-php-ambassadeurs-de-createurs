@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Event;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\EventRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,12 +61,9 @@ class UserController extends AbstractController
     /**
      * @Route("/{id}", name="user_show", methods={"GET"})
      */
-    public function show(User $user): Response
+    public function show(User $user, EventRepository $eventRepository): Response
     {
-        $id = $user->getId();
-        $events = $this->getDoctrine()
-            ->getRepository(Event::class)
-            ->findBy(['user' => $id], null);
+        $events = $eventRepository->findBy(['user' => $user]);
         return $this->render('user/show.html.twig', [
             'user' => $user,
             'events' => $events

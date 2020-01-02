@@ -19,12 +19,12 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i = 0; $i < 80; $i++) {
             $user = $this->getReference('user_' . rand(0, 19));
-            $blog = new Event();
-            $blog->setPlace($user->getCity());
-            $blog->setUser($user);
-            $blog->setDescription($faker->sentence(6));
-            $blog->setDateTime($faker->dateTime);
-            $manager->persist($blog);
+            $event = new Event();
+            $event->setPlace($user->getCity());
+            $event->setUser($user);
+            $event->setDescription($faker->sentence(6));
+            $event->setDateTime($faker->dateTime);
+            $manager->persist($event);
         }
         $manager->flush();
     }
