@@ -19,12 +19,12 @@ class BrandFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 0; $i < 10; $i++) {
             $brand = new Brand();
             $brand->setName($faker->name);
-            $brand->setDescription($faker->sentence(3));
+            $brand->setDescription($faker->sentence(2));
             $brand->setSite($faker->url);
             $brand->setInstagram($faker->url);
-            $brand->setHostAdvantage($faker->sentence(4));
-            $brand->setSellerAdvantage($faker->sentence(4));
-            $brand->setUser($this->getReference('user_' . rand(0, 19)));
+            $brand->setHostAdvantage($faker->sentence(2));
+            $brand->setSellerAdvantage($faker->sentence(2));
+            $brand->setUser($this->getReference('user_' . $i));
             $manager->persist($brand);
         }
         $manager->flush();

@@ -39,12 +39,12 @@ class Brand
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $host_advantage;
+    private $hostAdvantage;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $seller_advantage;
+    private $sellerAdvantage;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="brand", cascade={"persist", "remove"})
@@ -107,24 +107,24 @@ class Brand
 
     public function getHostAdvantage(): ?string
     {
-        return $this->host_advantage;
+        return $this->hostAdvantage;
     }
 
-    public function setHostAdvantage(string $host_advantage): self
+    public function setHostAdvantage(string $hostAdvantage): self
     {
-        $this->host_advantage = $host_advantage;
+        $this->hostAdvantage = $hostAdvantage;
 
         return $this;
     }
 
     public function getSellerAdvantage(): ?string
     {
-        return $this->seller_advantage;
+        return $this->sellerAdvantage;
     }
 
-    public function setSellerAdvantage(string $seller_advantage): self
+    public function setSellerAdvantage(string $sellerAdvantage): self
     {
-        $this->seller_advantage = $seller_advantage;
+        $this->sellerAdvantage = $sellerAdvantage;
 
         return $this;
     }
