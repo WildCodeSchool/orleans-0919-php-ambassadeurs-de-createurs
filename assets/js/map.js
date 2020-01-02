@@ -22,9 +22,6 @@ const ambassadors = JSON.parse(a.dataset.ambassadors);
 const b = document.querySelector('.js-events');
 const events = JSON.parse(b.dataset.events);
 
-console.log(ambassadors);
-console.log(events);
-
 document.addEventListener('DOMContentLoaded', () => {
     // eslint-disable-next-line no-use-before-define
     mapEvents(events, markers);
