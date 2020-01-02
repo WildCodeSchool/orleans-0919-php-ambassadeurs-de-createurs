@@ -68,7 +68,7 @@ class BrandController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success', 'Votre marque a été modifié');
             return $this->redirectToRoute('brand_index');
         }
 

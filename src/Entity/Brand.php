@@ -18,6 +18,10 @@ class Brand
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\NotBlank(message="Le nom de la marque est obligatoire")
+     * @Assert\Length(
+     *      max = 150,
+     *      maxMessage = "Votre rôle {{ limit }} caractères de long")
      */
     private $name;
 
@@ -38,11 +42,19 @@ class Brand
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="La récompense pour les hôtes est obligatoire")
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Votre rôle {{ limit }} caractères de long")
      */
     private $hostAdvantage;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="La récompense pour les vendeurs est obligatoire")
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Votre rôle {{ limit }} caractères de long")
      */
     private $sellerAdvantage;
 

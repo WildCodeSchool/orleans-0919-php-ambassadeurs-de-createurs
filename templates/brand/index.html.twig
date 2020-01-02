@@ -4,7 +4,13 @@
 
 {% block body %}
     <h1>Brand index</h1>
-
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     <table class="table">
         <thead>
             <tr>
