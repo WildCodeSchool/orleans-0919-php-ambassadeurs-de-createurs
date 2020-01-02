@@ -35,25 +35,26 @@ class HomeController extends AbstractController
 
         $roles = User::ROLES;
         $ambassadors = $userRepository->findBy(['rolesLMCO' => $roles['Ambassadeur']]);
-        $events = $eventRepository->findBy(['userRolesLMCO' => $roles['Ambassadeur']]);
-        var_dump($events);
-        die();
+        $events = $eventRepository->findRoleInUser($roles['Ambassadeur']);
         $ambassadorCards = array_slice($ambassadors, count($ambassadors)-self::NB_CARDS, self::NB_CARDS);
 
         $context = [
-            ObjectNormalizer::IGNORED_ATTRIBUTES => ['users', 'mail', 'department', 'user']
+            ObjectNormalizer::IGNORED_ATTRIBUTES => ['users', 'user']
         ];
         $ambassadorsArray = $normalizer->normalize($ambassadors, 'json', $context);
+        $eventsArray = $normalizer->normalize($events, 'json', $context);
 
         for ($i = 0; $i < count($ambassadorsArray); $i++) {
             $ambassadorsArray[$i]['coordinates'] = $coordinateService
                 ->getCoordinates($ambassadorsArray[$i]['city']);
         }
-
-        var_dump($ambassadorsArray);
-        die();
+        for ($i = 0; $i < count($eventsArray); $i++) {
+            $eventsArray[$i]['coordinates'] = $coordinateService
+                ->getCoordinates($eventsArray[$i]['place']);
+        }
         return $this->render('/home/index.html.twig', [
             'ambassadorsArray' => $ambassadorsArray,
+            'eventsArray' => $eventsArray,
             'ambassadorCards' => $ambassadorCards,
         ]);
     }
