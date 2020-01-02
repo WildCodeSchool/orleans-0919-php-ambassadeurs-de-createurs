@@ -75,6 +75,30 @@ svg.svg-inline--fa.fa-star.fa-w-18 {
     font-size: 15pt;
 }
 
+#map {
+    width: 80vw;
+    height: 80vh;
+}
+
+.popupTitle {
+    color: $primary-color;
+}
+
+.popupText {
+    font-size: $font-size-body;
+}
+
+a.fb-ic-card {
+    font-size: $font-size-icon;
+    color: $secondary-color;
+    align-self: end;
+}
+
+a.fb-ic-card:hover {
+    color: $primary-color;
+    text-decoration: none;
+}
+
 div.row.reasons {
     display: flex;
     justify-content: center;
@@ -93,7 +117,6 @@ div.row.reasons {
             text-align: center;
         }
     }
-
 }
 
 @media screen and (min-width: 1000px) {
