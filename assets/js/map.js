@@ -68,9 +68,12 @@ function mapAmbasadors(amb, mar) {
             <p class="m-0 ml-3 popupText">Lieu : ${amb[i].city}</p>
             <p class="m-0 ml-3 popupText">Rôles : ${duties.join(', ')}</p>
             <p class="m-0 ml-3 popupText"> Univers : ${categories.join(', ')}</p>
+            <div class="d-flex justify-content-around">
+            <a class="fb-ic-card" href="/user/${amb[i].id}">
+            <i class="far fa-user"></i></a>
             <a class="fb-ic-card" href="${amb[i].urlFacebook}">
-            <i class="fab fa-facebook-square ">
-            </i> </a> </div> </div>`;
+            <i class="fab fa-facebook-square "></i></a>
+            </div> </div> </div>`;
 
         m.bindPopup(customPopup, { minWidth: 400 });
         mar.addLayer(m);
@@ -101,7 +104,12 @@ function mapEvents(events, mar) {
             <p class="m-0 ml-3 popupText">Heure : ${dateEvent.toLocaleTimeString('fr-FR', optionsTime)}</p>
             <p class="m-0 ml-3 popupText">Hôte : ${events[i].user.firstname} ${events[i].user.lastname}</p>
             <p class="m-0 ml-3 popupText"> Univers : ${categories.join(', ')}</p>
-            </div> </div>`;
+            <div class="d-flex justify-content-around">
+            <a class="fb-ic-card" href="/user/${events[i].user.id}">
+            <i class="far fa-user"></i></a>
+            <a class="fb-ic-card" href="${events[i].user.urlFacebook}">
+            <i class="fab fa-facebook-square "></i></a>
+            </div> </div> </div>`;
 
         m.bindPopup(customPopup);
         mar.addLayer(m);
