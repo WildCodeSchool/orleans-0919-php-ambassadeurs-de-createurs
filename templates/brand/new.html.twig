@@ -3,9 +3,13 @@
 {% block title %}New Brand{% endblock %}
 
 {% block body %}
-    <h1>Create new Brand</h1>
-
-    {{ include('brand/_form.html.twig') }}
-
-    <a href="{{ path('brand_index') }}">back to list</a>
+    <div class="mt-5 container-xl container-lg container-fluid">
+        <h1 class="text-center mt-3 mb-4">Créer une marque</h1>
+        <div class="border-gold p-4">
+            {{ include('brand/_form.html.twig') }}
+        </div>
+        <div class="flex d-flex justify-content-around">
+            <a class="btn btn-dark m-5" href="{{ path('brand_index') }}"><i class="far fa-arrow-alt-circle-left"></i> Liste de vos marques</a>
+        </div>
+    </div>
 {% endblock %}

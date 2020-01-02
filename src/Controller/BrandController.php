@@ -38,7 +38,7 @@ class BrandController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($brand);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Votre marque a été créée');
             return $this->redirectToRoute('brand_index');
         }
 
@@ -68,7 +68,7 @@ class BrandController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', 'Votre marque a été modifié');
+
             return $this->redirectToRoute('brand_index');
         }
 
