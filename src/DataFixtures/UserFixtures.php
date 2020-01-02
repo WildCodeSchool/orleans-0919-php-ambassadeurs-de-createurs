@@ -16,6 +16,21 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         'ROLE_AMBASSADOR',
         'ROLE_CREATOR',
     ];
+
+    const CITIES = [
+        'Orleans',
+        'Tours',
+        'Chartres',
+        'Blois',
+        'Montargis',
+        'Paris',
+        'Lille',
+        'Nantes',
+        'Bordeaux',
+        'Toulouse',
+        'Nice',
+    ];
+
     private $passwordEncoder;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
@@ -30,7 +45,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user = new User();
             $user->setFirstname($faker->firstName);
             $user->setLastname($faker->lastName);
-            $user->setCity($faker->city);
+            $user->setCity(self::CITIES[array_rand(self::CITIES)]);
             $user->setPicture($faker->imageUrl(200, 200, 'fashion'));
             $user->setMail($faker->email);
             $user->setRoles([self::ROLES[rand(0, 1)]]);
@@ -54,6 +69,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $user,
                 'test'
             ));
+            $this->addReference('user_' . $i, $user);
             $manager->persist($user);
         }
         $manager->flush();
