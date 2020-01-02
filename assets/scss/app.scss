@@ -1,5 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
 @import "vars";
+@import "mixin";
 @import "form";
 @import "style_navbar";
 @import "home";
@@ -17,7 +18,7 @@
     font-family: $font-body;
 }
 
-h1, h2 {
+h1 {
     font-family: $font-title;
     font-size: $font-size-title;
     color: $primary-color;
@@ -26,6 +27,8 @@ h1, h2 {
 
 h2 {
     font-size: $font-size-second-title;
+    font-family: $font-title;
+    color: $primary-color;
     margin: 10px;
 }
 
