@@ -32,7 +32,7 @@ class HomeController extends AbstractController
     ): Response {
 
         $roles = User::ROLES;
-        $ambassadors = $userRepository->findBy(['roles' => $roles['Ambassadeur']]);
+        $ambassadors = $userRepository->findBy(['rolesLMCO' => $roles['Ambassadeur']]);
         $ambassadorCards = array_slice($ambassadors, count($ambassadors)-self::NB_CARDS, self::NB_CARDS);
 
         $context = [
