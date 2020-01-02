@@ -18,7 +18,9 @@ a
 {
     @include BoxShadowHelper(1);
     transition: .25s box-shadow;
+
     &:focus,
+
     &:hover {@include BoxShadowHelper(2);}
 }
 
