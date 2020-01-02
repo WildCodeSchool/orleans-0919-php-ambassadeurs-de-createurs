@@ -17,10 +17,10 @@ const markers = L.markerClusterGroup({
     showCoverageOnHover: false,
 });
 
-const a = document.querySelector('.js-ambassadors');
-const ambassadors = JSON.parse(a.dataset.ambassadors);
-const b = document.querySelector('.js-events');
-const events = JSON.parse(b.dataset.events);
+const ambassadorsSelector = document.querySelector('.js-ambassadors');
+const ambassadors = JSON.parse(ambassadorsSelector.dataset.ambassadors);
+const eventsSelector = document.querySelector('.js-events');
+const events = JSON.parse(eventsSelector.dataset.events);
 
 document.addEventListener('DOMContentLoaded', () => {
     // eslint-disable-next-line no-use-before-define
@@ -91,12 +91,11 @@ function mapEvents(events, mar) {
         const m = L.marker([events[i].coordinates[1], events[i].coordinates[0]]);
 
         const dateEvent = new Date(events[i].dateTime.timestamp * 1e3);
-        // TODO rework popup, in particular date
         const customPopup = `<div class="d-flex flex-row popup">
             <div class="d-flex flex-column">
             <h4 class="text-center popupTitle">${events[i].description}</h4>
             <p class="m-0 ml-3 popupText">Lieu : ${events[i].place}</p>
-            <p class="m-0 ml-3 popupText">Date : ${dateEvent.toISOString().split('T')[0]}</p>
+            <p class="m-0 ml-3 popupText">Date : ${dateEvent.toLocaleDateString('fr-FR')}</p>
             <p class="m-0 ml-3 popupText">Hôte : ${events[i].user.firstname} ${events[i].user.lastname}</p>
             <p class="m-0 ml-3 popupText"> Univers : ${categories.join(', ')}</p>
             </div> </div>`;
