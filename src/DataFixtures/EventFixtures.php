@@ -15,10 +15,13 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
+
+
         for ($i = 0; $i < 80; $i++) {
+            $user = $this->getReference('user_' . rand(0, 19));
             $blog = new Event();
-            $blog->setPlace($faker->city);
-            $blog->setUser($this->getReference('user_' . rand(0, 19)));
+            $blog->setPlace($user->getCity());
+            $blog->setUser($user);
             $blog->setDescription($faker->sentence(6));
             $blog->setDateTime($faker->dateTime);
             $manager->persist($blog);
