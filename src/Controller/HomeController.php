@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\EventRepository;
 use App\Repository\UserRepository;
 use App\Service\CoordinateService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,16 +28,20 @@ class HomeController extends AbstractController
      */
     public function index(
         UserRepository $userRepository,
+        EventRepository $eventRepository,
         CoordinateService $coordinateService,
         NormalizerInterface $normalizer
     ): Response {
 
         $roles = User::ROLES;
         $ambassadors = $userRepository->findBy(['rolesLMCO' => $roles['Ambassadeur']]);
+        $events = $eventRepository->findBy(['userRolesLMCO' => $roles['Ambassadeur']]);
+        var_dump($events);
+        die();
         $ambassadorCards = array_slice($ambassadors, count($ambassadors)-self::NB_CARDS, self::NB_CARDS);
 
         $context = [
-            ObjectNormalizer::IGNORED_ATTRIBUTES => ['users', 'mail', 'department']
+            ObjectNormalizer::IGNORED_ATTRIBUTES => ['users', 'mail', 'department', 'user']
         ];
         $ambassadorsArray = $normalizer->normalize($ambassadors, 'json', $context);
 
@@ -45,6 +50,8 @@ class HomeController extends AbstractController
                 ->getCoordinates($ambassadorsArray[$i]['city']);
         }
 
+        var_dump($ambassadorsArray);
+        die();
         return $this->render('/home/index.html.twig', [
             'ambassadorsArray' => $ambassadorsArray,
             'ambassadorCards' => $ambassadorCards,

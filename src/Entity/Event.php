@@ -93,4 +93,9 @@ class Event
 
         return $this;
     }
+
+    public function getUserRolesLMCO(): ?string
+    {
+        return $this->user->getRolesLMCO();
+    }
 }

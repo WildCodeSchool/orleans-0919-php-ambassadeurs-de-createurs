@@ -17,39 +17,44 @@ const markers = L.markerClusterGroup({
     showCoverageOnHover: false,
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const a = document.querySelector('.js-ambassadors');
-    const ambassadors = JSON.parse(a.dataset.ambassadors);
+const a = document.querySelector('.js-ambassadors');
+const ambassadors = JSON.parse(a.dataset.ambassadors);
 
+document.addEventListener('DOMContentLoaded', () => {
+    // eslint-disable-next-line no-use-before-define
+    mapAmbasadors(ambassadors, markers);
+});
+
+map.addLayer(markers);
+
+function mapAmbasadors(amb, mar) {
     // eslint-disable-next-line guard-for-in,no-restricted-syntax
-    for (const i in ambassadors) {
+    for (const i in amb) {
         const duties = [];
         const categories = [];
         // eslint-disable-next-line guard-for-in,no-restricted-syntax
-        for (const j in ambassadors[i].duties) {
-            duties[j] = ambassadors[i].duties[j].name;
+        for (const j in amb[i].duties) {
+            duties[j] = amb[i].duties[j].name;
         }
         // eslint-disable-next-line guard-for-in,no-restricted-syntax
-        for (const j in ambassadors[i].categories) {
-            categories[j] = ambassadors[i].categories[j].description;
+        for (const j in amb[i].categories) {
+            categories[j] = amb[i].categories[j].description;
         }
         // eslint-disable-next-line no-undef
-        const m = L.marker([ambassadors[i].coordinates[1], ambassadors[i].coordinates[0]]);
+        const m = L.marker([amb[i].coordinates[1], amb[i].coordinates[0]]);
 
         const customPopup = `<div class="d-flex flex-row popup"><div class="w-50">
-            <img src="${ambassadors[i].picture}" alt="${ambassadors[i].firstname} ${ambassadors[i].lastname}">
+            <img src="${amb[i].picture}" alt="${amb[i].firstname} ${amb[i].lastname}">
             </div> <div class="w-50 d-flex flex-column">
-            <h4 class="text-center popupTitle">${ambassadors[i].firstname} ${ambassadors[i].lastname}</h4>
-            <p class="m-0 ml-3 popupText">Lieu : ${ambassadors[i].city}</p>
+            <h4 class="text-center popupTitle">${amb[i].firstname} ${amb[i].lastname}</h4>
+            <p class="m-0 ml-3 popupText">Lieu : ${amb[i].city}</p>
             <p class="m-0 ml-3 popupText">Rôles : ${duties.join(', ')}</p>
             <p class="m-0 ml-3 popupText"> Univers : ${categories.join(', ')}</p>
-            <a class="fb-ic-card" href="${ambassadors[i].urlFacebook}">
+            <a class="fb-ic-card" href="${amb[i].urlFacebook}">
             <i class="fab fa-facebook-square ">
             </i> </a> </div> </div>`;
 
         m.bindPopup(customPopup, { minWidth: 400 });
-        markers.addLayer(m);
+        mar.addLayer(m);
     }
-});
-
-map.addLayer(markers);
+}
