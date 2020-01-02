@@ -21,7 +21,7 @@ class Brand
      * @Assert\NotBlank(message="Le nom de la marque est obligatoire")
      * @Assert\Length(
      *      max = 150,
-     *      maxMessage = "Votre rôle {{ limit }} caractères de long")
+     *      maxMessage = "Votre nom de marque ne doit pas depasser 150 caractères de long")
      */
     private $name;
 
@@ -45,7 +45,7 @@ class Brand
      * @Assert\NotBlank(message="La récompense pour les hôtes est obligatoire")
      * @Assert\Length(
      *      max = 255,
-     *      maxMessage = "Votre rôle {{ limit }} caractères de long")
+     *      maxMessage = "Votre recompense ne doit pas depasser 255 caractères de long")
      */
     private $hostAdvantage;
 
@@ -54,7 +54,7 @@ class Brand
      * @Assert\NotBlank(message="La récompense pour les vendeurs est obligatoire")
      * @Assert\Length(
      *      max = 255,
-     *      maxMessage = "Votre rôle {{ limit }} caractères de long")
+     *      maxMessage = "Votre recompense ne doit pas depasser 255 caractères de long")
      */
     private $sellerAdvantage;
 
