@@ -3,11 +3,14 @@
     border-radius: 1em;
 }
 
-.btn-dark{
+.btn-dark {
     background-color: black;
 }
 
-a {transition: .25s all;}
+a {
+    transition: .25s all;
+}
+
 .card {
     overflow: hidden;
     @include BoxShadowHelper(1);
@@ -15,7 +18,28 @@ a {transition: .25s all;}
     &:focus,
     &:hover {@include BoxShadowHelper(2);}
 }
+
 .card-inverse .card-img-overlay {
     background-color: rgba(#333,.85);
     border-color: rgba(#333,.85);
+}
+
+.card.card-inverse.animated.fadeInDown
+{
+    height : 50%;
+}
+
+.card-title.event
+{
+    color : $primary-color;
+}
+
+.card-text.event
+{
+    color : $third-color;
+}
+
+.text-muted.eventt
+{
+    color : $background-secondary;
 }
