@@ -22,7 +22,7 @@ class SearchController extends AbstractController
     public function showByRoles(UserRepository $userRepository, string $role, Request $request): Response
     {
 
-        $users = $userRepository->findBy(['roles' => $role]);
+        $users = $userRepository->findBy(['rolesLMCO' => $role]);
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
 
