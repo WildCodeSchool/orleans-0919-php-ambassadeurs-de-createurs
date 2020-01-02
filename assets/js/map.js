@@ -1,3 +1,9 @@
+// eslint-disable-next-line no-undef
+$('.nav-tabs li a').on('click', function () {
+    $('.nav-tabs li a').removeClass('active');
+    $(this).addClass('active');
+});
+
 // Saint Palais in Cher, center of France
 const centerFrance = [47.242419, 2.408616];
 

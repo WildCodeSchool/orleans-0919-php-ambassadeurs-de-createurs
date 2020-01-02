@@ -13,8 +13,18 @@
 
     <div class="js-ambassadors" data-ambassadors="{{ ambassadorsArray|json_encode }}"></div>
     <div class="js-events" data-events="{{ eventsArray|json_encode }}"></div>
-    <div class="d-flex justify-content-center">
-        <div class="mt-5 mb-5" id="map"></div>
+    <div class="d-flex w-100 justify-content-center">
+        <div class="d-flex flex-column mt-5 mapTabs align-self-center">
+            <ul class="nav nav-tabs nav-fill nav-justified">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#events">Prochain évènements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#ambassadors">Ambassadeurs</a>
+                </li>
+            </ul>
+            <div class="mb-5" id="map"></div>
+        </div>
     </div>
 
     <div class="greyBack mt-5 mb-5">
