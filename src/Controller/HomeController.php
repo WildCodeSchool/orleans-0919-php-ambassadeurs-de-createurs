@@ -38,11 +38,14 @@ class HomeController extends AbstractController
         $events = $eventRepository->findRoleInUser($roles['Ambassadeur']);
         $ambassadorCards = array_slice($ambassadors, count($ambassadors)-self::NB_CARDS, self::NB_CARDS);
 
-        $context = [
+        $contextAmbassadors = [
             ObjectNormalizer::IGNORED_ATTRIBUTES => ['users', 'user'],
         ];
-        $ambassadorsArray = $normalizer->normalize($ambassadors, 'json', $context);
-        $eventsArray = $normalizer->normalize($events, 'json', $context);
+        $contextEvents = [
+            ObjectNormalizer::IGNORED_ATTRIBUTES => ['events', 'users'],
+        ];
+        $ambassadorsArray = $normalizer->normalize($ambassadors, 'json', $contextAmbassadors);
+        $eventsArray = $normalizer->normalize($events, 'json', $contextEvents);
 
         for ($i = 0; $i < count($ambassadorsArray); $i++) {
             $ambassadorsArray[$i]['coordinates'] = $coordinateService

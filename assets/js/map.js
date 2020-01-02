@@ -22,6 +22,7 @@ const ambassadors = JSON.parse(a.dataset.ambassadors);
 const b = document.querySelector('.js-events');
 const events = JSON.parse(b.dataset.events);
 
+console.log(ambassadors);
 console.log(events);
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -65,7 +66,6 @@ function mapAmbasadors(amb, mar) {
 
 function mapEvents(events, mar) {
 
-    console.log(events);
     // eslint-disable-next-line guard-for-in,no-restricted-syntax
     for (const i in events) {
         const categories = [];
@@ -76,17 +76,18 @@ function mapEvents(events, mar) {
         // eslint-disable-next-line no-undef
         const m = L.marker([events[i].coordinates[1], events[i].coordinates[0]]);
 
+        const dateEvent = new Date(events[i].dateTime.timestamp * 1e3);
+        // TODO rework popup, in particular date
         const customPopup = `<div class="d-flex flex-row popup">
             <div class="d-flex flex-column">
             <h4 class="text-center popupTitle">${events[i].description}</h4>
             <p class="m-0 ml-3 popupText">Lieu : ${events[i].place}</p>
+            <p class="m-0 ml-3 popupText">Date : ${dateEvent.toISOString().split('T')[0]}</p>
             <p class="m-0 ml-3 popupText">Hôte : ${events[i].user.firstname} ${events[i].user.lastname}</p>
             <p class="m-0 ml-3 popupText"> Univers : ${categories.join(', ')}</p>
-            <a class="fb-ic-card" href="${events[i].user.urlFacebook}">
-            <i class="fab fa-facebook-square ">
-            </i> </a> </div> </div>`;
+            </div> </div>`;
 
-        m.bindPopup(customPopup, { minWidth: 300 });
+        m.bindPopup(customPopup);
         mar.addLayer(m);
     }
 }
