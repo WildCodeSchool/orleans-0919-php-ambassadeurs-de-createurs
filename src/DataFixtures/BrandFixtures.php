@@ -16,16 +16,19 @@ class BrandFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
-        for ($i = 0; $i < 10; $i++) {
-            $brand = new Brand();
-            $brand->setName($faker->name);
-            $brand->setDescription($faker->sentence(2));
-            $brand->setSite($faker->url);
-            $brand->setInstagram($faker->url);
-            $brand->setHostAdvantage($faker->sentence(2));
-            $brand->setSellerAdvantage($faker->sentence(2));
-            $brand->setUser($this->getReference('user_' . $i));
-            $manager->persist($brand);
+        for ($i = 0; $i < 19; $i++) {
+            $user = $this->getReference('user_' . $i);
+            if ($user->getRolesLMCO() == 'Créateur') {
+                $brand = new Brand();
+                $brand->setName($faker->name);
+                $brand->setDescription($faker->sentence(2));
+                $brand->setSite($faker->url);
+                $brand->setInstagram($faker->url);
+                $brand->setHostAdvantage($faker->sentence(2));
+                $brand->setSellerAdvantage($faker->sentence(2));
+                $brand->setUser($user);
+                $manager->persist($brand);
+            }
         }
         $manager->flush();
     }
