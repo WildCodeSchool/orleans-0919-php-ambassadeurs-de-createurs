@@ -15,8 +15,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class User implements UserInterface
 {
-    const ROLES = ['Ambassadeur' => 'ROLE_AMBASSADOR', 'Createur' => 'ROLE_CREATOR'];
-    const ROLES_URL = ['ambassadeur' => 'ROLE_AMBASSADOR', 'createur' => 'ROLE_CREATOR'];
+    const ROLE_AMBASSADOR = 'ROLE_AMBASSADOR';
+    const ROLE_CREATOR = 'ROLE_CREATOR';
+
+    const ROLES = ['Ambassadeur' => self::ROLE_AMBASSADOR, 'Createur' => self::ROLE_CREATOR];
+    const ROLES_URL = ['ambassadeur' => self::ROLE_AMBASSADOR, 'createur' => self::ROLE_CREATOR];
 
     /**
      * @ORM\Id()
