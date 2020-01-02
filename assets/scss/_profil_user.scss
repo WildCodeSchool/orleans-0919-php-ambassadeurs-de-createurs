@@ -12,7 +12,6 @@ a {
 }
 
 .card {
-    overflow: hidden;
     @include BoxShadowHelper(1);
     transition: .25s box-shadow;
     &:focus,
@@ -22,11 +21,6 @@ a {
 .card-inverse .card-img-overlay {
     background-color: rgba(#333,.85);
     border-color: rgba(#333,.85);
-}
-
-.card.card-inverse.animated.fadeInDown
-{
-    height : 50%;
 }
 
 .card-title.event
@@ -39,7 +33,7 @@ a {
     color : $third-color;
 }
 
-.text-muted.eventt
+.text-muted.event
 {
     color : $background-secondary;
 }
