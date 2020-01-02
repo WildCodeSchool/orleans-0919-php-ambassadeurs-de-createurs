@@ -13,8 +13,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     const ROLES = [
-        'Ambassadeur',
-        'Créateur',
+        'ROLE_AMBASSADOR',
+        'ROLE_CREATOR',
     ];
     private $passwordEncoder;
 
@@ -33,7 +33,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setCity($faker->city);
             $user->setPicture($faker->imageUrl(200, 200, 'fashion'));
             $user->setMail($faker->email);
-            $user->setRolesLMCO(self::ROLES[rand(0, 1)]);
+            $user->setRoles([self::ROLES[rand(0, 1)]]);
             $user->setDepartment($this->getReference("00" . rand(1, 7)));
             $user->addCategory($this->getReference('category_' . rand(0, 5)));
             $nbDuty = rand(0, 2);
@@ -50,7 +50,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     break;
             }
             $user->setUrlFacebook($faker->url);
-            $user->setRoles(['ROLES_' .$user->getRolesLMCO()]);
             $user->setPassword($this->passwordEncoder->encodePassword(
                 $user,
                 'test'

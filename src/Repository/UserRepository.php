@@ -56,11 +56,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
 
         if (!empty($search['duty'])) {
-            $query->join('u.duties', 'd')
-                ->andWhere('d.id = :duty')
+            $query->join('u.duties', 's')
+                ->andWhere('s.id = :duty')
                 ->setParameter('duty', $search['duty']);
         }
+        return $query->getQuery()->getResult();
+    }
 
+    public function findByRoles(string $roles) : array
+    {
+        $query = $this->createQueryBuilder('r')
+            ->select('u')
+            ->from(User::class, 'u')
+            ->where('u.roles LIKE :roles')
+            ->setParameter('roles', '%' . $roles . '%');
         return $query->getQuery()->getResult();
     }
 }

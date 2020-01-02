@@ -14,17 +14,17 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputMail">Mail</label>
+    <h1 class="h3 mb-3 font-weight-normal">Identifiez-vous</h1>
+    <label for="inputMail">Email</label>
     <input type="text" value="{{ last_username }}" name="mail" id="inputMail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
+    <label for="inputPassword">Mot de passe</label>
     <input type="password" name="password" id="inputPassword" class="form-control" required>
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
     <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+        S'identifier
     </button>
 </form>
 {% endblock %}
