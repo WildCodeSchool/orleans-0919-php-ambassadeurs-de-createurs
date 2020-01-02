@@ -70,6 +70,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $user,
                 'test'
             ));
+            $this->addReference('user_' . $i, $user);
             $manager->persist($user);
         }
         $manager->flush();
