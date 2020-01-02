@@ -1,9 +1,3 @@
-// eslint-disable-next-line no-undef
-$('.nav-tabs li a').on('click', function () {
-    $('.nav-tabs li a').removeClass('active');
-    $(this).addClass('active');
-});
-
 // Saint Palais in Cher, center of France
 const centerFrance = [47.242419, 2.408616];
 
@@ -33,7 +27,23 @@ document.addEventListener('DOMContentLoaded', () => {
     mapEvents(events, markers);
 });
 
-map.addLayer(markers);
+// eslint-disable-next-line no-undef
+$('#events').on('click', function () {
+    $('#ambassadors').removeClass('active');
+    $(this).addClass('active');
+    markers.clearLayers();
+    // eslint-disable-next-line no-use-before-define
+    mapEvents(events, markers);
+});
+
+// eslint-disable-next-line no-undef
+$('#ambassadors').on('click', function () {
+    $('#events').removeClass('active');
+    $(this).addClass('active');
+    markers.clearLayers();
+    // eslint-disable-next-line no-use-before-define
+    mapAmbasadors(ambassadors, markers);
+});
 
 function mapAmbasadors(amb, mar) {
     // eslint-disable-next-line guard-for-in,no-restricted-syntax
@@ -65,6 +75,7 @@ function mapAmbasadors(amb, mar) {
         m.bindPopup(customPopup, { minWidth: 400 });
         mar.addLayer(m);
     }
+    map.addLayer(markers);
 }
 
 function mapEvents(events, mar) {
@@ -93,4 +104,5 @@ function mapEvents(events, mar) {
         m.bindPopup(customPopup);
         mar.addLayer(m);
     }
+    map.addLayer(markers);
 }

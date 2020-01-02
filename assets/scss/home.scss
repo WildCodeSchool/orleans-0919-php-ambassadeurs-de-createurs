@@ -79,6 +79,11 @@ svg.svg-inline--fa.fa-star.fa-w-18 {
     width: 80vw;
 }
 
+.nav-link {
+    color: $secondary-color;
+    font-size: $font-size-body;
+}
+
 #map {
     width: 80vw;
     height: 80vh;
@@ -98,7 +103,7 @@ a.fb-ic-card {
     align-self: end;
 }
 
-a.fb-ic-card:hover {
+a.fb-ic-card:hover, .nav-link:hover {
     color: $primary-color;
     text-decoration: none;
 }
