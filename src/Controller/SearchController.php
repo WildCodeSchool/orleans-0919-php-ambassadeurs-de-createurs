@@ -25,7 +25,7 @@ class SearchController extends AbstractController
         if (!array_key_exists($role, User::ROLES_URL)) {
             throw new Exception('Mauvais rôle');
         }
-        $users = $userRepository->findByRoles(array_keys(User::ROLES, User::ROLES_URL[$role])[0]);
+        $users = $userRepository->findByRoles(User::ROLES_URL[$role]);
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
 
