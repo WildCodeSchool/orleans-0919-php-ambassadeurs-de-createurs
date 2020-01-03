@@ -46,8 +46,13 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ card.firstname }}</h5>
                                     <p class="card-text">J'habite dans le {{ card.department.codeName }}</p>
-                                    <p class="card-text"><small class="text-muted">Je suis un {{ card.rolesLMCO }}</small>
-                                    </p>
+                                    {% for role in card.roles %}
+                                        {% if role == 'ROLES_Ambassadeur' %}
+                                            <p class="card-text"><small class="text-muted">Je suis un ambassadeur</small></p>
+                                        {% elseif role == 'ROLES_Créateur'%}
+                                            <p class="card-text"><small class="text-muted">Je suis un créateur</small></p>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
                             </div>
                             <div class="col-md-4">

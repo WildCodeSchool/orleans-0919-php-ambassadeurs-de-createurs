@@ -31,8 +31,7 @@ class HomeController extends AbstractController
         NormalizerInterface $normalizer
     ): Response {
 
-        $roles = User::ROLES;
-        $ambassadors = $userRepository->findBy(['rolesLMCO' => $roles['Ambassadeur']]);
+        $ambassadors = $userRepository->findByRoles('Ambassadeur');
         $ambassadorCards = array_slice($ambassadors, count($ambassadors)-self::NB_CARDS, self::NB_CARDS);
 
         $context = [
