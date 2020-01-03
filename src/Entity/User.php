@@ -15,8 +15,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class User implements UserInterface
 {
+    const ROLE_AMBASSADOR = 'ROLE_AMBASSADOR';
+    const ROLE_CREATOR = 'ROLE_CREATOR';
 
-    const ROLES = ['Ambassadeur' => 'Ambassadeur', 'Créateur' => 'Créateur'];
+    const ROLES = ['Ambassadeur' => self::ROLE_AMBASSADOR, 'Createur' => self::ROLE_CREATOR];
+    const ROLES_URL = ['ambassadeur' => self::ROLE_AMBASSADOR, 'createur' => self::ROLE_CREATOR];
 
     /**
      * @ORM\Id()
@@ -79,14 +82,6 @@ class User implements UserInterface
      */
     private $password;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     *      max = 255,
-     *      maxMessage = "Le rôle doit être au plus {{ limit }} caractères de long")
-     * @Assert\Choice(choices=User::ROLES, message="Rôle invalide")
-     */
-    private $rolesLMCO;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -224,25 +219,6 @@ class User implements UserInterface
     public function setMail(string $mail): self
     {
         $this->mail = $mail;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getRolesLMCO(): ?string
-    {
-        return $this->rolesLMCO;
-    }
-
-    /**
-     * @param string $roleLMCO
-     * @return $this
-     */
-    public function setRolesLMCO(string $roleLMCO): self
-    {
-        $this->rolesLMCO = $roleLMCO;
 
         return $this;
     }
