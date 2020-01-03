@@ -27,18 +27,22 @@ document.addEventListener('DOMContentLoaded', () => {
     mapEvents(events, markers);
 });
 
-// eslint-disable-next-line no-undef
+// eslint-disable-next-line no-undef,func-names
 $('#events').on('click', function () {
+    // eslint-disable-next-line no-undef
     $('#ambassadors').removeClass('active');
+    // eslint-disable-next-line no-undef
     $(this).addClass('active');
     markers.clearLayers();
     // eslint-disable-next-line no-use-before-define
     mapEvents(events, markers);
 });
 
-// eslint-disable-next-line no-undef
+// eslint-disable-next-line no-undef,func-names
 $('#ambassadors').on('click', function () {
+    // eslint-disable-next-line no-undef
     $('#events').removeClass('active');
+    // eslint-disable-next-line no-undef
     $(this).addClass('active');
     markers.clearLayers();
     // eslint-disable-next-line no-use-before-define
@@ -81,8 +85,8 @@ function mapAmbasadors(amb, mar) {
     map.addLayer(markers);
 }
 
+// eslint-disable-next-line no-shadow
 function mapEvents(events, mar) {
-
     // eslint-disable-next-line guard-for-in,no-restricted-syntax
     for (const i in events) {
         const categories = [];
@@ -94,7 +98,9 @@ function mapEvents(events, mar) {
         const m = L.marker([events[i].coordinates[1], events[i].coordinates[0]]);
 
         const dateEvent = new Date(events[i].dateTime.timestamp * 1e3);
-        const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const optionsDate = {
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+        };
         const optionsTime = { hour: '2-digit', minute: '2-digit' };
         const customPopup = `<div class="d-flex flex-row popup">
             <div class="d-flex flex-column">
