@@ -99,7 +99,7 @@ function mapEvents(events, mar) {
 
         const dateEvent = new Date(events[i].dateTime.timestamp * 1e3);
         const optionsDate = {
-            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
         };
         const optionsTime = { hour: '2-digit', minute: '2-digit' };
         const customPopup = `<div class="d-flex flex-row popup">
