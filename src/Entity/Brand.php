@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BrandRepository")
@@ -21,7 +22,7 @@ class Brand
      * @Assert\NotBlank(message="Le nom de la marque est obligatoire")
      * @Assert\Length(
      *      max = 150,
-     *      maxMessage = "Votre nom de marque ne doit pas depasser 150 caractères de long")
+     *      maxMessage = "Votre nom de marque ne doit pas depasser {{limit}} caractères de long")
      */
     private $name;
 
@@ -45,7 +46,7 @@ class Brand
      * @Assert\NotBlank(message="La récompense pour les hôtes est obligatoire")
      * @Assert\Length(
      *      max = 255,
-     *      maxMessage = "Votre recompense ne doit pas depasser 255 caractères de long")
+     *      maxMessage = "Votre recompense ne doit pas depasser {{limit}} caractères de long")
      */
     private $hostAdvantage;
 
@@ -54,7 +55,7 @@ class Brand
      * @Assert\NotBlank(message="La récompense pour les vendeurs est obligatoire")
      * @Assert\Length(
      *      max = 255,
-     *      maxMessage = "Votre recompense ne doit pas depasser 255 caractères de long")
+     *      maxMessage = "Votre recompense ne doit pas depasser {{limit}} caractères de long")
      */
     private $sellerAdvantage;
 
