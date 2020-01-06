@@ -411,7 +411,7 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-  
+
     public function getBrand(): ?Brand
     {
         return $this->brand;
@@ -442,11 +442,10 @@ class User implements UserInterface
 
     public function getDutiesToString(): string
     {
-        $dutyCollection = $this->getDuties();
-        $dutyArray = [];
-        foreach ($dutyCollection as $duty) {
-            $dutyArray[] = $duty->getName();
+        $dutyNames = [];
+        foreach ($this->getDuties() as $duty) {
+            $dutyNames[] = $duty->getName();
         }
-        return implode(', ', $dutyArray);
+        return implode(', ', $dutyNames);
     }
 }
