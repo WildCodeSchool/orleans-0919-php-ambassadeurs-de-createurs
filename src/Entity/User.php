@@ -412,7 +412,7 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
   
-  public function getBrand(): ?Brand
+    public function getBrand(): ?Brand
     {
         return $this->brand;
     }
