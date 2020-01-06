@@ -40,7 +40,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ blog.title }}</h5>
                                 <p class=" text-left mt-3 textdate">{{ blog.date|localizeddate('short', 'none') }}</p>
-                                <p class="">{{ blog.content|truncate(150,true) }}</p>
+                                <p class="">{{ blog.content|truncate(150,true)|raw }}</p>
                                 <a href="#" class="btn btn-gold">Voir l'article</a>
                             </div>
                         </div>

@@ -4,11 +4,23 @@ const centerFrance = [47.242419, 2.408616];
 // eslint-disable-next-line no-undef
 const map = L.map('map', { gestureHandling: true }).setView(centerFrance, 6);
 
+// eslint-disable-next-line no-unused-vars,no-undef
+const goldIcon = new L.Icon({
+    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+});
+
 // eslint-disable-next-line no-undef
 // const url = 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png';
 // const url = 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png';
 // const url = 'https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png';
-const url = 'https://{s}.tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png';
+// const url = 'https://{s}.tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png';
+const url = 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png';
+// const url = 'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}';
 
 L.tileLayer(url, {
     maxZoom: 12,
@@ -66,7 +78,7 @@ function mapAmbasadors(amb, mar) {
             categories[j] = amb[i].categories[j].description;
         }
         // eslint-disable-next-line no-undef
-        const m = L.marker([amb[i].longitude, amb[i].latitude]);
+        const m = L.marker([amb[i].longitude, amb[i].latitude], { icon: goldIcon });
 
         const customPopup = `<div class="d-flex flex-row popup"><div class="w-50">
             <img class="img-fluid" src="${amb[i].picture}" alt="${amb[i].firstname} ${amb[i].lastname}">
@@ -101,7 +113,7 @@ function mapEvents(amb, mar) {
         for (const j in amb[i].events) {
             const event = amb[i].events[j];
             // eslint-disable-next-line no-undef
-            const m = L.marker([event.longitude, event.latitude]);
+            const m = L.marker([event.longitude, event.latitude], { icon: goldIcon });
 
             const dateEvent = new Date(event.dateTime.timestamp * 1e3);
             const optionsDate = {

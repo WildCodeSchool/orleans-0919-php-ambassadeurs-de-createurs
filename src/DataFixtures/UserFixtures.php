@@ -77,6 +77,21 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $this->addReference('user_' . $i, $user);
             $manager->persist($user);
         }
+
+        $admin = new User();
+        $admin->setFirstname('admin');
+        $admin->setLastname('admin');
+        $admin->setCity('admin');
+        $admin->setPicture('admin');
+        $admin->setMail('admin@admin.com');
+        $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setDepartment($this->getReference("00" . rand(1, 7)));
+        $admin->setPassword($this->passwordEncoder->encodePassword(
+            $admin,
+            'admin'
+        ));
+        $manager->persist($admin);
+
         $manager->flush();
     }
 
