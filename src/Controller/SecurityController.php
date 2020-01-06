@@ -56,7 +56,7 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $user->setRoles(['ROLES_' .$user->getRolesLMCO()]);
+            $user->setRoles([$request->request->get('user')['role']]);
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,

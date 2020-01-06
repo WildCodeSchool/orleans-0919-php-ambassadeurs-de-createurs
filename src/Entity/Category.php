@@ -54,14 +54,6 @@ class Category
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getUser(): Collection
-    {
-        return $this->users;
-    }
-
     public function addUser(User $user): self
     {
         if (!$this->users->contains($user)) {
