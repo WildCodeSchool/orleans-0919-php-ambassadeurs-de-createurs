@@ -1,4 +1,4 @@
-<form method="post" action="{{ path('blog_delete', {'slug': blog.slug}) }}"
+<form method="post" action="{{ path('admin_blog_delete', {'slug': blog.slug}) }}"
       onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cet article ?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ blog.slug) }}">
