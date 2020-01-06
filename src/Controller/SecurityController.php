@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ProfilType;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 use App\Security\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -77,6 +79,26 @@ class SecurityController extends AbstractController
         return $this->render('user/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("/profil", name="app_profile")
+     */
+    public function profile(Request $request) :Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(ProfilType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Votre profil a été modifié.');
+            return $this->redirectToRoute('app_profile');
+        }
+        return $this->render('security/profile.html.twig', [
+            'form' => $form->createView(),
+            'user' => $user,
         ]);
     }
 }
