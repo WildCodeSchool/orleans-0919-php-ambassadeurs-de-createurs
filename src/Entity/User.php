@@ -301,26 +301,6 @@ class User implements UserInterface
         return $this->favorites;
     }
 
-    public function addFavorites(Favorite $favoriteId): self
-    {
-        if (!$this->favorites->contains($favoriteId)) {
-            $this->favorites[] = $favoriteId;
-            $favoriteId->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFavorites(Favorite $favoriteId): self
-    {
-        if ($this->favorites->contains($favoriteId)) {
-            $this->favorites->removeElement($favoriteId);
-            // set the owning side to null (unless already changed)
-            if ($favoriteId->getUser() === $this) {
-                $favoriteId->setUser(null);
-            }
-        }
-    }
     /**
      * A visual identifier that represents this user.
      *

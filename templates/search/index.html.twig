@@ -58,12 +58,10 @@
                 } else {
                     icone.classList.replace('far', 'fas');
                 }
-            }).catch((function (error) {
+            })
+                .catch((function (error) {
                 if (error.response.status === 403) {
                     window.alert("Vous ne pouvez pas ajouter en favoris si vous n'êtes pas connecté !")
-                }
-                else {
-                    window.alert("Une erreur s'est produite, réessayez plus tard");
                 }
             }))
         }

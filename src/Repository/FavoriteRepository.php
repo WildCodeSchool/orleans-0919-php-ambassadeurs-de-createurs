@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Favorite;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -47,4 +48,14 @@ class FavoriteRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function isLikedByUser($user)
+    {
+        $qb = $this->createQueryBuilder('f');
+
+            $qb->where('f.id = :favorite')
+            ->setParameter('favorite', $user);
+
+        return $qb->getQuery()->getResult();
+    }
 }

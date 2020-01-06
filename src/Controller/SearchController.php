@@ -9,6 +9,7 @@ use App\Form\SearchType;
 use App\Repository\FavoriteRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -53,34 +54,25 @@ class SearchController extends AbstractController
     public function like(User $userFavorite, ObjectManager $manager, FavoriteRepository $favoriteRepository): Response
     {
         $user = $this->getUser();
-
+// isGranted
         if (!$user) {
             return $this->json([
-            'code' => 403,
-            'message' => 'Unauthorized'
+                'code' => 403,
+                'message' => 'Unauthorized'
             ], 403);
         }
 
-        if ($userFavorite->isLikedByUser($user)) {
-            $favorite = $favoriteRepository->findOneBy([
-                'user' => $user
-            ]);
+        $favorite = $favoriteRepository->isLikedByUser($user);
 
+        if ($favorite instanceof Favorite) {
             $manager->remove($favorite);
-            $manager->flush();
-
-            return $this->json([
-                'code' => 200,
-                'message' => 'Like bien supprimé',
-                'likes' => $favoriteRepository->count(['user' => $userFavorite])
-            ], 200);
+        } else {
+            $favorite = new Favorite();
+            $favorite->setUserFavorite($userFavorite)
+                ->setUser($user);
+            $manager->persist($favorite);
         }
 
-        $favorite = new Favorite();
-        $favorite->setUserFavorite($userFavorite)
-            ->setUser($user);
-
-        $manager->persist($favorite);
         $manager->flush();
 
         return $this->json([
