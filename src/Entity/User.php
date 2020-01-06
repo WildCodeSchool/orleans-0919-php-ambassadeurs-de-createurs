@@ -411,7 +411,7 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-  
+
     public function getBrand(): ?Brand
     {
         return $this->brand;
@@ -438,5 +438,14 @@ class User implements UserInterface
             $role = array_keys(self::ROLES, self::ROLE_CREATOR)[0];
         }
         return $role;
+    }
+
+    public function getDutiesToString(): string
+    {
+        $dutyNames = [];
+        foreach ($this->getDuties() as $duty) {
+            $dutyNames[] = $duty->getName();
+        }
+        return implode(', ', $dutyNames);
     }
 }
