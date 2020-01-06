@@ -115,7 +115,7 @@ class User implements UserInterface
     private $urlFacebook;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Brand", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Brand", mappedBy="user", cascade={"remove", "remove"})
      */
     private $brand;
 
