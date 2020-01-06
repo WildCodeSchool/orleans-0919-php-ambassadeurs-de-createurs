@@ -7,7 +7,7 @@
     <div class="container-fluid card-search">
 
         {% include 'search/_filter.html.twig' with {form: form} only %}
-
+        <p>Nombre de résultats : {{ nbUsers }}</p>
 
         <div class="row justify-content-center">
             {% for user in users %}

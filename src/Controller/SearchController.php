@@ -31,20 +31,21 @@ class SearchController extends AbstractController
         }
 
         $data['roles'] = $role;
-        $users = $userRepository->findSearch($data, $page, self::NB_MAX_RESULT);
-
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $data[] = $form->getData();
-            $users = $userRepository->findSearch($data, $page, self::NB_MAX_RESULT);
+            $data['filters'] = $form->getData();
         }
+        $nbUsers = count($userRepository->findSearch($data));
+        $users = $userRepository->findSearch($data, $page);
+
 
         return $this->render('search/index.html.twig', [
+            'nbUsers' => $nbUsers,
             'users' => $users,
             'role' => $role,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 }
