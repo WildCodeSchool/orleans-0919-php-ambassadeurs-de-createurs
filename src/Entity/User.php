@@ -47,14 +47,13 @@ class User implements UserInterface
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * )
      */
     private $picture;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="La ville de résidence est obligatoire")
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
      *      max = 255,
      *      maxMessage = "le nom de la ville ne doit pas dépasser {{ limit }} caractères")
@@ -90,7 +89,7 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Department", inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $department;
 
