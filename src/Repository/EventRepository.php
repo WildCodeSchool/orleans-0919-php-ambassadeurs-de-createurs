@@ -18,15 +18,4 @@ class EventRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Event::class);
     }
-
-    public function findRoleInUser(string $role): array
-    {
-        $query = $this->createQueryBuilder('e')
-            ->join('e.user', 'u')
-            ->where('u.roles LIKE :role')
-            ->setParameter('role', '%'.$role.'%')
-            ->getQuery();
-
-        return $query->getResult();
-    }
 }
