@@ -417,4 +417,14 @@ class User implements UserInterface
         }
         return $role;
     }
+
+    public function getDutiesToString(): string
+    {
+        $dutyCollection = $this->getDuties();
+        $dutyArray = [];
+        foreach ($dutyCollection as $duty) {
+            $dutyArray[] = $duty->getName();
+        }
+        return implode(', ', $dutyArray);
+    }
 }
