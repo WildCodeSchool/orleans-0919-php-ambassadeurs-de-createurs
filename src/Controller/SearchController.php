@@ -26,6 +26,7 @@ class SearchController extends AbstractController
 
         $data = [];
 
+
         if (!array_key_exists($role, User::ROLES_URL)) {
             throw new Exception('Mauvais rôle');
         }
@@ -35,6 +36,7 @@ class SearchController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
+            $page = 1;
             $data['filters'] = $form->getData();
         }
         $nbUsers = count($userRepository->findSearch($data));
@@ -46,6 +48,8 @@ class SearchController extends AbstractController
             'users' => $users,
             'role' => $role,
             'form' => $form->createView(),
+            'page' => $page,
+            'nbPages' => ceil($nbUsers / self::NB_MAX_RESULT),
         ]);
     }
 }

@@ -7,7 +7,7 @@
     <div class="container-fluid card-search">
 
         {% include 'search/_filter.html.twig' with {form: form} only %}
-        <p>Nombre de résultats : {{ nbUsers }}</p>
+        <h5 class="text-center">Nombre de résultats : {{ nbUsers }}</h5>
 
         <div class="row justify-content-center">
             {% for user in users %}
@@ -19,13 +19,40 @@
                             <p class="m-0">100</p><i class="fas fa-star ml-2"></i>
                         </div>
                         <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
-                        <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }} ({{ user.department.code }})</p>
+                        <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}
+                            ({{ user.department.code }})</p>
                         <hr>
                         <p class="card-text">Vendeur / Hôte</p>
                     </div>
                 </div>
             {% endfor %}
+
         </div>
+        <div class="text-center">
+            <p class="m-3">Page : {{ page }}</p>
+        </div>
+        <div class="text-center">
+            {% if page >= 2 %}
+                <a class="btn btn-gold mx-5 mb-5" href="{{ path('search_role', {'role': role, 'page': page-1} ) }}">
+                    <i class="far fa-arrow-alt-circle-left"></i> Précédent
+                </a>
+            {% else %}
+                <a class="btn btn-dark mx-5 mb-5" href="">
+                    <i class="far fa-arrow-alt-circle-left"></i> Précédent
+                </a>
+            {% endif %}
+
+            {% if page < nbPages %}
+            <a class="btn btn-gold mx-5 mb-5" href="{{ path('search_role', {'role': role, 'page': page+1} ) }}">
+                Suivant <i class="far fa-arrow-alt-circle-right"></i>
+            </a>
+            {% else %}
+            <a class="btn btn-dark mx-5 mb-5" href="">
+                Suivant <i class="far fa-arrow-alt-circle-right"></i>
+            </a>
+            {% endif %}
+        </div>
+
     </div>
 
 {% endblock %}
