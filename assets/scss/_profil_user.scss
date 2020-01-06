@@ -14,7 +14,7 @@ a
     transition: .25s all;
 }
 
-.card
+.card-event
 {
     @include BoxShadowHelper(1);
     transition: .25s box-shadow;

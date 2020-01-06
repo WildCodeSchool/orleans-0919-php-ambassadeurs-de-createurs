@@ -15,9 +15,15 @@
             <li class="nav-item">
                 <a class="nav-link mr-5" href="{{ path('blog_index') }}"><span class="nav-effect">NEWS</span></a>
             </li>
+            {% if app.user %}
+                <li class="nav-item">
+                    <a class="nav-link mr-5" href="{{ path('app_profile') }}"><span class="nav-effect">PROFIL</span></a>
+                </li>
+            {% else %}
             <li class="nav-item">
                 <a class="nav-link mr-5" href="{{ path('user_new') }}"><span class="nav-effect">S'INSCRIRE</span></a>
             </li>
+            {% endif %}
         </ul>
         <ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item avatar">
