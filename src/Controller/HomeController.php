@@ -3,15 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Repository\EventRepository;
 use App\Repository\UserRepository;
-use App\Service\CoordinateService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Exception\ExceptionInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class HomeController extends AbstractController
 {
@@ -21,43 +18,22 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home_index")
      * @param UserRepository $userRepository
-     * @param CoordinateService $coordinateService
-     * @param NormalizerInterface $normalizer
+     * @param SerializerInterface $serializer
      * @return Response
-     * @throws ExceptionInterface
      */
-    public function index(
-        UserRepository $userRepository,
-        EventRepository $eventRepository,
-        CoordinateService $coordinateService,
-        NormalizerInterface $normalizer
-    ): Response {
+    public function index(UserRepository $userRepository, SerializerInterface $serializer): Response
+    {
 
-        $roles = User::ROLES;
-        $ambassadors = $userRepository->findBy(['rolesLMCO' => $roles['Ambassadeur']]);
-        $events = $eventRepository->findRoleInUser($roles['Ambassadeur']);
+        $ambassadors = $userRepository->findByRoles(User::ROLE_AMBASSADOR);
         $ambassadorCards = array_slice($ambassadors, count($ambassadors)-self::NB_CARDS, self::NB_CARDS);
 
-        $contextAmbassadors = [
-            ObjectNormalizer::IGNORED_ATTRIBUTES => ['users', 'user'],
+        $context = [
+            AbstractNormalizer::IGNORED_ATTRIBUTES => ['users', 'user'],
         ];
-        $contextEvents = [
-            ObjectNormalizer::IGNORED_ATTRIBUTES => ['events', 'users'],
-        ];
-        $ambassadorsArray = $normalizer->normalize($ambassadors, 'json', $contextAmbassadors);
-        $eventsArray = $normalizer->normalize($events, 'json', $contextEvents);
+        $ambassadorsJson = $serializer->serialize($ambassadors, 'json', $context);
 
-        for ($i = 0; $i < count($ambassadorsArray); $i++) {
-            $ambassadorsArray[$i]['coordinates'] = $coordinateService
-                ->getCoordinates($ambassadorsArray[$i]['city']);
-        }
-        for ($i = 0; $i < count($eventsArray); $i++) {
-            $eventsArray[$i]['coordinates'] = $coordinateService
-                ->getCoordinates($eventsArray[$i]['place']);
-        }
         return $this->render('/home/index.html.twig', [
-            'ambassadorsArray' => $ambassadorsArray,
-            'eventsArray' => $eventsArray,
+            'ambassadors' => $ambassadorsJson,
             'ambassadorCards' => $ambassadorCards,
         ]);
     }

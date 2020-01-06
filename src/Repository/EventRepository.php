@@ -23,8 +23,8 @@ class EventRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('e')
             ->join('e.user', 'u')
-            ->where('u.rolesLMCO = :role')
-            ->setParameter('role', $role)
+            ->where('u.roles LIKE :role')
+            ->setParameter('role', '%'.$role.'%')
             ->getQuery();
 
         return $query->getResult();

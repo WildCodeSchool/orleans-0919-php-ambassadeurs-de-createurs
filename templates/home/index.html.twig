@@ -11,8 +11,7 @@
         </div>
     </div>
 
-    <div class="js-ambassadors" data-ambassadors="{{ ambassadorsArray|json_encode }}"></div>
-    <div class="js-events" data-events="{{ eventsArray|json_encode }}"></div>
+    <div class="js-ambassadors" data-ambassadors="{{ ambassadors }}"></div>
     <div class="d-flex w-100 justify-content-center">
         <div class="d-flex flex-column mt-5 mapTabs align-self-center">
             <ul class="nav nav-tabs nav-fill nav-justified">
@@ -57,7 +56,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ card.firstname }}</h5>
                                     <p class="card-text">J'habite dans le {{ card.department.codeName }}</p>
-                                    <p class="card-text"><small class="text-muted">Je suis un {{ card.rolesLMCO }}</small>
+                                    <p class="card-text"><small class="text-muted">Je suis un {{ card.roleLabel }}</small>
                                     </p>
                                 </div>
                             </div>

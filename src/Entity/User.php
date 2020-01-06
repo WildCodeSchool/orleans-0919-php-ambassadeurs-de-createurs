@@ -18,7 +18,7 @@ class User implements UserInterface
     const ROLE_AMBASSADOR = 'ROLE_AMBASSADOR';
     const ROLE_CREATOR = 'ROLE_CREATOR';
 
-    const ROLES = ['Ambassadeur' => self::ROLE_AMBASSADOR, 'Createur' => self::ROLE_CREATOR];
+    const ROLES = ['Ambassadeur' => self::ROLE_AMBASSADOR, 'Créateur' => self::ROLE_CREATOR];
     const ROLES_URL = ['ambassadeur' => self::ROLE_AMBASSADOR, 'createur' => self::ROLE_CREATOR];
 
     /**
@@ -118,6 +118,16 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="user")
      */
     private $events;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $latitude;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $longitude;
 
     public function __construct()
     {
@@ -439,6 +449,41 @@ class User implements UserInterface
                 $event->setUser(null);
             }
         }
+        return $this;
+    }
+
+    public function getRoleLabel(): string
+    {
+        $role = '';
+        if (in_array(self::ROLE_AMBASSADOR, $this->getRoles())) {
+            $role = array_keys(self::ROLES, self::ROLE_AMBASSADOR)[0];
+        } elseif (in_array(self::ROLE_CREATOR, $this->getRoles())) {
+            $role = array_keys(self::ROLES, self::ROLE_CREATOR)[0];
+        }
+        return $role;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
+
         return $this;
     }
 }
