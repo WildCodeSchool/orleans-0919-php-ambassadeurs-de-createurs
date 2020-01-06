@@ -120,14 +120,21 @@ class User implements UserInterface
     private $events;
 
     /**
+     * @Assert\Type(type="float")
      * @ORM\Column(type="float", nullable=true)
      */
     private $latitude;
 
     /**
+     * @Assert\Type(type="float")
      * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Brand", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $brand;
 
     public function __construct()
     {
@@ -421,6 +428,23 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getBrand(): ?Brand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(Brand $brand): self
+    {
+        $this->brand = $brand;
+
+        // set the owning side of the relation if necessary
+        if ($brand->getUser() !== $this) {
+            $brand->setUser($this);
+        }
+
+        return $this;
     }
 
     /**

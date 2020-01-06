@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
-use App\Service\CoordinateService;
 use Faker;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -40,7 +39,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        $coordinateService = new CoordinateService();
         $faker = Faker\Factory::create('fr_FR');
         for ($i = 0; $i < 20; $i++) {
             $user = new User();
@@ -48,9 +46,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setLastname($faker->lastName);
             $city = self::CITIES[array_rand(self::CITIES)];
             $user->setCity($city);
-            $coordinates = $coordinateService->getCoordinates($city);
-            $user->setLatitude($coordinates[0]);
-            $user->setLongitude($coordinates[1]);
+            $user->setLatitude($faker->latitude(-4.987792, 9.755859));
+            $user->setLongitude($faker->longitude(41.046216, 51.563412));
             $user->setPicture($faker->imageUrl(200, 200, 'fashion'));
             $user->setMail($faker->email);
             $user->setRoles([self::ROLES[rand(0, 1)]]);

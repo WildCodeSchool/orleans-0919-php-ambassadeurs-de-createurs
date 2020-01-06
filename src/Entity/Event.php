@@ -42,11 +42,13 @@ class Event
     private $user;
 
     /**
+     * @Assert\Type(type="float")
      * @ORM\Column(type="float", nullable=true)
      */
     private $latitude;
 
     /**
+     * @Assert\Type(type="float")
      * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
