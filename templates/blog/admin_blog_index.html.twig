@@ -18,11 +18,11 @@
             <tbody>
             {% for blog in blogs %}
                 <tr>
-                    <td><a href="{{ path('blog_show', {'slug': blog.slug}) }}" class="titleForm">{{ blog.title }}</a></td>
+                    <td><a href="{{ path('admin_blog_show', {'slug': blog.slug}) }}" class="titleForm">{{ blog.title }}</a></td>
                     <td>{{ blog.author }}</td>
                     <td>{{ blog.date ? blog.date|localizeddate('long', 'short') }}</td>
                     <td>
-                        <a href="{{ path('blog_edit', {'slug': blog.slug}) }}" class="">
+                        <a href="{{ path('admin_blog_edit', {'slug': blog.slug}) }}" class="">
                             <button
                                     class="btn btn-gold">Modifier
                             </button>
@@ -37,7 +37,7 @@
             </tbody>
         </table>
 
-        <a href="{{ path('blog_new') }}" class="btn btn-gold">
+        <a href="{{ path('admin_blog_new') }}" class="btn btn-gold">
             Créer un article
         </a>
     </div>
