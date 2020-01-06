@@ -6,6 +6,7 @@ use App\Data\SearchData;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -37,11 +38,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * @return User[]
+     * @return Paginator
      */
-    public function findSearch(array $search): array
+    public function findSearch(array $search, int $page, int $nbMaxByPage): Paginator
     {
+
         $query = $this->createQueryBuilder('u');
+
+        if (!empty($search['roles'])) {
+            $query->where('u.roles LIKE :roles')
+                ->setParameter('roles', '%' . User::ROLES_URL[$search['roles']] . '%');
+        }
 
         if (!empty($search['department'])) {
             $query->join('u.department', 'd')
@@ -60,8 +67,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 ->andWhere('s.id = :duty')
                 ->setParameter('duty', $search['duty']);
         }
-        return $query->getQuery()->getResult();
+        $query = $query->getQuery();
+
+        $firstResult = ($page - 1) * $nbMaxByPage;
+        $query->setFirstResult($firstResult)->setMaxResults($nbMaxByPage);
+        $paginator = new Paginator($query);
+
+        return $paginator;
     }
+
 
     public function findByRoles(string $roles) : array
     {
