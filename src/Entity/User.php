@@ -18,7 +18,7 @@ class User implements UserInterface
     const ROLE_AMBASSADOR = 'ROLE_AMBASSADOR';
     const ROLE_CREATOR = 'ROLE_CREATOR';
 
-    const ROLES = ['Ambassadeur' => self::ROLE_AMBASSADOR, 'Createur' => self::ROLE_CREATOR];
+    const ROLES = ['Ambassadeur' => self::ROLE_AMBASSADOR, 'Créateur' => self::ROLE_CREATOR];
     const ROLES_URL = ['ambassadeur' => self::ROLE_AMBASSADOR, 'createur' => self::ROLE_CREATOR];
 
     /**
@@ -405,5 +405,16 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getRoleLabel(): string
+    {
+        $role = '';
+        if (in_array(self::ROLE_AMBASSADOR, $this->getRoles())) {
+            $role = array_keys(self::ROLES, self::ROLE_AMBASSADOR)[0];
+        } elseif (in_array(self::ROLE_CREATOR, $this->getRoles())) {
+            $role = array_keys(self::ROLES, self::ROLE_CREATOR)[0];
+        }
+        return $role;
     }
 }
