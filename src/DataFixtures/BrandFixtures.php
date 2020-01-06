@@ -21,8 +21,9 @@ class BrandFixtures extends Fixture implements DependentFixtureInterface
             if ($user->getRolesLMCO() == 'Créateur') {
                 $brand = new Brand();
                 $brand->setName($faker->name);
-                $brand->setDescription($faker->sentence(2));
+                $brand->setDescription($faker->paragraph(3));
                 $brand->setSite($faker->url);
+                $brand->setSellDescription($faker->paragraph(2));
                 $brand->setInstagram($faker->url);
                 $brand->setHostAdvantage($faker->sentence(2));
                 $brand->setSellerAdvantage($faker->sentence(2));
