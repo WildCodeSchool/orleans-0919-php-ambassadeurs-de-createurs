@@ -34,7 +34,32 @@ class ProfilType extends UserType
             'label' => 'Compte Facebook',
             'required' => false,
         ]);
+        $builder->add('picture', TextType::class, [
+            'label' => 'Photo',
+            'required' => false,
+        ]);
+        $builder->add('department', EntityType::class, [
+            'label' => 'Département',
+            'class' => Department::class,
+            'choice_label' => 'codeName',
+        ]);
+        $builder->add('duties', EntityType::class, [
+            'label' => 'Préférences',
+            'class' => Duty::class,
+            'choice_label' => 'name',
+            'expanded' => true,
+            'multiple' => true,
+        ]);
+        $builder->add('categories', EntityType::class, [
+            'label' => 'Univers',
+            'class' => Category::class,
+            'choice_label' => 'description',
+            'multiple' => true,
+            'expanded' => true,
+            'by_reference' => false,
+        ]);
     }
+
     public function getParent()
     {
         return UserType::class;
