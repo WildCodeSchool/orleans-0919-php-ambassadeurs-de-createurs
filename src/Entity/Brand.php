@@ -22,7 +22,7 @@ class Brand
      * @Assert\NotBlank(message="Le nom de la marque est obligatoire")
      * @Assert\Length(
      *      max = 150,
-     *      maxMessage = "Votre nom de marque ne doit pas depasser 150 caractères de long")
+     *      maxMessage = "Votre nom de marque ne doit pas depasser {{limit}} caractères de long")
      */
     private $name;
 
@@ -33,11 +33,19 @@ class Brand
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Votre lien ne doit pas depasser {{limit}} caractères de long")
      */
     private $site;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Votre lien ne doit pas depasser {{limit}} caractères de long")
      */
     private $instagram;
 
@@ -46,7 +54,7 @@ class Brand
      * @Assert\NotBlank(message="La récompense pour les hôtes est obligatoire")
      * @Assert\Length(
      *      max = 255,
-     *      maxMessage = "Votre recompense ne doit pas depasser 255 caractères de long")
+     *      maxMessage = "Votre recompense ne doit pas depasser {{limit}} caractères de long")
      */
     private $hostAdvantage;
 
@@ -55,7 +63,7 @@ class Brand
      * @Assert\NotBlank(message="La récompense pour les vendeurs est obligatoire")
      * @Assert\Length(
      *      max = 255,
-     *      maxMessage = "Votre recompense ne doit pas depasser 255 caractères de long")
+     *      maxMessage = "Votre recompense ne doit pas depasser {{limit}} caractères de long")
      */
     private $sellerAdvantage;
 
