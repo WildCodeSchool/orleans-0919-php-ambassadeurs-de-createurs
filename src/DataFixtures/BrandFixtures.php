@@ -18,7 +18,7 @@ class BrandFixtures extends Fixture implements DependentFixtureInterface
         $faker = Faker\Factory::create('fr_FR');
         for ($i = 0; $i < 19; $i++) {
             $user = $this->getReference('user_' . $i);
-            if ($user->getRolesLMCO() == 'Créateur') {
+            if ($user->getRoles() == ['ROLE_CREATOR']) {
                 $brand = new Brand();
                 $brand->setName($faker->name);
                 $brand->setDescription($faker->sentence(2));
