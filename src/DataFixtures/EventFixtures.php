@@ -19,9 +19,11 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i = 0; $i < 80; $i++) {
             $user = $this->getReference('user_' . rand(0, 19));
+            $brand = $this->getReference('brand_' . rand(20, 39));
             $event = new Event();
             $event->setPlace($user->getCity());
             $event->setUser($user);
+            $event->setBrand($brand);
             $event->setDescription($faker->sentence(6));
             $event->setDateTime($faker->dateTime);
             $manager->persist($event);
@@ -37,6 +39,6 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
      */
     public function getDependencies()
     {
-        return [ UserFixtures::class];
+        return [ UserFixtures::class, BrandFixtures::class];
     }
 }
