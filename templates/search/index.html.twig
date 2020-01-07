@@ -12,17 +12,18 @@
         <div class="row justify-content-center">
             {% for user in users %}
                 <div class="card col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">
-                    <img src="{{ user.picture }}" class="card-img-top" alt="image de {{ user.firstname }}">
-
-                    <div class="card-body">
-                        <div class="star mb-4">
-                            <p class="m-0">100</p><i class="fas fa-star ml-2"></i>
+                    <a  class="" href="{{ path('user_show', {'id': user.id}) }}">
+                        <img src="{{ user.picture }}" class="card-img-top" alt="image de {{ user.firstname }}">
+                        <div class="card-body">
+                            <div class="star mb-4">
+                                <p class="m-0">100</p><i class="fas fa-star ml-2"></i>
+                            </div>
+                            <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
+                            <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }} ({{ user.department.code }})</p>
+                            <hr>
+                            <p class="card-text">{{ user.dutiesToString }}</p>
                         </div>
-                        <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
-                        <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }} ({{ user.department.code }})</p>
-                        <hr>
-                        <p class="card-text">Vendeur / Hôte</p>
-                    </div>
+                    </a>
                 </div>
             {% endfor %}
         </div>

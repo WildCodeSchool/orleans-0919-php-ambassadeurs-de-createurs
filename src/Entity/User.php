@@ -82,6 +82,7 @@ class User implements UserInterface
      */
     private $password;
 
+
     /**
      * @ORM\Column(type="text", nullable=true)
      */
@@ -411,7 +412,6 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-
     public function getBrand(): ?Brand
     {
         return $this->brand;
@@ -438,5 +438,14 @@ class User implements UserInterface
             $role = array_keys(self::ROLES, self::ROLE_CREATOR)[0];
         }
         return $role;
+    }
+
+    public function getDutiesToString(): string
+    {
+        $dutyNames = [];
+        foreach ($this->getDuties() as $duty) {
+            $dutyNames[] = $duty->getName();
+        }
+        return implode(', ', $dutyNames);
     }
 }
