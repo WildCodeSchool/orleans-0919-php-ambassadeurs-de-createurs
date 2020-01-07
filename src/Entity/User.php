@@ -113,6 +113,11 @@ class User implements UserInterface
      */
     private $urlFacebook;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Brand", mappedBy="user", cascade={"remove", "remove"})
+     */
+    private $brand;
+
     public function __construct()
     {
         $this->duties = new ArrayCollection();
@@ -406,6 +411,23 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    public function getBrand(): ?Brand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(Brand $brand): self
+    {
+        $this->brand = $brand;
+
+        // set the owning side of the relation if necessary
+        if ($brand->getUser() !== $this) {
+            $brand->setUser($this);
+        }
+
+        return $this;
+    }
+
     public function getRoleLabel(): string
     {
         $role = '';
@@ -415,5 +437,14 @@ class User implements UserInterface
             $role = array_keys(self::ROLES, self::ROLE_CREATOR)[0];
         }
         return $role;
+    }
+
+    public function getDutiesToString(): string
+    {
+        $dutyNames = [];
+        foreach ($this->getDuties() as $duty) {
+            $dutyNames[] = $duty->getName();
+        }
+        return implode(', ', $dutyNames);
     }
 }
