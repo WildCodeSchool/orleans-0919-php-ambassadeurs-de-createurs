@@ -33,11 +33,19 @@ class Brand
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Votre lien ne doit pas depasser {{limit}} caractères de long")
      */
     private $site;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Votre lien ne doit pas depasser {{limit}} caractères de long")
      */
     private $instagram;
 

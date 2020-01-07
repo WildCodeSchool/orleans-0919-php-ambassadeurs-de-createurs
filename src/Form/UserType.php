@@ -44,10 +44,11 @@ class UserType extends AbstractType
                 'class' => Department::class,
                 'choice_label' => 'codeName',
             ])
-            ->add('rolesLMCO', ChoiceType::class, [
+            ->add('role', ChoiceType::class, [
                 'label' => 'Rôle',
                 'choices' => User::ROLES,
                 'expanded' => true,
+                'mapped' => false,
             ])
             ->add('duties', EntityType::class, [
                 'label' => 'Préférences',

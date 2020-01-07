@@ -37,23 +37,25 @@
             <div class="row no-gutters">
                 {% for card in ambassadorCards %}
                     <div class="card mb-5 col-md-5 col-sm-12">
-                        <div class="row no-gutters">
-                            <div class="col-md-1 col-sm-12 mt-2">
-                                <i class="fas fa-star"></i>
-                                <p>100</p>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ card.firstname }}</h5>
-                                    <p class="card-text">J'habite dans le {{ card.department.codeName }}</p>
-                                    <p class="card-text"><small class="text-muted">Je suis un {{ card.rolesLMCO }}</small>
-                                    </p>
+                        <a  class="" href="{{ path('user_show', {'id': card.id}) }}">
+                            <div class="row no-gutters">
+                                <div class="col-md-1 col-sm-12 mt-2">
+                                    <i class="fas fa-star"></i>
+                                    <p>100</p>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ card.firstname }}</h5>
+                                        <p class="card-text">J'habite dans le {{ card.department.codeName }}</p>
+                                        <p class="card-text"><small class="text-muted">Je suis un {{ card.roleLabel }}</small>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="{{ card.picture }}" class="card-img" alt="Image">
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <img src="{{ card.picture }}" class="card-img" alt="Image">
-                            </div>
-                        </div>
+                        </a>
                     </div>
                 {% endfor %}
             </div>
