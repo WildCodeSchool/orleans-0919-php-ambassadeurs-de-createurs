@@ -73,6 +73,11 @@ class Brand
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $sellDescription;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -158,6 +163,18 @@ class Brand
     public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getSellDescription(): ?string
+    {
+        return $this->sellDescription;
+    }
+
+    public function setSellDescription(?string $sellDescription): self
+    {
+        $this->sellDescription = $sellDescription;
 
         return $this;
     }
