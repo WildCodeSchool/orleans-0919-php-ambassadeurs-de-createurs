@@ -22,7 +22,6 @@
                         <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}
                             {% if user.department.code is defined %}
                             ({{ user.department.code }})
-                        {% else %}
                             {% endif %}</p>
                         <hr>
                         <p class="card-text">{{ user.dutiesToString }}</p>
