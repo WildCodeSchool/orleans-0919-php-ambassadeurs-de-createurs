@@ -132,7 +132,7 @@ class User implements UserInterface
     private $longitude;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Brand", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Brand", mappedBy="user", cascade={"remove", "remove"})
      */
     private $brand;
 
@@ -509,5 +509,14 @@ class User implements UserInterface
         $this->longitude = $longitude;
 
         return $this;
+    }
+
+    public function getDutiesToString(): string
+    {
+        $dutyNames = [];
+        foreach ($this->getDuties() as $duty) {
+            $dutyNames[] = $duty->getName();
+        }
+        return implode(', ', $dutyNames);
     }
 }

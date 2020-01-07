@@ -16,6 +16,10 @@ div.buttonRole {
     width: 40vw;
 }
 
+div.buttonRole a.btn {
+    font-size: $font-size-body;
+}
+
 div.ambassador {
     display: flex;
     flex-direction: column;
