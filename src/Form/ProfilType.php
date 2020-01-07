@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Form\UserType;
+use App\Form\UserInscriptionType;
 use App\Entity\Department;
 use App\Entity\Duty;
 use App\Entity\User;
@@ -20,7 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 
-class ProfilType extends UserType
+class ProfilType extends UserInscriptionType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -62,6 +62,6 @@ class ProfilType extends UserType
 
     public function getParent()
     {
-        return UserType::class;
+        return UserInscriptionType::class;
     }
 }
