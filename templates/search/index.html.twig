@@ -34,7 +34,7 @@
         <div class="text-center">
             {% if page >= 2 %}
                 <a class="btn btn-gold mx-5 mb-5"
-                   href="{{ path('search_role', {'role': role, 'page': page-1}|merge({'department' : app.request.get('department'), 'category' : app.request.get('category'), 'duty' : app.request.get('duty') }))}}">
+                   href="{{ path('search_role', {'role': role, 'page': page-1}|merge(app.request.query.all))}}">
                     <i class="far fa-arrow-alt-circle-left"></i> Précédent
                 </a>
             {% else %}
@@ -45,7 +45,7 @@
 
             {% if page < nbPages %}
             <a class="btn btn-gold mx-5 mb-5"
-               href="{{ path('search_role', {'role': role, 'page': page+1}|merge({'department' : app.request.get('department'), 'category' : app.request.get('category'), 'duty' : app.request.get('duty') }) ) }}">
+               href="{{ path('search_role', {'role': role, 'page': page+1}|merge(app.request.query.all)) }}">
                 Suivant <i class="far fa-arrow-alt-circle-right"></i>
             </a>
             {% else %}
