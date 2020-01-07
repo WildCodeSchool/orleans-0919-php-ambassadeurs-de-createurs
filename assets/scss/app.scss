@@ -47,3 +47,13 @@ h3 {
 body {
     background-color: $background-secondary;
 }
+
+a {
+    text-decoration: none;
+    color: $secondary-color;
+}
+
+a:hover {
+    text-decoration: none;
+    color: $primary-color;
+}

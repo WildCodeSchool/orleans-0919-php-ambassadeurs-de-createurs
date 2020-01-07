@@ -12,7 +12,7 @@
         <div class="row justify-content-center">
             {% for user in users %}
                 <div class="card col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">
-                    <a  class="" href="{{ path('user_show', {'id': user.id}) }}">
+                    <a href="{{ path('user_show', {'id': user.id}) }}">
                         <img src="{{ user.picture }}" class="card-img-top" alt="image de {{ user.firstname }}">
                         <div class="card-body">
                             <div class="star mb-4">
