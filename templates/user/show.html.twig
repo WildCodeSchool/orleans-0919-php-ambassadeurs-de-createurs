@@ -47,6 +47,7 @@
                                 <h4 class="card-title event">{{ event.place }}</h4>
                                 <p class="card-text event">{{ event.dateTime|date('d/m/Y à H:i') }}
                                     - {{ event.user.firstname }}</p>
+                                <p class="card-text event">Présentant les poduits de {{ event.brand.name }}</p>
                                 <p class="card-text event">{{ event.description }}</p>
                             </div>
                         </article>
