@@ -6,7 +6,7 @@
     <h1 class="text-center"> Recherche des {{ role }}s </h1>
     <div class="container-fluid card-search">
 
-        {% include 'search/_filter.html.twig' with {form: form} only %}
+        {% include 'search/_filter.html.twig' with {form: form} %}
         <h5 class="text-center">Nombre de résultats : {{ nbUsers }}</h5>
 
         <div class="row justify-content-center">
@@ -33,21 +33,23 @@
         </div>
         <div class="text-center">
             {% if page >= 2 %}
-                <a class="btn btn-gold mx-5 mb-5" href="{{ path('search_role', {'role': role, 'page': page-1} ) }}">
+                <a class="btn btn-gold mx-5 mb-5"
+                   href="{{ path('search_role', {'role': role, 'page': page-1}|merge({'department' : app.request.get('department'), 'category' : app.request.get('category'), 'duty' : app.request.get('duty') }))}}">
                     <i class="far fa-arrow-alt-circle-left"></i> Précédent
                 </a>
             {% else %}
-                <a class="btn btn-dark mx-5 mb-5" href="">
+                <a class="btn btn-inactive mx-5 mb-5">
                     <i class="far fa-arrow-alt-circle-left"></i> Précédent
                 </a>
             {% endif %}
 
             {% if page < nbPages %}
-            <a class="btn btn-gold mx-5 mb-5" href="{{ path('search_role', {'role': role, 'page': page+1} ) }}">
+            <a class="btn btn-gold mx-5 mb-5"
+               href="{{ path('search_role', {'role': role, 'page': page+1}|merge({'department' : app.request.get('department'), 'category' : app.request.get('category'), 'duty' : app.request.get('duty') }) ) }}">
                 Suivant <i class="far fa-arrow-alt-circle-right"></i>
             </a>
             {% else %}
-            <a class="btn btn-dark mx-5 mb-5" href="">
+            <a class="btn btn-inactive mx-5 mb-5">
                 Suivant <i class="far fa-arrow-alt-circle-right"></i>
             </a>
             {% endif %}

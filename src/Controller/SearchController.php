@@ -23,9 +23,7 @@ class SearchController extends AbstractController
      */
     public function showByRoles(UserRepository $userRepository, string $role, Request $request, int $page): Response
     {
-
         $data = [];
-
 
         if (!array_key_exists($role, User::ROLES_URL)) {
             throw new Exception('Mauvais rôle');
@@ -36,12 +34,11 @@ class SearchController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $page = 1;
             $data['filters'] = $form->getData();
         }
+
         $nbUsers = count($userRepository->findSearch($data));
         $users = $userRepository->findSearch($data, $page);
-
 
         return $this->render('search/index.html.twig', [
             'nbUsers' => $nbUsers,
