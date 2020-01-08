@@ -47,7 +47,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         if (!empty($search['roles'])) {
             $query->andWhere('u.roles LIKE :roles')
-                ->setParameter('roles', '%' . User::ROLES_URL[$search['roles']] . '%');
+                ->setParameter('roles', '%' . User::ROLES_URL[$search['roles']] . '%')
+                ->orderBy('u.firstname', 'ASC');
         }
 
         if (!empty($search['filters']['department'])) {
