@@ -47,14 +47,13 @@ class User implements UserInterface
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * )
      */
     private $picture;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="La ville de résidence est obligatoire")
+     * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\Length(
      *      max = 255,
      *      maxMessage = "le nom de la ville ne doit pas dépasser {{ limit }} caractères")
@@ -90,7 +89,7 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Department", inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $department;
 
@@ -123,6 +122,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="userFavorite")
      */
     private $followers;
+
+     /** 
+     * @ORM\OneToOne(targetEntity="App\Entity\Brand", mappedBy="user", cascade={"remove", "remove"})
+     */
+    private $brand;
 
     public function __construct()
     {
@@ -417,6 +421,23 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    public function getBrand(): ?Brand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(Brand $brand): self
+    {
+        $this->brand = $brand;
+
+        // set the owning side of the relation if necessary
+        if ($brand->getUser() !== $this) {
+            $brand->setUser($this);
+        }
+
+        return $this;
+    }
+
     public function getRoleLabel(): string
     {
         $role = '';
@@ -485,5 +506,14 @@ class User implements UserInterface
             }
         }
         return $this;
+    }
+  
+    public function getDutiesToString(): string
+    {
+        $dutyNames = [];
+        foreach ($this->getDuties() as $duty) {
+            $dutyNames[] = $duty->getName();
+        }
+        return implode(', ', $dutyNames);
     }
 }
