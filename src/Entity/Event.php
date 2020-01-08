@@ -42,7 +42,7 @@ class Event
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Brand", inversedBy="eventsSponsored")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Brand", inversedBy="sponsoredEvents")
      * @ORM\JoinColumn(nullable=false)
      */
     private $brand;
