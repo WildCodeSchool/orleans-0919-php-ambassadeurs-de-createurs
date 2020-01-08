@@ -29,7 +29,6 @@ class BrandFixtures extends Fixture implements DependentFixtureInterface
             $brand->setUser($user);
             $this->addReference('brand_' . $i, $brand);
             $manager->persist($brand);
-
         }
         $manager->flush();
     }
