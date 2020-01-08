@@ -25,21 +25,6 @@ class BlogRepository extends ServiceEntityRepository
 
     public function findAllSortAndPage(?int $page = null): array
     {
-//        if (!is_numeric($page)) {
-//            throw new InvalidArgumentException(
-//                'La valeur de l\'argument $page est incorrecte.'
-//            );
-//        }
-
-//        if ($page < 1) {
-//            throw new NotFoundHttpException('La page demandée n\'existe pas');
-//        }
-
-        if (!is_numeric(BlogController::NB_MAX_ARTICLES)) {
-            throw new InvalidArgumentException(
-                'La valeur de l\'argument $nbMaxParPage est incorrecte.'
-            );
-        }
 
         $query = $this->createQueryBuilder('b')
             ->where('CURRENT_DATE() >= b.date')
