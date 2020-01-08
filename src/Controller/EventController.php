@@ -35,8 +35,8 @@ class EventController extends AbstractController
         Request $request,
         CoordinateService $coordinateService,
         int $userId,
-        UserRepository $userRepository): Response
-    {
+        UserRepository $userRepository
+    ): Response {
         $user = $userRepository->findOneBy(['id' => $userId]);
         $event = new Event();
         $event->setUser($user);
