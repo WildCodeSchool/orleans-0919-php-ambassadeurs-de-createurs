@@ -80,6 +80,11 @@ class Brand
      */
     private $events;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $sellDescription;
+  
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -201,6 +206,16 @@ class Brand
                 $event->setBrand(null);
             }
         }
+    }
+
+    public function getSellDescription(): ?string
+    {
+        return $this->sellDescription;
+    }
+
+    public function setSellDescription(?string $sellDescription): self
+    {
+        $this->sellDescription = $sellDescription;
 
         return $this;
     }

@@ -22,12 +22,14 @@ class BrandFixtures extends Fixture implements DependentFixtureInterface
             $brand->setName($faker->name);
             $brand->setDescription($faker->sentence(2));
             $brand->setSite($faker->url);
+            $brand->setSellDescription($faker->paragraph(2));
             $brand->setInstagram($faker->url);
             $brand->setHostAdvantage($faker->sentence(2));
             $brand->setSellerAdvantage($faker->sentence(2));
             $brand->setUser($user);
             $this->addReference('brand_' . $i, $brand);
             $manager->persist($brand);
+            }
         }
         $manager->flush();
     }
