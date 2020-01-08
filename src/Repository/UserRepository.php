@@ -2,10 +2,12 @@
 
 namespace App\Repository;
 
+use App\Controller\SearchController;
 use App\Data\SearchData;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -22,6 +24,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         parent::__construct($registry, User::class);
     }
+
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
@@ -36,34 +39,46 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    /**
-     * @return User[]
-     */
-    public function findSearch(array $search): array
+
+    public function findSearch(array $search, ?int $page = null): array
     {
+
         $query = $this->createQueryBuilder('u');
 
-        if (!empty($search['department'])) {
-            $query->join('u.department', 'd')
-                ->where('d.id = :department')
-                ->setParameter('department', $search['department']);
+        if (!empty($search['roles'])) {
+            $query->andWhere('u.roles LIKE :roles')
+                ->setParameter('roles', '%' . User::ROLES_URL[$search['roles']] . '%');
         }
 
-        if (!empty($search['category'])) {
+        if (!empty($search['filters']['department'])) {
+            $query->join('u.department', 'd')
+                ->andWhere('d.id = :department')
+                ->setParameter('department', $search['filters']['department']);
+        }
+
+        if (!empty($search['filters']['category'])) {
             $query->join('u.categories', 'c')
                 ->andWhere('c.id = :category')
-                ->setParameter('category', $search['category']);
+                ->setParameter('category', $search['filters']['category']);
         }
 
-        if (!empty($search['duty'])) {
+        if (!empty($search['filters']['duty'])) {
             $query->join('u.duties', 's')
                 ->andWhere('s.id = :duty')
-                ->setParameter('duty', $search['duty']);
+                ->setParameter('duty', $search['filters']['duty']);
         }
+
+        if ($page !== null) {
+            $firstResult = ($page - 1) * SearchController::NB_MAX_RESULT;
+            $query->setFirstResult($firstResult)->setMaxResults(SearchController::NB_MAX_RESULT);
+        }
+
+
         return $query->getQuery()->getResult();
     }
 
-    public function findByRoles(string $roles) : array
+
+    public function findByRoles(string $roles): array
     {
         $query = $this->createQueryBuilder('r')
             ->select('u')
