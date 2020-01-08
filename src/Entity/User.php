@@ -12,11 +12,16 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"mail"}, message="Il y a déjà un compte avec cette adresse mail.")
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class User implements UserInterface
 {
+    const ROLE_AMBASSADOR = 'ROLE_AMBASSADOR';
+    const ROLE_CREATOR = 'ROLE_CREATOR';
 
-    const ROLES = ['Ambassadeur' => 'Ambassadeur', 'Créateur' => 'Créateur'];
+    const ROLES = ['Ambassadeur' => self::ROLE_AMBASSADOR, 'Créateur' => self::ROLE_CREATOR];
+    const ROLES_URL = ['ambassadeur' => self::ROLE_AMBASSADOR, 'createur' => self::ROLE_CREATOR];
 
     /**
      * @ORM\Id()
@@ -44,14 +49,13 @@ class User implements UserInterface
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * )
      */
     private $picture;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="La ville de résidence est obligatoire")
+     * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\Length(
      *      max = 255,
      *      maxMessage = "le nom de la ville ne doit pas dépasser {{ limit }} caractères")
@@ -79,14 +83,6 @@ class User implements UserInterface
      */
     private $password;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     *      max = 255,
-     *      maxMessage = "Le rôle doit être au plus {{ limit }} caractères de long")
-     * @Assert\Choice(choices=User::ROLES, message="Rôle invalide")
-     */
-    private $rolesLMCO;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -95,7 +91,7 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Department", inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $department;
 
@@ -119,10 +115,45 @@ class User implements UserInterface
      */
     private $urlFacebook;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="user")
+     */
+    private $followedUsers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="userFavorite")
+     */
+    private $followers;
+
+     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="user")
+     */
+    private $events;
+
+    /**
+     * @Assert\Type(type="float")
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $latitude;
+
+    /**
+     * @Assert\Type(type="float")
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $longitude;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Brand", mappedBy="user", cascade={"remove", "remove"})
+     */
+    private $brand;
+
     public function __construct()
     {
         $this->duties = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->followers = new ArrayCollection();
+        $this->followedUsers = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     /**
@@ -224,25 +255,6 @@ class User implements UserInterface
     public function setMail(string $mail): self
     {
         $this->mail = $mail;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getRolesLMCO(): ?string
-    {
-        return $this->rolesLMCO;
-    }
-
-    /**
-     * @param string $roleLMCO
-     * @return $this
-     */
-    public function setRolesLMCO(string $roleLMCO): self
-    {
-        $this->rolesLMCO = $roleLMCO;
 
         return $this;
     }
@@ -395,7 +407,6 @@ class User implements UserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
 
@@ -410,7 +421,6 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -429,5 +439,152 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getBrand(): ?Brand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(Brand $brand): self
+    {
+        $this->brand = $brand;
+
+        // set the owning side of the relation if necessary
+        if ($brand->getUser() !== $this) {
+            $brand->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setUser($this);
+        }
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->contains($event)) {
+            $this->events->removeElement($event);
+            // set the owning side to null (unless already changed)
+            if ($event->getUser() === $this) {
+                $event->setUser(null);
+            }
+        }
+        return $this;
+    }
+
+    public function getRoleLabel(): string
+    {
+        $role = '';
+        if (in_array(self::ROLE_AMBASSADOR, $this->getRoles())) {
+            $role = array_keys(self::ROLES, self::ROLE_AMBASSADOR)[0];
+        } elseif (in_array(self::ROLE_CREATOR, $this->getRoles())) {
+            $role = array_keys(self::ROLES, self::ROLE_CREATOR)[0];
+        }
+        return $role;
+    }
+
+    /**
+     * @return Collection|Favorite[]
+     */
+    public function getFollowers(): Collection
+    {
+        return $this->followers;
+    }
+
+    public function addFollower(Favorite $follower): self
+    {
+        if (!$this->followers->contains($follower)) {
+            $this->followers[] = $follower;
+            $follower->setUser($this);
+        }
+    }
+  
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    public function removeFollower(Favorite $follower): self
+    {
+        if ($this->followers->contains($follower)) {
+            $this->followers->removeElement($follower);
+            // set the owning side to null (unless already changed)
+            if ($follower->getUser() === $this) {
+                $follower->setUser(null);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|Favorite[]
+     */
+    public function getFollowedUsers(): Collection
+    {
+        return $this->followedUsers;
+    }
+
+    public function addFollowedUser(Favorite $followedUser): self
+    {
+        if (!$this->followedUsers->contains($followedUser)) {
+            $this->followedUsers[] = $followedUser;
+            $followedUser->setUserFavorite($this);
+        }
+        return $this;
+    }
+
+    public function removeFollowedUser(Favorite $followedUser): self
+    {
+        if ($this->followedUsers->contains($followedUser)) {
+            $this->followedUsers->removeElement($followedUser);
+            // set the owning side to null (unless already changed)
+            if ($followedUser->getUserFavorite() === $this) {
+                $followedUser->setUserFavorite(null);
+            }
+        }
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getDutiesToString(): string
+    {
+        $dutyNames = [];
+        foreach ($this->getDuties() as $duty) {
+            $dutyNames[] = $duty->getName();
+        }
+        return implode(' et ', $dutyNames);
     }
 }

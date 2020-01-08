@@ -1,5 +1,6 @@
 .filterImage {
     opacity: 0.8;
+    height: 85vh;
 }
 
 div.carousel-caption {
@@ -13,6 +14,10 @@ div.greyBack {
 
 div.buttonRole {
     width: 40vw;
+}
+
+div.buttonRole a.btn {
+    font-size: $font-size-body;
 }
 
 div.ambassador {
@@ -75,9 +80,18 @@ svg.svg-inline--fa.fa-star.fa-w-18 {
     font-size: 15pt;
 }
 
+.mapTabs {
+    width: 80vw;
+}
+
+.nav-link {
+    color: $secondary-color;
+    font-size: $font-size-nav;
+}
+
 #map {
     width: 80vw;
-    height: 80vh;
+    height: 90vh;
 }
 
 .popupTitle {
@@ -91,12 +105,17 @@ svg.svg-inline--fa.fa-star.fa-w-18 {
 a.fb-ic-card {
     font-size: $font-size-icon;
     color: $secondary-color;
-    align-self: end;
 }
 
-a.fb-ic-card:hover {
+a.fb-ic-card:hover, .nav-link:hover {
     color: $primary-color;
     text-decoration: none;
+}
+
+a#ambassadors.nav-link.active, a#events.nav-link.active {
+    color: $primary-color;
+    border-color: $secondary-color;
+    border-bottom: none;
 }
 
 div.row.reasons {
@@ -145,5 +164,14 @@ div.row.reasons {
 
     .filterImage {
         opacity: 0.6;
+    }
+
+    .mapTabs {
+        width: 100vw;
+    }
+
+    #map {
+        width: 100vw;
+        height: 90vh;
     }
 }

@@ -1,32 +1,31 @@
 <nav class="mb-1 navbar navbar-expand-lg navbar-light">
     <ul class="navbar-nav ml-auto nav-flex-icons">
         <li class="nav-item avatar">
-            <a class="nav-link" href="#"><img src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" class="rounded-circle z-depth-0"
-                                              alt="avatar image" height="50"><span class="nav-effect">CONNEXION</span>
-
-            </a>
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" class="rounded-circle z-depth-0"
+                                              alt="avatar image" height="50">
+            <p>ADMIN</p>
         </li>
     </ul>
 
     <div class="collapse navbar-collapse " id="navbarSupportedContent-555">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link ml-2" href="{{ path('user_index') }}"><span class="nav-effect">UTILISATEURS</span></a>
+                <a class="nav-link ml-2" href="{{ path('admin_user_index') }}"><span class="nav-effect">UTILISATEURS</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ml-2" href="{{ path('category_index') }}"><span class="nav-effect">UNIVERS</span></a>
+                <a class="nav-link ml-2" href="{{ path('admin_category_index') }}"><span class="nav-effect">UNIVERS</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ml-2" href="{{ path('blog_index') }}"><span class="nav-effect">BLOG</span></a>
+                <a class="nav-link ml-2" href="{{ path('admin_blog_index') }}"><span class="nav-effect">NEWS</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ml-2" href="#"><span class="nav-effect">EVENEMENTS</span></a>
+                <a class="nav-link ml-2" href="#"><span class="nav-effect">ÉVÉNEMENTS</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link ml-2" href="#"><span class="nav-effect">ABONNEMENTS</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ml-2" href="{{ path('home_index') }}"><span class="nav-effect">ACCES AU SITE</span></a>
+                <a class="nav-link ml-2" href="{{ path('home_index') }}"><span class="nav-effect">ACCÈS AU SITE</span></a>
             </li>
         </ul>
         <a class="navbar-brand ml-2" href="{{ path('admin_index') }}"><img src="{{ asset('build/ADC_logo_transparent.png') }}" alt="logo" height="80"></a>

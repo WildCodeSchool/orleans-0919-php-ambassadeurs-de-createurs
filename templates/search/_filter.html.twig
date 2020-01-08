@@ -1,4 +1,4 @@
-{{ form_start(form) }}
+{{ form_start(form, {'action': path('search_role', {'role': role})}) }}
 <div class="row">
     <div class="col-12 col-md-8 col-lg-6 col-xl-3 offset-1 select-element">
         {{ form_row(form.department) }}

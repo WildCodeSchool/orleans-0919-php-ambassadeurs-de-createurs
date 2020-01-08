@@ -6,6 +6,7 @@ use App\Entity\Event;
 use App\Entity\User;
 use App\Form\EventType;
 use App\Repository\EventRepository;
+use App\Service\CoordinateService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +30,7 @@ class EventController extends AbstractController
     /**
      * @Route("/new", name="event_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, CoordinateService $coordinateService): Response
     {
 
         $event = new Event();
@@ -39,9 +40,15 @@ class EventController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $city = $request->request->get('event')['place'];
+            $coordinates = $coordinateService->getCoordinates($city);
+            if (!is_null($coordinates)) {
+                $event->setLatitude($coordinates[0]);
+                $event->setLongitude($coordinates[1]);
+            }
             $entityManager->persist($event);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Votre événement a été créé');
             return $this->redirectToRoute('event_index');
         }
 
@@ -64,14 +71,22 @@ class EventController extends AbstractController
     /**
      * @Route("/{id}/edit", name="event_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Event $event): Response
+    public function edit(Request $request, Event $event, CoordinateService $coordinateService): Response
     {
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
+            $entityManager = $this->getDoctrine()->getManager();
+            $city = $request->request->get('event')['place'];
+            $coordinates = $coordinateService->getCoordinates($city);
+            if (!is_null($coordinates)) {
+                $event->setLatitude($coordinates[0]);
+                $event->setLongitude($coordinates[1]);
+            }
+            $entityManager->persist($event);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre événement a été mofifié');
             return $this->redirectToRoute('event_index');
         }
 
@@ -90,6 +105,7 @@ class EventController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($event);
             $entityManager->flush();
+            $this->addFlash('danger', 'Votre événement a été supprimé');
         }
 
         return $this->redirectToRoute('event_index');
