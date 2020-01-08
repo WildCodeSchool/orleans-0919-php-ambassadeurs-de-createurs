@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Category;
 use App\Entity\User;
 use Faker;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -41,11 +40,14 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 150; $i++) {
             $user = new User();
             $user->setFirstname($faker->firstName);
             $user->setLastname($faker->lastName);
-            $user->setCity(self::CITIES[array_rand(self::CITIES)]);
+            $city = self::CITIES[array_rand(self::CITIES)];
+            $user->setCity($city);
+            $user->setLatitude($faker->latitude(-4.987792, 9.755859));
+            $user->setLongitude($faker->longitude(41.046216, 51.563412));
             $user->setPicture($faker->imageUrl(200, 200, 'fashion'));
             $user->setMail($faker->email);
             $user->setRoles([self::ROLES[0]]);

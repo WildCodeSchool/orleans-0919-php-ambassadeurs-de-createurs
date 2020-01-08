@@ -47,6 +47,18 @@ class Event
      */
     private $brand;
 
+    /**
+     * @Assert\Type(type="float")
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $latitude;
+
+    /**
+     * @Assert\Type(type="float")
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $longitude;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,6 +120,30 @@ class Event
     public function setBrand(?Brand $brand): self
     {
         $this->brand = $brand;
+      
+        return $this;
+    }
+      
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
 
         return $this;
     }
