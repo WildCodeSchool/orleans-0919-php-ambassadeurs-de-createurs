@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\UserType;
+use App\Form\ProfilType;
+use App\Form\UserInscriptionType;
+use App\Repository\UserRepository;
 use App\Security\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -22,12 +24,13 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-             return $this->redirectToRoute('home_index');
+            return $this->redirectToRoute('home_index');
         }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
+
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
@@ -51,7 +54,7 @@ class SecurityController extends AbstractController
         LoginFormAuthenticator $authenticator
     ) {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserInscriptionType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -77,6 +80,26 @@ class SecurityController extends AbstractController
         return $this->render('user/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("/profil", name="app_profile")
+     */
+    public function profile(Request $request) :Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(ProfilType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Votre profil a été modifié.');
+            return $this->redirectToRoute('app_profile');
+        }
+        return $this->render('security/profile.html.twig', [
+            'form' => $form->createView(),
+            'user' => $user,
         ]);
     }
 }
