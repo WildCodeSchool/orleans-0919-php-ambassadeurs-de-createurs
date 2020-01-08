@@ -116,6 +116,7 @@ a#ambassadors.nav-link.active, a#events.nav-link.active {
     color: $primary-color;
     border-color: $secondary-color;
     border-bottom: none;
+    background-color: darken($third-color, 10%);
 }
 
 div.row.reasons {
