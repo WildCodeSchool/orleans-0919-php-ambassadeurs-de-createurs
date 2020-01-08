@@ -1,0 +1,59 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ brand.user.firstname }}{% endblock %}
+
+{% block body %}
+    <h1 class="text-center mt-5">{{ brand.name }}</h1>
+
+    <div class="container-fluid">
+        <div class="row text-center mt-5">
+            <div class="offset-1 col-4 mt-5">
+                <div class="pictureProfil">
+                    <img class="rounded-circle" src="{{ brand.user.picture }}" alt="{{ brand.name }}">
+                </div>
+                <br>
+                <h3 class="nameProfil">
+                    {{ brand.name }}
+                </h3>
+                <a href="{{ brand.site }}">
+                    Site
+                </a>
+                <br>
+                <a href="{{ brand.instagram}}">
+                    Instagram
+                </a>
+                <br>
+            </div>
+            <div class="descriptionBloc col-4 offset-2 text-justify mx-4 pb-5 px-5 pt-2 align-self-center ">
+                <h4 class="text-center">Histoire de la marque</h4>
+                <p class="font-weight-bold"> Categorie :
+                    {% for category in brand.user.categories %}
+                    {{ category.description }}
+                {% else %}
+                    Aucun univers n'a été sélectioné
+                {% endfor %}
+
+                </p>
+                <p>{{ brand.description}} </p>
+            </div>
+        </div>
+
+        <div class="text-center m-3">
+            <button type="button" class="btn btn-gold">Me contacter</button>
+        </div>
+
+        <div class="row text-center m-3">
+            <div class="descriptionBloc col-5 text-justify m-5 pb-3 px-5 pt-2 align-self-center ">
+                <h4 class="text-center">Compensations</h4>
+                <h4>Hôte</h4>
+                <p>{{ brand.hostAdvantage}} </p>
+                <h4>Vendeur</h4>
+                <p>{{ brand.sellerAdvantage}} </p>
+            </div>
+            <div class="descriptionBloc col-5 text-justify m-5 pb-5 px-5 pt-2 align-self-center ">
+                <h4 class="text-center"> Notre approche de la vente chez le particulier</h4>
+                <p>{{ brand.sellDescription }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

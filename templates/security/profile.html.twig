@@ -1,0 +1,9 @@
+{% extends 'layout.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+        <h1>Bienvenue sur votre profil</h1>
+        <h3>Vos informations </h3>
+        {{ include('user/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+        <a class="btn btn-dark" href="{{ path('home_index') }}">Retour</a>
+    </div>
+{% endblock %}
