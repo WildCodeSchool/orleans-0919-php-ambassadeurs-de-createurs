@@ -34,6 +34,17 @@
         <div class="text-center mt-5">
             <button type="button" class="btn btn-gold">Me contacter</button>
         </div>
+{#        <div class="text-center m-3">#}
+{#            <a href="{{ path('user_edit', {'id': user.id}) }}">#}
+{#                <button type="button" class="btn btn-gold">Modifier mon profil</button>#}
+{#            </a>#}
+{#        </div>#}
+        <div class="text-center m-3">
+            <a href="{{ path('event_new', {'userId': user.id}) }}">
+                <button type="button" class="btn btn-gold">Créer un événement</button>
+            </a>
+        </div>
+
         <div>
             <h2 class="mt-2">Mes prochaines ventes</h2>
             <div class="row">

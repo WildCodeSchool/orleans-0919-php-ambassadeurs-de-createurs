@@ -17,8 +17,7 @@ class EventType extends AbstractType
         $builder
             ->add('place', TextType::class, ['label' => 'Localisation', 'trim' => true,])
             ->add('dateTime', DateTimeType::class, ['label' => 'Date' ,'format' => 'Y-m-d H:i:s'])
-            ->add('description', TextareaType::class, ['label' => 'Description', 'trim' => true,])
-            ->add('user', null, ['label' => 'Utilisateur', 'choice_label' => 'firstname']);
+            ->add('description', TextareaType::class, ['label' => 'Description', 'trim' => true,]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
