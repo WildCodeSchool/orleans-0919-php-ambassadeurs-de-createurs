@@ -516,6 +516,6 @@ class User implements UserInterface
         foreach ($this->getDuties() as $duty) {
             $dutyNames[] = $duty->getName();
         }
-        return implode(', ', $dutyNames);
+        return implode(' et ', $dutyNames);
     }
 }

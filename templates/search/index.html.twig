@@ -18,11 +18,6 @@
                             <div class="star mb-4">
                                 <p class="m-0">100</p><i class="fas fa-star ml-2"></i>
                             </div>
-                            <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
-                            <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }} ({{ user.department.code }})</p>
-                            <hr>
-                            <p class="card-text">{{ user.dutiesToString }}</p>
-                        </div>
                         <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
                         <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}
 
@@ -32,7 +27,7 @@
 
                         <hr>
                         <p class="card-text">{{ user.dutiesToString }}</p>
-                    </div>
+                        </div>
                     </a>
                 </div>
             {% endfor %}

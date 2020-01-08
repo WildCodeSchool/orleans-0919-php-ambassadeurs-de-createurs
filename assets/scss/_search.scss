@@ -32,3 +32,8 @@ select {
         cursor: default;
     }
 }
+
+.card:hover {
+    //border: $primary-color solid 2px;
+    box-shadow: 0 0 15px lightgrey;
+}
