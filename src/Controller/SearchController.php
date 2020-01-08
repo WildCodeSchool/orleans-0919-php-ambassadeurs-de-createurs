@@ -16,28 +16,37 @@ use Symfony\Component\Config\Definition\Exception\Exception;
  */
 class SearchController extends AbstractController
 {
+    const NB_MAX_RESULT = 12;
+
     /**
-     * @Route("/{role}", name="search_role")
+     * @Route("/{role}/{page}", name="search_role", requirements={"page" = "\d+"}, defaults={"page" = 1})
      */
-    public function showByRoles(UserRepository $userRepository, string $role, Request $request): Response
+    public function showByRoles(UserRepository $userRepository, string $role, Request $request, int $page): Response
     {
+        $data = [];
 
         if (!array_key_exists($role, User::ROLES_URL)) {
             throw new Exception('Mauvais rôle');
         }
-        $users = $userRepository->findByRoles(User::ROLES_URL[$role]);
+
+        $data['roles'] = $role;
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $data = $form->getData();
-            $users = $userRepository->findSearch($data);
+            $data['filters'] = $form->getData();
         }
 
+        $nbUsers = count($userRepository->findSearch($data));
+        $users = $userRepository->findSearch($data, $page);
+
         return $this->render('search/index.html.twig', [
+            'nbUsers' => $nbUsers,
             'users' => $users,
             'role' => $role,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'page' => $page,
+            'nbPages' => ceil($nbUsers / self::NB_MAX_RESULT),
         ]);
     }
 }
