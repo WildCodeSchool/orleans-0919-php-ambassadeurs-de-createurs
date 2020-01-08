@@ -2,12 +2,14 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\ArticleTag;
 use App\Entity\Blog;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker;
 
-class BlogFixtures extends Fixture
+class BlogFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -18,8 +20,14 @@ class BlogFixtures extends Fixture
             $blog->setAuthor($faker->name);
             $blog->setContent($faker->paragraph(50));
             $blog->setDate($faker->dateTime);
+            $blog->setTag($this->getReference('articleTag_' . rand(0, 1)));
             $manager->persist($blog);
         }
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [ArticleTagFixtures::class];
     }
 }
