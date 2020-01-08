@@ -11,21 +11,31 @@
         </div>
     </div>
 
-    <div class="js-ambassadors" data-ambassadors="{{ ambassadorsArray | json_encode }}"></div>
-    <div class="d-flex justify-content-center">
-        <div class="mt-5 mb-5" id="map"></div>
+    <div class="js-ambassadors" data-ambassadors="{{ ambassadors }}"></div>
+    <div class="d-flex w-100 justify-content-center">
+        <div class="d-flex flex-column mt-5 mapTabs align-self-center">
+            <ul class="nav nav-tabs nav-fill nav-justified">
+                <li class="nav-item">
+                    <a class="nav-link active"  id="events" href="#events">Prochaines ventes privées</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="ambassadors" href="#ambassadors">Ambassadeurs</a>
+                </li>
+            </ul>
+            <div class="mb-5" id="map"></div>
+        </div>
     </div>
 
     <div class="greyBack mt-5 mb-5">
         <h2 class="ml-5 p-3">Je recherche : </h2>
         <div class="d-flex justify-content-around">
             <div class="buttonRole">
-                <a class="btn btn-gold w-100 mb-4 mb-md-0" href="{{ path('search_role', {'role': 'ambassadeur'}) }}">Ambassadeur</a>
+                <a class="btn btn-gold w-100 mb-4 mb-md-0" href="{{ path('search_role', {'role': 'ambassadeur', 'page': 1}) }}">Ambassadeur</a>
                 <h3 class="mt-3 mb-3 w-100 text-center d-none d-md-block">Un ambassadeur pour un créateur</h3>
             </div>
             <div class="buttonRole">
                 <a class="btn btn-gold w-100 mb-4 mb-md-0"
-                   href="{{ path('search_role', {'role': 'createur'}) }}">Créateur</a>
+                   href="{{ path('search_role', {'role': 'createur', 'page': 1}) }}">Créateur</a>
                 <h3 class="mt-3 mb-3 w-100 text-center d-none d-md-block">Une marque, un style</h3>
             </div>
         </div>
@@ -37,18 +47,21 @@
             <div class="row no-gutters">
                 {% for card in ambassadorCards %}
                     <div class="card mb-5 col-md-5 col-sm-12">
-                        <a  class="" href="{{ path('user_show', {'id': card.id}) }}">
-                            <div class="row no-gutters">
-                                <div class="col-md-1 col-sm-12 mt-2">
-                                    <i class="fas fa-star"></i>
-                                    <p>100</p>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ card.firstname }}</h5>
+                        <a href="{{ path('user_show', {'id': card.id}) }}">
+                          <div class="row no-gutters">
+                            <div class="col-md-1 col-sm-12 mt-2">
+                                <i class="fas fa-star"></i>
+                                <p>100</p>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ card.firstname }}</h5>
+                                    {% if card.department.codeName is defined %}
                                         <p class="card-text">J'habite dans le {{ card.department.codeName }}</p>
-                                        <p class="card-text"><small class="text-muted">Je suis un {{ card.roleLabel }}</small>
-                                        </p>
+                                    {% endif %}
+                                    <p class="card-text">
+                                        <small class="text-muted">Je suis un {{ card.roleLabel }}</small>
+                                    </p>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
