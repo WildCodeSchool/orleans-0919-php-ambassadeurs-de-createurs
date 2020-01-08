@@ -20,6 +20,10 @@ class ArticleTag
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="L'étiquette est obligatoire")
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Etiquette trop longue, elle doit être au plus {{ limit }} caractères")
      */
     private $tag;
 

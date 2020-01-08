@@ -23,3 +23,17 @@ select {
 .form-control {
     border: 1px solid white;
 }
+
+.btn-inactive {
+    background-color: $background-primary;
+    color: white;
+
+    &:hover{
+        cursor: default;
+    }
+}
+
+.card:hover {
+    //border: $primary-color solid 2px;
+    box-shadow: 0 0 15px lightgrey;
+}
