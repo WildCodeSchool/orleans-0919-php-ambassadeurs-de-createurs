@@ -7,6 +7,7 @@ use App\Form\ProfilType;
 use App\Form\UserInscriptionType;
 use App\Repository\UserRepository;
 use App\Security\LoginFormAuthenticator;
+use App\Service\CoordinateService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,7 +52,8 @@ class SecurityController extends AbstractController
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
         GuardAuthenticatorHandler $guardHandler,
-        LoginFormAuthenticator $authenticator
+        LoginFormAuthenticator $authenticator,
+        CoordinateService $coordinateService
     ) {
         $user = new User();
         $form = $this->createForm(UserInscriptionType::class, $user);
@@ -60,6 +62,12 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $user->setRoles([$request->request->get('user')['role']]);
+            $city = $request->request->get('user')['city'];
+            $coordinates = $coordinateService->getCoordinates($city);
+            if (!is_null($coordinates)) {
+                $user->setLatitude($coordinates[0]);
+                $user->setLongitude($coordinates[1]);
+            }
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
