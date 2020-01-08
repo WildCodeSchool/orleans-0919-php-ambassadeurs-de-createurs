@@ -11,6 +11,7 @@ function onClickBtnLike(event) {
     axios.get(url)
         .then((response) => {
             if (response.status === 403) {
+                // eslint-disable-next-line no-alert
                 window.alert("Vous ne pouvez pas ajouter en favoris si vous n'êtes pas connecté !");
             } else {
                 spanCount.textContent = response.data.favorites;
