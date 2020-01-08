@@ -42,7 +42,7 @@ class Event
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Brand", inversedBy="events")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Brand", inversedBy="eventsSponsored")
      * @ORM\JoinColumn(nullable=false)
      */
     private $brand;
@@ -120,10 +120,10 @@ class Event
     public function setBrand(?Brand $brand): self
     {
         $this->brand = $brand;
-      
+
         return $this;
     }
-      
+
     public function getLatitude(): ?float
     {
         return $this->latitude;
