@@ -17,12 +17,12 @@ class Favorite
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="favorites")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="followedUsers")
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="favorites")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="followers")
      */
     private $userFavorite;
 

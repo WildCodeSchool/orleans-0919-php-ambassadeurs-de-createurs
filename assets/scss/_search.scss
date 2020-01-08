@@ -23,3 +23,8 @@ select {
 .form-control {
     border: 1px solid white;
 }
+
+.btn-link:hover {
+    color: $primary-color;
+    text-decoration: none;
+}

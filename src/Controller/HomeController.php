@@ -35,7 +35,7 @@ class HomeController extends AbstractController
         $ambassadorCards = array_slice($ambassadors, count($ambassadors)-self::NB_CARDS, self::NB_CARDS);
 
         $context = [
-            ObjectNormalizer::IGNORED_ATTRIBUTES => ['users', 'mail', 'department']
+            ObjectNormalizer::IGNORED_ATTRIBUTES => ['users', 'mail', 'department', 'user', 'userFavorite']
         ];
         $ambassadorsArray = $normalizer->normalize($ambassadors, 'json', $context);
 

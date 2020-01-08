@@ -117,13 +117,19 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="user")
      */
-    private $favorites;
+    private $followedUsers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="userFavorite")
+     */
+    private $followers;
 
     public function __construct()
     {
         $this->duties = new ArrayCollection();
         $this->categories = new ArrayCollection();
-        $this->favorites = new ArrayCollection();
+        $this->followers = new ArrayCollection();
+        $this->followedUsers = new ArrayCollection();
     }
 
     /**
@@ -353,14 +359,6 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Favorite[]
-     */
-    public function getFavorites(): Collection
-    {
-        return $this->favorites;
-    }
-
-    /**
      * A visual identifier that represents this user.
      *
      * @see UserInterface
@@ -388,27 +386,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function addFavorite(Favorite $favorite): self
-    {
-        if (!$this->favorites->contains($favorite)) {
-            $this->favorites[] = $favorite;
-            $favorite->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFavorite(Favorite $favorite): self
-    {
-        if ($this->favorites->contains($favorite)) {
-            $this->favorites->removeElement($favorite);
-            // set the owning side to null (unless already changed)
-            if ($favorite->getUser() === $this) {
-                $favorite->setUser(null);
-            }
-        }
-    }
-
     /**
      * @see UserInterface
      */
@@ -421,22 +398,6 @@ class User implements UserInterface
     {
         $this->password = $password;
         return $this;
-    }
-
-    /**
-     * Permet de savoir si cet utilisateur est liké par un utilisateur
-     *
-     * @param \App\Entity\User $user
-     * @return bool
-     */
-    public function isLikedByUser(User $user): bool
-    {
-        foreach ($this->favorites as $favorite) {
-            if ($favorite->getUser() === $user) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
@@ -465,5 +426,64 @@ class User implements UserInterface
             $role = array_keys(self::ROLES, self::ROLE_CREATOR)[0];
         }
         return $role;
+    }
+
+    /**
+     * @return Collection|Favorite[]
+     */
+    public function getFollowers(): Collection
+    {
+        return $this->followers;
+    }
+
+    public function addFollower(Favorite $follower): self
+    {
+        if (!$this->followers->contains($follower)) {
+            $this->followers[] = $follower;
+            $follower->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollower(Favorite $follower): self
+    {
+        if ($this->followers->contains($follower)) {
+            $this->followers->removeElement($follower);
+            // set the owning side to null (unless already changed)
+            if ($follower->getUser() === $this) {
+                $follower->setUser(null);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|Favorite[]
+     */
+    public function getFollowedUsers(): Collection
+    {
+        return $this->followedUsers;
+    }
+
+    public function addFollowedUser(Favorite $followedUser): self
+    {
+        if (!$this->followedUsers->contains($followedUser)) {
+            $this->followedUsers[] = $followedUser;
+            $followedUser->setUserFavorite($this);
+        }
+        return $this;
+    }
+
+    public function removeFollowedUser(Favorite $followedUser): self
+    {
+        if ($this->followedUsers->contains($followedUser)) {
+            $this->followedUsers->removeElement($followedUser);
+            // set the owning side to null (unless already changed)
+            if ($followedUser->getUserFavorite() === $this) {
+                $followedUser->setUserFavorite(null);
+            }
+        }
+        return $this;
     }
 }

@@ -50,39 +50,31 @@ class SearchController extends AbstractController
      *
      * @Route("/{id}/like", name="search_like")
      *
-     * @param User $userFavorite
+     * @param User $userToFollow
      * @param ObjectManager $manager
-     * @param FavoriteRepository $favoriteRepository
      * @return Response
      */
-    public function like(User $userFavorite, ObjectManager $manager, FavoriteRepository $favoriteRepository): Response
+    public function like(User $userToFollow, ObjectManager $manager): Response
     {
-        $user = $this->getUser();
-// isGranted
-        if (!$user) {
+        if (!$this->isGranted('ROLE_USER')) {
             return $this->json([
                 'code' => 403,
                 'message' => 'Unauthorized'
             ], 403);
         }
 
-        $favorite = $favoriteRepository->isLikedByUser($user);
+        $user = $this->getUser();
 
-        if ($favorite instanceof Favorite) {
-            $manager->remove($favorite);
-        } else {
-            $favorite = new Favorite();
-            $favorite->setUserFavorite($userFavorite)
-                ->setUser($user);
-            $manager->persist($favorite);
-        }
+        $favorite = new Favorite();
+        $favorite->setUserFavorite($userToFollow);
+        $favorite->setUser($user);
+        $manager->persist($favorite);
 
         $manager->flush();
 
         return $this->json([
-            'code' => 200,
+            'favorites' => count($userToFollow->getFollowers()),
             'message' => 'Like bien ajouté',
-            'likes' => $favoriteRepository->count(['user' => $userFavorite])
         ], 200);
     }
 }
