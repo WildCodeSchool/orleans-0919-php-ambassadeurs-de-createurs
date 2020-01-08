@@ -5,14 +5,17 @@
 {% block body %}
     <h1 class="text-center"> Recherche des {{ role }}s </h1>
     <div class="container-fluid card-search">
-        {% include 'search/_filter.html.twig' with {form: form} only %}
+
+        {% include 'search/_filter.html.twig' with {form: form} %}
+        <h5 class="text-center">Nombre de résultats : {{ nbUsers }}</h5>
+
         <div class="row justify-content-center">
             {% for user in users %}
                 <div class="card col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">
-                    <img src="{{ user.picture }}" class="card-img-top" alt="image de {{ user.firstname }}">
-
-                    <div class="card-body">
-                        <div class="star mb-4">
+                    <a href="{{ path('user_show', {'id': user.id}) }}">
+                        <img src="{{ user.picture }}" class="card-img-top" alt="image de {{ user.firstname }}">
+                        <div class="card-body">
+                            <div class="star mb-4">
                             <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">
                                 <div class="col-md-1 col-sm-12 mt-2">
                                     <span class="js-likes">{{ user.followers | length }}</span>
@@ -30,34 +33,46 @@
                         </div>
                         <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
                         <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}
-                            ({{ user.department.code }})</p>
 
-                    <a  class="" href="{{ path('user_show', {'id': user.id}) }}">
-                        <img src="{{ user.picture }}" class="card-img-top" alt="image de {{ user.firstname }}">
-                        <div class="card-body">
-                            <div class="star mb-4">
-                                <p class="m-0">100</p><i class="fas fa-star ml-2"></i>
-                            </div>
-                            <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
-                            <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }} ({{ user.department.code }})</p>
-                            <hr>
-                            <p class="card-text">{{ user.dutiesToString }}</p>
-                        </div>
-                        <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
-                        <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}
                             {% if user.department.code is defined %}
                             ({{ user.department.code }})
                             {% endif %}</p>
 
                         <hr>
                         <p class="card-text">{{ user.dutiesToString }}</p>
-                    </div>
+                        </div>
                     </a>
                 </div>
             {% endfor %}
+
+        </div>
+        <div class="text-center">
+            <p class="m-3">Page : {{ page }}</p>
+        </div>
+        <div class="text-center">
+            {% if page >= 2 %}
+                <a class="btn btn-gold mx-5 mb-5"
+                   href="{{ path('search_role', {'role': role, 'page': page-1}|merge(app.request.query.all))}}">
+                    <i class="far fa-arrow-alt-circle-left"></i> Précédent
+                </a>
+            {% else %}
+                <a class="btn btn-inactive mx-5 mb-5">
+                    <i class="far fa-arrow-alt-circle-left"></i> Précédent
+                </a>
+            {% endif %}
+
+            {% if page < nbPages %}
+            <a class="btn btn-gold mx-5 mb-5"
+               href="{{ path('search_role', {'role': role, 'page': page+1}|merge(app.request.query.all)) }}">
+                Suivant <i class="far fa-arrow-alt-circle-right"></i>
+            </a>
+            {% else %}
+            <a class="btn btn-inactive mx-5 mb-5">
+                Suivant <i class="far fa-arrow-alt-circle-right"></i>
+            </a>
+            {% endif %}
         </div>
     </div>
-
 {% endblock %}
 
 {% block javascripts %}

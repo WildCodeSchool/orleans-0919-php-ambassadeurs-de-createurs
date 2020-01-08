@@ -124,6 +124,23 @@ class User implements UserInterface
     private $followers;
 
      /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="user")
+     */
+    private $events;
+
+    /**
+     * @Assert\Type(type="float")
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $latitude;
+
+    /**
+     * @Assert\Type(type="float")
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $longitude;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Brand", mappedBy="user", cascade={"remove", "remove"})
      */
     private $brand;
@@ -134,6 +151,7 @@ class User implements UserInterface
         $this->categories = new ArrayCollection();
         $this->followers = new ArrayCollection();
         $this->followedUsers = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     /**
@@ -438,6 +456,35 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setUser($this);
+        }
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->contains($event)) {
+            $this->events->removeElement($event);
+            // set the owning side to null (unless already changed)
+            if ($event->getUser() === $this) {
+                $event->setUser(null);
+            }
+        }
+        return $this;
+    }
+
     public function getRoleLabel(): string
     {
         $role = '';
@@ -463,6 +510,16 @@ class User implements UserInterface
             $this->followers[] = $follower;
             $follower->setUser($this);
         }
+    }
+  
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
 
         return $this;
     }
@@ -507,13 +564,25 @@ class User implements UserInterface
         }
         return $this;
     }
-  
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
     public function getDutiesToString(): string
     {
         $dutyNames = [];
         foreach ($this->getDuties() as $duty) {
             $dutyNames[] = $duty->getName();
         }
-        return implode(', ', $dutyNames);
+        return implode(' et ', $dutyNames);
     }
 }
