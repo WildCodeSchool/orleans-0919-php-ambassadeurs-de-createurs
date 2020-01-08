@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Entity\User;
-use App\Form\UserType;
+use App\Form\UserInscriptionType;
 use App\Repository\EventRepository;
 use App\Repository\UserRepository;
 use App\Service\CoordinateService;
@@ -49,7 +49,7 @@ class AdminUserController extends AbstractController
      */
     public function edit(Request $request, User $user, CoordinateService $coordinateService): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserInscriptionType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
