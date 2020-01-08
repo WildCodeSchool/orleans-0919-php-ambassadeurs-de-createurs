@@ -50,7 +50,39 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setLongitude($faker->longitude(41.046216, 51.563412));
             $user->setPicture($faker->imageUrl(200, 200, 'fashion'));
             $user->setMail($faker->email);
-            $user->setRoles([self::ROLES[rand(0, 1)]]);
+            $user->setRoles([self::ROLES[0]]);
+            $user->setDepartment($this->getReference("00" . rand(1, 7)));
+            $user->addCategory($this->getReference('category_' . rand(0, 5)));
+            $nbDuty = rand(0, 2);
+            switch ($nbDuty) {
+                case 0:
+                    $user->addDuty($this->getReference('hôte'));
+                    break;
+                case 1:
+                    $user->addDuty($this->getReference('vendeur'));
+                    break;
+                case 2:
+                    $user->addDuty($this->getReference('hôte'));
+                    $user->addDuty($this->getReference('vendeur'));
+                    break;
+            }
+            $user->setUrlFacebook($faker->url);
+            $user->setPassword($this->passwordEncoder->encodePassword(
+                $user,
+                'test'
+            ));
+            $this->addReference('user_' . $i, $user);
+            $manager->persist($user);
+        }
+
+        for ($i = 20; $i < 40; $i++) {
+            $user = new User();
+            $user->setFirstname($faker->firstName);
+            $user->setLastname($faker->lastName);
+            $user->setCity(self::CITIES[array_rand(self::CITIES)]);
+            $user->setPicture($faker->imageUrl(200, 200, 'fashion'));
+            $user->setMail($faker->email);
+            $user->setRoles([self::ROLES[1]]);
             $user->setDepartment($this->getReference("00" . rand(1, 7)));
             $user->addCategory($this->getReference('category_' . rand(0, 5)));
             $nbDuty = rand(0, 2);
