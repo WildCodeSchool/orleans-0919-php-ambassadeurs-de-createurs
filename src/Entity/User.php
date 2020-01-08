@@ -123,7 +123,7 @@ class User implements UserInterface
      */
     private $followers;
 
-     /** 
+     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Brand", mappedBy="user", cascade={"remove", "remove"})
      */
     private $brand;
