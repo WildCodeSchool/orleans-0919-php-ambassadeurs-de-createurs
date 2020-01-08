@@ -1,12 +1,12 @@
 .profile-card-5 .btn {
-    font-size: 12px;
     padding: 7px 20px;
     border-radius: 0;
 }
 
 
 .textdate {
-    font-size: 11px;
+    font-size: $font-size-date;
+    font-style: italic;
 }
 
 .profile-card-5 h5 {
@@ -14,7 +14,7 @@
 }
 
 .profile-card-5 {
-    font-size: 14px;
+    font-size: $font-size-body;
     font-weight: 300;
 }
 
