@@ -3,18 +3,13 @@ const axios = require('axios');
 function onClickBtnLike(event) {
     event.preventDefault();
 
-    console.log(this.querySelector('.fa-star'));
-
     const url = this.href;
     const spanCount = this.querySelector('span.js-likes');
     const icone = this.querySelector('.fa-star');
 
 
     axios.get(url)
-        .then(function (response) {
-            console.log(response);
-            console.log(response.data);
-
+        .then((response) => {
             if (response.status === 403) {
                 window.alert("Vous ne pouvez pas ajouter en favoris si vous n'êtes pas connecté !");
             } else {
@@ -26,11 +21,11 @@ function onClickBtnLike(event) {
                     icone.dataset.prefix = 'far';
                 }
             }
-        }).catch(function (error) {
-            console.log(error);
+            // eslint-disable-next-line no-unused-vars
+        }).catch((error) => {
         });
 }
 
-document.querySelectorAll('a.js-like').forEach(function (link) {
+document.querySelectorAll('a.js-like').forEach((link) => {
     link.addEventListener('click', onClickBtnLike);
 });
