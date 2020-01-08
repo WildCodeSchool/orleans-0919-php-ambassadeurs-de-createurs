@@ -61,7 +61,7 @@ class AdminUserController extends AbstractController
             }
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success', 'Votre utilisateur a été modifié');
             return $this->redirectToRoute('admin_user_index');
         }
 
@@ -80,6 +80,7 @@ class AdminUserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
+            $this->addFlash('danger', 'Votre utilisateur a été supprimé');
         }
 
         return $this->redirectToRoute('admin_user_index');
