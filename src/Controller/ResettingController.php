@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Component\Validator\Constraint;
 use App\Form\ResettingType;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -17,7 +18,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use \DateTime;
 
 /**
  * @Route("/renouvellement-mot-de-passe")
@@ -55,7 +56,7 @@ class ResettingController extends AbstractController
             // création du token
             $user->setToken($tokenGenerator->generateToken());
             // enregistrement de la date de création du token
-            $user->setPasswordRequestedAt(new DateTimeType());
+            $user->setPasswordRequestedAt(new DateTime());
             $manager->flush();
 
             // on utilise le service Mailer créé précédemment
@@ -81,20 +82,21 @@ class ResettingController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
     // si supérieur à 10min, retourne false
     // sinon retourne false
-    private function isRequestInTime(DateTimeType $passwordRequestedAt = null)
+    private function isRequestInTime(\DateTime $passwordRequestedAt = null)
     {
         if ($passwordRequestedAt === null) {
             return false;
         }
 
-        $now = new DateTimeType();
+        $now = new DateTime();
         $interval = $now->getTimestamp() - $passwordRequestedAt->getTimestamp();
 
         $daySeconds = 86400;
-        $limitTime = $interval > $daySeconds ? false : $limitTime = true;
-        return $limitTime;
+
+        return $interval <= $daySeconds;
     }
 
     /**

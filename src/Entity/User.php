@@ -12,6 +12,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"mail"}, message="Il y a déjà un compte avec cette adresse mail.")
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class User implements UserInterface
 {
@@ -519,7 +521,7 @@ class User implements UserInterface
         return implode(' et ', $dutyNames);
     }
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true, options={"default": "CURRENT_TIMESTAMP"})
      * @var \DateTime
      */
     private $passwordRequestedAt;
