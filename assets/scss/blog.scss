@@ -1,65 +1,64 @@
 .profile-card-5 .btn {
-  padding: 7px 20px;
-  border-radius: 0;
+    padding: 7px 20px;
+    border-radius: 0;
 }
 
 
 .textdate {
-  font-size: $font-size-date;
-  font-style: italic;
+    font-size: $font-size-date;
+    font-style: italic;
 }
 
 .profile-card-5 h5 {
-  color: $primary-color;
+    color: $primary-color;
 }
 
 .profile-card-5 {
-  font-size: $font-size-body;
-  font-weight: 300;
-
-  &:hover {
-    box-shadow: none;
-  }
+    font-size: $font-size-body;
+    font-weight: 300;
+    &:hover {
+        box-shadow: none;
+    }
 }
 
 .profile-card-5 .btn-primary {
-  background-color: $primary-color;
-  border-color: $primary-color;
+    background-color: $primary-color;
+    border-color: $primary-color;
 }
 
 h5.card-title {
-  font-size: 16pt;
-  min-height: 50px;
-  padding-top: 10px;
+    font-size: 16pt;
+    min-height: 50px;
+    padding-top: 10px;
 }
 
 .card-block {
-  position: relative;
-  margin: -50px 20px 20px;
+    position: relative;
+    margin: -50px 20px 20px;
 }
 
 
 .firstblog {
-  margin: 50px -50px 80px -50px;
+    margin: 50px -50px 80px -50px;
 }
 
 .card-img-block-top {
-  margin: 50px 0 80px;
+    margin: 50px 0 80px;
 }
 
 .firstSentence {
-  font-style: italic;
+    font-style: italic;
 }
 
 h3.card-title {
-  color: $primary-color;
+    color: $primary-color;
 }
 
 .oneArticle {
-  padding-left: 50px;
+    padding-left: 50px;
 }
 
 .badge-gold {
-  background-color: $primary-color;
-  color: $third-color;
+    background-color: $primary-color;
+    color: $third-color;
 }
