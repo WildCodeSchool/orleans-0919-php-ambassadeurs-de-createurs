@@ -261,9 +261,9 @@ class User implements UserInterface
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getMail(): ?string
+    public function getMail(): string
     {
         return $this->mail;
     }

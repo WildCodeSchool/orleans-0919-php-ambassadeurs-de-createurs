@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Validator\Constraint;
 use App\Form\ResettingType;
 use App\Repository\UserRepository;
@@ -68,7 +69,7 @@ class ResettingController extends AbstractController
                 ]));
 
             $mailer->send($email);
-
+            dd($email);
             $this->addFlash(
                 'success',
                 "Un mail va vous être envoyé
