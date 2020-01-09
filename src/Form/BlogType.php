@@ -23,8 +23,8 @@ class BlogType extends AbstractType
             ])
             ->add('articleTag', EntityType::class, [
                 'class' => ArticleTag::class,
+                'label' => 'Étiquette',
                 'choice_label' => 'tag',
-                'choice_value' => 'tag',
                 'query_builder' => function (ArticleTagRepository $articleTagRepository) {
                     return $articleTagRepository->createQueryBuilder('t')
                         ->orderBy('t.tag', 'ASC');
