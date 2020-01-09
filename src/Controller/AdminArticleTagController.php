@@ -68,8 +68,8 @@ class AdminArticleTagController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('article_tag_index');
+            $this->addFlash('success', 'Votre étiquette d\'article a été modifiée');
+            return $this->redirectToRoute('admin_article_tag_index');
         }
 
         return $this->render('article_tag/edit.html.twig', [
