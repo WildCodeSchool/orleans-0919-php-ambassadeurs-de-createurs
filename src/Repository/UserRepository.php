@@ -81,9 +81,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function findByRoles(string $roles): array
     {
-//        $query = $this->createQueryBuilder('r')
-//            ->select('u')
-//            ->from(User::class, 'u')
+//        $query = $this->createQueryBuilder('u')
 //            ->leftjoin('u.brand', 'b')
 //            ->leftjoin('u.categories', 'c')
 //            ->leftjoin('u.department', 'd')
@@ -92,14 +90,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 //            ->leftjoin('u.followers', 'fr')
 //            ->leftjoin('u.duties', 'du')
 //            ->where('u.roles LIKE :roles')
-//            ->setParameter('roles', '%' . $roles . '%');
-//        return $query->getQuery()->getResult();
+//            ->setParameter('roles', '%' . $roles . '%')
+//            ->getQuery();
+//        return $query->getResult();
 
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
             'SELECT u, b, c, d, e, fd, fr, du
-                   FROM App\Entity\User u 
-                   LEFT JOIN u.brand b 
+                   FROM App\Entity\User u
+                   LEFT JOIN u.brand b
                    LEFT JOIN u.categories c
                    LEFT JOIN u.department d
                    LEFT JOIN u.events e
