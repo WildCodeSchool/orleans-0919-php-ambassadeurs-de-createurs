@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout_admin.html.twig' %}
 
 {% block title %}Event{% endblock %}
 
@@ -31,4 +31,4 @@
     <a href="{{ path('event_edit', {'id': event.id}) }}">edit</a>
 
 {{ include('event/_delete_form.html.twig') }}
-{% endblock %}}
+{% endblock %}

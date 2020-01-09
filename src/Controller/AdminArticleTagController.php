@@ -21,7 +21,7 @@ class AdminArticleTagController extends AbstractController
     public function index(ArticleTagRepository $articleTagRepository): Response
     {
         return $this->render('article_tag/index.html.twig', [
-            'article_tags' => $articleTagRepository->findAll(),
+            'article_tags' => $articleTagRepository->findBy([], ['tag' => 'ASC']),
         ]);
     }
 
