@@ -3,14 +3,14 @@
 {% block title %}{{ blog.title }}{% endblock %}
 
 {% block body %}
-    <div class="container-fluid pt-1 mb-5">
-        <img class="card-img-top " src="http://placeimg.com/640/360/any" alt="image de l'article {{ blog.title }}">
+    <div class="container pt-1 my-5">
+        <img class="card-img-top" src="http://placeimg.com/640/360/any" alt="image de l'article {{ blog.title }}">
         <h1 class="text-center m-5">{{ blog.title }}</h1>
-        <p class=" text-left mt-3 textdate">
+        <p class=" text-center mt-3 textdate">
             {{ blog.date|localizeddate('short', 'none') }} -
             <span class="badge badge-pill badge-gold">{{ blog.articleTag.tag }}</span>
         </p>
-        <p class="textFirstArticle mt-5">{{ blog.content }}</p>
+        <p class="mt-5 text-center">{{ blog.content }}</p>
 
-    </div>
+    </>
 {% endblock %}
