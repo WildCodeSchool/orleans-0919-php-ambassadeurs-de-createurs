@@ -125,7 +125,7 @@ class User implements UserInterface
      */
     private $followers;
 
-     /**
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="user")
      */
     private $events;
@@ -146,6 +146,26 @@ class User implements UserInterface
      * @ORM\OneToOne(targetEntity="App\Entity\Brand", mappedBy="user", cascade={"remove", "remove"})
      */
     private $brand;
+
+    /**
+     * @Assert\NotBlank(groups={"registration"})
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true, options={"default": "CURRENT_TIMESTAMP"})
+     * @var \DateTime
+     */
+    private $passwordRequestedAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+
+    private $token;
 
     public function __construct()
     {
@@ -513,7 +533,7 @@ class User implements UserInterface
             $follower->setUser($this);
         }
     }
-  
+
     public function getLatitude(): ?float
     {
         return $this->latitude;
@@ -587,18 +607,7 @@ class User implements UserInterface
         }
         return implode(' et ', $dutyNames);
     }
-    /**
-     * @ORM\Column(type="datetime", nullable=true, options={"default": "CURRENT_TIMESTAMP"})
-     * @var \DateTime
-     */
-    private $passwordRequestedAt;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $token;
 
     /*
      * Get passwordRequestedAt
@@ -649,9 +658,4 @@ class User implements UserInterface
     {
         $this->plainPassword = $plainPassword;
     }
-    /**
-     * @Assert\NotBlank(groups={"registration"})
-     * @Assert\Length(max=4096)
-     */
-    private $plainPassword;
 }
