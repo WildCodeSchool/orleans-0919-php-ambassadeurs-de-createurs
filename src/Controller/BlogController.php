@@ -24,4 +24,14 @@ class BlogController extends AbstractController
             'blogs' => $blogRepository->findBy([], ['date' => 'DESC']),
         ]);
     }
+
+    /**
+     * @Route("/{slug}", name="blog_show", methods={"GET"})
+     */
+    public function show(Blog $blog): Response
+    {
+        return $this->render('blog/show.html.twig', [
+            'blog' => $blog,
+        ]);
+    }
 }
