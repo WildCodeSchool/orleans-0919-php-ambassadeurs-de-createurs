@@ -15,8 +15,8 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create('fr_FR');
         for ($i = 0; $i < 80; $i++) {
-            $user = $this->getReference('user_' . rand(0, 19));
-            $brand = $this->getReference('brand_' . rand(20, 39));
+            $user = $this->getReference('user_' . rand(0, 99));
+            $brand = $this->getReference('brand_' . rand(100, 199));
             $event = new Event();
             $event->setPlace($user->getCity());
             $event->setLatitude($faker->latitude(-4.987792, 9.755859));

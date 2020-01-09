@@ -55,7 +55,7 @@ class AdminBlogController extends AbstractController
      */
     public function show(Blog $blog): Response
     {
-        return $this->render('blog/show.html.twig', [
+        return $this->render('blog/admin_blog_show.html.twig', [
             'blog' => $blog,
         ]);
     }
