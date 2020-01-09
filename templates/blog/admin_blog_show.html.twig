@@ -1,0 +1,39 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center m-5">{{ blog.title }}</h1>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Titre</th>
+                <td class="text-center">{{ blog.title }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ blog.content|raw }}</td>
+            </tr>
+            <tr>
+                <th>Auteur</th>
+                <td class="text-center">{{ blog.author }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td class="text-center">{{ blog.date ? blog.date|localizeddate('long', 'short') }}</td>
+            </tr>
+
+            </tbody>
+        </table>
+        <a href="{{ path('admin_blog_index') }}" class="btn btn-gold">
+            Retour
+        </a>
+
+        <a href="{{ path('admin_blog_edit', {'slug': blog.slug}) }}" class="btn btn-gold">
+            Modifier
+        </a>
+        {{ include('blog/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

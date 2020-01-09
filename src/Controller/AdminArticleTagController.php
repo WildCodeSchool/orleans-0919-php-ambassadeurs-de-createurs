@@ -38,8 +38,8 @@ class AdminArticleTagController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($articleTag);
             $entityManager->flush();
-
-            return $this->redirectToRoute('article_tag_index');
+            $this->addFlash('success', 'Votre étiquette a été créée');
+            return $this->redirectToRoute('admin_article_tag_index');
         }
 
         return $this->render('article_tag/new.html.twig', [
@@ -68,8 +68,8 @@ class AdminArticleTagController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('article_tag_index');
+            $this->addFlash('success', 'Votre étiquette d\'article a été modifiée');
+            return $this->redirectToRoute('admin_article_tag_index');
         }
 
         return $this->render('article_tag/edit.html.twig', [
@@ -87,8 +87,9 @@ class AdminArticleTagController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($articleTag);
             $entityManager->flush();
+            $this->addFlash('danger', 'Votre étiquette d\'article de blog a été supprimée');
         }
 
-        return $this->redirectToRoute('article_tag_index');
+        return $this->redirectToRoute('admin_article_tag_index');
     }
 }

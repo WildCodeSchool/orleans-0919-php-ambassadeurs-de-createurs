@@ -32,4 +32,14 @@ class BlogController extends AbstractController
             'nbPages' => ceil($nbArticles / self::NB_MAX_ARTICLES),
         ]);
     }
+
+    /**
+     * @Route("/{slug}", name="blog_show", methods={"GET"})
+     */
+    public function show(Blog $blog): Response
+    {
+        return $this->render('blog/show.html.twig', [
+            'blog' => $blog,
+        ]);
+    }
 }
