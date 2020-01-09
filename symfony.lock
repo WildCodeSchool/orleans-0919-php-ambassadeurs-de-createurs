@@ -111,6 +111,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "drewm/mailchimp-api": {
+        "version": "v2.5.4"
+    },
     "easycorp/easy-log-handler": {
         "version": "1.0",
         "recipe": {
