@@ -35,7 +35,6 @@ class ResettingController extends AbstractController
         UserRepository $userRepository,
         MailerInterface $mailer
     ) {
-        // création d'un formulaire "à la volée", afin que l'internaute puisse renseigner son mail
         $form = $this->createFormBuilder()
             ->add('email', EmailType::class, [
                 'constraints' => [
@@ -47,7 +46,6 @@ class ResettingController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $manager = $this->getDoctrine()->getManager();
             $user = $userRepository->findOneBy(['mail' => $form->getData()['email']]);
-            // aucun email associé à ce compte.
             if (!$user) {
                 $this->addFlash('warning', "Cet email n'existe pas.");
                 return $this->redirectToRoute("request_resetting");
@@ -69,7 +67,6 @@ class ResettingController extends AbstractController
                 ]));
 
             $mailer->send($email);
-            dd($email);
             $this->addFlash(
                 'success',
                 "Un mail va vous être envoyé
@@ -105,10 +102,6 @@ class ResettingController extends AbstractController
      */
     public function resetting(User $user, $token, Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        // interdit l'accès à la page si:
-        // le token associé au membre est null
-        // le token enregistré en base et le token présent dans l'url ne sont pas égaux
-        // le token date de plus de 10 minutes
         if ($user->getToken() === null
             || $token !== $user->getToken()
             || !$this->isRequestInTime($user->getPasswordRequestedAt())) {
@@ -123,8 +116,6 @@ class ResettingController extends AbstractController
             $encoded = $passwordEncoder->encodePassword($user, $password);
             $user->setPassword($encoded);
 
-
-            // réinitialisation du token à null pour qu'il ne soit plus réutilisable
             $user->setToken(null);
             $user->setPasswordRequestedAt(null);
 
