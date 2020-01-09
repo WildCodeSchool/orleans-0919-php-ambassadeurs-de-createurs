@@ -38,8 +38,8 @@ class AdminArticleTagController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($articleTag);
             $entityManager->flush();
-
-            return $this->redirectToRoute('article_tag_index');
+            $this->addFlash('success', 'Votre étiquette a été créée');
+            return $this->redirectToRoute('admin_article_tag_index');
         }
 
         return $this->render('article_tag/new.html.twig', [
