@@ -29,17 +29,15 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/new/{userId}", name="event_new", methods={"GET","POST"})
+     * @Route("/new/", name="event_new", methods={"GET","POST"})
      */
     public function new(
         Request $request,
         CoordinateService $coordinateService,
-        int $userId,
         UserRepository $userRepository
     ): Response {
-        $user = $userRepository->findOneBy(['id' => $userId]);
         $event = new Event();
-        $event->setUser($user);
+        $event->setUser($this->getUser());
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
@@ -54,7 +52,7 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_show', ['id' => $userId]);
+            return $this->redirectToRoute('user_show', ['id' => $this->getUser()]);
         }
 
         return $this->render('event/new.html.twig', [

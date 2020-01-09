@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Event;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -16,8 +18,13 @@ class EventType extends AbstractType
     {
         $builder
             ->add('place', TextType::class, ['label' => 'Localisation', 'trim' => true,])
-            ->add('dateTime', DateTimeType::class, ['label' => 'Date' ,'format' => 'Y-m-d H:i:s'])
-            ->add('description', TextareaType::class, ['label' => 'Description', 'trim' => true,]);
+            ->add('dateTime', DateTimeType::class, ['label' => 'Date', 'format' => 'Y-m-d H:i:s'])
+            ->add('description', TextareaType::class, ['label' => 'Description', 'trim' => true,])
+            ->add('brand_id', EntityType::class, [
+                'label' => 'Marque',
+                'class' => User::class,
+                'choice_label' => 'firstname',
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
