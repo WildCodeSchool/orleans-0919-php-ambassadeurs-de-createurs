@@ -81,7 +81,7 @@ class ResettingController extends AbstractController
         ]);
     }
 
-    // si supérieur à 10min, retourne false
+    // si supérieur à 24h, retourne false
     // sinon retourne false
     private function isRequestInTime(\DateTime $passwordRequestedAt = null)
     {
