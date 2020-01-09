@@ -57,7 +57,6 @@ class ResettingController extends AbstractController
             $user->setPasswordRequestedAt(new DateTime());
             $manager->flush();
 
-
             $email = (new Email())
                 ->from($this->getParameter('mailer_from'))
                 ->to($user->getMail())
