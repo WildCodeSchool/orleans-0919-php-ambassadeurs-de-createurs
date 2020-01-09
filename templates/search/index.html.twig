@@ -16,30 +16,30 @@
                         <img src="{{ user.picture }}" class="card-img-top" alt="image de {{ user.firstname }}">
                         <div class="card-body">
                             <div class="star mb-4">
-                            <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">
-                                <div class="col-md-1 col-sm-12 mt-2">
-                                    <span class="js-likes">{{ user.followers | length }}</span>
-                                    {% set class="far" %}
-                                    {% if app.user %}
-                                    {% for favorites in app.user.followedUsers %}
-                                        {% if user == favorites.userFavorite %}
-                                            {% set class="fas" %}
+                                <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">
+                                    <div class="col-md-1 col-sm-12 mt-2">
+                                        <span class="js-likes">{{ user.followers | length }}</span>
+                                        {% set class="far" %}
+                                        {% if app.user %}
+                                            {% for favorites in app.user.followedUsers %}
+                                                {% if user == favorites.userFavorite %}
+                                                    {% set class="fas" %}
+                                                {% endif %}
+                                            {% endfor %}
                                         {% endif %}
-                                    {% endfor %}
-                                    {% endif %}
-                                    <i class="{{ class }} fa-star ml-2"></i>
-                                </div>
-                            </a>
-                        </div>
-                        <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
-                        <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}
+                                        <i class="{{ class }} fa-star ml-2"></i>
+                                    </div>
+                                </a>
+                            </div>
+                            <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
+                            <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}
 
-                            {% if user.department.code is defined %}
-                            ({{ user.department.code }})
-                            {% endif %}</p>
+                                {% if user.department.code is defined %}
+                                    ({{ user.department.code }})
+                                {% endif %}</p>
 
-                        <hr>
-                        <p class="card-text">{{ user.dutiesToString }}</p>
+                            <hr>
+                            <p class="card-text">{{ user.dutiesToString }}</p>
                         </div>
                     </a>
                 </div>
@@ -52,7 +52,7 @@
         <div class="text-center">
             {% if page >= 2 %}
                 <a class="btn btn-gold mx-5 mb-5"
-                   href="{{ path('search_role', {'role': role, 'page': page-1}|merge(app.request.query.all))}}">
+                   href="{{ path('search_role', {'role': role, 'page': page-1}|merge(app.request.query.all)) }}">
                     <i class="far fa-arrow-alt-circle-left"></i> Précédent
                 </a>
             {% else %}
@@ -62,14 +62,14 @@
             {% endif %}
 
             {% if page < nbPages %}
-            <a class="btn btn-gold mx-5 mb-5"
-               href="{{ path('search_role', {'role': role, 'page': page+1}|merge(app.request.query.all)) }}">
-                Suivant <i class="far fa-arrow-alt-circle-right"></i>
-            </a>
+                <a class="btn btn-gold mx-5 mb-5"
+                   href="{{ path('search_role', {'role': role, 'page': page+1}|merge(app.request.query.all)) }}">
+                    Suivant <i class="far fa-arrow-alt-circle-right"></i>
+                </a>
             {% else %}
-            <a class="btn btn-inactive mx-5 mb-5">
-                Suivant <i class="far fa-arrow-alt-circle-right"></i>
-            </a>
+                <a class="btn btn-inactive mx-5 mb-5">
+                    Suivant <i class="far fa-arrow-alt-circle-right"></i>
+                </a>
             {% endif %}
         </div>
     </div>
