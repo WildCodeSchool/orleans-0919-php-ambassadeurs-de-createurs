@@ -81,11 +81,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function findByRoles(string $roles): array
     {
-        $query = $this->createQueryBuilder('r')
-            ->select('u')
-            ->from(User::class, 'u')
+        $query = $this->createQueryBuilder('u')
+            ->select(['u', 'b', 'c', 'd', 'e', 'fd', 'fr', 'du'])
+            ->leftjoin('u.brand', 'b')
+            ->leftjoin('u.categories', 'c')
+            ->leftjoin('u.department', 'd')
+            ->leftjoin('u.events', 'e')
+            ->leftjoin('u.followedUsers', 'fd')
+            ->leftjoin('u.followers', 'fr')
+            ->leftjoin('u.duties', 'du')
             ->where('u.roles LIKE :roles')
-            ->setParameter('roles', '%' . $roles . '%');
-        return $query->getQuery()->getResult();
+            ->setParameter('roles', '%' . $roles . '%')
+            ->getQuery();
+        return $query->getResult();
     }
 }
