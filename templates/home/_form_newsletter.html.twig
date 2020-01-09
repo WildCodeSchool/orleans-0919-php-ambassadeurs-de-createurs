@@ -1,0 +1,8 @@
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+
+<div class="flex d-flex justify-content-around">
+    <button class="btn btn-gold mb-4">{{ button_label|default('S\'inscrire') }}</button>
+</div>
+{{ form_end(form) }}
