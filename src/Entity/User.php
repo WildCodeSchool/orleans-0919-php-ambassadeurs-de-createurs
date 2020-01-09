@@ -135,6 +135,11 @@ class User implements UserInterface
      */
     private $brand;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $chosenCreator = false;
+
     public function __construct()
     {
         $this->duties = new ArrayCollection();
@@ -517,5 +522,17 @@ class User implements UserInterface
             $dutyNames[] = $duty->getName();
         }
         return implode(' et ', $dutyNames);
+    }
+
+    public function getChosenCreator(): ?bool
+    {
+        return $this->chosenCreator;
+    }
+
+    public function setChosenCreator(bool $chosenCreator): self
+    {
+        $this->chosenCreator = $chosenCreator;
+
+        return $this;
     }
 }

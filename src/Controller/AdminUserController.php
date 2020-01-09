@@ -47,17 +47,29 @@ class AdminUserController extends AbstractController
     /**
      * @Route("/{id}/edit", name="admin_user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user, CoordinateService $coordinateService): Response
-    {
+    public function edit(
+        Request $request,
+        User $user,
+        CoordinateService $coordinateService,
+        UserRepository $userRepository
+    ): Response {
+
+        $users = $userRepository->findBy(['chosenCreator' => true]);
+
         $form = $this->createForm(UserInscriptionType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $city = $request->request->get('user')['city'];
             $coordinates = $coordinateService->getCoordinates($city);
+
             if (!is_null($coordinates)) {
                 $user->setLatitude($coordinates[0]);
                 $user->setLongitude($coordinates[1]);
+            }
+            if (array_count_values($users) > 6) {
+                $user->setChosenCreator(false);
+                $this->addFlash('danger', '6 Créateurs ont déjà été choisis');
             }
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();
