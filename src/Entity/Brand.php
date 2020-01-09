@@ -78,16 +78,16 @@ class Brand
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="brand")
      */
-    private $events;
+    private $sponsoredEvents;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $sellDescription;
-  
+
     public function __construct()
     {
-        $this->events = new ArrayCollection();
+        $this->sponsoredEvents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -182,25 +182,25 @@ class Brand
     /**
      * @return Collection|Event[]
      */
-    public function getEvents(): Collection
+    public function getsponsoredEvents(): Collection
     {
-        return $this->events;
+        return $this->sponsoredEvents;
     }
 
-    public function addEvent(Event $event): self
+    public function addEventSponsored(Event $event): self
     {
-        if (!$this->events->contains($event)) {
-            $this->events[] = $event;
+        if (!$this->sponsoredEvents->contains($event)) {
+            $this->sponsoredEvents[] = $event;
             $event->setBrand($this);
         }
 
         return $this;
     }
 
-    public function removeEvent(Event $event): self
+    public function removeEventSponsored(Event $event): self
     {
-        if ($this->events->contains($event)) {
-            $this->events->removeElement($event);
+        if ($this->sponsoredEvents->contains($event)) {
+            $this->sponsoredEvents->removeElement($event);
             // set the owning side to null (unless already changed)
             if ($event->getBrand() === $this) {
                 $event->setBrand(null);

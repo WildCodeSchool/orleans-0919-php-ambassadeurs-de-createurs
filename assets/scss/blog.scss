@@ -16,6 +16,10 @@
 .profile-card-5 {
     font-size: $font-size-body;
     font-weight: 300;
+
+    &:hover {
+        box-shadow: none;
+    }
 }
 
 .profile-card-5 .btn-primary {
