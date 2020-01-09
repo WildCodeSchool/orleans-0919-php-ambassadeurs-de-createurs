@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ArticleTag{% endblock %}
+
+{% block body %}
+    <h1>Edit ArticleTag</h1>
+
+    {{ include('article_tag/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('article_tag_index') }}">back to list</a>
+
+    {{ include('article_tag/_delete_form.html.twig') }}
+{% endblock %}
