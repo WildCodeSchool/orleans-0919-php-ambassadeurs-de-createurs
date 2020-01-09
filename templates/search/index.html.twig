@@ -16,12 +16,20 @@
                         <img src="{{ user.picture }}" class="card-img-top" alt="image de {{ user.firstname }}">
                         <div class="card-body">
                             <div class="star mb-4">
-                                <p class="m-0">100</p><i class="fas fa-star ml-2"></i>
-                            </div>
-                            <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
-                            <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }} ({{ user.department.code }})</p>
-                            <hr>
-                            <p class="card-text">{{ user.dutiesToString }}</p>
+                            <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">
+                                <div class="col-md-1 col-sm-12 mt-2">
+                                    <span class="js-likes">{{ user.followers | length }}</span>
+                                    {% set class="far" %}
+                                    {% if app.user %}
+                                    {% for favorites in app.user.followedUsers %}
+                                        {% if user == favorites.userFavorite %}
+                                            {% set class="fas" %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+                                    <i class="{{ class }} fa-star ml-2"></i>
+                                </div>
+                            </a>
                         </div>
                         <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
                         <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}
@@ -32,7 +40,7 @@
 
                         <hr>
                         <p class="card-text">{{ user.dutiesToString }}</p>
-                    </div>
+                        </div>
                     </a>
                 </div>
             {% endfor %}
@@ -65,4 +73,9 @@
             {% endif %}
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('favorite') }}
 {% endblock %}

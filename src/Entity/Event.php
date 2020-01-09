@@ -42,6 +42,12 @@ class Event
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Brand", inversedBy="sponsoredEvents")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $brand;
+
+    /**
      * @Assert\Type(type="float")
      * @ORM\Column(type="float", nullable=true)
      */
@@ -102,6 +108,18 @@ class Event
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getBrand(): ?Brand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(?Brand $brand): self
+    {
+        $this->brand = $brand;
 
         return $this;
     }

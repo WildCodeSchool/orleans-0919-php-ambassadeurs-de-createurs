@@ -64,6 +64,12 @@ class Blog
      */
     private $content;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ArticleTag", inversedBy="blogs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $articleTag;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -113,6 +119,18 @@ class Blog
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getArticleTag(): ?ArticleTag
+    {
+        return $this->articleTag;
+    }
+
+    public function setArticleTag(?ArticleTag $articleTag): self
+    {
+        $this->articleTag = $articleTag;
 
         return $this;
     }

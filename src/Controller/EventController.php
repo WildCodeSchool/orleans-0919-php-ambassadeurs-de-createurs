@@ -29,7 +29,7 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/new/", name="event_new", methods={"GET","POST"})
+     * @Route("/new", name="event_new", methods={"GET","POST"})
      */
     public function new(
         Request $request,
@@ -51,7 +51,7 @@ class EventController extends AbstractController
             }
             $entityManager->persist($event);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Votre événement a été créé');
             return $this->redirectToRoute('user_show', ['id' => $this->getUser()]);
         }
 
@@ -89,7 +89,7 @@ class EventController extends AbstractController
             }
             $entityManager->persist($event);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Votre événement a été mofifié');
             return $this->redirectToRoute('event_index');
         }
 
@@ -108,6 +108,7 @@ class EventController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($event);
             $entityManager->flush();
+            $this->addFlash('danger', 'Votre événement a été supprimé');
         }
 
         return $this->redirectToRoute('event_index');
