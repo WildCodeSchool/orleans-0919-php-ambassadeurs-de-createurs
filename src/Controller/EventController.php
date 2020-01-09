@@ -52,7 +52,7 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
             $this->addFlash('success', 'Votre événement a été créé');
-            return $this->redirectToRoute('user_show', ['id' => $this->getUser()]);
+            return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
         }
 
         return $this->render('event/new.html.twig', [

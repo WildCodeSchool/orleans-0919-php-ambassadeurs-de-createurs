@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
+use App\Entity\Brand;
 use App\Entity\Event;
-use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -20,10 +20,10 @@ class EventType extends AbstractType
             ->add('place', TextType::class, ['label' => 'Localisation', 'trim' => true,])
             ->add('dateTime', DateTimeType::class, ['label' => 'Date', 'format' => 'Y-m-d H:i:s'])
             ->add('description', TextareaType::class, ['label' => 'Description', 'trim' => true,])
-            ->add('brand_id', EntityType::class, [
+            ->add('brand', EntityType::class, [
                 'label' => 'Marque',
-                'class' => User::class,
-                'choice_label' => 'firstname',
+                'class' => Brand::class,
+                'choice_label' => 'name',
                 ]);
     }
 
