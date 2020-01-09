@@ -7,17 +7,23 @@ div.carousel-caption {
     color: $secondary-color;
 }
 
-div.greyBack {
-    width: 100%;
-    background-color: $background-primary;
+div.searchBg {
+    background-color: white;
 }
 
 div.buttonRole {
     width: 40vw;
+    margin-bottom: 20px;
 }
 
 div.buttonRole a.btn {
-    font-size: $font-size-body;
+    font-size: 1.5rem;
+    font-family: $font-title;
+
+    &:hover {
+        background-color: lighten($primary-color, 5);
+
+    }
 }
 
 div.ambassador {
