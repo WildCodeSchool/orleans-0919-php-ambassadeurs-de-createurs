@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Validator\Constraint;
 use App\Form\ResettingType;
 use App\Repository\UserRepository;
@@ -11,9 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
-use App\Service\Mailer;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
-use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -30,15 +30,14 @@ class ResettingController extends AbstractController
      */
     public function request(
         Request $request,
-        Mailer $mailer,
         TokenGeneratorInterface $tokenGenerator,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        MailerInterface $mailer
     ) {
         // création d'un formulaire "à la volée", afin que l'internaute puisse renseigner son mail
         $form = $this->createFormBuilder()
             ->add('email', EmailType::class, [
                 'constraints' => [
-                    new Email(),
                     new NotBlank()
                 ]])
             ->getForm();
@@ -59,16 +58,17 @@ class ResettingController extends AbstractController
             $user->setPasswordRequestedAt(new DateTime());
             $manager->flush();
 
-            // on utilise le service Mailer créé précédemment
-            $bodyMail = $mailer->createBodyMail('resetting/mail.html.twig', [
-                'user' => $user
-            ]);
-            $mailer->sendMessage(
-                'from@email.com',
-                $user->getMail(),
-                'renouvellement du mot de passe',
-                $bodyMail
-            );
+
+            $email = (new Email())
+                ->from($this->getParameter('mailer_from'))
+                ->to($user->getMail())
+                ->subject('Réinitialisation mot de passe')
+                ->html($this->renderView('resetting/mail.html.twig', [
+                    'user' => $user
+                ]));
+
+            $mailer->send($email);
+
             $this->addFlash(
                 'success',
                 "Un mail va vous être envoyé
