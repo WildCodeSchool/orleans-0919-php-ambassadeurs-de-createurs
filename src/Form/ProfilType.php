@@ -7,6 +7,9 @@ use App\Entity\Department;
 use App\Entity\Duty;
 use App\Entity\User;
 use App\Entity\Category;
+use App\Repository\CategoryRepository;
+use App\Repository\DepartmentRepository;
+use App\Repository\DutyRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -42,6 +45,10 @@ class ProfilType extends UserInscriptionType
             'label' => 'Département',
             'class' => Department::class,
             'choice_label' => 'codeName',
+            'query_builder' => function (DepartmentRepository $departmentRepository) {
+                return $departmentRepository->createQueryBuilder('d')
+                    ->orderBy('d.code', 'ASC');
+            },
         ]);
         $builder->add('duties', EntityType::class, [
             'label' => 'Préférences',
@@ -49,6 +56,10 @@ class ProfilType extends UserInscriptionType
             'choice_label' => 'name',
             'expanded' => true,
             'multiple' => true,
+            'query_builder' => function (DutyRepository $dutyRepository) {
+                return $dutyRepository->createQueryBuilder('d')
+                    ->orderBy('d.name', 'ASC');
+            },
         ]);
         $builder->add('categories', EntityType::class, [
             'label' => 'Univers',
@@ -57,6 +68,10 @@ class ProfilType extends UserInscriptionType
             'multiple' => true,
             'expanded' => true,
             'by_reference' => false,
+            'query_builder' => function (CategoryRepository $categoryRepository) {
+                return $categoryRepository->createQueryBuilder('c')
+                    ->orderBy('c.description', 'ASC');
+            },
         ]);
     }
 

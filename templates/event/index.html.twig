@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout_admin.html.twig' %}
 
 {% block title %}Event index{% endblock %}
 
@@ -12,6 +12,7 @@
             <th>Place</th>
             <th>DateTime</th>
             <th>Description</th>
+            <th>User</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ event.place }}</td>
                 <td>{{ event.dateTime ? event.dateTime|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ event.description }}</td>
+                <td>{{ event.user.firstname }}</td>
                 <td>
                     <a href="{{ path('event_show', {'id': event.id}) }}">show</a>
                     <a href="{{ path('event_edit', {'id': event.id}) }}">edit</a>
@@ -34,6 +36,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('event_new') }}">Create new</a>
 {% endblock %}
