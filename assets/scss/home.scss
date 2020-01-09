@@ -19,6 +19,7 @@ div.buttonRole {
 div.buttonRole a.btn {
     font-size: 1.5rem;
     font-family: $font-title;
+    width: 50%;
 
     &:hover {
         background-color: lighten($primary-color, 5);
