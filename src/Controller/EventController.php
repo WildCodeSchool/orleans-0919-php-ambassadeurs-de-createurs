@@ -6,6 +6,7 @@ use App\Entity\Event;
 use App\Entity\User;
 use App\Form\EventType;
 use App\Repository\EventRepository;
+use App\Repository\UserRepository;
 use App\Service\CoordinateService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,11 +31,13 @@ class EventController extends AbstractController
     /**
      * @Route("/new", name="event_new", methods={"GET","POST"})
      */
-    public function new(Request $request, CoordinateService $coordinateService): Response
-    {
-
+    public function new(
+        Request $request,
+        CoordinateService $coordinateService,
+        UserRepository $userRepository
+    ): Response {
         $event = new Event();
-
+        $event->setUser($this->getUser());
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
@@ -48,8 +51,8 @@ class EventController extends AbstractController
             }
             $entityManager->persist($event);
             $entityManager->flush();
-
-            return $this->redirectToRoute('event_index');
+            $this->addFlash('success', 'Votre événement a été créé');
+            return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
         }
 
         return $this->render('event/new.html.twig', [
@@ -86,7 +89,7 @@ class EventController extends AbstractController
             }
             $entityManager->persist($event);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Votre événement a été mofifié');
             return $this->redirectToRoute('event_index');
         }
 
@@ -101,10 +104,11 @@ class EventController extends AbstractController
      */
     public function delete(Request $request, Event $event): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $event->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($event);
             $entityManager->flush();
+            $this->addFlash('danger', 'Votre événement a été supprimé');
         }
 
         return $this->redirectToRoute('event_index');

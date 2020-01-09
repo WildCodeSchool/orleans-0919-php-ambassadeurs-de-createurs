@@ -116,6 +116,16 @@ class User implements UserInterface
     private $urlFacebook;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="user")
+     */
+    private $followedUsers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="userFavorite")
+     */
+    private $followers;
+
+     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="user")
      */
     private $events;
@@ -141,6 +151,8 @@ class User implements UserInterface
     {
         $this->duties = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->followers = new ArrayCollection();
+        $this->followedUsers = new ArrayCollection();
         $this->events = new ArrayCollection();
     }
 
@@ -395,7 +407,6 @@ class User implements UserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
 
@@ -410,7 +421,6 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -488,6 +498,22 @@ class User implements UserInterface
         return $role;
     }
 
+    /**
+     * @return Collection|Favorite[]
+     */
+    public function getFollowers(): Collection
+    {
+        return $this->followers;
+    }
+
+    public function addFollower(Favorite $follower): self
+    {
+        if (!$this->followers->contains($follower)) {
+            $this->followers[] = $follower;
+            $follower->setUser($this);
+        }
+    }
+  
     public function getLatitude(): ?float
     {
         return $this->latitude;
@@ -497,6 +523,47 @@ class User implements UserInterface
     {
         $this->latitude = $latitude;
 
+        return $this;
+    }
+
+    public function removeFollower(Favorite $follower): self
+    {
+        if ($this->followers->contains($follower)) {
+            $this->followers->removeElement($follower);
+            // set the owning side to null (unless already changed)
+            if ($follower->getUser() === $this) {
+                $follower->setUser(null);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|Favorite[]
+     */
+    public function getFollowedUsers(): Collection
+    {
+        return $this->followedUsers;
+    }
+
+    public function addFollowedUser(Favorite $followedUser): self
+    {
+        if (!$this->followedUsers->contains($followedUser)) {
+            $this->followedUsers[] = $followedUser;
+            $followedUser->setUserFavorite($this);
+        }
+        return $this;
+    }
+
+    public function removeFollowedUser(Favorite $followedUser): self
+    {
+        if ($this->followedUsers->contains($followedUser)) {
+            $this->followedUsers->removeElement($followedUser);
+            // set the owning side to null (unless already changed)
+            if ($followedUser->getUserFavorite() === $this) {
+                $followedUser->setUserFavorite(null);
+            }
+        }
         return $this;
     }
 
