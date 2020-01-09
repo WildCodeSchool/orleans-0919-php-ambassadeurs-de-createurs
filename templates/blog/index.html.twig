@@ -20,13 +20,13 @@
                         </div>
                         <div class="col-md-5 card profile-card-5 firstblog">
                             <div class="card-body">
-                                <h3 class="card-title firstArticleTitle mt-3">{{ article.title }}</h3>
-                                <p class=" text-left mt-3 textdate">
-                                    {{ article.date|localizeddate('short', 'none') }} -
-                                    <span class="badge badge-pill badge-gold">{{ article.articleTag.tag }}</span>
+                                <p class=" text-left my-4 textdate">
+                                    {{ blog.date|localizeddate('short', 'none') }} -
+                                    <span class="badge badge-pill badge-gold">{{ blog.articleTag.tag }}</span>
                                 </p>
-                                <p class="textFirstArticle mt-5">{{ article.content|truncate(200,true)|raw }}</p>
-                                <a href="#" class="btn btn-gold mt-5">Voir l'article</a>
+                                <h3 class="card-title firstArticleTitle mt-3">{{ blog.title }}</h3>
+                                <p class="textFirstArticle mt-4">{{ blog.content|truncate(200,true)|raw }}</p>
+                                <a href="{{ path('blog_show', {'slug': blog.slug}) }}" class="btn btn-gold mt-5">Voir l'article</a>
                             </div>
                         </div>
                         <h2 class="col offset-2 mb-5">Nos articles</h2>
@@ -40,13 +40,13 @@
                         </div>
                         <div class="card profile-card-5 card-block">
                             <div class="card-body">
-                                <h5 class="card-title">{{ article.title }}</h5>
                                 <p class=" text-left mt-3 textdate">
                                     {{ article.date|localizeddate('short', 'none') }} -
                                     <span class="badge badge-pill badge-gold">{{ article.articleTag.tag }}</span>
                                 </p>
-                                <p class="">{{ article.content|truncate(150,true)|raw }}</p>
-                                <a href="#" class="btn btn-gold">Voir l'article</a>
+                                <h5 class="card-title">{{ blog.title }}</h5>
+                                <p class="">{{ blog.content|truncate(150,true)|raw }}</p>
+                                <a href="{{ path('blog_show', {'slug': blog.slug}) }}" class="btn btn-gold">Voir l'article</a>
                             </div>
                         </div>
                     </div>
