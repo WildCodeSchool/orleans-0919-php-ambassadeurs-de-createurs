@@ -112,10 +112,15 @@ a.fb-ic-card:hover, .nav-link:hover {
     text-decoration: none;
 }
 
+a#ambassadors.nav-link, a#events.nav-link {
+    border-color: $background-primary;
+    border-bottom: none;
+}
+
 a#ambassadors.nav-link.active, a#events.nav-link.active {
     color: $primary-color;
     border-color: $secondary-color;
-    border-bottom: none;
+    background-color: darken($third-color, 10%);
 }
 
 div.row.reasons {
