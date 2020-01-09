@@ -81,33 +81,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function findByRoles(string $roles): array
     {
-//        $query = $this->createQueryBuilder('u')
-//            ->leftjoin('u.brand', 'b')
-//            ->leftjoin('u.categories', 'c')
-//            ->leftjoin('u.department', 'd')
-//            ->leftjoin('u.events', 'e')
-//            ->leftjoin('u.followedUsers', 'fd')
-//            ->leftjoin('u.followers', 'fr')
-//            ->leftjoin('u.duties', 'du')
-//            ->where('u.roles LIKE :roles')
-//            ->setParameter('roles', '%' . $roles . '%')
-//            ->getQuery();
-//        return $query->getResult();
-
-        $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery(
-            'SELECT u, b, c, d, e, fd, fr, du
-                   FROM App\Entity\User u
-                   LEFT JOIN u.brand b
-                   LEFT JOIN u.categories c
-                   LEFT JOIN u.department d
-                   LEFT JOIN u.events e
-                   LEFT JOIN u.followedUsers fd
-                   LEFT JOIN u.followers fr
-                   LEFT JOIN u.duties du
-                   WHERE u.roles LIKE :roles'
-        );
-        $query->setParameter('roles', '%' . $roles . '%');
-        return $query->execute();
+        $query = $this->createQueryBuilder('u')
+            ->select(['u', 'b', 'c', 'd', 'e', 'fd', 'fr', 'du'])
+            ->leftjoin('u.brand', 'b')
+            ->leftjoin('u.categories', 'c')
+            ->leftjoin('u.department', 'd')
+            ->leftjoin('u.events', 'e')
+            ->leftjoin('u.followedUsers', 'fd')
+            ->leftjoin('u.followers', 'fr')
+            ->leftjoin('u.duties', 'du')
+            ->where('u.roles LIKE :roles')
+            ->setParameter('roles', '%' . $roles . '%')
+            ->getQuery();
+        return $query->getResult();
     }
 }
