@@ -87,8 +87,9 @@ class AdminArticleTagController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($articleTag);
             $entityManager->flush();
+            $this->addFlash('danger', 'Votre étiquette d\'article de blog a été supprimée');
         }
 
-        return $this->redirectToRoute('article_tag_index');
+        return $this->redirectToRoute('admin_article_tag_index');
     }
 }
