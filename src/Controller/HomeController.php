@@ -16,7 +16,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class HomeController extends AbstractController
 {
     const NB_CARDS = 6;
-    const MAILCHIMP_API_KEY = '905d1d0295d910a79d373a54c81a7dd2-us4';
 
     /**
      * @Route("/", name="home_index")
@@ -41,7 +40,7 @@ class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $newsletterData = $form->getData();
 
-            $mailChimp = new MailChimp(self::MAILCHIMP_API_KEY);
+            $mailChimp = new MailChimp($this->getParameter('mailchimp_api_key'));
             $listId = $mailChimp->get('lists')['lists'][0]['id'];
 
             $mailChimp->post('lists/'.$listId.'/members', [
