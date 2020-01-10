@@ -9,14 +9,14 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Picture</th>
-                <th>City</th>
-                <th>Mail</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Image</th>
+                <th>Ville</th>
+                <th>Email</th>
                 <th>Role</th>
-                <th>Duties</th>
-                <th>Department</th>
+                <th>Préférences</th>
+                <th>Departement</th>
                 <th>Description</th>
                 <th>actions</th>
             </tr>
@@ -36,8 +36,16 @@
                         {{ duty.name }}
                     {% endfor %}
                 </td>
-                <td>{{ user.department.codeName }}</td>
-                <td>{{ user.description }}</td>
+                <td>
+                    {% if user.department.codeName is defined %}
+                    {{ user.department.codeName }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if user.description is defined %}
+                    {{ user.description }}
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-gold"><i class="far fa-eye mr-2"></i>Voir</a>
                     <a href="{{ path('admin_user_edit', {'id': user.id}) }}" class="btn btn-gold"><i class="fas fa-pencil-alt mr-2"></i>Modifier</a>
@@ -51,5 +59,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_new') }}">Create new</a>
+    <a href="{{ path('user_new') }}" class="btn btn-gold">Créer un utilisateur</a>
 {% endblock %}
