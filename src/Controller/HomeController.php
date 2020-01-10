@@ -38,22 +38,15 @@ class HomeController extends AbstractController
             ->getForm();
         $form->handleRequest($request);
 
-
-
-
         if ($form->isSubmitted() && $form->isValid()) {
             $newsletterData = $form->getData();
+
             $mailChimp = new MailChimp(self::MAILCHIMP_API_KEY);
             $listId = $mailChimp->get('lists')['lists'][0]['id'];
 
-//            $subscriber_hash = MailChimp::subscriberHash('figerw@aol.com');
-//            $mailChimp->delete("lists/$listId/members/$subscriber_hash");
-//            $subscriber_hash = MailChimp::subscriberHash('figerw@gmail.com');
-//            $mailChimp->delete("lists/$listId/members/$subscriber_hash");
-
             $mailChimp->post('lists/'.$listId.'/members', [
                 'email_address' => $newsletterData['mail'],
-                'merge_fields' => ['FNAME'=>$newsletterData['firstname'], 'LNAME'=>''],
+                'merge_fields' => ['FNAME'=>$newsletterData['firstname']],
                 'status' => 'subscribed',
             ]);
             if ($mailChimp->success()) {
@@ -63,27 +56,6 @@ class HomeController extends AbstractController
             }
             return $this->redirectToRoute('home_index');
         }
-
-        $ambassadors = $userRepository->findByRoles(User::ROLE_AMBASSADOR);
-        $ambassadorCards = array_slice($ambassadors, count($ambassadors)-self::NB_CARDS, self::NB_CARDS);
-
-//        $MailChimp = new MailChimp();
-//        $result = $MailChimp->get('lists');
-//        $list_id = $result['lists'][0]['id'];
-//        $result = $MailChimp->post("lists/$list_id/members", [
-//            'email_address' => 'sylvaindesousa@free.fr',
-//            'status'        => 'subscribed',
-//        ]);
-//        $subscriber_hash = MailChimp::subscriberHash('sylvaindesousa@free.fr');
-//        $MailChimp->delete("lists/$list_id/members/$subscriber_hash");
-//
-//        if ($MailChimp->success()) {
-//            var_dump($result, $list_id);
-//            die();
-//        } else {
-//            echo $MailChimp->getLastError();
-//        }
-
 
         $ambassadors = $userRepository->findByRoles(User::ROLE_AMBASSADOR);
         $ambassadorCards = array_slice($ambassadors, count($ambassadors)-self::NB_CARDS, self::NB_CARDS);
