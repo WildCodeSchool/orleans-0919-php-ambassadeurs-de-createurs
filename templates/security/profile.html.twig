@@ -70,6 +70,10 @@
                                 <p class="card-text event">{{ event.description }}</p>
                             </div>
                         </article>
+                        <a href="{{ path('event_edit', {'id': event.id}) }}">
+                            <button type="button" class="btn btn-gold">Modifier</button>
+                        </a>
+
                     </div>
                 {% endfor %}
             </div>
