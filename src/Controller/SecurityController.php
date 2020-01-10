@@ -61,10 +61,9 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $user->setRoles([$request->request->get('user')['role']]);
-            $city = $request->request->get('user')['city'];
-            $coordinates = $coordinateService->getCoordinates($city);
-            if (!is_null($coordinates)) {
+            $user->setRoles([$request->request->get('user_inscription')['role']]);
+            $coordinates = $coordinateService->getCoordinates($user->getCity());
+            if ($coordinates !== null) {
                 $user->setLatitude($coordinates[0]);
                 $user->setLongitude($coordinates[1]);
             }
