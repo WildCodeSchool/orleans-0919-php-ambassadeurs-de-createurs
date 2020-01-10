@@ -8,25 +8,25 @@
         <p class="text-center m-5 firstSentence">Rencontres, news, outils, tout ce dont vous avez besoin pour vous
             lancer dans la vente privée à domicile ...</p>
         <div class="row justify-content-center m-0">
-            {% for blog in blogs|slice(0,9) %}
+            {% for article in articles|slice(0,9) %}
                 {% if loop.first %}
-                    <h2 class="col offset-1 oneArticle">A la une</h2>
+                    <h2 class="col offset-1 oneArticle">À la une</h2>
                     <div class="row justify-content-center">
                         <div class="col-md-5 card-img-block">
                             <div class="card-img-block-top">
                                 <img class="card-img-top " src="http://placeimg.com/640/360/any"
-                                     alt="image de l'article {{ blog.title }}">
+                                     alt="image de l'article {{ article.title }}">
                             </div>
                         </div>
                         <div class="col-md-5 card profile-card-5 firstblog">
                             <div class="card-body">
-                                <h3 class="card-title firstArticleTitle mt-3">{{ blog.title }}</h3>
-                                <p class=" text-left mt-3 textdate">
-                                    {{ blog.date|localizeddate('short', 'none') }} -
-                                    <span class="badge badge-pill badge-gold">{{ blog.articleTag.tag }}</span>
+                                <p class=" text-left my-4 textdate">
+                                    {{ article.date|localizeddate('short', 'none') }} -
+                                    <span class="badge badge-pill badge-gold">{{ article.articleTag.tag }}</span>
                                 </p>
-                                <p class="textFirstArticle mt-5">{{ blog.content|truncate(200,true)|raw }}</p>
-                                <a href="#" class="btn btn-gold mt-5">Voir l'article</a>
+                                <h3 class="card-title firstArticleTitle mt-3">{{ article.title }}</h3>
+                                <p class="textFirstArticle mt-4">{{ article.content|truncate(200,true)|raw }}</p>
+                                <a href="{{ path('blog_show', {'slug': article.slug}) }}" class="btn btn-gold mt-5">Voir l'article</a>
                             </div>
                         </div>
                         <h2 class="col offset-2 mb-5">Nos articles</h2>
@@ -36,22 +36,46 @@
                     <div class="col-md-4 m-4 mb-5">
                         <div class="card-img-block">
                             <img class="card-img-top" src="http://placeimg.com/640/360/any"
-                                 alt="image de l'article {{ blog.title }}">
+                                 alt="image de l'article {{ article.title }}">
                         </div>
                         <div class="card profile-card-5 card-block">
                             <div class="card-body">
-                                <h5 class="card-title">{{ blog.title }}</h5>
                                 <p class=" text-left mt-3 textdate">
-                                    {{ blog.date|localizeddate('short', 'none') }} -
-                                    <span class="badge badge-pill badge-gold">{{ blog.articleTag.tag }}</span>
+                                    {{ article.date|localizeddate('short', 'none') }} -
+                                    <span class="badge badge-pill badge-gold">{{ article.articleTag.tag }}</span>
                                 </p>
-                                <p class="">{{ blog.content|truncate(150,true)|raw }}</p>
-                                <a href="#" class="btn btn-gold">Voir l'article</a>
+                                <h5 class="card-title">{{ article.title }}</h5>
+                                <p class="">{{ article.content|truncate(150,true)|raw }}</p>
+                                <a href="{{ path('blog_show', {'slug': article.slug}) }}" class="btn btn-gold">Voir l'article</a>
                             </div>
                         </div>
                     </div>
                 {% endif %}
             {% endfor %}
+        </div>
+        <div class="text-center">
+            <p class="m-3">Page : {{ page }}</p>
+        </div>
+        <div class="text-center">
+            {% if page >= 2 %}
+                <a class="btn btn-gold mx-5 mb-5" href="{{ path('blog_index', {'page': page-1})}}">
+                    <i class="far fa-arrow-alt-circle-left"></i> Précédent
+                </a>
+            {% else %}
+                <a class="btn btn-inactive mx-5 mb-5">
+                    <i class="far fa-arrow-alt-circle-left"></i> Précédent
+                </a>
+            {% endif %}
+
+            {% if page < nbPages %}
+                <a class="btn btn-gold mx-5 mb-5" href="{{ path('blog_index', {'page': page+1})}}">
+                    Suivant <i class="far fa-arrow-alt-circle-right"></i>
+                </a>
+            {% else %}
+                <a class="btn btn-inactive mx-5 mb-5">
+                    Suivant <i class="far fa-arrow-alt-circle-right"></i>
+                </a>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

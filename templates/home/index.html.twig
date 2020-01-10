@@ -16,7 +16,7 @@
         <div class="d-flex flex-column mt-5 mapTabs align-self-center">
             <ul class="nav nav-tabs nav-fill nav-justified">
                 <li class="nav-item">
-                    <a class="nav-link active"  id="events" href="#events">Prochaines ventes privées</a>
+                    <a class="nav-link active" id="events" href="#events">Prochaines ventes privées</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="ambassadors" href="#ambassadors">Ambassadeurs</a>
@@ -26,17 +26,19 @@
         </div>
     </div>
 
-    <div class="greyBack mt-5 mb-5">
-        <h2 class="ml-5 p-3">Je recherche : </h2>
+    <div class="searchBg my-5 p-5">
+        <h2 class="text-center p-3">Je recherche</h2>
         <div class="d-flex justify-content-around">
-            <div class="buttonRole">
-                <a class="btn btn-gold w-100 mb-4 mb-md-0" href="{{ path('search_role', {'role': 'ambassadeur', 'page': 1}) }}">Ambassadeur</a>
-                <h3 class="mt-3 mb-3 w-100 text-center d-none d-md-block">Un ambassadeur pour un créateur</h3>
+
+            <div class="buttonRole d-flex flex-column align-items-center">
+                <h3 class="mt-3 mb-3 text-center d-none d-md-block">Un ambassadeur pour un créateur</h3>
+                <a class="btn btn-gold mb-4" href="{{ path('search_role', {'role': 'ambassadeur', 'page': 1}) }}">Ambassadeurs</a>
+
             </div>
-            <div class="buttonRole">
-                <a class="btn btn-gold w-100 mb-4 mb-md-0"
-                   href="{{ path('search_role', {'role': 'createur', 'page': 1}) }}">Créateur</a>
-                <h3 class="mt-3 mb-3 w-100 text-center d-none d-md-block">Une marque, un style</h3>
+            <div class="buttonRole d-flex flex-column align-items-center">
+                <h3 class="mt-3 mb-3 text-center d-none d-md-block">Une marque, un style</h3>
+                <a class="btn btn-gold mb-4"
+                href="{{ path('search_role', {'role': 'createur', 'page': 1}) }}">Créateurs</a>
             </div>
         </div>
     </div>
@@ -48,20 +50,35 @@
                 {% for card in ambassadorCards %}
                     <div class="card mb-5 col-md-5 col-sm-12">
                         <a href="{{ path('user_show', {'id': card.id}) }}">
-                          <div class="row no-gutters">
-                            <div class="col-md-1 col-sm-12 mt-2">
-                                <i class="fas fa-star"></i>
-                                <p>100</p>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ card.firstname }}</h5>
-                                    {% if card.department.codeName is defined %}
-                                        <p class="card-text">J'habite dans le {{ card.department.codeName }}</p>
-                                    {% endif %}
-                                    <p class="card-text">
-                                        <small class="text-muted">Je suis un {{ card.roleLabel }}</small>
-                                    </p>
+                            <div class="row no-gutters">
+                                <div class="col-md-1 col-sm-12 mt-2">
+                                    <div class="star_home">
+                                        <a href="{{ path('search_like', {'id' : card.id}) }}"
+                                           class="btn btn-link js-like">
+                                            <div class="col-md-1 col-sm-12 mt-2">
+                                                <span class="js-likes">{{ card.followers | length }}</span>
+                                                {% set class="far" %}
+                                                {% if app.user %}
+                                                    {% for favorites in app.user.followedUsers %}
+                                                        {% if card == favorites.userFavorite %}
+                                                            {% set class="fas" %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <i class="{{ class }} fa-star ml-2"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ card.firstname }}</h5>
+                                        {% if card.department.codeName is defined %}
+                                            <p class="card-text">J'habite dans le {{ card.department.codeName }}</p>
+                                        {% endif %}
+                                        <p class="card-text">
+                                            <small class="text-muted">Je suis un {{ card.roleLabel }}</small>
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -143,4 +160,5 @@
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('map') }}
+    {{ encore_entry_script_tags('favorite') }}
 {% endblock %}

@@ -15,13 +15,31 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BlogController extends AbstractController
 {
+    const NB_MAX_ARTICLES = 7;
+
+
     /**
-     * @Route("/", name="blog_index", methods={"GET"})
+     * @Route("/{page}", name="blog_index", methods={"GET"}, requirements={"page" = "\d+"}, defaults={"page" = 1})
      */
-    public function index(BlogRepository $blogRepository): Response
+    public function index(BlogRepository $blogRepository, int $page): Response
     {
+        $nbArticles = count($blogRepository->findAllSortAndPage());
+        $articles = $blogRepository->findAllSortAndPage($page);
+
         return $this->render('blog/index.html.twig', [
-            'blogs' => $blogRepository->findBy([], ['date' => 'DESC']),
+            'articles' => $articles,
+            'page' => $page,
+            'nbPages' => ceil($nbArticles / self::NB_MAX_ARTICLES),
+        ]);
+    }
+
+    /**
+     * @Route("/{slug}", name="blog_show", methods={"GET"})
+     */
+    public function show(Blog $blog): Response
+    {
+        return $this->render('blog/show.html.twig', [
+            'blog' => $blog,
         ]);
     }
 }

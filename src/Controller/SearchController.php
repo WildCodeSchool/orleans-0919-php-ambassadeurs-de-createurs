@@ -73,11 +73,21 @@ class SearchController extends AbstractController
         }
 
         $user = $this->getUser();
+        $addFavorite = false;
 
-        $favorite = new Favorite();
-        $favorite->setUserFavorite($userToFollow);
-        $favorite->setUser($user);
-        $manager->persist($favorite);
+        foreach ($user->getFollowedUsers() as $favorite) {
+            if ($favorite->getUserFavorite() === $userToFollow) {
+                $manager->remove($favorite);
+                $addFavorite = true;
+            }
+        }
+
+        if (!$addFavorite) {
+            $favorite = new Favorite();
+            $favorite->setUserFavorite($userToFollow);
+            $favorite->setUser($user);
+            $manager->persist($favorite);
+        }
 
         $manager->flush();
 

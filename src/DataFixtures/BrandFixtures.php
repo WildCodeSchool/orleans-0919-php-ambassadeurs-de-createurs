@@ -16,7 +16,7 @@ class BrandFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
-        for ($i = 20; $i < 40; $i++) {
+        for ($i = 100; $i < 200; $i++) {
             $user = $this->getReference('user_' . $i);
             $brand = new Brand();
             $brand->setName($faker->name);

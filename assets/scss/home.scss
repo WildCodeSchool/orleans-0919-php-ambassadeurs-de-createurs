@@ -7,17 +7,24 @@ div.carousel-caption {
     color: $secondary-color;
 }
 
-div.greyBack {
-    width: 100%;
-    background-color: $background-primary;
+div.searchBg {
+    background-color: $third-color;
 }
 
 div.buttonRole {
     width: 40vw;
+    margin-bottom: 20px;
 }
 
 div.buttonRole a.btn {
-    font-size: $font-size-body;
+    font-size: 1.5rem;
+    font-family: $font-title;
+    width: 50%;
+
+    &:hover {
+        background-color: lighten($primary-color, 5);
+
+    }
 }
 
 div.ambassador {
@@ -112,10 +119,15 @@ a.fb-ic-card:hover, .nav-link:hover {
     text-decoration: none;
 }
 
+a#ambassadors.nav-link, a#events.nav-link {
+    border-color: $background-primary;
+    border-bottom: none;
+}
+
 a#ambassadors.nav-link.active, a#events.nav-link.active {
     color: $primary-color;
     border-color: $secondary-color;
-    border-bottom: none;
+    background-color: darken($third-color, 10%);
 }
 
 div.row.reasons {
@@ -136,6 +148,10 @@ div.row.reasons {
             text-align: center;
         }
     }
+}
+
+.star_home {
+    color: $primary-color;
 }
 
 @media screen and (min-width: 1000px) {

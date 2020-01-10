@@ -110,6 +110,7 @@ function mapEvents(amb, mar) {
             <p class="m-0 ml-3 popupText">Date : ${dateEvent.toLocaleDateString('fr-FR', optionsDate)}</p>
             <p class="m-0 ml-3 popupText">Heure : ${dateEvent.toLocaleTimeString('fr-FR', optionsTime)}</p>
             <p class="m-0 ml-3 popupText">Hôte : ${amb[i].firstname} ${amb[i].lastname}</p>
+            <p class="m-0 ml-3 popupText">Créateur : ${event.brand.name}</p>
             <p class="m-0 ml-3 popupText"> Univers : ${categories.join(', ')}</p>
             <div class="d-flex justify-content-around">
             <a class="fb-ic-card" href="/user/${amb[i].id}">
