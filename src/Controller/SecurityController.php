@@ -92,7 +92,18 @@ class SecurityController extends AbstractController
     /**
      * @Route("/profil", name="app_profile")
      */
-    public function profile(Request $request) :Response
+    public function profile() :Response
+    {
+        $user = $this->getUser();
+        return $this->render('security/profile.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * @Route("/profil/modification", name="app_profileEdit")
+     */
+    public function editProfile(Request $request) :Response
     {
         $user = $this->getUser();
         $form = $this->createForm(ProfilType::class, $user);
@@ -104,7 +115,7 @@ class SecurityController extends AbstractController
             $this->addFlash('success', 'Votre profil a été modifié.');
             return $this->redirectToRoute('app_profile');
         }
-        return $this->render('security/profile.html.twig', [
+        return $this->render('security/editProfile.html.twig', [
             'form' => $form->createView(),
             'user' => $user,
         ]);
