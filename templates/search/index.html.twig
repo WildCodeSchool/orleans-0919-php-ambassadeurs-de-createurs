@@ -31,6 +31,7 @@
                                     </div>
                                 </a>
                             </div>
+
                             <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
                             <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}
 
@@ -39,6 +40,9 @@
                                 {% endif %}</p>
 
                             <hr>
+                            {% if user.roleLabel == 'Créateur' %}
+                                <p>Recherche un :</p>
+                            {% endif %}
                             <p class="card-text">{{ user.dutiesToString }}</p>
                         </div>
                     </a>
