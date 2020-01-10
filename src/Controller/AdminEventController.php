@@ -14,10 +14,19 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/event")
+ * @Route("admin/event")
  */
-class EventController extends AbstractController
+class AdminEventController extends AbstractController
 {
+    /**
+     * @Route("/", name="event_index", methods={"GET"})
+     */
+    public function index(EventRepository $eventRepository): Response
+    {
+        return $this->render('event/index.html.twig', [
+            'events' => $eventRepository->findAll(),
+        ]);
+    }
 
     /**
      * @Route("/new", name="event_new", methods={"GET","POST"})
@@ -52,6 +61,15 @@ class EventController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{id}", name="event_show", methods={"GET"})
+     */
+    public function show(Event $event): Response
+    {
+        return $this->render('event/show.html.twig', [
+            'event' => $event,
+        ]);
+    }
 
     /**
      * @Route("/{id}/edit", name="event_edit", methods={"GET","POST"})
@@ -80,6 +98,7 @@ class EventController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     /**
      * @Route("/{id}", name="event_delete", methods={"DELETE"})
      */
