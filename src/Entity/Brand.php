@@ -78,6 +78,7 @@ class Brand
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="brand")
      */
+
     private $sponsoredEvents;
 
     /**
@@ -186,17 +187,14 @@ class Brand
     {
         return $this->sponsoredEvents;
     }
-
     public function addEventSponsored(Event $event): self
     {
         if (!$this->sponsoredEvents->contains($event)) {
             $this->sponsoredEvents[] = $event;
             $event->setBrand($this);
         }
-
         return $this;
     }
-
     public function removeEventSponsored(Event $event): self
     {
         if ($this->sponsoredEvents->contains($event)) {
@@ -207,16 +205,13 @@ class Brand
             }
         }
     }
-
     public function getSellDescription(): ?string
     {
         return $this->sellDescription;
     }
-
     public function setSellDescription(?string $sellDescription): self
     {
         $this->sellDescription = $sellDescription;
-
         return $this;
     }
 }

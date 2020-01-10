@@ -13,6 +13,10 @@
                 <td class="text-center">{{ blog.title }}</td>
             </tr>
             <tr>
+                <th>Étiquette</th>
+                <td class="text-center">{{ blog.articleTag.tag }}</td>
+            </tr>
+            <tr>
                 <th>Contenu</th>
                 <td>{{ blog.content|raw }}</td>
             </tr>

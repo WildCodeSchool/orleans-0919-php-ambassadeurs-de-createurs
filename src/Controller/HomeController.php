@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\User;
@@ -12,9 +11,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class HomeController extends AbstractController
 {
-
     const NB_CARDS = 6;
-
     /**
      * @Route("/", name="home_index")
      * @param UserRepository $userRepository
@@ -23,15 +20,12 @@ class HomeController extends AbstractController
      */
     public function index(UserRepository $userRepository, SerializerInterface $serializer): Response
     {
-
         $ambassadors = $userRepository->findByRoles(User::ROLE_AMBASSADOR);
         $ambassadorCards = array_slice($ambassadors, count($ambassadors)-self::NB_CARDS, self::NB_CARDS);
-
         $context = [
             AbstractNormalizer::IGNORED_ATTRIBUTES => ['users', 'user', 'sponsoredEvents', 'userFavorite'],
         ];
         $ambassadorsJson = $serializer->serialize($ambassadors, 'json', $context);
-
         return $this->render('/home/index.html.twig', [
             'ambassadors' => $ambassadorsJson,
             'ambassadorCards' => $ambassadorCards,

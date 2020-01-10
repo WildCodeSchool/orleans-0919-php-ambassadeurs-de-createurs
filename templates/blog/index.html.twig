@@ -9,7 +9,7 @@
             lancer dans la vente privée à domicile ...</p>
         <div class="row justify-content-center m-0">
             {% for article in articles|slice(0,9) %}
-                {% if loop.first %}
+                {% if loop.first and page == 1 %}
                     <h2 class="col offset-1 oneArticle">À la une</h2>
                     <div class="row justify-content-center">
                         <div class="col-md-5 card-img-block">
