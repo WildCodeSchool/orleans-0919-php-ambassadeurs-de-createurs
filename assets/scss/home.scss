@@ -154,6 +154,23 @@ div.row.reasons {
     color: $primary-color;
 }
 
+.mailIcon {
+    font-size: $font-size-icon;
+    color: $third-color;
+}
+
+.mailIcon:hover {
+    color: $secondary-color;
+}
+
+button.flex.d-flex.flex-column.btn.btn-gold.mb-4 {
+    font-size: $font-size-body;
+}
+
+button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
+    color: $secondary-color;
+}
+
 @media screen and (min-width: 1000px) {
 
     div.card.mb-5 {

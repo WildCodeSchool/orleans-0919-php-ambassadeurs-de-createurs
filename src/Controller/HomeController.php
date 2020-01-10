@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use \DrewM\MailChimp\MailChimp;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class HomeController extends AbstractController
 {
@@ -28,6 +29,10 @@ class HomeController extends AbstractController
     public function index(Request $request, UserRepository $userRepository, SerializerInterface $serializer): Response
     {
         $form = $this->createFormBuilder()
+            ->add('firstname', TextType::class, [
+                'label' => 'Prénom',
+                'attr' => ['placeholder' => 'John'],
+            ])
             ->add('mail', EmailType::class, [
                 'label' => 'E-mail',
                 'attr' => ['placeholder' => 'exemple@mail.fr'],
@@ -35,12 +40,22 @@ class HomeController extends AbstractController
             ->getForm();
         $form->handleRequest($request);
 
+
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             $newsletterData = $form->getData();
             $mailChimp = new MailChimp(self::MAILCHIMP_API_KEY);
             $listId = $mailChimp->get('lists')['lists'][0]['id'];
+
+//            $subscriber_hash = MailChimp::subscriberHash('figerw@aol.com');
+//            $mailChimp->delete("lists/$listId/members/$subscriber_hash");
+//            $subscriber_hash = MailChimp::subscriberHash('figerw@gmail.com');
+//            $mailChimp->delete("lists/$listId/members/$subscriber_hash");
+
             $mailChimp->post('lists/'.$listId.'/members', [
                 'email_address' => $newsletterData['mail'],
+                'merge_fields' => ['FNAME'=>$newsletterData['firstname'], 'LNAME'=>''],
                 'status' => 'subscribed',
             ]);
             if ($mailChimp->success()) {

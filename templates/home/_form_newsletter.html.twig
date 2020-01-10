@@ -3,6 +3,9 @@
     {{ form_widget(form) }}
 
 <div class="flex d-flex justify-content-around">
-    <button class="btn btn-gold mb-4">{{ button_label|default('S\'inscrire') }}</button>
+    <button class="flex d-flex flex-column btn btn-gold mb-4">
+        <i class="far fa-envelope mailIcon align-self-center"></i>
+        {{ button_label|default('S\'inscrire') }}
+    </button>
 </div>
 {{ form_end(form) }}
