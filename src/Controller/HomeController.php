@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\User;
@@ -16,7 +15,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class HomeController extends AbstractController
 {
-
     const NB_CARDS = 6;
     const MAILCHIMP_API_KEY = '905d1d0295d910a79d373a54c81a7dd2-us4';
 
@@ -87,11 +85,12 @@ class HomeController extends AbstractController
 //        }
 
 
+        $ambassadors = $userRepository->findByRoles(User::ROLE_AMBASSADOR);
+        $ambassadorCards = array_slice($ambassadors, count($ambassadors)-self::NB_CARDS, self::NB_CARDS);
         $context = [
             AbstractNormalizer::IGNORED_ATTRIBUTES => ['users', 'user', 'sponsoredEvents', 'userFavorite'],
         ];
         $ambassadorsJson = $serializer->serialize($ambassadors, 'json', $context);
-
         return $this->render('/home/index.html.twig', [
             'ambassadors' => $ambassadorsJson,
             'ambassadorCards' => $ambassadorCards,

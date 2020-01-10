@@ -125,7 +125,7 @@ class User implements UserInterface
      */
     private $followers;
 
-     /**
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="user")
      */
     private $events;
@@ -146,6 +146,26 @@ class User implements UserInterface
      * @ORM\OneToOne(targetEntity="App\Entity\Brand", mappedBy="user", cascade={"remove", "remove"})
      */
     private $brand;
+
+    /**
+     * @Assert\NotBlank(groups={"registration"})
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true, options={"default": "CURRENT_TIMESTAMP"})
+     * @var \DateTime
+     */
+    private $passwordRequestedAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+
+    private $token;
 
     public function __construct()
     {
@@ -241,11 +261,11 @@ class User implements UserInterface
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getMail(): ?string
+    public function getMail(): string
     {
-        return $this->mail;
+        return $this->mail ?? '';
     }
 
     /**
@@ -513,7 +533,7 @@ class User implements UserInterface
             $follower->setUser($this);
         }
     }
-  
+
     public function getLatitude(): ?float
     {
         return $this->latitude;
@@ -586,5 +606,56 @@ class User implements UserInterface
             $dutyNames[] = $duty->getName();
         }
         return implode(' et ', $dutyNames);
+    }
+
+
+    /*
+     * Get passwordRequestedAt
+     */
+    public function getPasswordRequestedAt()
+    {
+        return $this->passwordRequestedAt;
+    }
+
+    /*
+     * Set passwordRequestedAt
+     */
+    public function setPasswordRequestedAt($passwordRequestedAt)
+    {
+        $this->passwordRequestedAt = $passwordRequestedAt;
+        return $this;
+    }
+
+    /*
+     * Get token
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /*
+     * Set token
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
     }
 }

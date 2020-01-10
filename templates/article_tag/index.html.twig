@@ -18,7 +18,7 @@
                 <tr>
                     <td><a href="{{ path('admin_article_tag_show', {'id': article_tag.id}) }}" class="titleForm">{{ article_tag.tag }}</a></td>
                     <td>
-                        <a href="{{ path('admin_article_tag_edit', {'id': article_tag.id}) }}" class="btn btn-gold">Modifier</a>
+                        <a href="{{ path('admin_article_tag_edit', {'id': article_tag.id}) }}" class="btn btn-gold"><i class="fas fa-pencil-alt mr-2"></i>Modifier</a>
                     </td>
                 </tr>
             {% else %}
