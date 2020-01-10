@@ -51,9 +51,11 @@
             <button type="button" class="btn btn-gold">Contacter cet Ambassadeur</button>
         </div>
         <div class="text-center m-3">
+            {% if is_granted('ROLE_AMBASSADOR') %}
             <a href="{{ path('event_new', {'userId': user.id}) }}">
                 <button type="button" class="btn btn-gold">Créer un événement</button>
             </a>
+            {% endif %}
         </div>
 
         <div>
