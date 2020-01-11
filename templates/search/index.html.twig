@@ -32,18 +32,22 @@
                                 </a>
                             </div>
 
-                            <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
-                            <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}
+                            <a href="{{ path('user_show', {'id': user.id}) }}">
+                                <div>
+                                    <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
+                                    <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}
 
-                                {% if user.department.code is defined %}
-                                    ({{ user.department.code }})
-                                {% endif %}</p>
+                                        {% if user.department.code is defined %}
+                                            ({{ user.department.code }})
+                                        {% endif %}</p>
 
-                            <hr>
-                            {% if user.roleLabel == 'Créateur' %}
-                                <p>Recherche un :</p>
-                            {% endif %}
-                            <p class="card-text">{{ user.dutiesToString }}</p>
+                                    <hr>
+                                    {% if user.roleLabel == 'Créateur' %}
+                                        <p>Recherche un :</p>
+                                    {% endif %}
+                                    <p class="card-text">{{ user.dutiesToString }}</p>
+                                </div>
+                            </a>
                         </div>
                     </a>
                 </div>

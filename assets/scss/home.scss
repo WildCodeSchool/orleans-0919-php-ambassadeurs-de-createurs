@@ -1,6 +1,6 @@
 .filterImage {
     opacity: 0.8;
-    height: 85vh;
+    height: calc(100vh - 100px);
 }
 
 div.carousel-caption {
@@ -98,7 +98,7 @@ svg.svg-inline--fa.fa-star.fa-w-18 {
 
 #map {
     width: 80vw;
-    height: 90vh;
+    height: calc(100vh - 45px);
 }
 
 .popupTitle {

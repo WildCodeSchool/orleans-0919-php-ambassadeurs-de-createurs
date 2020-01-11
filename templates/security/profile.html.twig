@@ -1,9 +1,83 @@
 {% extends 'layout.html.twig' %}
 {% block body %}
+    <h1 class="text-center mt-5">{{ user.firstname }}</h1>
     <div class="container-fluid">
-        <h1>Bienvenue sur votre profil</h1>
-        <h3>Vos informations </h3>
-        {{ include('user/_form.html.twig', {'button_label': 'Enregistrer'}) }}
-        <a class="btn btn-dark" href="{{ path('home_index') }}">Retour</a>
+        <div class="row text-center mt-5">
+            <div class="offset-1 col-4 mt-5">
+                <div class="pictureProfil">
+                    <img class="rounded-circle" src="{{ user.picture }}" alt="{{ user.firstname }}">
+                </div>
+                <br>
+                <h3 class="nameProfil">
+                    {{ user.firstname }}
+                </h3>
+                <br>
+            </div>
+            <div class="descriptionBloc col-4 offset-2 text-justify m-2 p-5 align-self-center ">
+                <div class="star">
+                    <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">
+                        <div class="col-md-1 col-sm-12 mt-2">
+                            <span class="js-likes">{{ user.followers | length }}</span>
+                            {% set class="far" %}
+                            {% if app.user %}
+                                {% for favorites in app.user.followedUsers %}
+                                    {% if user == favorites.userFavorite %}
+                                        {% set class="fas" %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            <i class="{{ class }} fa-star ml-2"></i>
+                        </div>
+                    </a>
+                </div>
+                <p>J'habite à {{ user.city }}.</p>
+                <p>Les univers que j'aime sont : </p>
+                <ul>
+                    {% for category in user.categories %}
+                        <li>{{ category.description }}</li>
+                    {% else %}
+                        <li>Aucun univers n'a été sélectioné</li>
+                    {% endfor %}
+                </ul>
+                <p>Je suis intéressé par le status de : </p>
+            </div>
+        </div>
+        <div class="text-center m-3">
+            <a href="{{ path('app_profileEdit') }}">
+                <button type="button" class="btn btn-gold">Modifier</button>
+            </a>
+        </div>
+        {% if is_granted('ROLE_AMBASSADOR') %}
+        <div class="text-center m-3">
+            <a href="{{ path('event_new', {'userId': user.id}) }}">
+                <button type="button" class="btn btn-gold">Créer un événement</button>
+            </a>
+        </div>
+        <div>
+            <h2 class="mt-2">Mes prochaines ventes</h2>
+            <div class="row">
+                {% for event in user.events %}
+                    <div class="col-xs-12 col-md-4 event mt-3">
+                        <article class="card card-event card-inverse animated fadeInDown">
+                            <img class="img-fluid"
+                                 src="https://snap-photos.s3.amazonaws.com/img-thumbs/960w/SYC0YBA37V.jpg"
+                                 alt="Leaf on the street"/>
+                            <div class="card-img-overlay">
+                                <h4 class="card-title event">{{ event.place }}</h4>
+                                <p class="card-text event">{{ event.dateTime|date('d/m/Y à H:i') }}
+                                    - {{ event.user.firstname }}</p>
+                                <p class="card-text event">Présentant les poduits de {{ event.brand.name }}</p>
+                                <p class="card-text event">{{ event.description }}</p>
+                            </div>
+                        </article>
+                        <a href="{{ path('event_edit', {'id': event.id}) }}">
+                            <button type="button" class="btn btn-gold">Modifier</button>
+                        </a>
+
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
     </div>
 {% endblock %}
