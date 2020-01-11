@@ -6,9 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+use \DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BlogRepository")
+ * @Vich\Uploadable
  * @UniqueEntity(fields={"title"}, message="Un article avec le même titre existe déjà")
  */
 class Blog
@@ -31,21 +35,6 @@ class Blog
      */
     private $slug;
 
-    /**
-     * @return mixed
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @param mixed $slug
-     */
-    public function setSlug($slug): void
-    {
-        $this->slug = $slug;
-    }
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
@@ -70,6 +59,30 @@ class Blog
      */
     private $articleTag;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * @Vich\UploadableField(mapping="articles_image", fileNameProperty="image")
+     * @Assert\File(
+     *     maxSize = "200k",
+     *     maxSizeMessage="La taille des images est limité à {{ limit }}ko",
+     *     mimeTypes = {"image/jpeg", "image/png", "image/webp", "image/gif"},
+     *     mimeTypesMessage = "Ce n'est pas un format d'image valide"
+     * )
+     * @var File|null
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $updatedAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +98,22 @@ class Blog
         $this->title = $title;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug): void
+    {
+        $this->slug = $slug;
     }
 
     public function getAuthor(): ?string
@@ -133,5 +162,44 @@ class Blog
         $this->articleTag = $articleTag;
 
         return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new DateTime();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 }

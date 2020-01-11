@@ -14,7 +14,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-5 card-img-block">
                             <div class="card-img-block-top">
-                                <img class="card-img-top " src="http://placeimg.com/640/360/any"
+                                <img class="card-img-top firstimage" src="{{ vich_uploader_asset(article, 'imageFile') }}"
                                      alt="image de l'article {{ article.title }}">
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                 {% else %}
                     <div class="col-md-4 m-4 mb-5">
                         <div class="card-img-block">
-                            <img class="card-img-top" src="http://placeimg.com/640/360/any"
+                            <img class="card-img-top" src="{{ vich_uploader_asset(article, 'imageFile') }}"
                                  alt="image de l'article {{ article.title }}">
                         </div>
                         <div class="card profile-card-5 card-block">
