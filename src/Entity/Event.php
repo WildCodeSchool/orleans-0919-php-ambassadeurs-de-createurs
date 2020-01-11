@@ -38,7 +38,6 @@ class Event
      * @Assert\NotNull(message="Le champ utilisateur est obligatoire")
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
-     *
      */
     private $user;
 
@@ -106,7 +105,7 @@ class Event
         return $this->user;
     }
 
-    public function setUser(User $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
