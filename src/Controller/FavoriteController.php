@@ -12,16 +12,16 @@ class FavoriteController extends AbstractController
 {
     /**
      * @Route("/favorite", name="app_favorite")
-     * @param User $user
      * @param FavoriteRepository $favoriteRepository
      * @return Response
      */
-    public function show(User $user, FavoriteRepository $favoriteRepository): Response
+    public function show(FavoriteRepository $favoriteRepository): Response
     {
-        $favorites = $favoriteRepository->findFavoriteByUser(['user' => $user]);
+        $user = $this->getUser();
+
+        $favorites = $favoriteRepository->findFavoriteByUser($user);
         return $this->render('favorite/index.html.twig', [
-            'user' => $user,
-            'favorite' => $favorites
+            'favorites' => $favorites
         ]);
     }
 }

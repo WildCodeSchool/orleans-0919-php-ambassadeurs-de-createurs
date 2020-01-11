@@ -20,11 +20,13 @@ class FavoriteRepository extends ServiceEntityRepository
         parent::__construct($registry, Favorite::class);
     }
 
-    public function findFavoriteByUser($user)
+    public function findFavoriteByUser($userId)
     {
         $qb = $this->createQueryBuilder('f')
-            ->innerJoin('f.user', 'u')
-            ->addSelect('f')
+            ->join('f.user', 'u')
+            ->join('f.userFavorite', 'uf')
+            ->where("f.user = :userId")
+            ->setParameter('userId', $userId)
             ->getQuery();
 
         return $qb->execute();
