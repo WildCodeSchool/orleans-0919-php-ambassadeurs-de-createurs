@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Serializable;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -20,7 +19,7 @@ use \DateTime;
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  * @Vich\Uploadable
  */
-class User implements UserInterface, Serializable
+class User implements UserInterface, \Serializable
 {
     const ROLE_AMBASSADOR = 'ROLE_AMBASSADOR';
     const ROLE_CREATOR = 'ROLE_CREATOR';
@@ -715,6 +714,11 @@ class User implements UserInterface, Serializable
      */
     public function serialize()
     {
+        return serialize([
+            $this->getId(),
+            $this->getUsername(),
+            $this->getPassword(),
+        ]);
     }
 
     /**
@@ -722,5 +726,10 @@ class User implements UserInterface, Serializable
      */
     public function unserialize($serialized)
     {
+        list (
+            $this->id,
+            $this->mail,
+            $this->password,
+            ) = unserialize($serialized);
     }
 }
