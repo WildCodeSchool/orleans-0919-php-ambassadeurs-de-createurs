@@ -112,7 +112,11 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+//            var_dump($user);
+//            die();
+            $entityManager->persist($user);
+            $entityManager->flush();
             $this->addFlash('success', 'Votre profil a été modifié.');
             return $this->redirectToRoute('app_profile');
         }

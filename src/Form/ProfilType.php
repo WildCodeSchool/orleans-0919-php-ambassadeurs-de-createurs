@@ -39,7 +39,9 @@ class ProfilType extends UserInscriptionType
             'required' => false,
         ]);
         $builder->add('pictureFile', VichImageType::class, [
-            'label' => 'Photo'
+            'label'             => 'Photo',
+            'download_link'     => false,
+            'allow_delete'      => false,
         ]);
         $builder->add('department', EntityType::class, [
             'label' => 'Département',
