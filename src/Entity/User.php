@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -19,7 +20,7 @@ use \DateTime;
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  * @Vich\Uploadable
  */
-class User implements UserInterface
+class User implements UserInterface, Serializable
 {
     const ROLE_AMBASSADOR = 'ROLE_AMBASSADOR';
     const ROLE_CREATOR = 'ROLE_CREATOR';
@@ -707,5 +708,19 @@ class User implements UserInterface
     public function setUpdatedAt(DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function serialize()
+    {
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function unserialize($serialized)
+    {
     }
 }

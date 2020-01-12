@@ -22,6 +22,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProfilType extends UserInscriptionType
 {
@@ -37,9 +38,8 @@ class ProfilType extends UserInscriptionType
             'label' => 'Compte Facebook',
             'required' => false,
         ]);
-        $builder->add('picture', TextType::class, [
-            'label' => 'Photo',
-            'required' => false,
+        $builder->add('pictureFile', VichImageType::class, [
+            'label' => 'Photo'
         ]);
         $builder->add('department', EntityType::class, [
             'label' => 'Département',
