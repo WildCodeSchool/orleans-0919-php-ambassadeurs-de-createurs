@@ -13,7 +13,7 @@
             {% for user in users %}
                 <div class="card col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">
                     <a href="{{ path('user_show', {'id': user.id}) }}">
-                        <img src="{{ user.picture }}" class="card-img-top" alt="image de {{ user.firstname }}">
+                        <img src="{{ vich_uploader_asset(user, 'pictureFile') }}" class="card-img-top" alt="image de {{ user.firstname }}">
                         <div class="card-body">
                             <div class="star mb-4">
                                 <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">
