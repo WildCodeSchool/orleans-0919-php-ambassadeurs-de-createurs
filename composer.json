@@ -5,6 +5,7 @@
         "php": "^7.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "drewm/mailchimp-api": "^2.5",
         "friendsofsymfony/ckeditor-bundle": "^2.1",
         "phpmd/phpmd": "^2.6",
         "sensio/framework-extra-bundle": "^5.1",
