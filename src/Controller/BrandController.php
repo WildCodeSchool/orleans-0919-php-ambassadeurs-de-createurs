@@ -19,6 +19,8 @@ use Symfony\Component\Form\FormFactory;
  */
 class BrandController extends AbstractController
 {
+    const MAX_ON_HOMEPAGE = 5;
+
     /**
      * @Route("/", name="brand_index", methods={"GET","POST"})
      * @param BrandRepository $brandRepository
@@ -40,8 +42,11 @@ class BrandController extends AbstractController
             $views[] = $form->createView();
 
             if ($form->isSubmitted() && $form->isValid()) {
-                if ($chosenCreator > 5 && $brand->getChosenCreator() === true) {
-                    $this->addFlash('danger', '6 Créateurs sont déjà affichés sur la page d\'accueil');
+                if ($chosenCreator > self::MAX_ON_HOMEPAGE && $brand->getChosenCreator() === true) {
+                    $this->addFlash(
+                        'danger',
+                        self::MAX_ON_HOMEPAGE + 1 . ' Créateurs sont déjà affichés sur la page d\'accueil'
+                    );
                     return $this->redirectToRoute('brand_index');
                 } elseif ($chosenCreator > 5 && $brand->getChosenCreator() === false) {
                     $this->getDoctrine()->getManager()->flush();
