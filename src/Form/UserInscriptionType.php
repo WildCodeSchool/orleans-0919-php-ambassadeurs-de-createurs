@@ -58,7 +58,6 @@ class UserInscriptionType extends AbstractType
                     new Length([
                         'min' => 4,
                         'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères',
-                        // max length allowed by Symfony for security reasons
                         'max' => 255,
                     ]),
                 ],
@@ -68,7 +67,7 @@ class UserInscriptionType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepter les mentions légales pour continuer l\'inscription.',
                     ]),
                 ],
             ])
@@ -77,7 +76,8 @@ class UserInscriptionType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepter les conditions générales
+                         d\'utilisation pour continuer l\'inscription.',
                     ]),
                 ],
             ])
@@ -86,7 +86,8 @@ class UserInscriptionType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepter les conditions générales
+                         de vente pour continuer l\'inscription.',
                     ]),
                 ],
             ]);
