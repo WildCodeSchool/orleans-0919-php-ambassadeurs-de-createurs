@@ -31,8 +31,13 @@ class BlogRepository extends ServiceEntityRepository
             ->orderBy('b.date', 'DESC');
 
         if ($page !== null) {
-            $firstResult = ($page - 1) * BlogController::NB_MAX_ARTICLES;
-            $query->setFirstResult($firstResult)->setMaxResults(BlogController::NB_MAX_ARTICLES);
+            if ($page == 1) {
+                $firstResult = ($page - 1) * BlogController::NB_MAX_ARTICLES_P1;
+                $query->setFirstResult($firstResult)->setMaxResults(BlogController::NB_MAX_ARTICLES_P1);
+            } else {
+                $firstResult = ($page - 1) * BlogController::NB_MAX_ARTICLES_P1;
+                $query->setFirstResult($firstResult)->setMaxResults(BlogController::NB_MAX_ARTICLES);
+            }
         }
 
         return $query->getQuery()->getResult();

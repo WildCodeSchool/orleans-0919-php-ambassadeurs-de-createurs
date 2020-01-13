@@ -15,7 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BlogController extends AbstractController
 {
-    const NB_MAX_ARTICLES = 7;
+    const NB_MAX_ARTICLES = 8;
+    const NB_MAX_ARTICLES_P1 = 7;
 
 
     /**
