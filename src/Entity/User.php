@@ -257,7 +257,7 @@ class User implements UserInterface, \Serializable
      * @param string $picture
      * @return $this
      */
-    public function setPicture(string $picture): self
+    public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
 
@@ -718,7 +718,6 @@ class User implements UserInterface, \Serializable
             $this->getId(),
             $this->getUsername(),
             $this->getPassword(),
-            $this->getPicture()
         ]);
     }
 
@@ -731,7 +730,6 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->mail,
             $this->password,
-            $this->picture,
             ) = unserialize($serialized);
     }
 }
