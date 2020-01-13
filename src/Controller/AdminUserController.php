@@ -47,12 +47,8 @@ class AdminUserController extends AbstractController
     /**
      * @Route("/{id}/edit", name="admin_user_edit", methods={"GET","POST"})
      */
-    public function edit(
-        Request $request,
-        User $user,
-        CoordinateService $coordinateService,
-        UserRepository $userRepository
-    ): Response {
+    public function edit(Request $request, User $user, CoordinateService $coordinateService): Response
+    {
 
         $form = $this->createForm(UserInscriptionType::class, $user);
         $form->handleRequest($request);
