@@ -29,7 +29,7 @@
                 <td>{{ brand.sellerAdvantage }}</td>
                 <td>
                     <a href="{{ path('brand_show', {'id': brand.id}) }}">show</a>
-                    <a href="{{ path('brand_edit', {'id': brand.id}) }}">edit</a>
+                    <a href="{{ path('admin_brand_edit', {'id': brand.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

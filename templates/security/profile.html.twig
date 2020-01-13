@@ -48,41 +48,79 @@
             </a>
         </div>
         {% if is_granted('ROLE_AMBASSADOR') %}
-        <div class="text-center m-3">
-            <a href="{{ path('event_new', {'userId': user.id}) }}">
-                <button type="button" class="btn btn-gold">Créer un événement</button>
-            </a>
+            <div class="text-center m-3">
+                <a href="{{ path('event_new', {'userId': user.id}) }}">
+                    <button type="button" class="btn btn-gold">Créer un événement</button>
+                </a>
 
-            <a href="{{ path('app_favorite') }}"><button type="button" class="btn btn-gold">Mes favoris</button></a>
+                <a href="{{ path('app_favorite') }}">
+                    <button type="button" class="btn btn-gold">Mes favoris</button>
+                </a>
 
-        </div>
-        <div>
-            <h2 class="mt-2">Mes prochaines ventes</h2>
-            <div class="row">
-                {% for event in user.events %}
+            </div>
+            <div>
+                <h2 class="mt-2">Mes prochaines ventes</h2>
+                <div class="row">
+                    {% for event in user.events %}
+                        <div class="col-xs-12 col-md-4 event mt-3">
+                            <article class="card card-event card-inverse animated fadeInDown">
+                                <img class="img-fluid"
+                                     src="https://snap-photos.s3.amazonaws.com/img-thumbs/960w/SYC0YBA37V.jpg"
+                                     alt="Leaf on the street"/>
+                                <div class="card-img-overlay">
+                                    <h4 class="card-title event">{{ event.place }}</h4>
+                                    <p class="card-text event">{{ event.dateTime|date('d/m/Y à H:i') }}
+                                        - {{ event.user.firstname }}</p>
+                                    <p class="card-text event">Présentant les produits de {{ event.brand.name }}</p>
+                                    <p class="card-text event">{{ event.description }}</p>
+                                </div>
+                            </article>
+                            {% if  (event.user.id == user.id) or (is_granted('ROLE_ADMIN')) %}
+                                <a href="{{ path('event_edit', {'id': event.id}) }}">
+                                    <button type="button" class="btn btn-gold">Modifier</button>
+                                </a>
+                            {% endif %}
+
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        {% if is_granted('ROLE_CREATOR') %}
+            <div class="text-center m-3">
+                <a href="{{ path('brand_new', {'userId': user.id}) }}">
+                    <button type="button" class="btn btn-gold">Créer ma marque</button>
+                </a>
+
+                <a href="{{ path('app_favorite') }}">
+                    <button type="button" class="btn btn-gold">Mes favoris</button>
+                </a>
+
+            </div>
+        {% if user.brand is not null %}
+            <div>
+                <h2 class="mt-2">Ma marque</h2>
+                <div class="row">
                     <div class="col-xs-12 col-md-4 event mt-3">
                         <article class="card card-event card-inverse animated fadeInDown">
                             <img class="img-fluid"
                                  src="https://snap-photos.s3.amazonaws.com/img-thumbs/960w/SYC0YBA37V.jpg"
                                  alt="Leaf on the street"/>
                             <div class="card-img-overlay">
-                                <h4 class="card-title event">{{ event.place }}</h4>
-                                <p class="card-text event">{{ event.dateTime|date('d/m/Y à H:i') }}
-                                    - {{ event.user.firstname }}</p>
-                                <p class="card-text event">Présentant les poduits de {{ event.brand.name }}</p>
-                                <p class="card-text event">{{ event.description }}</p>
+                                <h4 class="card-title event">{{ user.brand.name }}</h4>
+                                <p class="card-text event">
+                                    - {{ user.brand.description }}</p>
+                                <p class="card-text event">Site{{ user.brand.site }}</p>
+                                <p class="card-text event">Instagram {{ user.brand.instagram }}</p>
                             </div>
                         </article>
-                        {% if  (event.user.id == user.id) or (is_granted('ROLE_ADMIN'))  %}
-                        <a href="{{ path('event_edit', {'id': event.id}) }}">
+                        <a href="{{ path('brand_edit', {'id': user.brand.id}) }}">
                             <button type="button" class="btn btn-gold">Modifier</button>
                         </a>
-                        {% endif %}
-
                     </div>
-                {% endfor %}
+                </div>
             </div>
-        </div>
+            {% endif %}
         {% endif %}
     </div>
 {% endblock %}

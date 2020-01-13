@@ -21,7 +21,6 @@ class BrandType extends AbstractType
             ->add('instagram', UrlType::class)
             ->add('host_advantage')
             ->add('seller_advantage')
-            ->add('user', EntityType::class, ['class' => User::class, 'choice_label' => 'firstname'])
         ;
     }
 

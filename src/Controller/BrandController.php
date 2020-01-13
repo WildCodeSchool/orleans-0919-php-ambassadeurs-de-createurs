@@ -15,31 +15,24 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BrandController extends AbstractController
 {
-    /**
-     * @Route("/", name="brand_index", methods={"GET"})
-     */
-    public function index(BrandRepository $brandRepository): Response
-    {
-        return $this->render('brand/index.html.twig', [
-            'brands' => $brandRepository->findAll(),
-        ]);
-    }
 
     /**
      * @Route("/new", name="brand_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
+        $user =  $this->getUser();
         $brand = new Brand();
         $form = $this->createForm(BrandType::class, $brand);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $brand->setUser($user);
             $entityManager->persist($brand);
             $entityManager->flush();
             $this->addFlash('success', 'Votre marque a été créée');
-            return $this->redirectToRoute('brand_index');
+            return $this->redirectToRoute('app_profile');
         }
 
         return $this->render('brand/new.html.twig', [
@@ -63,19 +56,25 @@ class BrandController extends AbstractController
      */
     public function edit(Request $request, Brand $brand): Response
     {
-        $form = $this->createForm(BrandType::class, $brand);
-        $form->handleRequest($request);
+        $user = $this->getUser();
+        if ($user === $brand->getUser()) {
+            $form = $this->createForm(BrandType::class, $brand);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', 'Votre marque a été modifiée');
-            return $this->redirectToRoute('brand_index');
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash('success', 'Votre marque a été modifiée');
+                return $this->redirectToRoute('app_profile');
+            }
+
+            return $this->render('brand/edit.html.twig', [
+                'brand' => $brand,
+                'form' => $form->createView(),
+            ]);
+        } else {
+            $this->addFlash('danger', 'Vous ne pouvez pas modifier cette marque.');
+            return $this->redirectToRoute('app_profile');
         }
-
-        return $this->render('brand/edit.html.twig', [
-            'brand' => $brand,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**
@@ -90,6 +89,6 @@ class BrandController extends AbstractController
             $this->addFlash('danger', 'Votre marque a été supprimée');
         }
 
-        return $this->redirectToRoute('brand_index');
+        return $this->redirectToRoute('app_profile');
     }
 }
