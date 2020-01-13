@@ -47,7 +47,7 @@ class AdminBrandController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'Votre marque a été modifiée');
-            return $this->redirectToRoute('brand_index');
+            return $this->redirectToRoute('admin_brand_index');
         }
 
         return $this->render('brand/admin_edit.html.twig', [
