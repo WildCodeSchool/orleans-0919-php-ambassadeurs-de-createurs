@@ -21,9 +21,9 @@ class SubscriptionController extends AbstractController
      */
     public function index(SubscriptionRepository $subRepository): Response
     {
-        $prices = $subRepository->findAll();
+        $prices = $subRepository->findOneBy([]);
         return $this->render('subscription/index.html.twig', [
-            'prices' => $prices[0],
+            'prices' => $prices,
         ]);
     }
 }
