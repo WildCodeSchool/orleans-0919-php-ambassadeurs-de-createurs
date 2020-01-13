@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminEventController extends AbstractController
 {
     /**
-     * @Route("/", name="event_index", methods={"GET"})
+     * @Route("/", name="admin_event_index", methods={"GET"})
      */
     public function index(EventRepository $eventRepository): Response
     {
@@ -29,7 +29,7 @@ class AdminEventController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="event_new", methods={"GET","POST"})
+     * @Route("/new", name="admin_event_new", methods={"GET","POST"})
      */
     public function new(
         Request $request,
@@ -52,7 +52,7 @@ class AdminEventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
             $this->addFlash('success', 'Votre événement a été créé');
-            return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
+            return $this->redirectToRoute('app_profile', ['id' => $this->getUser()->getId()]);
         }
 
         return $this->render('event/new.html.twig', [
@@ -62,7 +62,7 @@ class AdminEventController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="event_show", methods={"GET"})
+     * @Route("/{id}", name="admin_event_show", methods={"GET"})
      */
     public function show(Event $event): Response
     {
@@ -72,7 +72,7 @@ class AdminEventController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="event_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="admin_event_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Event $event, CoordinateService $coordinateService): Response
     {
@@ -90,17 +90,17 @@ class AdminEventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
             $this->addFlash('success', 'Votre événement a été mofifié');
-            return $this->redirectToRoute('event_index');
+            return $this->redirectToRoute('admin_event_index');
         }
 
-        return $this->render('event/edit.html.twig', [
+        return $this->render('event/admin_edit.html.twig', [
             'event' => $event,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="event_delete", methods={"DELETE"})
+     * @Route("/{id}", name="admin_event_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Event $event): Response
     {
@@ -111,6 +111,6 @@ class AdminEventController extends AbstractController
             $this->addFlash('danger', 'Votre événement a été supprimé');
         }
 
-        return $this->redirectToRoute('event_index');
+        return $this->redirectToRoute('admin_event_index');
     }
 }
