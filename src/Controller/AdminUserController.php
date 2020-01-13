@@ -54,8 +54,6 @@ class AdminUserController extends AbstractController
         UserRepository $userRepository
     ): Response {
 
-        $users = $userRepository->findBy(['chosenCreator' => true]);
-
         $form = $this->createForm(UserInscriptionType::class, $user);
         $form->handleRequest($request);
 
@@ -66,10 +64,6 @@ class AdminUserController extends AbstractController
             if (!is_null($coordinates)) {
                 $user->setLatitude($coordinates[0]);
                 $user->setLongitude($coordinates[1]);
-            }
-            if (array_count_values($users) > 6) {
-                $user->setChosenCreator(false);
-                $this->addFlash('danger', '6 Créateurs ont déjà été choisis');
             }
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();
