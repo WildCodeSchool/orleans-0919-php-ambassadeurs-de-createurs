@@ -18,7 +18,7 @@
             </tr>
             <tr>
                 <th>Contenu</th>
-                <td>{{ blog.content|raw }}</td>
+                <td>{{ question.answer|raw }}</td>
             </tr>
             </tbody>
         </table>
@@ -29,6 +29,6 @@
         <a href="{{ path('admin_question_edit', {'id': question.id}) }}" class="btn btn-gold">
             Modifier
         </a>
-        {{ include('blog/_delete_form.html.twig') }}
+        {{ include('question/_delete_form.html.twig') }}
     </div>
 {% endblock %}
