@@ -1,30 +1,34 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout_admin.html.twig' %}
 
-{% block title %}Question{% endblock %}
+{% block title %}{{ question.question }}{% endblock %}
 
 {% block body %}
-    <h1>Question</h1>
+    <div class="container">
+        <h1 class="text-center m-5">{{ question.question }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ question.id }}</td>
-            </tr>
+        <table class="table w-100">
+            <tbody>
             <tr>
                 <th>Question</th>
-                <td>{{ question.question }}</td>
+                <td class="text-center">{{ question.question }}</td>
             </tr>
             <tr>
-                <th>Answer</th>
-                <td>{{ question.answer }}</td>
+                <th>Catégorie</th>
+                <td class="text-center">{{ question.category.category }}</td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ blog.content|raw }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="{{ path('admin_question_index') }}" class="btn btn-gold">
+            Retour
+        </a>
 
-    <a href="{{ path('question_index') }}">back to list</a>
-
-    <a href="{{ path('question_edit', {'id': question.id}) }}">edit</a>
-
-    {{ include('question/_delete_form.html.twig') }}
+        <a href="{{ path('admin_question_edit', {'id': question.id}) }}" class="btn btn-gold">
+            Modifier
+        </a>
+        {{ include('blog/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

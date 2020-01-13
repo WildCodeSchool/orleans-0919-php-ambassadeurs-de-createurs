@@ -1,37 +1,41 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout_admin.html.twig' %}
 
-{% block title %}Question index{% endblock %}
+{% block title %}Admin FAQ{% endblock %}
 
 {% block body %}
-    <h1>Question index</h1>
+    <div class="container">
+        <h1 class="text-center m-5">Les Questions</h1>
 
-    <table class="table">
-        <thead>
+        <table class="table">
+            <thead>
             <tr>
-                <th>Id</th>
                 <th>Question</th>
-                <th>Answer</th>
-                <th>actions</th>
+                <th>Catégorie</th>
+                <th>Réponse</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for question in questions %}
-            <tr>
-                <td>{{ question.id }}</td>
-                <td>{{ question.question }}</td>
-                <td>{{ question.answer }}</td>
-                <td>
-                    <a href="{{ path('question_show', {'id': question.id}) }}">show</a>
-                    <a href="{{ path('question_edit', {'id': question.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for question in questions %}
+                <tr>
+                    <td><a href="{{ path('admin_question_show', {'id': question.id}) }}" class="titleForm">{{ question.question }}</a></td>
+                    <td>{{ question.category.category }}</td>
+                    <td>{{ question.answer }}</td>
+                    <td>
+                        <a href="{{ path('admin_question_edit', {'id': question.id}) }}" class="">
+                            <button class="btn btn-gold"><i class="fas fa-pencil-alt mr-2"></i>Modifier</button>
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucune question trouvée</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('question_new') }}">Create new</a>
+        <a href="{{ path('admin_question_new') }}" class="btn btn-gold mb-5">
+            Créer une question
+        </a>
+    </div>
 {% endblock %}
