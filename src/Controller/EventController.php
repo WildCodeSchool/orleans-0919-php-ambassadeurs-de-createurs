@@ -43,7 +43,7 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
             $this->addFlash('success', 'Votre événement a été créé');
-            return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
+            return $this->redirectToRoute('app_profile');
         }
 
         return $this->render('event/new.html.twig', [
@@ -58,40 +58,54 @@ class EventController extends AbstractController
      */
     public function edit(Request $request, Event $event, CoordinateService $coordinateService): Response
     {
-        $form = $this->createForm(EventType::class, $event);
-        $form->handleRequest($request);
+        $user = $this->getUser();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $city = $request->request->get('event')['place'];
-            $coordinates = $coordinateService->getCoordinates($city);
-            if (!is_null($coordinates)) {
-                $event->setLatitude($coordinates[0]);
-                $event->setLongitude($coordinates[1]);
+        if ($user === $event->getUser()) {
+            $form = $this->createForm(EventType::class, $event);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $city = $request->request->get('event')['place'];
+                $coordinates = $coordinateService->getCoordinates($city);
+                if (!is_null($coordinates)) {
+                    $event->setLatitude($coordinates[0]);
+                    $event->setLongitude($coordinates[1]);
+                }
+                $entityManager->persist($event);
+                $entityManager->flush();
+                $this->addFlash('success', 'Votre événement a été mofifié.');
+                return $this->redirectToRoute('app_profile');
             }
-            $entityManager->persist($event);
-            $entityManager->flush();
-            $this->addFlash('success', 'Votre événement a été mofifié');
-            return $this->redirectToRoute('event_index');
-        }
 
-        return $this->render('event/edit.html.twig', [
-            'event' => $event,
-            'form' => $form->createView(),
-        ]);
+            return $this->render('event/edit.html.twig', [
+                'event' => $event,
+                'form' => $form->createView(),
+            ]);
+        } else {
+            $this->addFlash('danger', 'Vous ne pouvez pas modifier cet évènement.');
+            return $this->redirectToRoute('app_profile');
+        }
     }
+
     /**
      * @Route("/{id}", name="event_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Event $event): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $event->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($event);
-            $entityManager->flush();
-            $this->addFlash('danger', 'Votre événement a été supprimé');
-        }
+        $user = $this->getUser();
+        if ($user === $event->getUser()) {
+            if ($this->isCsrfTokenValid('delete' . $event->getId(), $request->request->get('_token'))) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($event);
+                $entityManager->flush();
+                $this->addFlash('danger', 'Votre événement a été supprimé.');
+            }
 
-        return $this->redirectToRoute('event_index');
+            return $this->redirectToRoute('app_profile');
+        } else {
+            $this->addFlash('danger', 'Vous ne pouvez pas supprimer cet évènement.');
+            return $this->redirectToRoute('app_profile');
+        }
     }
 }

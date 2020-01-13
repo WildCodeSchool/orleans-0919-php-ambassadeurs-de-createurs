@@ -73,9 +73,11 @@
                                 <p class="card-text event">{{ event.description }}</p>
                             </div>
                         </article>
+                        {% if  (event.user.id == user.id) or (is_granted('ROLE_ADMIN'))  %}
                         <a href="{{ path('event_edit', {'id': event.id}) }}">
                             <button type="button" class="btn btn-gold">Modifier</button>
                         </a>
+                        {% endif %}
 
                     </div>
                 {% endfor %}
