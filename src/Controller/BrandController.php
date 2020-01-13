@@ -25,12 +25,8 @@ class BrandController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function index(BrandRepository $brandRepository, Request $request): Response
+    public function index(BrandRepository $brandRepository, Request $request, FormFactory $formFactory): Response
     {
-        /**
-         * @var FormFactory
-         */
-        $formFactory = $this->get('form.factory');
         $brands = $brandRepository->findAll();
         $chosenCreator = count($brandRepository->findBy(['chosenCreator' => true]));
         $views = [];
