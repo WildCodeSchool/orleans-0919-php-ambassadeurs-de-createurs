@@ -21,7 +21,7 @@ class AdminQuestionController extends AbstractController
     public function index(QuestionRepository $questionRepository): Response
     {
         return $this->render('question/admin_index.html.twig', [
-            'questions' => $questionRepository->findAll(),
+            'questions' => $questionRepository->findBy([], ['question' => 'ASC']),
         ]);
     }
 
