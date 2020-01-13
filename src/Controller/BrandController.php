@@ -41,19 +41,19 @@ class BrandController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
                 if ($chosenCreator > 5 && $brand->getChosenCreator() === true) {
-                    $this->addFlash('danger', '6 Créateurs ont déjà été mis en avant');
+                    $this->addFlash('danger', '6 Créateurs sont déjà affichés sur la page d\'accueil');
                     return $this->redirectToRoute('brand_index');
                 } elseif ($chosenCreator > 5 && $brand->getChosenCreator() === false) {
                     $this->getDoctrine()->getManager()->flush();
-                    $this->addFlash('success', 'Votre créateur a été retiré de la mise en avant');
+                    $this->addFlash('success', 'Votre créateur a été retiré de la page d\'accueil');
                     return $this->redirectToRoute('brand_index');
                 } elseif ($brand->getChosenCreator() === false) {
                     $this->getDoctrine()->getManager()->flush();
-                    $this->addFlash('success', 'Votre créateur a été retiré de la mise en avant');
+                    $this->addFlash('success', 'Votre créateur a été retiré de la page d\'accueil');
                     return $this->redirectToRoute('brand_index');
                 }
                 $this->getDoctrine()->getManager()->flush();
-                $this->addFlash('success', 'Votre créateur a été mis en avant');
+                $this->addFlash('success', 'Votre créateur a été mis en avant et sera affiché sur la page d\'accueil');
                 return $this->redirectToRoute('brand_index');
             }
         }
