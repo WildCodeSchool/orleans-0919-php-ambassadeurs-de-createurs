@@ -42,6 +42,7 @@ class ProfilType extends UserInscriptionType
             'label'             => 'Photo',
             'download_link'     => false,
             'allow_delete'      => false,
+            'required' => false,
         ]);
         $builder->add('department', EntityType::class, [
             'label' => 'Département',
