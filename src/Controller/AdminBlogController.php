@@ -40,7 +40,7 @@ class AdminBlogController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($blog);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Votre article a été créé');
             return $this->redirectToRoute('admin_blog_index');
         }
 
@@ -55,7 +55,7 @@ class AdminBlogController extends AbstractController
      */
     public function show(Blog $blog): Response
     {
-        return $this->render('blog/show.html.twig', [
+        return $this->render('blog/admin_blog_show.html.twig', [
             'blog' => $blog,
         ]);
     }
@@ -70,7 +70,7 @@ class AdminBlogController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success', 'Votre article a été modifié');
             return $this->redirectToRoute('admin_blog_index');
         }
 
@@ -89,6 +89,7 @@ class AdminBlogController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($blog);
             $entityManager->flush();
+            $this->addFlash('danger', 'Votre article a été supprimé');
         }
         return $this->redirectToRoute('admin_blog_index');
     }

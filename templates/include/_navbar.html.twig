@@ -24,6 +24,11 @@
                 <a class="nav-link mr-5" href="{{ path('user_new') }}"><span class="nav-effect">S'INSCRIRE</span></a>
             </li>
             {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+            <li class="nav-item">
+                <a class="nav-link mr-5" href="{{ path('admin_index') }}"><span class="nav-effect">ADMINISTRATION</span></a>
+            </li>
+            {% endif %}
         </ul>
         <ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item avatar">

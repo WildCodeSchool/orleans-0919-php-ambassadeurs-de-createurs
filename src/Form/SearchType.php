@@ -5,6 +5,9 @@ namespace App\Form;
 use App\Entity\Category;
 use App\Entity\Department;
 use App\Entity\Duty;
+use App\Repository\CategoryRepository;
+use App\Repository\DepartmentRepository;
+use App\Repository\DutyRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -23,6 +26,10 @@ class SearchType extends AbstractType
                 'required' => false,
                 'label' => false,
                 'placeholder' => 'Département',
+                'query_builder' => function (DepartmentRepository $departmentRepository) {
+                    return $departmentRepository->createQueryBuilder('d')
+                        ->orderBy('d.code', 'ASC');
+                },
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
@@ -31,6 +38,10 @@ class SearchType extends AbstractType
                 'required' => false,
                 'label' => false,
                 'placeholder' => 'Univers',
+                'query_builder' => function (CategoryRepository $categoryRepository) {
+                    return $categoryRepository->createQueryBuilder('c')
+                        ->orderBy('c.description', 'ASC');
+                },
             ])
             ->add('duty', EntityType::class, [
                 'class' => Duty::class,
@@ -39,6 +50,10 @@ class SearchType extends AbstractType
                 'required' => false,
                 'label' => false,
                 'placeholder' => 'Statut',
+                'query_builder' => function (DutyRepository $dutyRepository) {
+                    return $dutyRepository->createQueryBuilder('d')
+                        ->orderBy('d.name', 'ASC');
+                },
             ])
         ;
     }

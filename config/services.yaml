@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'fr'
+    mailer_from: '%env(resolve:MAILER_FROM_ADDRESS)%'
+    mailchimp_api_key: '%env(resolve:MAILCHIMP_API_KEY)%'
 
 services:
     # default configuration for services in *this* file

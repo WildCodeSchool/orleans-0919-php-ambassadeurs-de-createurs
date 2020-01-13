@@ -1,0 +1,49 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Liste de mes favoris{% endblock %}
+
+{% block body %}
+    <h1 class="text-center"> Liste de mes favoris </h1>
+    <div class="container-fluid card-search">
+        <div class="row justify-content-center">
+            {% for favorite in favorites %}
+                <div class="card col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">
+                    <a href="{{ path('user_show', {'id': favorite.userFavorite.id}) }}">
+                        <img src="{{ favorite.userFavorite.picture }}" class="card-img-top"
+                             alt="image de {{ favorite.userFavorite.firstname }}">
+                        <div class="card-body">
+                            <div class="star mb-4">
+                                <a href="{{ path('search_like', {'id' : favorite.userFavorite.id}) }}"
+                                   class="btn btn-link js-like">
+                                    <div class="col-md-1 col-sm-12 mt-2">
+                                        <span class="js-likes">{{ favorite.userFavorite.followers | length }}</span>
+                                        {% set class="fas" %}
+                                        {% for favorites in app.user.followedUsers %}
+                                            {% if favorite.user == favorites.userFavorite %}
+                                                {% set class="far" %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        <i class="{{ class }} fa-star ml-2"></i>
+                                    </div>
+                                </a>
+                            </div>
+                            <h2 class="card-text text-handscript mb-3">{{ favorite.userFavorite.firstname }}</h2>
+                            <p class="card-text"><i
+                                        class="fas fa-map-marker-alt primary-color"></i> {{ favorite.userFavorite.city }}
+                                {% if favorite.userFavorite.department.code is defined %}
+                                    ({{ favorite.userFavorite.department.code }})
+                                {% endif %}</p>
+                            <hr>
+                            <p class="card-text">{{ favorite.userFavorite.dutiesToString }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('favorite') }}
+{% endblock %}

@@ -1,7 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
-
+{% block title %}S'identifier{% endblock %}
 {% block body %}
 <form method="post">
     {% if error %}
@@ -13,18 +12,21 @@
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Identifiez-vous</h1>
-    <label for="inputMail">Email</label>
-    <input type="text" value="{{ last_username }}" name="mail" id="inputMail" class="form-control" required autofocus>
-    <label for="inputPassword">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-    <button class="btn btn-lg btn-primary" type="submit">
-        S'identifier
-    </button>
+    <div class="container-xl container-lg container-fluid loginForm">
+        <h1 class="mt-5 mb-5 text-center">Identifiez-vous</h1>
+        <div class="border-gold p-4">
+            <label for="inputMail">Email</label>
+            <input type="text" value="{{ last_username }}" name="mail" id="inputMail" class="form-control" required autofocus>
+            <label for="inputPassword">Mot de passe</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" required>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <div class="d-flex justify-content-center">
+            <button class="btn btn-gold mt-4" type="submit">S'identifier</button>
+            </div>
+        </div>
+    </div>
 </form>
+    <p>
+        <a href="{{path('request_resetting')}}">Mot de passe oublié ?</a>
+    </p>
 {% endblock %}

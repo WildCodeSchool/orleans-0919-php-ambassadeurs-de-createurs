@@ -17,7 +17,23 @@
                 </h3>
                 <br>
             </div>
-            <div class="descriptionBloc col-4 offset-2 text-justify m-4 p-5 align-self-center ">
+            <div class="descriptionBloc col-4 offset-2 text-justify m-2 p-5 align-self-center ">
+                <div class="star">
+                    <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">
+                        <div class="col-md-1 col-sm-12 mt-2">
+                            <span class="js-likes">{{ user.followers | length }}</span>
+                            {% set class="far" %}
+                            {% if app.user %}
+                                {% for favorites in app.user.followedUsers %}
+                                    {% if user == favorites.userFavorite %}
+                                        {% set class="fas" %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            <i class="{{ class }} fa-star ml-2"></i>
+                        </div>
+                    </a>
+                </div>
                 <p>J'habite à {{ user.city }}.</p>
                 <p>Les univers que j'aime sont : </p>
                 <ul>
@@ -32,7 +48,7 @@
         </div>
 
         <div class="text-center mt-5">
-            <button type="button" class="btn btn-gold">Me contacter</button>
+            <button type="button" class="btn btn-gold">Contacter cet Ambassadeur</button>
         </div>
         <div>
             <h2 class="mt-2">Mes prochaines ventes</h2>
@@ -56,4 +72,9 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('favorite') }}
 {% endblock %}

@@ -61,10 +61,9 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $user->setRoles([$request->request->get('user')['role']]);
-            $city = $request->request->get('user')['city'];
-            $coordinates = $coordinateService->getCoordinates($city);
-            if (!is_null($coordinates)) {
+            $user->setRoles([$request->request->get('user_inscription')['role']]);
+            $coordinates = $coordinateService->getCoordinates($user->getCity());
+            if ($coordinates !== null) {
                 $user->setLatitude($coordinates[0]);
                 $user->setLongitude($coordinates[1]);
             }
@@ -93,7 +92,18 @@ class SecurityController extends AbstractController
     /**
      * @Route("/profil", name="app_profile")
      */
-    public function profile(Request $request) :Response
+    public function profile() :Response
+    {
+        $user = $this->getUser();
+        return $this->render('security/profile.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * @Route("/profil/modification", name="app_profileEdit")
+     */
+    public function editProfile(Request $request) :Response
     {
         $user = $this->getUser();
         $form = $this->createForm(ProfilType::class, $user);
@@ -105,7 +115,7 @@ class SecurityController extends AbstractController
             $this->addFlash('success', 'Votre profil a été modifié.');
             return $this->redirectToRoute('app_profile');
         }
-        return $this->render('security/profile.html.twig', [
+        return $this->render('security/editProfile.html.twig', [
             'form' => $form->createView(),
             'user' => $user,
         ]);

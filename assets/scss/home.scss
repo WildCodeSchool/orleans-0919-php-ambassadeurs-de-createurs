@@ -1,23 +1,30 @@
 .filterImage {
     opacity: 0.8;
-    height: 85vh;
+    height: calc(100vh - 100px);
 }
 
 div.carousel-caption {
     color: $secondary-color;
 }
 
-div.greyBack {
-    width: 100%;
-    background-color: $background-primary;
+div.searchBg {
+    background-color: $third-color;
 }
 
 div.buttonRole {
     width: 40vw;
+    margin-bottom: 20px;
 }
 
 div.buttonRole a.btn {
-    font-size: $font-size-body;
+    font-size: 1.5rem;
+    font-family: $font-title;
+    width: 50%;
+
+    &:hover {
+        background-color: lighten($primary-color, 5);
+
+    }
 }
 
 div.ambassador {
@@ -91,7 +98,7 @@ svg.svg-inline--fa.fa-star.fa-w-18 {
 
 #map {
     width: 80vw;
-    height: 90vh;
+    height: calc(100vh - 45px);
 }
 
 .popupTitle {
@@ -112,10 +119,15 @@ a.fb-ic-card:hover, .nav-link:hover {
     text-decoration: none;
 }
 
+a#ambassadors.nav-link, a#events.nav-link {
+    border-color: $background-primary;
+    border-bottom: none;
+}
+
 a#ambassadors.nav-link.active, a#events.nav-link.active {
     color: $primary-color;
     border-color: $secondary-color;
-    border-bottom: none;
+    background-color: darken($third-color, 10%);
 }
 
 div.row.reasons {
@@ -136,6 +148,27 @@ div.row.reasons {
             text-align: center;
         }
     }
+}
+
+.star_home {
+    color: $primary-color;
+}
+
+.mailIcon {
+    font-size: $font-size-icon;
+    color: $third-color;
+}
+
+.mailIcon:hover {
+    color: $secondary-color;
+}
+
+button.flex.d-flex.flex-column.btn.btn-gold.mb-4 {
+    font-size: $font-size-body;
+}
+
+button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
+    color: $secondary-color;
 }
 
 @media screen and (min-width: 1000px) {

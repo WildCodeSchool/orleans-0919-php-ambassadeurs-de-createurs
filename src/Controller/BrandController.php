@@ -130,6 +130,7 @@ class BrandController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($brand);
             $entityManager->flush();
+            $this->addFlash('danger', 'Votre marque a été supprimée');
         }
 
         return $this->redirectToRoute('brand_index');
