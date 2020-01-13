@@ -25,8 +25,8 @@
                 <td>{{ event.description }}</td>
                 <td>{{ event.user.firstname }}</td>
                 <td>
-                    <a href="{{ path('event_show', {'id': event.id}) }}">show</a>
-                    <a href="{{ path('event_edit', {'id': event.id}) }}">edit</a>
+                    <a href="{{ path('admin_event_show', {'id': event.id}) }}">show</a>
+                    <a href="{{ path('admin_event_edit', {'id': event.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
