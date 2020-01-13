@@ -16,12 +16,8 @@
                 <a class="nav-link mr-5" href="{{ path('blog_index') }}"><span class="nav-effect">NEWS</span></a>
             </li>
             {% if app.user %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle mr-5" href="{{ path('app_profile') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="nav-effect">PROFIL</span></a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ path('app_favorite') }}"><span class="nav-effect">LISTE DE MES FAVORIS</span></a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link mr-5" href="{{ path('app_profile') }}"><span class="nav-effect">PROFIL</span></a>
                 </li>
             {% else %}
             <li class="nav-item">
