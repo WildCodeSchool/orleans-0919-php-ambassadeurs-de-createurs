@@ -84,6 +84,11 @@ class Brand
      * @ORM\Column(type="text", nullable=true)
      */
     private $sellDescription;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $chosenCreator = false;
   
     public function __construct()
     {
@@ -216,6 +221,18 @@ class Brand
     public function setSellDescription(?string $sellDescription): self
     {
         $this->sellDescription = $sellDescription;
+
+        return $this;
+    }
+
+    public function getChosenCreator(): ?bool
+    {
+        return $this->chosenCreator;
+    }
+
+    public function setChosenCreator(bool $chosenCreator): self
+    {
+        $this->chosenCreator = $chosenCreator;
 
         return $this;
     }
