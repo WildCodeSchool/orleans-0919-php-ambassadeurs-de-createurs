@@ -49,14 +49,12 @@ class AdminUserController extends AbstractController
      */
     public function edit(Request $request, User $user, CoordinateService $coordinateService): Response
     {
-
         $form = $this->createForm(UserInscriptionType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $city = $request->request->get('user')['city'];
             $coordinates = $coordinateService->getCoordinates($city);
-
             if (!is_null($coordinates)) {
                 $user->setLatitude($coordinates[0]);
                 $user->setLongitude($coordinates[1]);
