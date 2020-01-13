@@ -9,7 +9,7 @@
             {% for favorite in favorites %}
                 <div class="card col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">
                     <a href="{{ path('user_show', {'id': favorite.userFavorite.id}) }}">
-                        <img src="{{ favorite.userFavorite.picture }}"
+                        <img src="{{ favorite.userFavorite.picture }}" class="card-img-top"
                              alt="image de {{ favorite.userFavorite.firstname }}">
                         <div class="card-body">
                             <div class="star mb-4">
