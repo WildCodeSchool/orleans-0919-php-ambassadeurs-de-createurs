@@ -22,6 +22,7 @@ class HomeController extends AbstractController
      * @param UserRepository $userRepository
      * @param SerializerInterface $serializer
      * @return Response
+     * @throws \Exception
      */
     public function index(Request $request, UserRepository $userRepository, SerializerInterface $serializer): Response
     {
@@ -65,6 +66,42 @@ class HomeController extends AbstractController
         return $this->render('/home/index.html.twig', [
             'ambassadors' => $ambassadorsJson,
             'ambassadorCards' => $ambassadorCards,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/unsubscribe", name="home_unsubscribe_newsletter")
+     * @return Response
+     * @throws \Exception
+     */
+    public function unsubscribeNewsletter(Request $request): Response
+    {
+        $form = $this->createFormBuilder()
+            ->add('mail', EmailType::class, [
+                'label' => 'E-mail',
+                'attr' => ['placeholder' => 'exemple@mail.fr'],
+            ])
+            ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $newsletterData = $form->getData();
+
+            $mailChimp = new MailChimp($this->getParameter('mailchimp_api_key'));
+            $listId = $mailChimp->get('lists')['lists'][0]['id'];
+            $subscriberHash = MailChimp::subscriberHash($newsletterData['mail']);
+            $mailChimp->delete("lists/$listId/members/$subscriberHash");
+
+            if ($mailChimp->success()) {
+                $this->addFlash('success', 'Votre inscription à la lettre d\'information a bien été annulée.');
+            } else {
+                $this->addFlash('danger', 'Votre désinscription à la lettre d\'information n\'a pas fonctionné');
+            }
+            return $this->redirectToRoute('home_index');
+        }
+
+        return $this->render('/home/unsubscribe_newsletter.html.twig', [
             'form' => $form->createView(),
         ]);
     }
