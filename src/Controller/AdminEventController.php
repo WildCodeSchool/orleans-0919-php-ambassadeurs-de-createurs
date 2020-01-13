@@ -28,38 +28,6 @@ class AdminEventController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="admin_event_new", methods={"GET","POST"})
-     */
-    public function new(
-        Request $request,
-        CoordinateService $coordinateService,
-        UserRepository $userRepository
-    ): Response {
-        $event = new Event();
-        $event->setUser($this->getUser());
-        $form = $this->createForm(EventType::class, $event);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $city = $request->request->get('event')['place'];
-            $coordinates = $coordinateService->getCoordinates($city);
-            if (!is_null($coordinates)) {
-                $event->setLatitude($coordinates[0]);
-                $event->setLongitude($coordinates[1]);
-            }
-            $entityManager->persist($event);
-            $entityManager->flush();
-            $this->addFlash('success', 'Votre événement a été créé');
-            return $this->redirectToRoute('app_profile', ['id' => $this->getUser()->getId()]);
-        }
-
-        return $this->render('event/new.html.twig', [
-            'event' => $event,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="admin_event_show", methods={"GET"})
