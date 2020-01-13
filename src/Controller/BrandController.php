@@ -35,9 +35,6 @@ class BrandController extends AbstractController
         $chosenCreator = count($brandRepository->findBy(['chosenCreator' => true]));
         $views = [];
         foreach ($brands as $key => $brand) {
-            /**
-             * @return FormBuilder
-             */
             $form = $formFactory->createNamed('chosen_creator_' . $key, ChosenCreatorType::class, $brand);
             $form->handleRequest($request);
             $views[] = $form->createView();
