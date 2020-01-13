@@ -175,10 +175,14 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     font-size: $font-size-body;
     text-decoration: none;
     color: $secondary-color;
-}
 
-.question:focus {
-    text-decoration: none;
+    &:focus {
+        text-decoration: none;
+    }
+
+    &:hover {
+        color: $primary-color;
+    }
 }
 
 @media screen and (min-width: 1000px) {
