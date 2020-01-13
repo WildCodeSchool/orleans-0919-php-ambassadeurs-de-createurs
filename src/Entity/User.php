@@ -63,7 +63,7 @@ class User implements UserInterface, \Serializable
      * @Vich\UploadableField(mapping="users_image", fileNameProperty="picture")
      * @Assert\File(
      *     maxSize = "100k",
-     *     maxSizeMessage="La taille des images est limité à {{ limit }}ko",
+     *     maxSizeMessage="La taille des images est limité à {{ limit }} {{ suffix }}",
      *     mimeTypes = {"image/jpeg", "image/png", "image/webp", "image/gif"},
      *     mimeTypesMessage = "Ce n'est pas un format d'image valide"
      * )
