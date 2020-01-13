@@ -29,6 +29,9 @@ class ProfilType extends UserInscriptionType
     {
         $builder->remove('password');
         $builder->remove('role');
+        $builder->remove('mentions');
+        $builder->remove('CGU');
+        $builder->remove('CGV');
         $builder->add('description', TextareaType::class, [
             'label' => 'Biographie',
             'required' => false,
