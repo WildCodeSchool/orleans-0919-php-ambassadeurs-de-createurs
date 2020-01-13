@@ -1,0 +1,61 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Notre concept - Créateur{% endblock %}
+
+{% block body %}
+    <div class="container-fluid pt-1 mb-5">
+        <h1 class="text-center mt-5">Créateur</h1>
+        <div class="row justify-content-center m-0">
+            <div class="col-md-9 col-sm-12 mt-3 mb-3">
+                <h2 class="text-center">Le BABA de la vente privée à domicile</h2>
+            </div>
+            <div class="col-md-9 col-sm-12 mt-5 mb-5">
+                <p class="text-center">Comment, une vente privée à domicile, mais je ne sais pas comment faire !!</p>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <h3 class="concept-title text-justify mb-3">1 - Je l’organise quand ?</h3>
+                <p class="text-justify mb-4">Tu l’organises quand tu as assez de stock pour pouvoir l’envoyer à ton
+                    hôtesse donc il faut prévoir !</p>
+                <h3 class="concept-title text-justify mb-3">2 - Comment vais-je trouver mon hôtesse ?</h3>
+                <p class="text-justify mb-4">En passant par le groupe très prisé de LMCO Paris vente privée à domicile.
+                    Tu postes ton annonce sur le groupe en te présentant et en proposant aux hôtesses qui le
+                    souhaitent d’organiser une vente chez elles.</p>
+                <h3 class="concept-title text-justify mb-3">3 - Mais ma vente je la fais quand ?</h3>
+                <p class="text-justify mb-4">Tu t’adaptes aux disponibilités de l’hôtesse et tu suggères éventuellement
+                    des jours mais jamais tu n’imposes, il faut bien se souvenir qu’elle ouvre son réseau pour toi.</p>
+                <h3 class="concept-title text-justify mb-3">4 - Je la rémunère comment ma formidable hôtesse ?</h3>
+                <p class="text-justify mb-4">C’est toi qui décides mais en règle générale, les créatrices offrent une
+                    gratification de 10 à 20 % en bon d’achat dans leur collection.</p>
+                <h3 class="concept-title text-justify mb-3">5 - Quand dois-je envoyer mon colis ?</h3>
+                <p class="text-justify mb-4">Tu l’envoies au moins deux voire trois jours avant que ton hôtesse ait le
+                    temps de bien tout installer sans se stresser.</p>
+                <h3 class="concept-title text-justify mb-3">6 - Qui doit payer les frais de port ?</h3>
+                <p class="text-justify mb-4">C’est toi évidemment… aller ET retour. N’oublie pas que ton hôtesse te rend
+                    service !</p>
+            </div>
+            <div class="col-md-9 col-sm-12 mt-5 mb-5">
+                <p class="text-center">A suivre donc une petite check-list des essentiels pour l’organisation de ta
+                    vente privée !!</p>
+                <p class="text-center">C’est bon tu signes ?</p>
+                <p class="text-center">Si ce n’est pas déjà fait, nous t’invitons à rejoindre notre groupe <a
+                            href="https://www.facebook.com/ambassadeursdecreateurs" target="_blank"><span class="concept-link">Facebook</span>
+                    </a> pour
+                    en discuter ou à <a href="mailto:lmco.paris15@gmail.com" target="_blank"><span class="concept-link">nous contacter</span></a> pour organiser pour organiser ta prochaine vente privée à
+                    domicile.</p>
+            </div>
+        </div>
+        <div class="row justify-content-center m-0">
+            <div class="col-md-9 col-sm-12 text-center mt-5 mb-5">
+                <a class="mr-5 mb-5" href="{{ path('app_concept') }}">
+                    <button type="button" class="btn btn-gold col-lg-3 col-md-1">Retour au concept</button>
+                </a>
+                <a class="ml-5 mb-5" href="{{ path('concept_ambassador') }}">
+                    <button type="button" class="btn btn-gold">HÔTES : le BABA d'une vente privée à domicile</button>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
