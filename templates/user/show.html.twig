@@ -6,7 +6,7 @@
 
     <div class="container-fluid mt-5">
         <div class="text-center">
-            <img class="rounded-circle img-profil" src="{{ user.picture }}" alt="{{ user.firstname }}">
+            <img class="rounded-circle img-profil" src="{{ vich_uploader_asset(user, 'pictureFile') }}" alt="{{ user.firstname }}">
             <h2 class="text-center mt-3">{{ user.firstname }}</h2>
         </div>
         <div class="d-flex justify-content-center">
@@ -27,7 +27,6 @@
                     <i class="{{ class }} fa-star ml-2"></i>
                 </div>
             </a>
-
         </div>
         <div class="text-center mt-4">
             <button type="button" class="btn btn-gold">Contacter cet Ambassadeur</button>
@@ -69,9 +68,7 @@
                 {% endfor %}
                 </div>
             </div>
-
         </div>
-
     </div>
 
 {% endblock %}

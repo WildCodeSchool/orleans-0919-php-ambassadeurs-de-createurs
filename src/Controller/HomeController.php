@@ -60,7 +60,13 @@ class HomeController extends AbstractController
         $ambassadors = $userRepository->findByRoles(User::ROLE_AMBASSADOR);
         $ambassadorCards = array_slice($ambassadors, count($ambassadors)-self::NB_CARDS, self::NB_CARDS);
         $context = [
-            AbstractNormalizer::IGNORED_ATTRIBUTES => ['users', 'user', 'sponsoredEvents', 'userFavorite'],
+            AbstractNormalizer::IGNORED_ATTRIBUTES => [
+                'users',
+                'user',
+                'sponsoredEvents',
+                'userFavorite',
+                'pictureFile',
+                'updatedAt'],
         ];
         $ambassadorsJson = $serializer->serialize($ambassadors, 'json', $context);
         return $this->render('/home/index.html.twig', [
