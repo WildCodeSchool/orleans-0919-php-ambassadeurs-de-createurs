@@ -14,7 +14,13 @@
                     <div class="row justify-content-center">
                         <div class="col-md-5 card-img-block">
                             <div class="card-img-block-top">
-                                <img class="card-img-top firstimage" src="{{ vich_uploader_asset(article, 'imageFile') }}"
+                                <img class="card-img-top firstimage"
+                                     src="
+                                        {% if article.image is null %}
+                                        {{ asset('build/blog_placeholder.png') }}
+                                        {% else %}
+                                        {{ vich_uploader_asset(article, 'imageFile') }}
+                                        {% endif %}"
                                      alt="image de l'article {{ article.title }}">
                             </div>
                         </div>

@@ -9,7 +9,13 @@
             {% for favorite in favorites %}
                 <div class="card col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">
                     <a href="{{ path('user_show', {'id': favorite.userFavorite.id}) }}">
-                        <img class="profilPagePicture" src="{{ vich_uploader_asset(favorite.userFavorite, 'pictureFile') }}"
+                        <img class="profilPagePicture"
+                             src="
+                                {% if favorite.userFavorite.picture is null %}
+                                {{ asset('build/placeholder_profil_grey.png') }}
+                                {% else %}
+                                {{ vich_uploader_asset(favorite.userFavorite, 'pictureFile') }}
+                                {% endif %}"
                              alt="image de {{ favorite.userFavorite.firstname }}">
                         <div class="card-body">
                             <div class="star mb-4">

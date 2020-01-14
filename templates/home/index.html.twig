@@ -84,7 +84,14 @@
                             </div>
                             <div class="col-md-4">
                                 <a href="{{ path('user_show', {'id': card.id}) }}">
-                                    <img src="{{ vich_uploader_asset(card, 'pictureFile') }}" class="card-img" alt="Image">
+                                    <img
+                                        src="
+                                            {% if card.picture is null %}
+                                            {{ asset('build/placeholder_profil_grey.png') }}
+                                            {% else %}
+                                            {{ vich_uploader_asset(card, 'pictureFile') }}
+                                            {% endif %}"
+                                        class="card-img" alt="Image">
                                 </a>
                             </div>
                         </div>

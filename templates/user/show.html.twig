@@ -9,7 +9,14 @@
         <div class="row text-center mt-5">
             <div class="offset-1 col-4 mt-5">
                 <div class="pictureProfil">
-                    <img class="rounded-circle profilPagePicture" src="{{ vich_uploader_asset(user, 'pictureFile') }}" alt="{{ user.firstname }}">
+                    <img class="rounded-circle profilPagePicture"
+                         src="
+                                {% if user.picture is null %}
+                                {{ asset('build/placeholder_profil_grey.png') }}
+                                {% else %}
+                                {{ vich_uploader_asset(user, 'pictureFile') }}
+                                {% endif %}"
+                         alt="{{ user.firstname }}">
                 </div>
                 <br>
                 <h3 class="nameProfil">
