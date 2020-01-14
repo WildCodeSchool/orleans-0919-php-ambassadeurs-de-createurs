@@ -1,13 +1,23 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout_admin.html.twig' %}
 
-{% block title %}Edit Question{% endblock %}
+{% block title %}Modifier une question{% endblock %}
 
 {% block body %}
-    <h1>Edit Question</h1>
+    <div class="mt-5 container-xl container-lg container-fluid">
+        <h1 class="mt-3 mb-4 text-center">Modifier une question</h1>
+        <div class="border-gold p-4">
+            {{ include('question/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+        </div>
 
-    {{ include('question/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('question_index') }}">back to list</a>
-
-    {{ include('question/_delete_form.html.twig') }}
+        <div class="row justify-content-between">
+            <div class="col col-lg-4">
+                <a class="btn btn-dark m-5" href="{{ path('admin_question_index') }}">
+                    <i class="far fa-arrow-alt-circle-left"></i> Liste des questions
+                </a>
+            </div>
+            <div class="col col-lg-3">
+                {{ include('question/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
