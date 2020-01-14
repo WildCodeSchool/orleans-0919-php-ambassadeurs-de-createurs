@@ -32,10 +32,10 @@ class BlogRepository extends ServiceEntityRepository
 
         if ($page !== null) {
             if ($page == 1) {
-                $firstResult = ($page - 1) * BlogController::NB_MAX_ARTICLES_P1;
-                $query->setFirstResult($firstResult)->setMaxResults(BlogController::NB_MAX_ARTICLES_P1);
+                $firstResult = ($page - 1) * (BlogController::NB_MAX_ARTICLES-1);
+                $query->setFirstResult($firstResult)->setMaxResults((BlogController::NB_MAX_ARTICLES-1));
             } else {
-                $firstResult = ($page - 1) * BlogController::NB_MAX_ARTICLES_P1;
+                $firstResult = ($page - 1) * (BlogController::NB_MAX_ARTICLES-1);
                 $query->setFirstResult($firstResult)->setMaxResults(BlogController::NB_MAX_ARTICLES);
             }
         }
