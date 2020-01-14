@@ -63,7 +63,9 @@ class UserInscriptionType extends AbstractType
                 ],
             ])
             ->add('mentions', CheckboxType::class, [
-                'label' => "J'accepte les mentions légales",
+                'label' => "J'accepte les mentions",
+                'help' => '<a href="#">légales</a>',
+                'help_html' => true,
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
