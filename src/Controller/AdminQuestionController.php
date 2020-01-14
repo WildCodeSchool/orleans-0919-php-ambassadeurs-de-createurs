@@ -38,7 +38,7 @@ class AdminQuestionController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($question);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Votre question a été crée');
             return $this->redirectToRoute('admin_question_index');
         }
 
@@ -68,7 +68,7 @@ class AdminQuestionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success', 'Votre question a été modifiée');
             return $this->redirectToRoute('admin_question_index');
         }
 
