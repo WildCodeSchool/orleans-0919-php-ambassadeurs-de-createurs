@@ -69,7 +69,7 @@ class Blog
      * @Vich\UploadableField(mapping="articles_image", fileNameProperty="image")
      * @Assert\File(
      *     maxSize = "200k",
-     *     maxSizeMessage="La taille des images est limité à {{ limit }}ko",
+     *     maxSizeMessage="La taille des images est limité à {{ limit }} {{ suffix }}",
      *     mimeTypes = {"image/jpeg", "image/png", "image/webp", "image/gif"},
      *     mimeTypesMessage = "Ce n'est pas un format d'image valide"
      * )
@@ -198,7 +198,7 @@ class Blog
     /**
      * @param \DateTime $updatedAt
      */
-    public function setUpdatedAt(\DateTime $updatedAt): void
+    public function setUpdatedAt(DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
