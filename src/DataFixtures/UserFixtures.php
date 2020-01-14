@@ -49,7 +49,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setCity($city);
             $user->setLatitude($faker->latitude(-4.987792, 9.755859));
             $user->setLongitude($faker->longitude(41.046216, 51.563412));
-            $user->setPicture('/build/placeholder_profil_grey.png');
             $user->setUpdatedAt(new DateTime());
             $user->setMail($faker->email);
             $user->setRoles([self::ROLES[0]]);
