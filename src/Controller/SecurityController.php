@@ -16,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use \DateTime;
 
 class SecurityController extends AbstractController
 {
@@ -62,6 +63,7 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $user->setRoles([$request->request->get('user_inscription')['role']]);
+            $user->setUpdatedAt(new DateTime());
             $coordinates = $coordinateService->getCoordinates($user->getCity());
             if ($coordinates !== null) {
                 $user->setLatitude($coordinates[0]);
@@ -110,8 +112,10 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
+            $entityManager = $this->getDoctrine()->getManager();
+            $user->setPicture = ('');
+            $entityManager->persist($user);
+            $entityManager->flush();
             $this->addFlash('success', 'Votre profil a été modifié.');
             return $this->redirectToRoute('app_profile');
         }
