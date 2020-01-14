@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class BlogType extends AbstractType
 {
@@ -36,6 +38,11 @@ class BlogType extends AbstractType
             ])
             ->add('date', DateTimeType::class, [
                 'label' => 'Date',
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label'             => 'Image',
+                'download_link'     => false,
+                'allow_delete'      => false,
             ])
             ->add('content', CKEditorType::class, [
                 'label' => 'Contenu',

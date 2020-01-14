@@ -1,37 +1,66 @@
-<nav class="mb-1 navbar navbar-expand-lg navbar-light">
-    <ul class="navbar-nav ml-auto nav-flex-icons">
-        <li class="nav-item avatar">
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" class="rounded-circle z-depth-0"
-                                              alt="avatar image" height="50">
-            <p>ADMIN</p>
-        </li>
-    </ul>
-
-    <div class="collapse navbar-collapse " id="navbarSupportedContent-555">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link ml-2" href="{{ path('admin_user_index') }}"><span class="nav-effect">UTILISATEURS</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link ml-2" href="{{ path('admin_category_index') }}"><span class="nav-effect">UNIVERS</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link ml-2" href="{{ path('admin_blog_index') }}"><span class="nav-effect">NEWS</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link ml-2" href="{{ path('admin_article_tag_index') }}"><span class="nav-effect">ÉTIQUETTES</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link ml-2" href="{{ path('event_index') }}"><span class="nav-effect">ÉVÉNEMENTS</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link ml-2" href="#"><span class="nav-effect">ABONNEMENTS</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link ml-2" href="{{ path('home_index') }}"><span class="nav-effect">ACCÈS AU SITE</span></a>
+<nav class="mb-1 navbar_admin navbar-expand-lg navbar-light">
+    <div class="nav_admin_picture pt-5 mb-3">
+        <ul class="navbar-nav picture_admin ml-auto">
+            <li class="nav-item avatar">
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" class="rounded-circle"
+                     alt="avatar image" height="50">
+                <p>ADMIN</p>
             </li>
         </ul>
-        <a class="navbar-brand ml-2" href="{{ path('admin_index') }}"><img src="{{ asset('build/ADC_logo_transparent.png') }}" alt="logo" height="80"></a>
+    </div>
+    <hr>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+        <ul class="nav-title">
+            <li class="nav-item">
+                <a class="nav-link mb-3" href="{{ path('admin_user_index') }}"><span class="mr-2"><i
+                                class="fas fa-user"></i></span><span
+                            class="nav-effect">UTILISATEURS</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mb-3" href="{{ path('admin_category_index') }}"><span class="mr-2"><i
+                                class="fas fa-atom"></i></span><span
+                            class="nav-effect">UNIVERS</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ml-2" href="{{ path('brand_index') }}"><span class="mr-2"><i
+                                class="fas fa-award"></i></span><span
+                            class="nav-effect">MARQUES</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mb-3" href="{{ path('admin_blog_index') }}"><span class="mr-2"><i
+                                class="fas fa-newspaper"></i></span><span
+                            class="nav-effect">NEWS</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mb-3" href="{{ path('admin_article_tag_index') }}"><span class="mr-2"><i
+                                class="fas fa-tags"></i></span><span
+                            class="nav-effect">ÉTIQUETTES</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mb-3" href="{{ path('admin_event_index') }}"><span class="mr-3"><i
+                                class="fas fa-calendar-week"></i></span><span
+                            class="nav-effect">ÉVÉNEMENTS</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mb-3" href="#"><span class="mr-2"><i class="fas fa-hand-holding-usd"></i></span><span
+                            class="nav-effect">ABONNEMENTS</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ml-2" href="{{ path('admin_question_index') }}"><span class="mr-2"><i
+                                class="fas fa-question-circle"></i></span><span
+                            class="nav-effect">FAQ</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ml-2" href="{{ path('home_index') }}"><span class="mr-2"><i
+                                class="fas fa-location-arrow"></i></span><span
+                            class="nav-effect">ACCÈS AU SITE</span></a>
+
+            </li>
+        </ul>
+    </div>
+    <div class="navbar_admin_logo pt-3 mb-5">
+        <a class="navbar-brand ml-2" href="{{ path('admin_index') }}"><img
+                    src="{{ asset('build/ADC_logo_transparent.png') }}" alt="logo" height="80"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
                 aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

@@ -16,6 +16,7 @@
 .profile-card-5 {
     font-size: $font-size-body;
     font-weight: 300;
+    min-height: 200px;
 
     &:hover {
         box-shadow: none;
@@ -38,9 +39,19 @@ h5.card-title {
     margin: -50px 20px 20px;
 }
 
-
 .firstblog {
     margin: 50px -50px 80px -50px;
+    height: 400px;
+}
+
+.firstimage {
+    height: 400px;
+    object-fit: cover;
+}
+
+.bodyimage {
+    height: 225px;
+    object-fit: cover;
 }
 
 .card-img-block-top {
@@ -62,4 +73,19 @@ h3.card-title {
 .badge-gold {
     background-color: $primary-color;
     color: $third-color;
+}
+
+.imgAdminBlog {
+    object-fit: cover;
+}
+
+.custom-file-label:lang(fr)::after {
+    content: 'Parcourir';
+}
+
+.vich-image a img {
+    margin-top: 1rem;
+    height: 50vh;
+    width: 100%;
+    object-fit: cover;
 }

@@ -84,7 +84,14 @@
                             </div>
                             <div class="col-md-4">
                                 <a href="{{ path('user_show', {'id': card.id}) }}">
-                                    <img src="{{ card.picture }}" class="card-img" alt="Image">
+                                    <img
+                                        src="
+                                            {% if card.picture is null %}
+                                            {{ asset('build/placeholder_profil_grey.png') }}
+                                            {% else %}
+                                            {{ vich_uploader_asset(card, 'pictureFile') }}
+                                            {% endif %}"
+                                        class="card-img" alt="Image">
                                 </a>
                             </div>
                         </div>
@@ -158,6 +165,17 @@
             </div>
         </div>
     </div>
+
+    <div class="mt-5 mb-5">
+        <fieldset class="mt-5 container-xl container-lg container-fluid border-gold">
+            <h2 class="text-center p-3">S'inscrire à la lettre d'information : </h2>
+            {{ include('home/_form_newsletter.html.twig')}}
+            <div class="w-100 text-right">
+                <a class="text-muted font-italic" href="{{ path('home_unsubscribe_newsletter') }}">Se désinscrire</a>
+            </div>
+        </fieldset>
+    </div>
+
 {% endblock %}
 
 {% block javascripts %}
