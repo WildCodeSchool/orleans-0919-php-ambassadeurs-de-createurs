@@ -81,7 +81,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setFirstname($faker->firstName);
             $user->setLastname($faker->lastName);
             $user->setCity(self::CITIES[array_rand(self::CITIES)]);
-            $user->setPicture('/build/placeholder_profil_grey.png');
             $user->setUpdatedAt(new DateTime());
             $user->setMail($faker->email);
             $user->setRoles([self::ROLES[1]]);
