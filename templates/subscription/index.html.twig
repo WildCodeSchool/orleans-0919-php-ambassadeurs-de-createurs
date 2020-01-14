@@ -1,0 +1,75 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Abonnement{% endblock %}
+
+{% block body %}
+    <div class="container pt-1 mb-5">
+        <h1 class="text-center m-5">Mon abonnement</h1>
+        <p class="text-center m-5 firstSentence">Le site est gratuit pour les ambassadeurs.
+            En revanche, afin de nous permettre de développer de nouvelles fonctionnalités, les créateurs sont invités à
+            prendre un abonnement pour rentrer en contact avec les ambassadeurs.
+        </p>
+        <h2 class="text-center">Trois abonnements sont proposés</h2>
+        <div class="row justify-content-center m-0">
+            {# block one month #}
+            <div class="col-md-4 col-lg-3 m-4 mb-5">
+                <div class="card-img-block">
+                    <div class="card-block-color">
+                        <p>1 mois</p>
+                    </div>
+                </div>
+
+                <div class="card profile-card-5 card-block">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ prices.oneMonth }} €/mois</h5>
+                    </div>
+                </div>
+            </div>
+            {# block six month #}
+            <div class="col-md-4 col-lg-3 m-4 mb-5">
+                <div class="card-img-block">
+                    <div class="card-block-color">
+                        <p>6 mois</p>
+                    </div>
+                </div>
+
+                <div class="card profile-card-5 card-block">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ prices.sixMonth }} €/mois</h5>
+                        <p>soit {{ prices.sixMonth * 6 }} € pour le semestre </p>
+                    </div>
+                </div>
+            </div>
+            {# block one year #}
+            <div class="col-md-4 col-lg-3 m-4 mb-5">
+                <div class="card-img-block">
+                    <div class="card-block-color">
+                        <p>12 mois</p>
+                    </div>
+                </div>
+
+                <div class="card profile-card-5 card-block">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ prices.oneYear }} €/mois</h5>
+                        <p>soit {{ prices.oneYear * 12 }} € pour l'année </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-left ml-5">
+            <p><i class="far fa-check-circle mr-3 primary-color"></i>
+                L’abonnement est à renouveler tous les ans à la date d’anniversaire.
+            </p>
+            <p><i class="far fa-check-circle mr-3 primary-color"></i>
+                Le paiement total est effectué au moment du règlement pour l’abonnement semestriel et à l’année.
+            </p>
+            <p><i class="far fa-check-circle mr-3 primary-color"></i>
+                Aucun remboursement ne pourra être effectué une fois l’abonnement choisi.
+            </p>
+            <p><i class="far fa-check-circle mr-3 primary-color"></i>
+                En revanche vous pouvez changer d’abonnement à tout moment. Votre nouvel abonnement
+                sedéclenchera automatiquement à la fin du précédent.
+            </p>
+        </div>
+    </div>
+{% endblock %}
