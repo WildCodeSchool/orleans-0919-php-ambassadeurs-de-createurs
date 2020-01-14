@@ -95,7 +95,7 @@ class Brand
 
     /**
      * @ORM\Column(type="boolean")
-     * * @Assert\Type(type="boolean")
+     * @Assert\Type(type="boolean")
      */
     private $hasSubscribe = false;
 
