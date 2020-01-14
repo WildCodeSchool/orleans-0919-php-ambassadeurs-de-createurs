@@ -62,7 +62,7 @@ function mapAmbasadors(amb, mar) {
         }
         const long = (amb[i].longitude !== null) ? amb[i].longitude : centerFrance[0];
         const lat = (amb[i].latitude !== null) ? amb[i].latitude : centerFrance[1];
-        const picture = (amb[i].picture !== null) ? '/uploads/user/'+amb[i].picture : '/build/placeholder_profil_grey.png';
+        const picture = (amb[i].picture !== null) ? `/uploads/user/${amb[i].picture}` : '/build/placeholder_profil_grey.png';
         // eslint-disable-next-line no-undef
         const m = L.marker([long, lat]);
 

@@ -109,6 +109,11 @@ svg.svg-inline--fa.fa-star.fa-w-18 {
     font-size: $font-size-body;
 }
 
+.popup div img {
+    height: 250px;
+    object-fit: cover;
+}
+
 a.fb-ic-card {
     font-size: $font-size-icon;
     color: $secondary-color;

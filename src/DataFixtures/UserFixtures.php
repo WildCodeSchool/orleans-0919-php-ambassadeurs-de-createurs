@@ -112,7 +112,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $admin->setFirstname('admin');
         $admin->setLastname('admin');
         $admin->setCity('admin');
-        $admin->setPicture('placeholder_profil_grey.png');
         $admin->setUpdatedAt(new DateTime());
         $admin->setMail('admin@admin.com');
         $admin->setRoles(['ROLE_ADMIN']);
