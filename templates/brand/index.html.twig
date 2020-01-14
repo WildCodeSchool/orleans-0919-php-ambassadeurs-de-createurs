@@ -6,19 +6,20 @@
     <h1>Brand index</h1>
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Site</th>
-                <th>Instagram</th>
-                <th>Host_advantage</th>
-                <th>Seller_advantage</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Site</th>
+            <th>Instagram</th>
+            <th>Host_advantage</th>
+            <th>Seller_advantage</th>
+            <th>Mise en avant</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
-        {% for brand in brands %}
+        {% for keys, brand in brands %}
             <tr>
                 <td>{{ brand.id }}</td>
                 <td>{{ brand.name }}</td>
@@ -27,6 +28,14 @@
                 <td>{{ brand.instagram }}</td>
                 <td>{{ brand.hostAdvantage }}</td>
                 <td>{{ brand.sellerAdvantage }}</td>
+                <td>
+                    {{ form_start(forms[keys]) }}
+                    {{ form_row(forms[keys].chosenCreator, { 'attr' : {'id' : keys ~ '_creator', 'name' : keys ~ '_creator'}}) }}
+                    <div class="flex d-flex justify-content-around">
+                        <button class="btn btn-gold">{{ button_label|default('Enregistrer') }}</button>
+                    </div>
+                    {{ form_end(forms[keys]) }}
+                </td>
                 <td>
                     <a href="{{ path('brand_show', {'id': brand.id}) }}">show</a>
                     <a href="{{ path('admin_brand_edit', {'id': brand.id}) }}">edit</a>

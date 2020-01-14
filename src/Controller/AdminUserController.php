@@ -55,10 +55,8 @@ class AdminUserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $city = $request->request->get('user')['city'];
             $coordinates = $coordinateService->getCoordinates($city);
-            if (!is_null($coordinates)) {
-                $user->setLatitude($coordinates[0]);
-                $user->setLongitude($coordinates[1]);
-            }
+            $user->setLatitude($coordinates[0]);
+            $user->setLongitude($coordinates[1]);
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'Votre utilisateur a été modifié');
