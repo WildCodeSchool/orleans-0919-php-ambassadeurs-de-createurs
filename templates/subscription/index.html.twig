@@ -51,7 +51,14 @@
                 </div>
             </div>
         </div>
-        <div class="text-left ml-5">
+        {% if app.user %}
+        <div class="text-center my-4">
+            <a href="#">
+                <button type="button" class="btn btn-gold">Je m'abonne</button>
+            </a>
+        </div>
+        {% endif %}
+        <div class="text-left ml-5 mt-5">
             <p><i class="far fa-check-circle mr-3 primary-color"></i>
                 L’abonnement est à renouveler tous les ans à la date d’anniversaire.
             </p>
