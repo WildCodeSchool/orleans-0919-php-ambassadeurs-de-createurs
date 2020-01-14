@@ -87,7 +87,7 @@ class AdminQuestionController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($question);
             $entityManager->flush();
-            $this->addFlash('danger', 'Votre question a été supprimé');
+            $this->addFlash('danger', 'Votre question a été supprimée de la FAQ');
         }
         return $this->redirectToRoute('admin_question_index');
     }
