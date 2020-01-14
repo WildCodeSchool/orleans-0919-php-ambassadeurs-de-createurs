@@ -41,7 +41,13 @@
                 {% else %}
                     <div class="col-md-4 m-4 mb-5">
                         <div class="card-img-block">
-                            <img class="card-img-top bodyimage" src="{{ vich_uploader_asset(article, 'imageFile') }}"
+                            <img class="card-img-top bodyimage"
+                                 src="
+                                    {% if article.image is null %}
+                                    {{ asset('build/blog_placeholder.png') }}
+                                    {% else %}
+                                    {{ vich_uploader_asset(article, 'imageFile') }}
+                                    {% endif %}"
                                  alt="image de l'article {{ article.title }}">
                         </div>
                         <div class="card profile-card-5 card-block">
