@@ -18,6 +18,8 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class UserInscriptionType extends AbstractType
 {
@@ -56,8 +58,36 @@ class UserInscriptionType extends AbstractType
                     new Length([
                         'min' => 4,
                         'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères',
-                        // max length allowed by Symfony for security reasons
                         'max' => 255,
+                    ]),
+                ],
+            ])
+            ->add('mentions', CheckboxType::class, [
+                'label' => "J'accepte les mentions",
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Vous devez accepter les mentions légales pour continuer l\'inscription.',
+                    ]),
+                ],
+            ])
+            ->add('CGU', CheckboxType::class, [
+                'label' => "J'accepte les",
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Vous devez accepter les conditions générales
+                         d\'utilisation pour continuer l\'inscription.',
+                    ]),
+                ],
+            ])
+            ->add('CGV', CheckboxType::class, [
+                'label' => "J'accepte les",
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Vous devez accepter les conditions générales
+                         de vente pour continuer l\'inscription.',
                     ]),
                 ],
             ]);
