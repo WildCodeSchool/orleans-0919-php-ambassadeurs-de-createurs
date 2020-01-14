@@ -93,6 +93,12 @@ class Brand
      */
     private $chosenCreator = false;
 
+    /**
+     * @ORM\Column(type="boolean")
+     * * @Assert\Type(type="boolean")
+     */
+    private $hasSubscribe = false;
+
     public function __construct()
     {
         $this->sponsoredEvents = new ArrayCollection();
@@ -230,6 +236,18 @@ class Brand
     public function setChosenCreator(bool $chosenCreator): self
     {
         $this->chosenCreator = $chosenCreator;
+
+        return $this;
+    }
+
+    public function getHasSubscribe(): ?bool
+    {
+        return $this->hasSubscribe;
+    }
+
+    public function setHasSubscribe(bool $hasSubscribe): self
+    {
+        $this->hasSubscribe = $hasSubscribe;
 
         return $this;
     }
