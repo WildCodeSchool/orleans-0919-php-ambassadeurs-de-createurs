@@ -20,7 +20,7 @@ class AdminSubscriptionController extends AbstractController
      */
     public function index(SubscriptionRepository $subRepository): Response
     {
-        return $this->render('subscription/index.html.twig', [
+        return $this->render('subscription/admin_index.html.twig', [
             'subscriptions' => $subRepository->findAll(),
         ]);
     }

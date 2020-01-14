@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Abonnement{% endblock %}
+{% block body %}
+    <div class="container">
+        <h1 class="text-center m-5">Les tarifs d'abonnement</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>1 mois</th>
+                <th>6 mois</th>
+                <th>12 mois</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for subscription in subscriptions %}
+                <tr>
+                    <td>{{ subscription.oneMonth }}€</td>
+                    <td>{{ subscription.sixMonth }}€</td>
+                    <td>{{ subscription.oneYear }}€</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun tarif trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
