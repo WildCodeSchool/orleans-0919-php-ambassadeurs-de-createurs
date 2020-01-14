@@ -16,6 +16,7 @@
 .profile-card-5 {
     font-size: $font-size-body;
     font-weight: 300;
+    min-height: 200px;
 
     &:hover {
         box-shadow: none;
@@ -76,11 +77,6 @@ h3.card-title {
 
 .imgAdminBlog {
     object-fit: cover;
-}
-
-.vich-image a img {
-    object-fit: cover;
-    width: 100%;
 }
 
 .custom-file-label:lang(fr)::after {

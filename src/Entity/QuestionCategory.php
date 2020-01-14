@@ -22,6 +22,9 @@ class QuestionCategory
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Votre catégotie doit être au plus {{ limit }} caractères de long")
      */
     private $category;
 
