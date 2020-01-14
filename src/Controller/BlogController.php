@@ -15,8 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BlogController extends AbstractController
 {
-    const NB_MAX_ARTICLES = 7;
-
+    const NB_MAX_ARTICLES = 8;
 
     /**
      * @Route("/{page}", name="blog_index", methods={"GET"}, requirements={"page" = "\d+"}, defaults={"page" = 1})

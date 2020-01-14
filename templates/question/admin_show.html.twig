@@ -1,0 +1,34 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block title %}{{ question.question }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center m-5">{{ question.question }}</h1>
+
+        <table class="table w-100">
+            <tbody>
+            <tr>
+                <th>Question</th>
+                <td class="text-center">{{ question.question }}</td>
+            </tr>
+            <tr>
+                <th>Catégorie</th>
+                <td class="text-center">{{ question.category.category }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ question.answer|raw }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="{{ path('admin_question_index') }}" class="btn btn-gold">
+            Retour
+        </a>
+
+        <a href="{{ path('admin_question_edit', {'id': question.id}) }}" class="btn btn-gold">
+            Modifier
+        </a>
+        {{ include('question/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
