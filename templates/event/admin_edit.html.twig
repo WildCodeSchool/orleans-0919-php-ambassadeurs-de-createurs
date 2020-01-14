@@ -6,16 +6,16 @@
     <div class="mt-5 container-xl container-lg container-fluid">
         <h1 class="text-center mt-3 mb-4">Modifier un événement</h1>
         <div class="border-gold p-4">
-            {{ include('event/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+            {{ include('event/admin_form.html.twig', {'button_label': 'Enregistrer'}) }}
         </div>
         <div class="row justify-content-between">
             <div class="col col-lg-4">
-                <a class="btn btn-dark m-5" href="{{ path('app_profile') }}">
+                <a class="btn btn-dark m-5" href="{{ path('admin_event_index') }}">
                     <i class="far fa-arrow-alt-circle-left"></i> Liste de vos événements
                 </a>
             </div>
             <div class="col col-lg-3">
-                {{ include('event/_delete_form.html.twig') }}
+                {{ include('event/admin_delete_form.html.twig') }}
             </div>
         </div>
     </div>

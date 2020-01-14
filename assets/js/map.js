@@ -66,7 +66,7 @@ function mapAmbasadors(amb, mar) {
         const m = L.marker([long, lat]);
 
         const customPopup = `<div class="d-flex flex-row popup"><div class="w-50">
-            <img class="img-fluid" src="${amb[i].picture}" alt="${amb[i].firstname} ${amb[i].lastname}">
+            <img class="img-fluid" src="/uploads/user/${amb[i].picture}" alt="${amb[i].firstname} ${amb[i].lastname}">
             </div> <div class="w-50 d-flex flex-column">
             <h4 class="text-center popupTitle">${amb[i].firstname} ${amb[i].lastname}</h4>
             <p class="m-0 ml-3 popupText">Lieu : ${amb[i].city}</p>
