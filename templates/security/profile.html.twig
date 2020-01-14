@@ -5,7 +5,14 @@
         <div class="row text-center mt-5">
             <div class="offset-1 col-4 mt-5">
                 <div class="pictureProfil">
-                    <img class="rounded-circle" src="{{ user.picture }}" alt="{{ user.firstname }}">
+                    <img class="rounded-circle profilPagePicture"
+                         src="
+                            {% if user.picture is null %}
+                            {{ asset('build/placeholder_profil_grey.png') }}
+                            {% else %}
+                            {{ vich_uploader_asset(user, 'pictureFile') }}
+                            {% endif %}"
+                         alt="{{ user.firstname }}">
                 </div>
                 <br>
                 <h3 class="nameProfil">
@@ -14,22 +21,6 @@
                 <br>
             </div>
             <div class="descriptionBloc col-4 offset-2 text-justify m-2 p-5 align-self-center ">
-                <div class="star">
-                    <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">
-                        <div class="col-md-1 col-sm-12 mt-2">
-                            <span class="js-likes">{{ user.followers | length }}</span>
-                            {% set class="far" %}
-                            {% if app.user %}
-                                {% for favorites in app.user.followedUsers %}
-                                    {% if user == favorites.userFavorite %}
-                                        {% set class="fas" %}
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                            <i class="{{ class }} fa-star ml-2"></i>
-                        </div>
-                    </a>
-                </div>
                 <p>J'habite à {{ user.city }}.</p>
                 <p>Les univers que j'aime sont : </p>
                 <ul>

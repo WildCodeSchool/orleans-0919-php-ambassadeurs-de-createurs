@@ -8,6 +8,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use \DateTime;
 
 class UserFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -48,7 +49,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setCity($city);
             $user->setLatitude($faker->latitude(-4.987792, 9.755859));
             $user->setLongitude($faker->longitude(41.046216, 51.563412));
-            $user->setPicture('/build/placeholder_profil_grey.png');
+            $user->setUpdatedAt(new DateTime());
             $user->setMail($faker->email);
             $user->setRoles([self::ROLES[0]]);
             $user->setDepartment($this->getReference("00" . rand(1, 7)));
@@ -80,7 +81,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setFirstname($faker->firstName);
             $user->setLastname($faker->lastName);
             $user->setCity(self::CITIES[array_rand(self::CITIES)]);
-            $user->setPicture('/build/placeholder_profil_grey.png');
+            $user->setUpdatedAt(new DateTime());
             $user->setMail($faker->email);
             $user->setRoles([self::ROLES[1]]);
             $user->setDepartment($this->getReference("00" . rand(1, 7)));
@@ -111,7 +112,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $admin->setFirstname('admin');
         $admin->setLastname('admin');
         $admin->setCity('admin');
-        $admin->setPicture('admin');
+        $admin->setUpdatedAt(new DateTime());
         $admin->setMail('admin@admin.com');
         $admin->setRoles(['ROLE_ADMIN']);
         $admin->setDepartment($this->getReference("00" . rand(1, 7)));

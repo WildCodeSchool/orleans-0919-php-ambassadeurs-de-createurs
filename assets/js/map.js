@@ -60,11 +60,14 @@ function mapAmbasadors(amb, mar) {
         for (const j in amb[i].categories) {
             categories[j] = amb[i].categories[j].description;
         }
+        const long = (amb[i].longitude !== null) ? amb[i].longitude : centerFrance[0];
+        const lat = (amb[i].latitude !== null) ? amb[i].latitude : centerFrance[1];
+        const picture = (amb[i].picture !== null) ? `/uploads/user/${amb[i].picture}` : '/build/placeholder_profil_grey.png';
         // eslint-disable-next-line no-undef
-        const m = L.marker([amb[i].longitude, amb[i].latitude]);
+        const m = L.marker([long, lat]);
 
         const customPopup = `<div class="d-flex flex-row popup"><div class="w-50">
-            <img class="img-fluid" src="${amb[i].picture}" alt="${amb[i].firstname} ${amb[i].lastname}">
+            <img class="img-fluid" src=${picture} alt="${amb[i].firstname} ${amb[i].lastname}">
             </div> <div class="w-50 d-flex flex-column">
             <h4 class="text-center popupTitle">${amb[i].firstname} ${amb[i].lastname}</h4>
             <p class="m-0 ml-3 popupText">Lieu : ${amb[i].city}</p>
@@ -95,8 +98,10 @@ function mapEvents(amb, mar) {
         // eslint-disable-next-line guard-for-in,no-restricted-syntax
         for (const j in amb[i].events) {
             const event = amb[i].events[j];
+            const long = (amb[i].longitude !== null) ? amb[i].longitude : centerFrance[0];
+            const lat = (amb[i].latitude !== null) ? amb[i].latitude : centerFrance[1];
             // eslint-disable-next-line no-undef
-            const m = L.marker([event.longitude, event.latitude]);
+            const m = L.marker([long, lat]);
 
             const dateEvent = new Date(event.dateTime.timestamp * 1e3);
             const optionsDate = {

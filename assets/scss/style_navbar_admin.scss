@@ -1,58 +1,26 @@
 /****Navbar_admin****/
-
-.navbar {
-    box-shadow: 1px 1px 20px $navbar-border-color;
+.navbar_admin {
+    height: 100%;
+    min-height: 100vh;
+    background-color: $third-color;
 }
 
-.navbar-light .navbar-nav .nav-link {
-    font-family: $font-body;
-    color: $secondary-color;
-    font-size: $font-size-body;
+.navbar_admin_logo {
+    display: flex;
+    justify-content: center;
 }
 
-.navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
-    color: $primary-color;
-    text-decoration: none;
+.nav_admin_picture {
+    display: flex;
+    justify-content: center;
 }
 
-.navbar-toggler-icon {
-    color: $secondary-color;
+.picture_admin {
+    display: contents;
 }
 
-.nav-effect {
-    position: relative;
-    padding: 5px;
-}
-
-.nav-effect::before, span::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: $primary-color;
-    transform: scaleX(0);
-    transition: transform 0.5s ease;
-}
-
-.nav-effect::before {
-    top: 0;
-    transform-origin: center right;
-}
-
-.nav-effect:hover::before {
-    transform-origin: center left;
-    transform: scaleX(1);
-}
-
-.nav-effect::after {
-    bottom: 0;
-    transform-origin: center left;
-}
-
-.nav-effect:hover::after {
-    transform-origin: center right;
-    transform: scaleX(1);
+.nav-title {
+    list-style-type: none;
 }
 
 /*******/
