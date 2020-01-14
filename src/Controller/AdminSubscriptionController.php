@@ -59,7 +59,7 @@ class AdminSubscriptionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="subscription_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="admin_sub_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Subscription $subscription): Response
     {
@@ -69,7 +69,7 @@ class AdminSubscriptionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('subscription_index');
+            return $this->redirectToRoute('admin_sub_index');
         }
 
         return $this->render('subscription/edit.html.twig', [

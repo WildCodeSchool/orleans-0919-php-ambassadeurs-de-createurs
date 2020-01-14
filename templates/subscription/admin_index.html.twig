@@ -10,6 +10,8 @@
                 <th>1 mois</th>
                 <th>6 mois</th>
                 <th>12 mois</th>
+                <th>Action</th>
+
             </tr>
             </thead>
             <tbody>
@@ -18,12 +20,16 @@
                     <td>{{ subscription.oneMonth }}€</td>
                     <td>{{ subscription.sixMonth }}€</td>
                     <td>{{ subscription.oneYear }}€</td>
+                <td>
+                    <a href="{{ path('admin_sub_edit', {'id': subscription.id}) }}" class="btn btn-gold"><i class="fas fa-pencil-alt mr-2"></i>Modifier</a>
+                </td>
                 </tr>
             {% else %}
                 <tr>
                     <td colspan="5">Aucun tarif trouvé</td>
                 </tr>
             {% endfor %}
+
             </tbody>
         </table>
     </div>
