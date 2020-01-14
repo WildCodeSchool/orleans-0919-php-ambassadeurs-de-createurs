@@ -1,8 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block layout %}
+    <div class="row container-fluid">
+        <header class="col-lg-2 p-0">
 {% block header %}
     {% include 'include/_navbar_admin.html.twig' %}
 {% endblock %}
-
+        </header>
+        <main class="col-lg-10 no-gutters">
 {% block body %}
+{% endblock %}
+        </main>
+    </div>
 {% endblock %}

@@ -45,9 +45,19 @@ a
     color : $background-secondary;
 }
 
+
+.img-profil {
+    width: 20rem;
+}
+
+.img-fluid{
+    height: 400px;
+}
+
 .vich-image a img {
     margin-top: 1rem;
     height: 50vh;
+    width: 100%;
     object-fit: cover;
 }
 
@@ -56,3 +66,4 @@ a
     max-height: 400px;
     object-fit: cover;
 }
+
