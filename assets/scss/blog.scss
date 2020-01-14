@@ -82,3 +82,10 @@ h3.card-title {
 .custom-file-label:lang(fr)::after {
     content: 'Parcourir';
 }
+
+.vich-image a img {
+    margin-top: 1rem;
+    height: 50vh;
+    width: 100%;
+    object-fit: cover;
+}

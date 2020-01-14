@@ -1,11 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout_admin.html.twig' %}
 
-{% block title %}New Question{% endblock %}
+{% block title %}Créer une question{% endblock %}
 
 {% block body %}
-    <h1>Create new Question</h1>
-
-    {{ include('question/_form.html.twig') }}
-
-    <a href="{{ path('question_index') }}">back to list</a>
+    <div class="mt-5 container-xl container-lg container-fluid">
+        <h1 class="text-center mt-3 mb-4">Créer une nouvelle question</h1>
+        <div class="border-gold p-4">
+            {{ include('question/_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

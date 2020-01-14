@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Question;
 use App\Entity\QuestionCategory;
 use App\Repository\QuestionCategoryRepository;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,8 +20,9 @@ class QuestionType extends AbstractType
             ->add('question', TextType::class, [
                 'label' => 'Question',
             ])
-            ->add('answer', TextType::class, [
+            ->add('answer', CKEditorType::class, [
                 'label' => 'Réponse',
+                'trim' => true,
             ])
             ->add('category', EntityType::class, [
                 'class' => QuestionCategory::class,
