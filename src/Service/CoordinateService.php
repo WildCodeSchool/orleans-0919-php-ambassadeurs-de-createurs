@@ -13,6 +13,6 @@ class CoordinateService
         $response = $client->request('GET', $url);
         $content = $response->toArray();
 
-        return $content['features'][0]['geometry']['coordinates'] ?? null;
+        return $content['features'][0]['geometry']['coordinates'] ?? [null, null];
     }
 }

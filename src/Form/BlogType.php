@@ -39,7 +39,11 @@ class BlogType extends AbstractType
             ->add('date', DateTimeType::class, [
                 'label' => 'Date',
             ])
-            ->add('imageFile', VichImageType::class)
+            ->add('imageFile', VichImageType::class, [
+                'label'             => 'Image',
+                'download_link'     => false,
+                'allow_delete'      => false,
+            ])
             ->add('content', CKEditorType::class, [
                 'label' => 'Contenu',
                 'trim' => true,

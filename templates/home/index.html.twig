@@ -84,7 +84,7 @@
                             </div>
                             <div class="col-md-4">
                                 <a href="{{ path('user_show', {'id': card.id}) }}">
-                                    <img src="{{ card.picture }}" class="card-img" alt="Image">
+                                    <img src="{{ vich_uploader_asset(card, 'pictureFile') }}" class="card-img" alt="Image">
                                 </a>
                             </div>
                         </div>
