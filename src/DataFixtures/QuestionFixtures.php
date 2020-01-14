@@ -16,7 +16,7 @@ class QuestionFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 0; $i < 20; $i++) {
             $question = new Question();
             $question->setQuestion($faker->sentence);
-            $question->setAnswer($faker->paragraph(3));
+            $question->setAnswer($faker->paragraph(12));
             $question->setCategory($this->getReference('questionCategory_' . rand(0, 2)));
             $manager->persist($question);
         }

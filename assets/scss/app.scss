@@ -3,12 +3,15 @@
 @import "mixin";
 @import "form";
 @import "style_navbar";
+@import "style_navbar_admin";
 @import "home";
 @import "profil_user";
 @import "style_footer";
 @import "search";
 @import "blog";
+@import "concept";
 @import "subscription";
+@import "faq";
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/solid';
