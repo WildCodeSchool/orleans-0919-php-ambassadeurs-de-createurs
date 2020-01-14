@@ -4,24 +4,67 @@ namespace App\Controller;
 
 use App\Entity\Brand;
 use App\Form\BrandType;
+use App\Form\ChosenCreatorType;
 use App\Repository\BrandRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\FormFactory;
 
 /**
  * @Route("/brand")
  */
 class BrandController extends AbstractController
 {
+    const MAX_ON_HOMEPAGE = 5;
+
     /**
-     * @Route("/", name="brand_index", methods={"GET"})
+     * @Route("/", name="brand_index", methods={"GET","POST"})
+     * @param BrandRepository $brandRepository
+     * @param Request $request
+     * @return Response
      */
-    public function index(BrandRepository $brandRepository): Response
+    public function index(BrandRepository $brandRepository, Request $request): Response
     {
+        /**
+         * @var FormFactory
+         */
+        $formFactory = $this->get('form.factory');
+        $brands = $brandRepository->findAll();
+        $chosenCreator = count($brandRepository->findBy(['chosenCreator' => true]));
+        $views = [];
+        foreach ($brands as $key => $brand) {
+            $form = $formFactory->createNamed('chosen_creator_' . $key, ChosenCreatorType::class, $brand);
+            $form->handleRequest($request);
+            $views[] = $form->createView();
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                if ($chosenCreator > self::MAX_ON_HOMEPAGE && $brand->getChosenCreator() === true) {
+                    $this->addFlash(
+                        'danger',
+                        self::MAX_ON_HOMEPAGE + 1 . ' Créateurs sont déjà affichés sur la page d\'accueil'
+                    );
+                    return $this->redirectToRoute('brand_index');
+                } elseif ($chosenCreator > 5 && $brand->getChosenCreator() === false) {
+                    $this->getDoctrine()->getManager()->flush();
+                    $this->addFlash('success', 'Votre créateur a été retiré de la page d\'accueil');
+                    return $this->redirectToRoute('brand_index');
+                } elseif ($brand->getChosenCreator() === false) {
+                    $this->getDoctrine()->getManager()->flush();
+                    $this->addFlash('success', 'Votre créateur a été retiré de la page d\'accueil');
+                    return $this->redirectToRoute('brand_index');
+                }
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash('success', 'Votre créateur a été mis en avant et sera affiché sur la page d\'accueil');
+                return $this->redirectToRoute('brand_index');
+            }
+        }
         return $this->render('brand/index.html.twig', [
-            'brands' => $brandRepository->findAll(),
+            'brands' => $brands,
+            'forms' => $views,
         ]);
     }
 
@@ -83,7 +126,7 @@ class BrandController extends AbstractController
      */
     public function delete(Request $request, Brand $brand): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$brand->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $brand->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($brand);
             $entityManager->flush();

@@ -6,7 +6,7 @@
     <div class="container">
         <h1 class="text-center m-5">{{ blog.title }}</h1>
 
-        <table class="table">
+        <table class="table w-100">
             <tbody>
             <tr>
                 <th>Titre</th>
@@ -15,6 +15,10 @@
             <tr>
                 <th>Étiquette</th>
                 <td class="text-center">{{ blog.articleTag.tag }}</td>
+            </tr>
+            <tr class="w-100">
+                <th>Image</th>
+                <td><img class="imgAdminBlog w-100" src="{{ vich_uploader_asset(blog, 'imageFile') }}" alt="{{ blog.title }}"></td>
             </tr>
             <tr>
                 <th>Contenu</th>
