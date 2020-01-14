@@ -62,11 +62,12 @@ function mapAmbasadors(amb, mar) {
         }
         const long = (amb[i].longitude !== null) ? amb[i].longitude : centerFrance[0];
         const lat = (amb[i].latitude !== null) ? amb[i].latitude : centerFrance[1];
+        const picture = (amb[i].picture !== null) ? `/uploads/user/${amb[i].picture}` : '/build/placeholder_profil_grey.png';
         // eslint-disable-next-line no-undef
         const m = L.marker([long, lat]);
 
         const customPopup = `<div class="d-flex flex-row popup"><div class="w-50">
-            <img class="img-fluid" src="/uploads/user/${amb[i].picture}" alt="${amb[i].firstname} ${amb[i].lastname}">
+            <img class="img-fluid" src=${picture} alt="${amb[i].firstname} ${amb[i].lastname}">
             </div> <div class="w-50 d-flex flex-column">
             <h4 class="text-center popupTitle">${amb[i].firstname} ${amb[i].lastname}</h4>
             <p class="m-0 ml-3 popupText">Lieu : ${amb[i].city}</p>
