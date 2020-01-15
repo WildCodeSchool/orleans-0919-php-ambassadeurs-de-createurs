@@ -109,6 +109,11 @@ svg.svg-inline--fa.fa-star.fa-w-18 {
     font-size: $font-size-body;
 }
 
+.popup div img {
+    height: 250px;
+    object-fit: cover;
+}
+
 a.fb-ic-card {
     font-size: $font-size-icon;
     color: $secondary-color;
@@ -134,7 +139,7 @@ div.row.reasons {
     display: flex;
     justify-content: center;
 
-    .col-3.text-reasons {
+    .text-reasons {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -169,6 +174,32 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4 {
 
 button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     color: $secondary-color;
+}
+
+.imgNewsletter{
+    width: 100vw;
+    opacity: 0.6;
+}
+
+.cardNewsletter{
+    position: absolute;
+    padding: 20px;
+    width: 50%;
+    bottom: 10%;
+    right: 5%;
+
+    div {
+        text-align: right;
+    }
+}
+
+.containerNewsletter{
+    position: relative;
+    text-align: center;
+
+    .card:hover{
+        box-shadow: none;
+    }
 }
 
 @media screen and (min-width: 1000px) {
@@ -206,5 +237,18 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     #map {
         width: 100vw;
         height: 90vh;
+    }
+
+    .cardNewsletter{
+        position: relative;
+        padding: 10px;
+        width: 100vw;
+        left: 15px;
+        right: 0;
+
+        div{
+            text-align: center;
+            margin-top: 30px;
+        }
     }
 }

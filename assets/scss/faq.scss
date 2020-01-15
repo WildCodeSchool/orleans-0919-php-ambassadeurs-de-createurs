@@ -1,0 +1,17 @@
+.question {
+    font-size: $font-size-body;
+    text-decoration: none;
+    color: $secondary-color;
+
+    &:focus {
+        text-decoration: none;
+    }
+
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+.answer {
+    text-indent: 1rem;
+}

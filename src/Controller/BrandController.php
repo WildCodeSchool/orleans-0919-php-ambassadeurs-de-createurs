@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Brand;
 use App\Form\BrandType;
 use App\Form\ChosenCreatorType;
+use App\Form\HasSubscribeType;
 use App\Repository\BrandRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormBuilder;
@@ -34,37 +35,21 @@ class BrandController extends AbstractController
          */
         $formFactory = $this->get('form.factory');
         $brands = $brandRepository->findAll();
-        $chosenCreator = count($brandRepository->findBy(['chosenCreator' => true]));
-        $views = [];
-        foreach ($brands as $key => $brand) {
-            $form = $formFactory->createNamed('chosen_creator_' . $key, ChosenCreatorType::class, $brand);
-            $form->handleRequest($request);
-            $views[] = $form->createView();
+        $viewsChosenCreator = [];
+        $viewsHasSubscribe = [];
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                if ($chosenCreator > self::MAX_ON_HOMEPAGE && $brand->getChosenCreator() === true) {
-                    $this->addFlash(
-                        'danger',
-                        self::MAX_ON_HOMEPAGE + 1 . ' Créateurs sont déjà affichés sur la page d\'accueil'
-                    );
-                    return $this->redirectToRoute('brand_index');
-                } elseif ($chosenCreator > 5 && $brand->getChosenCreator() === false) {
-                    $this->getDoctrine()->getManager()->flush();
-                    $this->addFlash('success', 'Votre créateur a été retiré de la page d\'accueil');
-                    return $this->redirectToRoute('brand_index');
-                } elseif ($brand->getChosenCreator() === false) {
-                    $this->getDoctrine()->getManager()->flush();
-                    $this->addFlash('success', 'Votre créateur a été retiré de la page d\'accueil');
-                    return $this->redirectToRoute('brand_index');
-                }
-                $this->getDoctrine()->getManager()->flush();
-                $this->addFlash('success', 'Votre créateur a été mis en avant et sera affiché sur la page d\'accueil');
-                return $this->redirectToRoute('brand_index');
-            }
+        foreach ($brands as $key => $brand) {
+            $formChosenCreator = $formFactory->createNamed('chosen_creator_' . $key, ChosenCreatorType::class, $brand);
+            $viewsChosenCreator[] = $formChosenCreator->createView();
+            $formHasSubscribe = $formFactory->createNamed('has_subscribe_' . $key, HasSubscribeType::class, $brand);
+            $viewsHasSubscribe[] = $formHasSubscribe->createView();
+            $this->formChosenCreators($brandRepository, $request, $formChosenCreator, $brand);
+            $this->formHasSubscribes($brandRepository, $request, $formHasSubscribe, $brand);
         }
         return $this->render('brand/index.html.twig', [
             'brands' => $brands,
-            'forms' => $views,
+            'formsChosenCreators' => $viewsChosenCreator,
+            'formsHasSubscribes' => $viewsHasSubscribe,
         ]);
     }
 
@@ -73,16 +58,18 @@ class BrandController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user =  $this->getUser();
         $brand = new Brand();
         $form = $this->createForm(BrandType::class, $brand);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $brand->setUser($user);
             $entityManager->persist($brand);
             $entityManager->flush();
             $this->addFlash('success', 'Votre marque a été créée');
-            return $this->redirectToRoute('brand_index');
+            return $this->redirectToRoute('app_profile');
         }
 
         return $this->render('brand/new.html.twig', [
@@ -106,19 +93,25 @@ class BrandController extends AbstractController
      */
     public function edit(Request $request, Brand $brand): Response
     {
-        $form = $this->createForm(BrandType::class, $brand);
-        $form->handleRequest($request);
+        $user = $this->getUser();
+        if ($user === $brand->getUser()) {
+            $form = $this->createForm(BrandType::class, $brand);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', 'Votre marque a été modifiée');
-            return $this->redirectToRoute('brand_index');
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash('success', 'Votre marque a été modifiée');
+                return $this->redirectToRoute('app_profile');
+            }
+
+            return $this->render('brand/edit.html.twig', [
+                'brand' => $brand,
+                'form' => $form->createView(),
+            ]);
+        } else {
+            $this->addFlash('danger', 'Vous ne pouvez pas modifier cette marque.');
+            return $this->redirectToRoute('app_profile');
         }
-
-        return $this->render('brand/edit.html.twig', [
-            'brand' => $brand,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**
@@ -133,6 +126,53 @@ class BrandController extends AbstractController
             $this->addFlash('danger', 'Votre marque a été supprimée');
         }
 
-        return $this->redirectToRoute('brand_index');
+        return $this->redirectToRoute('app_profile');
+    }
+
+    private function formChosenCreators(
+        BrandRepository $brandRepository,
+        Request $request,
+        $formChosenCreator,
+        $brand
+    ) {
+        $chosenCreator = count($brandRepository->findBy(['chosenCreator' => true]));
+        $formChosenCreator->handleRequest($request);
+        if ($formChosenCreator->isSubmitted() && $formChosenCreator->isValid()) {
+            if ($chosenCreator > self::MAX_ON_HOMEPAGE && $brand->getChosenCreator() === true) {
+                $this->addFlash(
+                    'danger',
+                    self::MAX_ON_HOMEPAGE + 1 . ' Créateurs sont déjà affichés sur la page d\'accueil'
+                );
+                return $this->redirectToRoute('brand_index');
+            }
+
+            if ($brand->getChosenCreator() === false) {
+                $this->addFlash('success', 'Votre créateur a été retiré de la page d\'accueil');
+            } else {
+                $this->addFlash(
+                    'success',
+                    'Votre créateur a été mis en avant et sera affiché sur la page d\'accueil'
+                );
+            }
+
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('brand_index');
+        }
+    }
+
+    private function formHasSubscribes(BrandRepository $brandRepository, Request $request, $formHasSubscribe, $brand)
+    {
+        $formHasSubscribe->handleRequest($request);
+
+        if ($formHasSubscribe->isSubmitted() && $formHasSubscribe->isValid()) {
+            if ($brand->getHasSubscribe() === true) {
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash('success', $brand->getName() . ' s\'est abonné');
+                return $this->redirectToRoute('brand_index');
+            }
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('danger', $brand->getName() . ' s\'est désabonné');
+            return $this->redirectToRoute('brand_index');
+        }
     }
 }

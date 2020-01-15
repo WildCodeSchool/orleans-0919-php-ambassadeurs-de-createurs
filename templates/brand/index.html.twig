@@ -8,14 +8,15 @@
         <thead>
         <tr>
             <th>Id</th>
-            <th>Name</th>
+            <th>Nom</th>
             <th>Description</th>
             <th>Site</th>
             <th>Instagram</th>
-            <th>Host_advantage</th>
-            <th>Seller_advantage</th>
+            <th>Avantage des hôtes</th>
+            <th>Avantage des vendeurs</th>
             <th>Mise en avant</th>
-            <th>actions</th>
+            <th>Abonnement</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -29,16 +30,24 @@
                 <td>{{ brand.hostAdvantage }}</td>
                 <td>{{ brand.sellerAdvantage }}</td>
                 <td>
-                    {{ form_start(forms[keys]) }}
-                    {{ form_row(forms[keys].chosenCreator, { 'attr' : {'id' : keys ~ '_creator', 'name' : keys ~ '_creator'}}) }}
+                    {{ form_start(formsChosenCreators[keys]) }}
+                    {{ form_row(formsChosenCreators[keys].chosenCreator, { 'attr' : {'id' : keys ~ '_creator', 'name' : keys ~ '_creator'}}) }}
                     <div class="flex d-flex justify-content-around">
                         <button class="btn btn-gold">{{ button_label|default('Enregistrer') }}</button>
                     </div>
-                    {{ form_end(forms[keys]) }}
+                    {{ form_end(formsChosenCreators[keys]) }}
+                </td>
+                <td>
+                    {{ form_start(formsHasSubscribes[keys]) }}
+                    {{ form_row(formsHasSubscribes[keys].hasSubscribe, { 'attr' : {'id' : keys ~ '_creator', 'name' : keys ~ '_creator'}}) }}
+                    <div class="flex d-flex justify-content-around">
+                        <button class="btn btn-gold">{{ button_label|default('Enregistrer') }}</button>
+                    </div>
+                    {{ form_end(formsHasSubscribes[keys]) }}
                 </td>
                 <td>
                     <a href="{{ path('brand_show', {'id': brand.id}) }}">show</a>
-                    <a href="{{ path('brand_edit', {'id': brand.id}) }}">edit</a>
+                    <a href="{{ path('admin_brand_edit', {'id': brand.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

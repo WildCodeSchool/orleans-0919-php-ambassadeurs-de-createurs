@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Subscription{% endblock %}
+
+{% block body %}
+    <h1>Create new Subscription</h1>
+
+    {{ include('subscription/_form.html.twig') }}
+
+    <a href="{{ path('subscription_index') }}">back to list</a>
+{% endblock %}

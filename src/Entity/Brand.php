@@ -70,7 +70,7 @@ class Brand
     private $sellerAdvantage;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="brand", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="brand")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -93,9 +93,21 @@ class Brand
      */
     private $chosenCreator = false;
 
+    /**
+     * @ORM\Column(type="boolean")
+     * @Assert\Type(type="boolean")
+     */
+    private $hasSubscribe = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Gallery", mappedBy="galleryOwner", orphanRemoval=true)
+     */
+    private $galleries;
+
     public function __construct()
     {
         $this->sponsoredEvents = new ArrayCollection();
+        $this->galleries = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -230,6 +242,49 @@ class Brand
     public function setChosenCreator(bool $chosenCreator): self
     {
         $this->chosenCreator = $chosenCreator;
+
+        return $this;
+    }
+
+    public function getHasSubscribe(): ?bool
+    {
+        return $this->hasSubscribe;
+    }
+
+    public function setHasSubscribe(bool $hasSubscribe): self
+    {
+        $this->hasSubscribe = $hasSubscribe;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Gallery[]
+     */
+    public function getGalleries(): Collection
+    {
+        return $this->galleries;
+    }
+
+    public function addGallery(Gallery $gallery): self
+    {
+        if (!$this->galleries->contains($gallery)) {
+            $this->galleries[] = $gallery;
+            $gallery->setGalleryOWner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGallery(Gallery $gallery): self
+    {
+        if ($this->galleries->contains($gallery)) {
+            $this->galleries->removeElement($gallery);
+            // set the owning side to null (unless already changed)
+            if ($gallery->getGalleryOWner() === $this) {
+                $gallery->setGalleryOWner(null);
+            }
+        }
 
         return $this;
     }

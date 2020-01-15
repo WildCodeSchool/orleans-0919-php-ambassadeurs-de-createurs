@@ -166,7 +166,7 @@ class User implements UserInterface, \Serializable
     private $longitude;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Brand", mappedBy="user", cascade={"remove", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Brand", mappedBy="user", cascade={"remove"})
      */
     private $brand;
 

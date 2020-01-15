@@ -14,20 +14,4 @@ class ConceptController extends AbstractController
     {
         return $this->render('concept/index.html.twig');
     }
-
-    /**
-     * @Route("/concept/createur", name="concept_creator")
-     */
-    public function showCreatorConcept()
-    {
-        return $this->render('concept/concept_creator.html.twig');
-    }
-
-    /**
-     * @Route("/concept/ambassadeur", name="concept_ambassador")
-     */
-    public function showAmbassadorConcept()
-    {
-        return $this->render('concept/concept_ambassador.html.twig');
-    }
 }

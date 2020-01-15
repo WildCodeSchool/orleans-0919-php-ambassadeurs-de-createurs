@@ -81,7 +81,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setFirstname($faker->firstName);
             $user->setLastname($faker->lastName);
             $user->setCity(self::CITIES[array_rand(self::CITIES)]);
-            $user->setPicture('/build/placeholder_profil_grey.png');
             $user->setUpdatedAt(new DateTime());
             $user->setMail($faker->email);
             $user->setRoles([self::ROLES[1]]);
@@ -113,7 +112,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $admin->setFirstname('admin');
         $admin->setLastname('admin');
         $admin->setCity('admin');
-        $admin->setPicture('placeholder_profil_grey.png');
         $admin->setUpdatedAt(new DateTime());
         $admin->setMail('admin@admin.com');
         $admin->setRoles(['ROLE_ADMIN']);
