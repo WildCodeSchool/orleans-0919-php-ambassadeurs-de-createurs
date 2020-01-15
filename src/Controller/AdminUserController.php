@@ -44,30 +44,6 @@ class AdminUserController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="admin_user_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, User $user, CoordinateService $coordinateService): Response
-    {
-        $form = $this->createForm(UserInscriptionType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $city = $request->request->get('user')['city'];
-            $coordinates = $coordinateService->getCoordinates($city);
-            $user->setLatitude($coordinates[0]);
-            $user->setLongitude($coordinates[1]);
-            $this->getDoctrine()->getManager()->persist($user);
-            $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', 'Votre utilisateur a été modifié');
-            return $this->redirectToRoute('admin_user_index');
-        }
-
-        return $this->render('user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="admin_user_delete", methods={"DELETE"})
