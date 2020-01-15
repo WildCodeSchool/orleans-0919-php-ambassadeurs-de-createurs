@@ -81,14 +81,8 @@ class HomeController extends AbstractController
         ];
         $ambassadorsJson = $serializer->serialize($ambassadors, 'json', $context);
         $creators = $brandRepository->findChosenCreator();
-        $favoriteCreators = [];
-//        foreach ($creators as $keyCreator => $creator) {
-//            dump($creator);
-//            $id = $creator->getUser();
-//            $favoriteCreators[$keyCreator] = $favoriteRepository->findFavoriteByUser($id);
-//        }
+        
         return $this->render('/home/index.html.twig', [
-            'favoriteCreators' => $favoriteCreators,
             'ambassadors' => $ambassadorsJson,
             'ambassadorCards' => $ambassadorCards,
             'creators' => $creators,
