@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\BrandRepository;
+use App\Repository\FavoriteRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -19,13 +22,21 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/", name="home_index")
+     * @param Request $request
      * @param UserRepository $userRepository
      * @param SerializerInterface $serializer
+     * @param BrandRepository $brandRepository
+     * @param FavoriteRepository $favoriteRepository
      * @return Response
      * @throws \Exception
      */
-    public function index(Request $request, UserRepository $userRepository, SerializerInterface $serializer): Response
-    {
+    public function index(
+        Request $request,
+        UserRepository $userRepository,
+        SerializerInterface $serializer,
+        BrandRepository $brandRepository,
+        FavoriteRepository $favoriteRepository
+    ): Response {
         $form = $this->createFormBuilder()
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
@@ -44,9 +55,9 @@ class HomeController extends AbstractController
             $mailChimp = new MailChimp($this->getParameter('mailchimp_api_key'));
             $listId = $mailChimp->get('lists')['lists'][0]['id'];
 
-            $mailChimp->post('lists/'.$listId.'/members', [
+            $mailChimp->post('lists/' . $listId . '/members', [
                 'email_address' => $newsletterData['mail'],
-                'merge_fields' => ['FNAME'=>$newsletterData['firstname']],
+                'merge_fields' => ['FNAME' => $newsletterData['firstname']],
                 'status' => 'subscribed',
             ]);
             if ($mailChimp->success()) {
@@ -58,7 +69,7 @@ class HomeController extends AbstractController
         }
 
         $ambassadors = $userRepository->findByRoles(User::ROLE_AMBASSADOR);
-        $ambassadorCards = array_slice($ambassadors, count($ambassadors)-self::NB_CARDS, self::NB_CARDS);
+        $ambassadorCards = array_slice($ambassadors, count($ambassadors) - self::NB_CARDS, self::NB_CARDS);
         $context = [
             AbstractNormalizer::IGNORED_ATTRIBUTES => [
                 'users',
@@ -69,9 +80,18 @@ class HomeController extends AbstractController
                 'updatedAt'],
         ];
         $ambassadorsJson = $serializer->serialize($ambassadors, 'json', $context);
+        $creators = $brandRepository->findChosenCreator();
+        $favoriteCreators = [];
+//        foreach ($creators as $keyCreator => $creator) {
+//            dump($creator);
+//            $id = $creator->getUser();
+//            $favoriteCreators[$keyCreator] = $favoriteRepository->findFavoriteByUser($id);
+//        }
         return $this->render('/home/index.html.twig', [
+            'favoriteCreators' => $favoriteCreators,
             'ambassadors' => $ambassadorsJson,
             'ambassadorCards' => $ambassadorCards,
+            'creators' => $creators,
             'form' => $form->createView(),
         ]);
     }
