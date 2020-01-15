@@ -25,4 +25,12 @@ class CompagnyController extends AbstractController
     {
         return $this->render('compagny/cgv_index.html.twig');
     }
+
+    /**
+     * @Route("/cgu", name="compagny_cgu")
+     */
+    public function showCGU()
+    {
+        return $this->render('compagny/cgu_index.html.twig');
+    }
 }
