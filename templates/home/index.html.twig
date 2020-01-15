@@ -166,15 +166,17 @@
         </div>
     </div>
 
-    <div class="mt-5 mb-5">
-        <fieldset class="mt-5 container-xl container-lg container-fluid border-gold">
-            <h2 class="text-center p-3">S'inscrire à la lettre d'information : </h2>
+    <div class="containerNewsletter row">
+        <img class="imgNewsletter col-12" src="{{ asset('build/newsletter_placeholder.jpg') }}" alt="image newsletter">
+        <fieldset class="card cardNewsletter col-12">
+            <h2 class="text-center p-3">S'inscrire à la Newsletter </h2>
             {{ include('home/_form_newsletter.html.twig')}}
-            <div class="w-100 text-right">
+            <div class="w-100">
                 <a class="text-muted font-italic" href="{{ path('home_unsubscribe_newsletter') }}">Se désinscrire</a>
             </div>
         </fieldset>
     </div>
+
 
 {% endblock %}
 
