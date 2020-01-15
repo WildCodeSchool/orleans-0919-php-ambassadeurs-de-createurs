@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\FavoriteRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -58,7 +59,8 @@ class HomeController extends AbstractController
         }
 
         $ambassadors = $userRepository->findByRoles(User::ROLE_AMBASSADOR);
-        $ambassadorCards = array_slice($ambassadors, count($ambassadors)-self::NB_CARDS, self::NB_CARDS);
+        $ambassadorCards = $userRepository->findByMostFavorites(User::ROLE_AMBASSADOR);
+
         $context = [
             AbstractNormalizer::IGNORED_ATTRIBUTES => [
                 'users',
