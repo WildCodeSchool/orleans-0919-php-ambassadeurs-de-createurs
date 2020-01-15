@@ -11,10 +11,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class CompagnyController extends AbstractController
 {
     /**
-     * @Route("/concept", name="app_concept")
+     * @Route("/concept", name="compagny_concept")
      */
-    public function show()
+    public function showConcept()
     {
         return $this->render('compagny/concept_index.html.twig');
+    }
+
+    /**
+     * @Route("/cgv", name="compagny_cgv")
+     */
+    public function showCGV()
+    {
+        return $this->render('compagny/cgv_index.html.twig');
     }
 }
