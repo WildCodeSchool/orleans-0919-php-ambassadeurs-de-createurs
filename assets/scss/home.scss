@@ -191,6 +191,11 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     div {
         text-align: right;
     }
+
+    input{
+        border-bottom: 1px solid $primary-color;
+    }
+
 }
 
 .containerNewsletter{
@@ -200,6 +205,16 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     .card:hover{
         box-shadow: none;
     }
+}
+
+.unsubscribeNewsletterBloc .form-group{
+    text-align: left;
+    margin: 0 2rem;
+
+    input{
+        border-bottom: 1px solid $primary-color;
+    }
+
 }
 
 @media screen and (min-width: 1000px) {
