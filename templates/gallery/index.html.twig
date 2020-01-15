@@ -10,12 +10,7 @@
             {% for gallery in galleries %}
                 <div class="col-md-12 col-lg-6 col-xl-3 mb-3 flex d-flex justify-content-center">
                     <img class="galleryImg"
-                         src="
-                    {% if gallery.photoName is null %}
-                    {{ asset('build/blog_placeholder.png') }}
-                    {% else %}
-                    {{ vich_uploader_asset(gallery, 'photoFile') }}
-                    {% endif %}"
+                         src="{{ vich_uploader_asset(gallery, 'photoFile') }}"
                          alt="Photo de {{ gallery.galleryOWner.name }}">
                 </div>
             {% endfor %}
