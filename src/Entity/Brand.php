@@ -70,7 +70,7 @@ class Brand
     private $sellerAdvantage;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="brand", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="brand")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
