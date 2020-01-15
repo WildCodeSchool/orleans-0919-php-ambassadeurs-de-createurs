@@ -28,7 +28,13 @@
             {{ include('gallery/_form.html.twig') }}
         </div>
     </div>
-
+    <div class="row justify-content-between">
+        <div class="col col-lg-4">
+            <a class="btn btn-dark m-5" href="{{ path('app_profile') }}">
+                <i class="far fa-arrow-alt-circle-left"></i> Retour
+            </a>
+        </div>
+    </div>
 
 
 {% endblock %}
