@@ -22,7 +22,7 @@ class Gallery
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photoName;
 
@@ -61,7 +61,7 @@ class Gallery
         return $this->photoName;
     }
 
-    public function setPhotoName(string $photoName): self
+    public function setPhotoName(?string $photoName): self
     {
         $this->photoName = $photoName;
 
