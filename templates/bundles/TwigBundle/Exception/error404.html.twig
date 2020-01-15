@@ -1,0 +1,22 @@
+{% extends 'layout_errors.html.twig' %}
+
+{% block title %}
+    {{ status_code }}
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid error-section pt-1 mb-5">
+        <h1 class="text-center m-5">Erreur {{ status_code }} - {{ status_text }}</h1>
+        <div class="picture-error mt-5">
+        <img class="error" src="{{ asset('build/error404.png') }}" alt="error-404">
+        </div>
+        <h2 class="text-center m-5">La page demandée est introuvable ou n'existe pas.</h2>
+        <div class="col-md-12 col-sm-12 mt-5 mb-5">
+            <p class="text-center">Mais pas d'inquiétude, il vous est toujours possible de retourner sur la page
+                d'accueil et de reprendre le fil de votre visite.</p>
+            <div class="back-to-home mt-5">
+                <a class="btn btn-gold mb-4" href="{{ path('home_index') }}">Revenir à la page d'accueil</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
