@@ -62,17 +62,10 @@ class UserInscriptionType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('mentions', CheckboxType::class, [
-                'label' => "J'accepte les mentions",
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devez accepter les mentions légales pour continuer l\'inscription.',
-                    ]),
-                ],
-            ])
             ->add('CGU', CheckboxType::class, [
                 'label' => "J'accepte les",
+                'help' => '<a href="#">CGU</a>',
+                'help_html' => true,
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -83,6 +76,8 @@ class UserInscriptionType extends AbstractType
             ])
             ->add('CGV', CheckboxType::class, [
                 'label' => "J'accepte les",
+                'help' => '<a href="#">CGV</a>',
+                'help_html' => true,
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([

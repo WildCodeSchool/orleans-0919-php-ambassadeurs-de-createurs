@@ -50,7 +50,7 @@
                 {% for card in ambassadorCards %}
                     <div class="card mb-5 col-md-5 col-sm-12">
                         <div class="row no-gutters">
-                            <div class="col-md-1 col-sm-12 mt-2">
+                            <div class="col-md-1 col-sm-12 mt-2 ml-3">
                                 <div class="star_home">
                                     <a href="{{ path('search_like', {'id' : card.id}) }}"
                                        class="btn btn-link js-like">
@@ -64,7 +64,7 @@
                                                     {% endif %}
                                                 {% endfor %}
                                             {% endif %}
-                                            <i class="{{ class }} fa-star ml-2"></i>
+                                            <i class="{{ class }} fa-star"></i>
                                         </div>
                                     </a>
                                 </div>
