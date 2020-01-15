@@ -20,6 +20,11 @@
                     <button type="button" class="btn btn-gold">Modifier</button>
                 </a>
             </div>
+            <div class="col-3 text-center mt-3">
+                <a href="{{ path('brand_edit', {'id': user.brand.id}) }}">
+                    <button type="button" class="btn btn-gold">Ma gallerie</button>
+                </a>
+            </div>
         </div>
     {% endif %}
 {% endif %}

@@ -100,7 +100,7 @@ class Brand
     private $hasSubscribe = false;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Gallery", mappedBy="brand", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Gallery", mappedBy="galleryOwner", orphanRemoval=true)
      */
     private $galleries;
 
@@ -270,7 +270,7 @@ class Brand
     {
         if (!$this->galleries->contains($gallery)) {
             $this->galleries[] = $gallery;
-            $gallery->setBrand($this);
+            $gallery->setGalleryOWner($this);
         }
 
         return $this;
@@ -281,8 +281,8 @@ class Brand
         if ($this->galleries->contains($gallery)) {
             $this->galleries->removeElement($gallery);
             // set the owning side to null (unless already changed)
-            if ($gallery->getBrand() === $this) {
-                $gallery->setBrand(null);
+            if ($gallery->getGalleryOWner() === $this) {
+                $gallery->setGalleryOWner(null);
             }
         }
 

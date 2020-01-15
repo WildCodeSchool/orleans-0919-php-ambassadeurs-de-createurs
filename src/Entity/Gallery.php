@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 use \DateTime;
 
 /**
@@ -48,7 +49,7 @@ class Gallery
      * @ORM\ManyToOne(targetEntity="App\Entity\Brand", inversedBy="galleries")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $brand;
+    private $galleryOwner;
 
     public function getId(): ?int
     {
@@ -72,14 +73,14 @@ class Gallery
         $this->updatedAt = $updatedAt;
     }
 
-    public function getBrand(): ?Brand
+    public function getGalleryOWner(): ?Brand
     {
-        return $this->brand;
+        return $this->galleryOwner;
     }
 
-    public function setBrand(?Brand $brand): self
+    public function setGalleryOWner(?Brand $brand): self
     {
-        $this->brand = $brand;
+        $this->galleryOwner = $brand;
 
         return $this;
     }

@@ -19,7 +19,7 @@ class GalleryFixtures extends Fixture implements DependentFixtureInterface
             $brand = $this->getReference('brand_' . $i);
             for ($j = 0; $j < 5; $j++) {
                 $gallery = new Gallery();
-                $gallery->setBrand($brand);
+                $gallery->setGalleryOWner($brand);
                 $gallery->setPhotoName($faker->imageUrl());
                 $gallery->setUpdatedAt(new DateTime());
                 $manager->persist($gallery);
