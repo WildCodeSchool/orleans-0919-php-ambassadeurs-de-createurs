@@ -33,4 +33,12 @@ class CompagnyController extends AbstractController
     {
         return $this->render('compagny/cgu_index.html.twig');
     }
+
+    /**
+     * @Route("/mentionslegales", name="compagny_mentions_legales")
+     */
+    public function showMentionsLegales()
+    {
+        return $this->render('compagny/mentions_legales_index.html.twig');
+    }
 }
