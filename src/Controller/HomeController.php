@@ -68,7 +68,10 @@ class HomeController extends AbstractController
                 'sponsoredEvents',
                 'userFavorite',
                 'pictureFile',
-                'updatedAt'],
+                'updatedAt',
+                'galleryOwner',
+                'galleries',
+            ],
         ];
         $ambassadorsJson = $serializer->serialize($ambassadors, 'json', $context);
         return $this->render('/home/index.html.twig', [
