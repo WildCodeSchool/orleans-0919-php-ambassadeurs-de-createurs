@@ -6,13 +6,16 @@
     <div class="mt-5 container-xl container-lg container-fluid">
         <h1 class="text-center mt-3 mb-4">Modifier votre marque</h1>
         <div class="border-gold p-4">
-            {{ include('brand/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+            {{ include('brand/_form.html.twig', {'button_label': 'Update'}) }}
         </div>
         <div class="row justify-content-between">
             <div class="col col-lg-4">
-                <a class="btn btn-dark m-5" href="{{ path('app_profile') }}">
-                    <i class="far fa-arrow-alt-circle-left"></i> Retour
+                <a class="btn btn-dark m-5" href="{{ path('admin_brand_index') }}">
+                    <i class="far fa-arrow-alt-circle-left"></i> Liste des marques
                 </a>
+            </div>
+            <div class="col col-lg-3">
+                {{ include('brand/admin_delete_form.html.twig') }}
             </div>
         </div>
     </div>
