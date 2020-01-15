@@ -99,9 +99,15 @@ class Brand
      */
     private $hasSubscribe = false;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Gallery", mappedBy="brand", orphanRemoval=true)
+     */
+    private $galleries;
+
     public function __construct()
     {
         $this->sponsoredEvents = new ArrayCollection();
+        $this->galleries = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -248,6 +254,37 @@ class Brand
     public function setHasSubscribe(bool $hasSubscribe): self
     {
         $this->hasSubscribe = $hasSubscribe;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Gallery[]
+     */
+    public function getGalleries(): Collection
+    {
+        return $this->galleries;
+    }
+
+    public function addGallery(Gallery $gallery): self
+    {
+        if (!$this->galleries->contains($gallery)) {
+            $this->galleries[] = $gallery;
+            $gallery->setBrand($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGallery(Gallery $gallery): self
+    {
+        if ($this->galleries->contains($gallery)) {
+            $this->galleries->removeElement($gallery);
+            // set the owning side to null (unless already changed)
+            if ($gallery->getBrand() === $this) {
+                $gallery->setBrand(null);
+            }
+        }
 
         return $this;
     }
