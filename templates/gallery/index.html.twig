@@ -10,7 +10,7 @@
             {% for gallery in galleries %}
                 <div class="col-md-12 col-lg-6 col-xl-3 mb-3 flex d-flex flex-column justify-content-center">
                     {{ include('gallery/_delete_aria_form.html.twig') }}
-                    <img class="img-thumbnail"
+                    <img class="galleryImg"
                          src="{{ vich_uploader_asset(gallery, 'photoFile') }}"
                          alt="Photo de {{ gallery.galleryOWner.name }}">
                     {{ include('gallery/_delete_form.html.twig') }}

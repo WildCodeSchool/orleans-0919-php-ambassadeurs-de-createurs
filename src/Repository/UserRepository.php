@@ -95,4 +95,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getQuery();
         return $query->getResult();
     }
+
+    public function findByMostFavorites(string $roles): array
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('u')
+            ->innerjoin('u.followers', 'fr')
+            ->where('u.roles LIKE :roles')
+            ->groupBy('u')
+            ->orderBy('COUNT(fr)', 'DESC')
+            ->setParameter('roles', '%' . $roles . '%')
+            ->setMaxResults(6)
+            ->getQuery();
+        return $query->getResult();
+    }
 }
