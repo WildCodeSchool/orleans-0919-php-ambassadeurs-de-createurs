@@ -10,27 +10,20 @@
 
     </div>
     <div>
-        <h2 class="mt-2">Mes prochaines ventes</h2>
-        <div class="row">
+        <h2 class="mt-2 text-center">Mes prochaines ventes</h2>
             {% for event in user.events %}
-                <div class="col-xs-12 col-md-4 event mt-3">
-                    <article class="card card-event card-inverse animated fadeInDown">
-                        <img class="img-fluid"
-                             src="https://snap-photos.s3.amazonaws.com/img-thumbs/960w/SYC0YBA37V.jpg"
-                             alt="Leaf on the street"/>
-                        <div class="card-img-overlay">
-                            <h4 class="card-title event">{{ event.place }}</h4>
-                            <p class="card-text event">{{ event.dateTime|date('d/m/Y à H:i') }}
-                                - {{ event.user.firstname }}</p>
-                            <p class="card-text event">Présentant les produits de {{ event.brand.name }}</p>
-                            <p class="card-text event">{{ event.description }}</p>
-                        </div>
-                    </article>
+            <div class="col-3 text-center mt-4">
+                <p>Marque : {{ event.brand.name }}</p>
+            </div>
+                <div class="col-3 text-center">
                     {% if  (event.user.id == user.id) or (is_granted('ROLE_ADMIN')) %}
                         <a href="{{ path('event_edit', {'id': event.id}) }}">
                             <button type="button" class="btn btn-gold">Modifier</button>
                         </a>
                     {% endif %}
+                </div>
+
+
 
                 </div>
             {% endfor %}
