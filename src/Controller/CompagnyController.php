@@ -41,4 +41,12 @@ class CompagnyController extends AbstractController
     {
         return $this->render('compagny/mentions_legales_index.html.twig');
     }
+
+    /**
+     * @Route("/politiquedeconfidentialite", name="compagny_confidentialite")
+     */
+    public function showConfidentialite()
+    {
+        return $this->render('compagny/confidentialite_index.html.twig');
+    }
 }
