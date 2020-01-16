@@ -69,7 +69,6 @@ class HomeController extends AbstractController
         }
 
         $ambassadors = $userRepository->findByRoles(User::ROLE_AMBASSADOR);
-        $ambassadorCards = array_slice($ambassadors, count($ambassadors) - self::NB_CARDS, self::NB_CARDS);
         $ambassadorCards = $userRepository->findByMostFavorites(User::ROLE_AMBASSADOR);
         $context = [
             AbstractNormalizer::IGNORED_ATTRIBUTES => [
@@ -85,7 +84,7 @@ class HomeController extends AbstractController
         ];
         $ambassadorsJson = $serializer->serialize($ambassadors, 'json', $context);
         $creators = $brandRepository->findChosenCreator();
-        
+
         return $this->render('/home/index.html.twig', [
             'ambassadors' => $ambassadorsJson,
             'ambassadorCards' => $ambassadorCards,

@@ -19,10 +19,16 @@ class UserController extends AbstractController
      */
     public function show(User $user, EventRepository $eventRepository): Response
     {
-        $events = $eventRepository->findBy(['user' => $user]);
-        return $this->render('user/show.html.twig', [
-            'user' => $user,
-            'events' => $events
-        ]);
+        $options = ['user' => $user];
+        $view = 'user/';
+        if (in_array(User::ROLE_AMBASSADOR, $user->getRoles())) {
+            $events = $eventRepository->findBy(['user' => $user]);
+            $view .= 'show_ambassador.html.twig';
+            $options['events'] = $events;
+        } elseif (in_array(User::ROLE_CREATOR, $user->getRoles())) {
+            $view .= 'show_creator.html.twig';
+        }
+
+        return $this->render($view, $options);
     }
 }
