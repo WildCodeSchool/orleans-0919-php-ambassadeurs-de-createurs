@@ -1,18 +1,18 @@
 {% extends 'layout_admin.html.twig' %}
 
-{% block title %}Event index{% endblock %}
+{% block title %}Les Événements{% endblock %}
 
 {% block body %}
-    <h1>Event index</h1>
+    <h1>Les Événements</h1>
 
     <table class="table">
         <thead>
         <tr>
             <th>Id</th>
-            <th>Place</th>
-            <th>DateTime</th>
+            <th>Lieu</th>
+            <th>Date</th>
             <th>Description</th>
-            <th>User</th>
+            <th>Ambassadeur</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -23,15 +23,14 @@
                 <td>{{ event.place }}</td>
                 <td>{{ event.dateTime ? event.dateTime|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ event.description }}</td>
-                <td>{{ event.user.firstname }}</td>
+                <td><a href="{{ path('user_show', {'id': event.user.id}) }}">{{ event.user.firstname }}</a></td>
                 <td>
-                    <a href="{{ path('admin_event_show', {'id': event.id}) }}">show</a>
-                    <a href="{{ path('admin_event_edit', {'id': event.id}) }}">edit</a>
+                    {{ include('event/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Aucun événement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>

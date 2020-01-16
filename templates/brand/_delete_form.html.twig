@@ -1,5 +1,5 @@
 <form method="post" action="{{ path('brand_delete', {'id': brand.id}) }}" onsubmit="return confirm('Attention, vous allez supprimer votre marque.');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ brand.id) }}">
-    <button class="btn btn-dark m-5"><i class="far fa-times-circle"></i> Supprimer</button>
+    <button class="btn btn-dark m-1"><i class="far fa-times-circle"></i> Supprimer</button>
 </form>
