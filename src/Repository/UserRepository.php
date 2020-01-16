@@ -100,10 +100,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         $query = $this->createQueryBuilder('u')
             ->select('u')
-            ->innerjoin('u.followers', 'fr')
+            ->leftjoin('u.followers', 'fr')
+            ->leftjoin('u.events', 'e')
             ->where('u.roles LIKE :roles')
             ->groupBy('u')
-            ->orderBy('COUNT(fr)', 'DESC')
+            ->addOrderBy('COUNT(fr)', 'DESC')
+            ->addOrderBy('COUNT(e)', 'DESC')
             ->setParameter('roles', '%' . $roles . '%')
             ->setMaxResults(6)
             ->getQuery();
