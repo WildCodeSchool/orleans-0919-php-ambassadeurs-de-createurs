@@ -17,7 +17,7 @@
                         {{ vich_uploader_asset(user, 'pictureFile') }}
                         {% endif %}"
                      alt="{{ user.brand.name }}">
-                <div class="flex d-flex justify-content-around w-75 mt-3 mb-3">
+                <div class="flex d-flex justify-content-center w-75 mt-3 mb-3">
                     <div class="star justify-content-center h-100">
                         <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like p-0">
                             <div class="col-md-1 col-sm-12 mt-2">
@@ -34,23 +34,20 @@
                             </div>
                         </a>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <p class="m-0"><i class="fas fa-map-marker-alt primary-color mr-3"></i>{{ user.city }}</p>
-                    </div>
                 </div>
                 <ul class="p-0 m-0 w-75 flex d-flex justify-content-around">
                     <li class="list-inline-item">
-                        <a class="fb-ic" href="{{ user.urlFacebook}}" target="_blank">
+                        <a class="profilIcon" href="{{ user.urlFacebook}}" target="_blank">
                             <i class="fab fa-facebook-square"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a class="inst-ic" href="{{ user.brand.site}}" target="_blank">
+                        <a class="profilIcon" href="{{ user.brand.site}}" target="_blank">
                             <i class="far fa-user"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a class="inst-ic" href="{{ user.brand.instagram}}" target="_blank">
+                        <a class="profilIcon" href="{{ user.brand.instagram}}" target="_blank">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </li>
@@ -82,14 +79,24 @@
                     </div>
                 </div>
 
-                <div class="carouselDiv align-self-center">
+                <div class="carouselDiv align-self-center ml-lg-5 mr-lg-5">
                     <h2 class="text-center">Mes produits</h2>
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            {% for i in 0..user.brand.galleries|length-1 %}
-                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ i }}" class="{% if loop.index == 1 %} active {% endif %}"></li>
-                            {% endfor %}
-                        </ol>
+                        <div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <ol class="carousel-indicators">
+                                {% for i in 0..user.brand.galleries|length-1 %}
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ i }}" class="{% if loop.index == 1 %} active {% endif %}"></li>
+                                {% endfor %}
+                            </ol>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
                         <div class="carousel-inner">
                             {% for gallery in user.brand.galleries %}
                             <div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
@@ -99,14 +106,6 @@
                             </div>
                             {% endfor %}
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
                     </div>
                 </div>
             </div>

@@ -71,16 +71,22 @@ a
     object-fit: cover;
 }
 
+.profilIcon {
+    font-size: $font-size-icon;
+    color: $secondary-color;
+
+    &hover {
+        color: $primary-color;
+        text-decoration: none;
+    }
+}
+
 .historyDiv {
     border: 2px dashed $primary-color;
 }
 
 .brandDescription {
     text-indent: 1rem;
-}
-
-.carouselDiv {
-    width: 90%;
 }
 
 .carousel-item div img{
@@ -93,21 +99,21 @@ a
     margin-bottom: 2rem;
 }
 
-.carousel-control-prev,  {
-    margin-left: -5rem;
-    filter: invert(100%);
-}
-
-.carousel-control-next {
-    margin-right: -5rem;
-    filter: invert(100%);
-}
-
 .carousel-indicators {
     margin-bottom: -40px;
     filter: invert(100%);
 }
 
+.carousel-control-prev, .carousel-control-next {
+    filter: invert(100%);
+    top: calc(100% + 30px);
+}
+
 @media screen and (max-width: 768px) {
 
+    .carousel-item div img{
+        height: 300px;
+        object-fit: cover;
+        border: 1px solid $primary-color
+    }
 }
