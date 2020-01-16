@@ -10,22 +10,9 @@
             <h3 class="d-none d-md-block">et développez vos ventes privées à domicile</h3>
         </div>
     </div>
-
-    <div class="js-ambassadors" data-ambassadors="{{ ambassadors }}"></div>
-    <div class="d-flex w-100 justify-content-center">
-        <div class="d-flex flex-column mt-5 mapTabs align-self-center">
-            <ul class="nav nav-tabs nav-fill nav-justified">
-                <li class="nav-item">
-                    <a class="nav-link active" id="events" href="#events">Prochaines ventes privées</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="ambassadors" href="#ambassadors">Ambassadeurs</a>
-                </li>
-            </ul>
-            <div class="mb-5" id="map"></div>
-        </div>
-    </div>
-
+    {% block map %}
+        {% include 'home/_map.html.twig' %}
+    {% endblock %}
     <div class="searchBg my-5 p-5">
         <h2 class="text-center p-3">Je recherche</h2>
         <div class="d-flex justify-content-around">

@@ -1,0 +1,16 @@
+{% block map %}
+<div class="js-ambassadors" data-ambassadors="{{ ambassadors }}"></div>
+<div class="d-flex w-100 justify-content-center">
+    <div class="d-flex flex-column mt-5 mapTabs align-self-center">
+        <ul class="nav nav-tabs nav-fill nav-justified">
+            <li class="nav-item">
+                <a class="nav-link active" id="events" href="#events">Prochaines ventes privées</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="ambassadors" href="#ambassadors">Ambassadeurs</a>
+            </li>
+        </ul>
+        <div class="mb-5" id="map"></div>
+    </div>
+</div>
+{% endblock %}
