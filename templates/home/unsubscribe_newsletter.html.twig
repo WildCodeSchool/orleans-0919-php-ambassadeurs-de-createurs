@@ -1,12 +1,28 @@
 {% extends '/layout.html.twig' %}
 
 {% block body %}
-
-    <div class="mt-5 mb-5">
-        <fieldset class="mt-5 container-xl container-lg container-fluid border-gold">
-            <h2 class="text-center p-3">Se désinscrire de la lettre d'information : </h2>
-            {{ include('home/_form_newsletter.html.twig')}}
-        </fieldset>
+    <div class="container d-flex justify-content-center">
+        <div class="col-12 col-lg-6 m-5">
+            <div class="card-img-block">
+                <img class="card-img-top bodyimage" src="{{ asset('build/newsletter_placeholder.jpg') }}"
+                     alt="image de l'article">
+            </div>
+            <div class="card profile-card-5 card-block">
+                <div class="card-body unsubscribeNewsletterBloc">
+                    <h5 class="card-title">Se désinscrire de la Newsletter</h5>
+                    <p class="mb-5">Pour vous désinscrire de la Newsletter d'Ambassadeurs de Créateur,
+                        merci de saisir l'adresse mail avec laquelle vous vous êtes abonné.</p>
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <div class="flex d-flex justify-content-around">
+                        <button class="btn btn-gold my-5">
+                            <i class="far fa-paper-plane mr-2"></i>
+                            {{ button_label|default('Se désinscrire') }}
+                        </button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
     </div>
-
 {% endblock %}

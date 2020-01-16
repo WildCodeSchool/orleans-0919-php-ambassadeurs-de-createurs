@@ -17,7 +17,7 @@
             {{ blog.date|localizeddate('short', 'none') }} -
             <span class="badge badge-pill badge-gold">{{ blog.articleTag.tag }}</span>
         </p>
-        <p class="mt-5 text-center">{{ blog.content }}</p>
+        <p class="mt-5 text-center">{{ blog.content|raw }}</p>
 
     </div>
 {% endblock %}

@@ -1,0 +1,8 @@
+<form class="flex d-flex justify-content-center deleteOver" method="post" action="{{ path('gallery_delete', {'id': gallery.id}) }}"
+      onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cette photo ?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ gallery.id) }}">
+    <button class="close" aria-label="Supprimer">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</form>

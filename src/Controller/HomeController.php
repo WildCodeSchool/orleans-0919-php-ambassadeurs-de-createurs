@@ -70,6 +70,7 @@ class HomeController extends AbstractController
 
         $ambassadors = $userRepository->findByRoles(User::ROLE_AMBASSADOR);
         $ambassadorCards = array_slice($ambassadors, count($ambassadors) - self::NB_CARDS, self::NB_CARDS);
+        $ambassadorCards = $userRepository->findByMostFavorites(User::ROLE_AMBASSADOR);
         $context = [
             AbstractNormalizer::IGNORED_ATTRIBUTES => [
                 'users',
@@ -77,7 +78,10 @@ class HomeController extends AbstractController
                 'sponsoredEvents',
                 'userFavorite',
                 'pictureFile',
-                'updatedAt'],
+                'updatedAt',
+                'galleryOwner',
+                'galleries',
+            ],
         ];
         $ambassadorsJson = $serializer->serialize($ambassadors, 'json', $context);
         $creators = $brandRepository->findChosenCreator();

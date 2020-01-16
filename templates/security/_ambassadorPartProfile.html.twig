@@ -1,0 +1,29 @@
+{% if is_granted('ROLE_AMBASSADOR') %}
+    <div class="text-center m-3">
+        <a href="{{ path('event_new', {'userId': user.id}) }}">
+            <button type="button" class="btn btn-gold">Créer un événement</button>
+        </a>
+
+        <a href="{{ path('app_favorite') }}">
+            <button type="button" class="btn btn-gold">Mes favoris</button>
+        </a>
+
+    </div>
+    <div>
+    <h2 class="mt-2 text-center">Mes prochaines ventes</h2>
+    {% for event in user.events %}
+        <div class="col-3 text-center mt-4">
+            <p>Marque : {{ event.brand.name }}</p>
+        </div>
+        <div class="col-3 text-center">
+            {% if  (event.user.id == user.id) or (is_granted('ROLE_ADMIN')) %}
+                <a href="{{ path('event_edit', {'id': event.id}) }}">
+                    <button type="button" class="btn btn-gold">Modifier</button>
+                </a>
+            {% endif %}
+        </div>
+        </div>
+    {% endfor %}
+    </div>
+    </div>
+{% endif %}
