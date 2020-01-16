@@ -49,16 +49,6 @@ class AdminArticleTagController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin_article_tag_show", methods={"GET"})
-     */
-    public function show(ArticleTag $articleTag): Response
-    {
-        return $this->render('article_tag/show.html.twig', [
-            'article_tag' => $articleTag,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="admin_article_tag_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, ArticleTag $articleTag): Response

@@ -1,6 +1,6 @@
 {% extends 'layout_admin.html.twig' %}
 
-{% block title %}ArticleTag index{% endblock %}
+{% block title %}Étiquettes{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -16,19 +16,19 @@
             <tbody>
             {% for article_tag in article_tags %}
                 <tr>
-                    <td><a href="{{ path('admin_article_tag_show', {'id': article_tag.id}) }}" class="titleForm">{{ article_tag.tag }}</a></td>
+                    <td>{{ article_tag.tag }}</td>
                     <td>
                         <a href="{{ path('admin_article_tag_edit', {'id': article_tag.id}) }}" class="btn btn-gold"><i class="fas fa-pencil-alt mr-2"></i>Modifier</a>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="3">Aucun tag trouvée</td>
+                    <td colspan="3">Aucune étiquette trouvée</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
 
-        <a href="{{ path('admin_article_tag_new') }}" class="btn btn-gold">Créer un univers</a>
+        <a href="{{ path('admin_article_tag_new') }}" class="btn btn-gold">Créer une étiquette</a>
     </div>
 {% endblock %}

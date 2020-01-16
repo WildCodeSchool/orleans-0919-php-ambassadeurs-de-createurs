@@ -1,62 +1,56 @@
 {% extends 'layout_admin.html.twig' %}
 
-{% block title %}Brand index{% endblock %}
+{% block title %}Admin marque{% endblock %}
 
 {% block body %}
-    <h1>Brand index</h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nom</th>
-            <th>Description</th>
-            <th>Site</th>
-            <th>Instagram</th>
-            <th>Avantage des hôtes</th>
-            <th>Avantage des vendeurs</th>
-            <th>Mise en avant</th>
-            <th>Abonnement</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for keys, brand in brands %}
+    <div class="container">
+        <h1 class="text-center m-5">Les marques</h1>
+        <table class="table">
+            <thead>
             <tr>
-                <td>{{ brand.id }}</td>
-                <td>{{ brand.name }}</td>
-                <td>{{ brand.description }}</td>
-                <td>{{ brand.site }}</td>
-                <td>{{ brand.instagram }}</td>
-                <td>{{ brand.hostAdvantage }}</td>
-                <td>{{ brand.sellerAdvantage }}</td>
-                <td>
-                    {{ form_start(formsChosenCreators[keys]) }}
-                    {{ form_row(formsChosenCreators[keys].chosenCreator, { 'attr' : {'id' : keys ~ '_creator', 'name' : keys ~ '_creator'}}) }}
-                    <div class="flex d-flex justify-content-around">
-                        <button class="btn btn-gold">{{ button_label|default('Enregistrer') }}</button>
-                    </div>
-                    {{ form_end(formsChosenCreators[keys]) }}
-                </td>
-                <td>
-                    {{ form_start(formsHasSubscribes[keys]) }}
-                    {{ form_row(formsHasSubscribes[keys].hasSubscribe, { 'attr' : {'id' : keys ~ '_creator', 'name' : keys ~ '_creator'}}) }}
-                    <div class="flex d-flex justify-content-around">
-                        <button class="btn btn-gold">{{ button_label|default('Enregistrer') }}</button>
-                    </div>
-                    {{ form_end(formsHasSubscribes[keys]) }}
-                </td>
-                <td>
-                    <a href="{{ path('brand_show', {'id': brand.id}) }}">show</a>
-                    <a href="{{ path('admin_brand_edit', {'id': brand.id}) }}">edit</a>
-                </td>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Avantage des hôtes</th>
+                <th>Avantage des vendeurs</th>
+                <th>Mise en avant</th>
+                <th>Abonnement</th>
+                <th>Actions</th>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for keys, brand in brands %}
+                <tr>
+                    <td>{{ brand.id }}</td>
+                    <td>{{ brand.name }}</td>
+                    <td>{{ brand.hostAdvantage }}</td>
+                    <td>{{ brand.sellerAdvantage }}</td>
+                    <td>
+                        {{ form_start(formsChosenCreators[keys]) }}
+                        {{ form_row(formsChosenCreators[keys].chosenCreator, { 'attr' : {'id' : keys ~ '_creator', 'name' : keys ~ '_creator'}}) }}
+                        <div class="flex d-flex justify-content-around">
+                            <button class="btn btn-gold">{{ button_label|default('Enregistrer') }}</button>
+                        </div>
+                        {{ form_end(formsChosenCreators[keys]) }}
+                    </td>
+                    <td>
+                        {{ form_start(formsHasSubscribes[keys]) }}
+                        {{ form_row(formsHasSubscribes[keys].hasSubscribe, { 'attr' : {'id' : keys ~ '_creator', 'name' : keys ~ '_creator'}}) }}
+                        <div class="flex d-flex justify-content-around">
+                            <button class="btn btn-gold">{{ button_label|default('Enregistrer') }}</button>
+                        </div>
+                        {{ form_end(formsHasSubscribes[keys]) }}
+                    </td>
+                    <td>
+                        {{ include('brand/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">Pas de marque trouvée</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-    <a href="{{ path('brand_new') }}">Create new</a>
 {% endblock %}
