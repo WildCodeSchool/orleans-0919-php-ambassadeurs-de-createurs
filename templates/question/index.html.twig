@@ -7,8 +7,7 @@
 
     {% for category in categories %}
         <h2 class="ml-5">{{ category.category }}</h2>
-        {% set i = loop.index %}
-        <div class="accordion m-5" id="accordionExample{{- i -}}">
+        <div class="accordion m-5" id="accordionExample{{ loop.index }}">
             {% for question in questions %}
                 {% if question.category == category %}
                     <div class="card">
@@ -23,7 +22,7 @@
 
                             </h3>
                         </div>
-                        <div id="collapse{{- loop.index -}}" class="collapse" aria-labelledby="heading{{- loop.index -}}" data-parent="#accordionExample{{- i -}}">
+                        <div id="collapse{{- loop.index -}}" class="collapse" aria-labelledby="heading{{- loop.index -}}" data-parent="#accordionExample{{ loop.parent.loop.index }}">
                             <div class="card-body text-left answer">
                                 {{ question.answer }}
                             </div>
