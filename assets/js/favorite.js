@@ -1,25 +1,22 @@
 const axios = require('axios');
 
-function onClickBtnLike(event) {
+function onClickBtnLike(event)
+{
     event.preventDefault();
 
     const url = this.href;
     const spanCount = this.querySelector('span.js-likes');
     const icone = this.querySelector('.fa-star');
 
-
     axios.get(url)
         .then((response) => {
             // eslint-disable-next-line no-empty
             if (response.status === 403) {
-            } else {
                 spanCount.textContent = response.data.favorites;
-
-                if (icone.dataset.prefix === 'far') {
-                    icone.dataset.prefix = 'fas';
-                } else {
-                    icone.dataset.prefix = 'far';
-                }
+            } else if (icone.dataset.prefix === 'far') {
+                icone.dataset.prefix = 'fas';
+            } else {
+                icone.dataset.prefix = 'far';
             }
             // eslint-disable-next-line no-unused-vars
         }).catch((error) => {
