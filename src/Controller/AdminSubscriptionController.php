@@ -77,18 +77,4 @@ class AdminSubscriptionController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-    /**
-     * @Route("/{id}", name="subscription_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Subscription $subscription): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$subscription->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($subscription);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('subscription_index');
-    }
 }

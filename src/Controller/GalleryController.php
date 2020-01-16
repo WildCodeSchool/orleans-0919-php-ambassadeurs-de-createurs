@@ -51,6 +51,7 @@ class GalleryController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($gallery);
             $entityManager->flush();
+            $this->addFlash('danger', 'Votre photo a été supprimée');
         }
 
         return $this->redirectToRoute('gallery_index');

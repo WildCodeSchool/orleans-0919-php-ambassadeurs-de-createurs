@@ -1,6 +1,6 @@
 {% extends 'layout_admin.html.twig' %}
 
-{% block title %}Category index{% endblock %}
+{% block title %}Les univers{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -16,7 +16,7 @@
         <tbody>
         {% for category in categories %}
             <tr>
-                <td><a href="{{ path('admin_category_show', {'id': category.id}) }}" class="titleForm">{{ category.description }}</a></td>
+                <td>{{ category.description }}</td>
                 <td>
                     <a href="{{ path('admin_category_edit', {'id': category.id}) }}" class="btn btn-gold"><i class="fas fa-pencil-alt mr-2"></i>Modifier</a>
                 </td>

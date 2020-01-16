@@ -14,7 +14,7 @@
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                 <h6 class="text-uppercase mb-4 font-weight-bold">À propos</h6>
                 <div>
-                    <a class="footer-link" href="{{ path('app_concept') }}">Notre concept</a>
+                    <a class="footer-link" href="{{ path('company_concept') }}">Notre concept</a>
                 </div>
                 <div>
                     <a class="footer-link" href="{{ path('sub_index') }}">Abonnement</a>
@@ -24,10 +24,13 @@
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                 <h6 class="text-uppercase mb-4 font-weight-bold">Service clients</h6>
                 <div>
-                    <a class="footer-link" href="#">CGV</a> / <a class="footer-link" href="#">CGU</a>
+                    <a class="footer-link" href="{{ path('company_cgv') }}">CGV</a> / <a class="footer-link" href="{{ path('company_cgu') }}">CGU</a>
                 </div>
                 <div>
-                    <a class="footer-link" href="#!">Mentions légales</a>
+                    <a class="footer-link" href="{{ path('company_legal_mentions') }}">Mentions légales</a>
+                </div>
+                <div>
+                    <a class="footer-link" href="{{ path('company_confidentiality') }}">Politique de confidentialité</a>
                 </div>
                 <div>
                     <a class="footer-link" href="{{ path('question') }}">FAQ</a>

@@ -43,6 +43,7 @@ class BlogType extends AbstractType
                 'label'             => 'Image',
                 'download_link'     => false,
                 'allow_delete'      => false,
+                'required' => false,
             ])
             ->add('content', CKEditorType::class, [
                 'label' => 'Contenu',

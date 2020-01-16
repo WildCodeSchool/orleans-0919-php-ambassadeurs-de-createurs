@@ -176,9 +176,20 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     color: $secondary-color;
 }
 
-.imgNewsletter{
+.containerNewsletter{
+    position: relative;
+    text-align: center;
     width: 100vw;
+
+    .card:hover{
+        box-shadow: none;
+    }
+}
+
+.imgNewsletter{
+    width: 100%;
     opacity: 0.6;
+    padding: 0;
 }
 
 .cardNewsletter{
@@ -191,15 +202,21 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     div {
         text-align: right;
     }
+
+    input{
+        border-bottom: 1px solid $primary-color;
+    }
+
 }
 
-.containerNewsletter{
-    position: relative;
-    text-align: center;
+.unsubscribeNewsletterBloc .form-group{
+    text-align: left;
+    margin: 0 2rem;
 
-    .card:hover{
-        box-shadow: none;
+    input{
+        border-bottom: 1px solid $primary-color;
     }
+
 }
 
 @media screen and (min-width: 1000px) {

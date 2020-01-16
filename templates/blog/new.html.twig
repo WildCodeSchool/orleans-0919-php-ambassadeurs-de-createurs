@@ -8,6 +8,9 @@
         <div class="border-gold p-4">
             {{ include('blog/_form.html.twig') }}
         </div>
+        <a class="btn btn-dark m-5" href="{{ path('admin_blog_index') }}">
+            <i class="far fa-arrow-alt-circle-left"></i> Liste des questions
+        </a>
 
     </div>
 {% endblock %}
