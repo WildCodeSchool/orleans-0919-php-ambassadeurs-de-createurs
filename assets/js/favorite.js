@@ -1,6 +1,7 @@
 const axios = require('axios');
 
-function onClickBtnLike(event) {
+function onClickBtnLike(event)
+{
     event.preventDefault();
 
     const url = this.href;
@@ -10,9 +11,8 @@ function onClickBtnLike(event) {
 
     axios.get(url)
         .then((response) => {
+            // eslint-disable-next-line no-empty
             if (response.status === 403) {
-                // eslint-disable-next-line no-alert
-                window.alert("Vous ne pouvez pas ajouter en favoris si vous n'êtes pas connecté !");
             } else {
                 spanCount.textContent = response.data.favorites;
 
@@ -24,6 +24,8 @@ function onClickBtnLike(event) {
             }
             // eslint-disable-next-line no-unused-vars
         }).catch((error) => {
+        // eslint-disable-next-line no-alert
+            window.alert("Vous ne pouvez pas ajouter en favoris si vous n'êtes pas connecté !");
         });
 }
 
