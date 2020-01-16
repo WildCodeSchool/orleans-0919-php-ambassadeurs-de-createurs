@@ -1,7 +1,6 @@
 const axios = require('axios');
 
-function onClickBtnLike(event)
-{
+function onClickBtnLike(event) {
     event.preventDefault();
 
     const url = this.href;
