@@ -1,61 +1,89 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}{{ user.firstname }}{% endblock %}
+{% block title %}{{ user.brand.name }}{% endblock %}
 
 {% block body %}
 
-    <div class="container-fluid mt-5">
-        <div class="text-center">
-            <img class="rounded-circle img-profil"
-              src="
-                {% if user.picture is null %}
-                {{ asset('build/placeholder_profil_grey.png') }}
-                {% else %}
-                {{ vich_uploader_asset(user, 'pictureFile') }}
-                {% endif %}"
-              alt="{{ user.firstname }}">
-            <h2 class="text-center mt-3">{{ user.firstname }}</h2>
-        </div>
-        <div class="d-flex justify-content-center">
-            <p class="m-0"><i class="fas fa-map-marker-alt primary-color mr-3"></i>{{ user.city }}</p>
-        </div>
-        <div class="star justify-content-center">
-            <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">
-                <div class="col-md-1 col-sm-12 mt-2">
-                    <span class="js-likes">{{ user.followers | length }}</span>
-                    {% set class="far" %}
-                    {% if app.user %}
-                        {% for favorites in app.user.followedUsers %}
-                            {% if user == favorites.userFavorite %}
-                                {% set class="fas" %}
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                    <i class="{{ class }} fa-star ml-2"></i>
-                </div>
-            </a>
-        </div>
-        <div class="text-center mt-4">
-        <a href="mailto:{{ user.mail }}">
-            <button type="button" class="btn btn-gold">Contacter cet Ambassadeur</button>
-             </a>
-        </div>
+    <div class="container-fluid">
+        <div class="row mb-5">
 
-        <div class="row m-5">
-            <div class="col-lg-5 pl-5">
-                <h2 class="mb-5">Mes informations</h2>
-                <p><i class="fas fa-heart mr-3"></i> Les univers que je préfère :
-                    {% for category in user.categories %}
-                        {{ category.description }},
-                    {% else %}
-                        Aucun univers n'a été sélectioné
-                    {% endfor %}
-                </p>
-                <p><i class="fas fa-donate mr-3"></i> Je suis intéressé par le status de {{ user.dutiesToString }}</p>
+            <div class="col-lg-4 flex d-flex flex-column align-items-center p-5">
+                <h1 class="text-center m-2 mb-4">{{ user.brand.name }}</h1>
+                <img class="rounded-circle img-profil-creator align-self-center"
+                     src="
+                        {% if user.picture is null %}
+                        {{ asset('build/placeholder_profil_grey.png') }}
+                        {% else %}
+                        {{ vich_uploader_asset(user, 'pictureFile') }}
+                        {% endif %}"
+                     alt="{{ user.brand.name }}">
+                <div class="flex d-flex justify-content-around w-75 mt-3 mb-3">
+                    <div class="star justify-content-center h-100">
+                        <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like p-0">
+                            <div class="col-md-1 col-sm-12 mt-2">
+                                <span class="js-likes">{{ user.followers | length }}</span>
+                                {% set class="far" %}
+                                {% if app.user %}
+                                    {% for favorites in app.user.followedUsers %}
+                                        {% if user == favorites.userFavorite %}
+                                            {% set class="fas" %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                <i class="{{ class }} fa-star ml-2"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <p class="m-0"><i class="fas fa-map-marker-alt primary-color mr-3"></i>{{ user.city }}</p>
+                    </div>
+                </div>
+                <ul class="p-0 m-0 w-75 flex d-flex justify-content-around">
+                    <li class="list-inline-item">
+                        <a class="fb-ic" href="{{ user.urlFacebook}}" target="_blank">
+                            <i class="fab fa-facebook-square"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="inst-ic" href="{{ user.brand.site}}" target="_blank">
+                            <i class="far fa-user"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="inst-ic" href="{{ user.brand.instagram}}" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="mt-3 mb-3 historyDiv">
+                    {% if user.brand.hostAdvantage is not null %}
+                    <h4 class="pt-3 pl-3 pr-3 m-0"> Nous offrons aux hôtes ces avantages : </h4>
+                    <p class="pb-3 pl-3 pr-3 m-0">{{ user.brand.hostAdvantage }}</p>
+                    {% endif %}
+                    {% if user.brand.sellerAdvantage is not null %}
+                    <h4 class="pt-3 pl-3 pr-3 m-0"> Nous offrons aux vendeurs ces avantages : </h4>
+                    <p class="pb-3 pl-3 pr-3 m-0">{{ user.brand.sellerAdvantage }}</p>
+                    {% endif %}
+                </div>
+                <a href="mailto:{{ user.mail }}">
+                    <button type="button" class="btn btn-gold">Contacter ce créateur</button>
+                </a>
             </div>
-            <div class="col-lg-5 offset-1">
-                <h2 class="mt-2">Mes produits</h2>
-                <div class="row">
+
+            <div class="col-lg-8 flex d-flex flex-column">
+                <div class="m-5 p-3 historyDiv">
+                    <h2 class="mt-2 text-center">Mon histoire</h2>
+                    <div class="brandDescription">
+                        {{ user.brand.description }}
+                    </div>
+                    <div class="brandDescription">
+                        {{ user.brand.sellDescription }}
+                    </div>
+                </div>
+
+                <div class="carouselDiv align-self-center">
+                    <h2 class="text-center">Mes produits</h2>
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             {% for i in 0..user.brand.galleries|length-1 %}
@@ -84,7 +112,6 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block javascripts %}

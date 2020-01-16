@@ -50,6 +50,10 @@ a
     width: 20rem;
 }
 
+.img-profil-creator {
+    width: 80%;
+}
+
 .img-fluid{
     height: 400px;
 }
@@ -67,32 +71,43 @@ a
     object-fit: cover;
 }
 
-.carousel-item div{
-    height: 200px;
+.historyDiv {
+    border: 2px dashed $primary-color;
+}
 
-    img {
-        object-fit: cover;
-    }
+.brandDescription {
+    text-indent: 1rem;
+}
+
+.carouselDiv {
+    width: 90%;
+}
+
+.carousel-item div img{
+    height: 400px;
+    object-fit: cover;
+    border: 1px solid $primary-color
 }
 
 #carouselExampleIndicators {
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 2rem;
 }
 
 .carousel-control-prev,  {
-    margin-left: -50px;
+    margin-left: -5rem;
     filter: invert(100%);
 }
 
 .carousel-control-next {
-    margin-right: -50px;
+    margin-right: -5rem;
     filter: invert(100%);
 }
 
 .carousel-indicators {
-    margin-bottom: -50px;
+    margin-bottom: -40px;
     filter: invert(100%);
 }
 
+@media screen and (max-width: 768px) {
+
+}
