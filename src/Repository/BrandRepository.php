@@ -18,4 +18,15 @@ class BrandRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Brand::class);
     }
+
+    public function findChosenCreator(): array
+    {
+        $query = $this->createQueryBuilder('b')
+            ->select('u, b')
+            ->leftJoin('b.user', 'u')
+            ->where("b.chosenCreator = 1")
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }

@@ -85,17 +85,16 @@
                             <div class="col-md-4">
                                 <a href="{{ path('user_show', {'id': card.id}) }}">
                                     <img
-                                        src="
+                                            src="
                                             {% if card.picture is null %}
                                             {{ asset('build/placeholder_profil_grey.png') }}
                                             {% else %}
                                             {{ vich_uploader_asset(card, 'pictureFile') }}
                                             {% endif %}"
-                                        class="card-img" alt="Image">
+                                            class="card-img" alt="Image">
                                 </a>
                             </div>
                         </div>
-                        </a>
                     </div>
                 {% endfor %}
             </div>
@@ -131,6 +130,69 @@
                         </p>
                     </div>
                 </div>
+            </div>
+        </div>
+        <h2 class="ml-3 mr-3 mb-5 mt-5 m-md-5 show"> Nos Créateurs</h2>
+        <div class="container-fluid card-ambassador">
+            <div class="row no-gutters">
+                {% for keyCreator, creator in creators %}
+                    <div class="card mb-5 col-md-5 col-sm-12">
+                        <div class="row no-gutters">
+                            <div class="col-md-1 col-sm-12 mt-2 ml-3">
+                                <div class="star_home">
+                                    <a href="{{ path('search_like', {'id' : creator.user.id}) }}"
+                                       class="btn btn-link js-like">
+                                        <div class="col-md-1 col-sm-12 mt-2">
+                                            <span class="js-likes">{{ creator.user.followers | length }}</span>
+                                            {% set class="far" %}
+                                            {% if app.user %}
+                                                {% for favorites in app.user.followedUsers %}
+                                                    {% if creator == favorites.userFavorite %}
+                                                        {% set class="fas" %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                            <i class="{{ class }} fa-star"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="card-body">
+                                    <a href="{{ path('brand_show', {'id': creator.id}) }}">
+                                        <h5 class="card-title">{{ creator.name }}</h5>
+                                        <p> Les univers dans lesquels je crée :
+                                            {% for category in creator.user.categories %}
+                                                {{ category.description }},
+                                            {% else %}
+                                                Aucun univers n'a été sélectioné
+                                            {% endfor %}</p>
+                                        <p>
+                                            Je recherche :
+                                            {% for duty in creator.user.duties %}
+                                                {{ duty.name }},
+                                            {% else %}
+                                                Les préférences n'ont pas été sélectionées
+                                            {% endfor %}
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{{ path('brand_show', {'id': creator.id}) }}">
+                                    <img
+                                            src="
+                                            {% if creator.user.picture is null %}
+                                            {{ asset('build/placeholder_profil_grey.png') }}
+                                            {% else %}
+                                            {{ vich_uploader_asset(card, 'pictureFile') }}
+                                            {% endif %}"
+                                            class="card-img" alt="Image">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
                 <div>
                     <div class="row reasons">
                         <h2 class="m-5"> Pourquoi devenir créateur ?</h2>
@@ -165,14 +227,16 @@
             </div>
         </div>
     </div>
-
+    </div>
     <div class="containerNewsletter row">
-        <img class="imgNewsletter col-12" src="{{ asset('build/newsletter_placeholder.jpg') }}" alt="image newsletter">
+        <img class="imgNewsletter col-12" src="{{ asset('build/newsletter_placeholder.jpg') }}"
+             alt="image newsletter">
         <fieldset class="card cardNewsletter col-12">
             <h2 class="text-center p-3">S'inscrire à la Newsletter </h2>
-            {{ include('home/_form_newsletter.html.twig')}}
+            {{ include('home/_form_newsletter.html.twig') }}
             <div class="w-100">
-                <a class="text-muted font-italic" href="{{ path('home_unsubscribe_newsletter') }}">Se désinscrire</a>
+                <a class="text-muted font-italic" href="{{ path('home_unsubscribe_newsletter') }}">Se
+                    désinscrire</a>
             </div>
         </fieldset>
     </div>
@@ -180,8 +244,8 @@
 
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('map') }}
-    {{ encore_entry_script_tags('favorite') }}
-{% endblock %}
+    {% block javascripts %}
+        {{ parent() }}
+        {{ encore_entry_script_tags('map') }}
+        {{ encore_entry_script_tags('favorite') }}
+    {% endblock %}
