@@ -4,7 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Brand;
 use App\Form\BrandType;
+use App\Form\ChosenCreatorType;
+use App\Form\HasSubscribeType;
 use App\Repository\BrandRepository;
+use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,13 +20,83 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AdminBrandController extends AbstractController
 {
-    /**
-     * @Route("/", name="admin_brand_index", methods={"GET"})
-     */
-    public function index(BrandRepository $brandRepository): Response
+
+    private function formChosenCreators(
+        BrandRepository $brandRepository,
+        Request $request,
+        $formChosenCreator,
+        $brand
+    ) {
+        $chosenCreator = count($brandRepository->findBy(['chosenCreator' => true]));
+        $formChosenCreator->handleRequest($request);
+        if ($formChosenCreator->isSubmitted() && $formChosenCreator->isValid()) {
+            if ($chosenCreator > self::MAX_ON_HOMEPAGE && $brand->getChosenCreator() === true) {
+                $this->addFlash(
+                    'danger',
+                    self::MAX_ON_HOMEPAGE + 1 . ' Créateurs sont déjà affichés sur la page d\'accueil'
+                );
+                return $this->redirectToRoute('brand_index');
+            }
+
+            if ($brand->getChosenCreator() === false) {
+                $this->addFlash('success', 'Votre créateur a été retiré de la page d\'accueil');
+            } else {
+                $this->addFlash(
+                    'success',
+                    'Votre créateur a été mis en avant et sera affiché sur la page d\'accueil'
+                );
+            }
+
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('brand_index');
+        }
+    }
+
+    private function formHasSubscribes(BrandRepository $brandRepository, Request $request, $formHasSubscribe, $brand)
     {
+        $formHasSubscribe->handleRequest($request);
+
+        if ($formHasSubscribe->isSubmitted() && $formHasSubscribe->isValid()) {
+            if ($brand->getHasSubscribe() === true) {
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash('success', $brand->getName() . ' s\'est abonné');
+                return $this->redirectToRoute('brand_index');
+            }
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('danger', $brand->getName() . ' s\'est désabonné');
+            return $this->redirectToRoute('brand_index');
+        }
+    }
+    const MAX_ON_HOMEPAGE = 5;
+
+    /**
+     * @Route("/", name="brand_index", methods={"GET","POST"})
+     * @param BrandRepository $brandRepository
+     * @param Request $request
+     * @return Response
+     */
+    public function index(BrandRepository $brandRepository, Request $request): Response
+    {
+        /**
+         * @var FormFactory
+         */
+        $formFactory = $this->get('form.factory');
+        $brands = $brandRepository->findAll();
+        $viewsChosenCreator = [];
+        $viewsHasSubscribe = [];
+
+        foreach ($brands as $key => $brand) {
+            $formChosenCreator = $formFactory->createNamed('chosen_creator_' . $key, ChosenCreatorType::class, $brand);
+            $viewsChosenCreator[] = $formChosenCreator->createView();
+            $formHasSubscribe = $formFactory->createNamed('has_subscribe_' . $key, HasSubscribeType::class, $brand);
+            $viewsHasSubscribe[] = $formHasSubscribe->createView();
+            $this->formChosenCreators($brandRepository, $request, $formChosenCreator, $brand);
+            $this->formHasSubscribes($brandRepository, $request, $formHasSubscribe, $brand);
+        }
         return $this->render('brand/index.html.twig', [
-            'brands' => $brandRepository->findAll(),
+            'brands' => $brands,
+            'formsChosenCreators' => $viewsChosenCreator,
+            'formsHasSubscribes' => $viewsHasSubscribe,
         ]);
     }
 
