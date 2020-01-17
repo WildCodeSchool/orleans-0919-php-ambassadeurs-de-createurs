@@ -19,14 +19,13 @@ class UserController extends AbstractController
      */
     public function show(User $user, EventRepository $eventRepository): Response
     {
-        if (in_array(User::ROLE_AMBASSADOR, $user->getRoles())) {
+        if ($user->hasRole(USER::ROLE_AMBASSADOR)) {
             $events = $eventRepository->findBy(['user' => $user]);
             return $this->render('user/show_ambassador.html.twig', [
                 'user' => $user,
                 'events' => $events,
             ]);
-        } elseif (in_array(User::ROLE_CREATOR, $user->getRoles())) {
-            $events = $eventRepository->findBy(['user' => $user]);
+        } elseif ($user->hasRole(USER::ROLE_CREATOR)) {
             return $this->render('user/show_creator.html.twig', [
                 'user' => $user,
             ]);
