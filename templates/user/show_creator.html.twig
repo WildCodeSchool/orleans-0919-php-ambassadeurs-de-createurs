@@ -70,13 +70,11 @@
             </div>
 
             <div class="col-lg-8 flex d-flex flex-column">
-                <div class="m-5 p-3 historyDiv">
+                <div class="m-5 p-3">
                     <h2 class="mt-2 text-center">Mon histoire</h2>
-                    <div class="brandDescription">
-                        {{ user.brand.description }}
-                    </div>
-                    <div class="brandDescription">
-                        {{ user.brand.sellDescription }}
+                    <div class="blockQuote">
+                        <p>{{ user.brand.description }}</p>
+                        <p>{{ user.brand.sellDescription }}</p>
                     </div>
                 </div>
 

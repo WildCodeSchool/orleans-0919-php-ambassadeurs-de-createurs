@@ -68,7 +68,8 @@ a
 
 .leftPanel {
     box-sizing: border-box;
-    box-shadow: 0 0 3px 2px $background-primary
+    box-shadow: 0 0 3px 2px $background-primary;
+    background-color: $third-color;
 }
 
 .profilPagePicture {
@@ -91,8 +92,17 @@ a
     border: 2px dashed $primary-color;
 }
 
-.brandDescription {
-    text-indent: 1rem;
+.blockQuote {
+    width:80%;
+    margin:50px auto;
+    padding:1.2rem 1rem 1.2rem 4rem;
+    border-left:8px solid $primary-color;
+    position: relative;
+    background: $third-color;
+
+    p {
+        text-indent: 1rem;
+    }
 }
 
 .carousel-item div img{
