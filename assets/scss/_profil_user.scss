@@ -65,6 +65,12 @@ a
     object-fit: cover;
 }
 
+
+.leftPanel {
+    box-sizing: border-box;
+    box-shadow: 0 0 3px 2px $background-primary
+}
+
 .profilPagePicture {
     width: 100%;
     max-height: 400px;
