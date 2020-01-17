@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row mb-5">
             <div class="col-lg-4  p-5">
-                <div class="flex d-flex flex-column align-items-center leftPanel">
+                <section class="flex d-flex flex-column align-items-center leftPanel">
                     <h1 class="text-center m-2 mb-4">{{ user.brand.name }}</h1>
                     <img class="rounded-circle img-profil-creator align-self-center"
                          src="
@@ -53,60 +53,76 @@
                         </li>
                     </ul>
 
-                    <div class="m-3 historyDiv ">
+                    <div class="m-3">
                         {% if user.brand.hostAdvantage is not null %}
-                            <h4 class="pt-3 pl-3 pr-3 m-0"> Nous offrons aux hôtes ces avantages : </h4>
-                            <p class="pb-3 pl-3 pr-3 m-0">{{ user.brand.hostAdvantage }}</p>
+                            <div class="row">
+                                <div class="col-2 pt-3 pb-3 pr-3 pl-0">
+                                    <i class="fas fa-home profilIcon"></i>
+                                </div>
+                                <div class="col-10 pt-3 pb-3 pr-3 pl-0">
+                                    <h4 class=""> Nous offrons aux hôtes ces avantages : </h4>
+                                    <p class="">{{ user.brand.hostAdvantage }}</p>
+                                </div>
+                            </div>
                         {% endif %}
                         {% if user.brand.sellerAdvantage is not null %}
-                            <h4 class="pt-3 pl-3 pr-3 m-0"> Nous offrons aux vendeurs ces avantages : </h4>
-                            <p class="pb-3 pl-3 pr-3 m-0">{{ user.brand.sellerAdvantage }}</p>
+                            <div class="row">
+                                <div class="col-2 pt-3 pb-3 pr-3 pl-0">
+                                    <i class="fas fa-hand-holding-usd profilIcon"></i>
+                                </div>
+                                <div class="col-10 pt-3 pb-3 pr-3 pl-0">
+                                    <h4 class=""> Nous offrons aux vendeurs ces avantages : </h4>
+                                    <p class="">{{ user.brand.sellerAdvantage }}</p>
+                                </div>
+                            </div>
                         {% endif %}
                     </div>
-                    <a class="mt-3 mb-3" href="mailto:{{ user.mail }}">
+                    <a class="mt-3 mb-4" href="mailto:{{ user.mail }}">
                         <button type="button" class="btn btn-gold">Contacter ce créateur</button>
                     </a>
-                </div>
+                </section>
             </div>
 
             <div class="col-lg-8 flex d-flex flex-column">
-                <div class="m-5 p-3">
+                <section class="m-5 p-3">
                     <h2 class="mt-2 text-center">Mon histoire</h2>
                     <div class="blockQuote">
                         <p>{{ user.brand.description }}</p>
                         <p>{{ user.brand.sellDescription }}</p>
                     </div>
-                </div>
+                </section>
 
-                <div class="carouselDiv align-self-center ml-lg-5 mr-lg-5">
-                    <h2 class="text-center">Mes produits</h2>
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <div>
-                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <ol class="carousel-indicators">
-                                {% for i in 0..user.brand.galleries|length-1 %}
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ i }}" class="{% if loop.index == 1 %} active {% endif %}"></li>
-                                {% endfor %}
-                            </ol>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </div>
-                        <div class="carousel-inner">
-                            {% for gallery in user.brand.galleries %}
-                            <div class="w-100 carousel-item {% if loop.index == 1 %} active {% endif %}">
-                                <div class="flex d-flex justify-content-center w-100">
-                                    <img class="d-block w-100" src="{{ vich_uploader_asset(gallery, 'photoFile') }}" alt="{{ user.brand.name }}">
-                                </div>
+                <section class="carouselDiv align-self-center ml-lg-5 mr-lg-5">
+                    <h2 class="text-center mb-4">Mes produits</h2>
+                    {% if user.brand.galleries is not empty %}
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <ol class="carousel-indicators">
+                                    {% for i in 0..user.brand.galleries|length-1 %}
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ i }}" class="{% if loop.index == 1 %} active {% endif %}"></li>
+                                    {% endfor %}
+                                </ol>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
                             </div>
-                            {% endfor %}
+                            <div class="carousel-inner">
+                                {% for gallery in user.brand.galleries %}
+                                <div class="w-100 carousel-item {% if loop.index == 1 %} active {% endif %}">
+                                    <div class="flex d-flex justify-content-center w-100">
+                                        <img class="d-block w-100" src="{{ vich_uploader_asset(gallery, 'photoFile') }}" alt="{{ user.brand.name }}">
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    {% endif %}
+                </section>
             </div>
         </div>
     </div>

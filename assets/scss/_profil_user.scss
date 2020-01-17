@@ -45,7 +45,6 @@ a
     color : $background-secondary;
 }
 
-
 .img-profil {
     width: 20rem;
 }
@@ -81,6 +80,8 @@ a
 .profilIcon {
     font-size: $font-size-icon;
     color: $secondary-color;
+    width: 35px;
+    height: 35px;
 
     &hover {
         color: $primary-color;
@@ -88,8 +89,9 @@ a
     }
 }
 
-.historyDiv {
-    border: 2px dashed $primary-color;
+.iconSite {
+    width: 35px;
+    height: 35px;
 }
 
 .blockQuote {
