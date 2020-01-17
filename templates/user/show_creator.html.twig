@@ -6,7 +6,7 @@
 
     <div class="container-fluid">
         <div class="row mb-5">
-            <div class="col-lg-4  p-5">
+            <div class="col-lg-4  py-5 px-lg-5">
                 <section class="flex d-flex flex-column align-items-center leftPanel">
                     <h1 class="text-center m-2 mb-4">{{ user.brand.name }}</h1>
                     <img class="rounded-circle img-profil-creator align-self-center"
@@ -56,7 +56,7 @@
                     <div class="m-3">
                         {% if user.brand.hostAdvantage is not null %}
                             <div class="row">
-                                <div class="col-2 pt-3 pb-3 pr-3 pl-0">
+                                <div class="col-2 p-3">
                                     <i class="fas fa-home profilIcon"></i>
                                 </div>
                                 <div class="col-10 pt-3 pb-3 pr-3 pl-0">
@@ -67,7 +67,7 @@
                         {% endif %}
                         {% if user.brand.sellerAdvantage is not null %}
                             <div class="row">
-                                <div class="col-2 pt-3 pb-3 pr-3 pl-0">
+                                <div class="col-2 p-3">
                                     <i class="fas fa-hand-holding-usd profilIcon"></i>
                                 </div>
                                 <div class="col-10 pt-3 pb-3 pr-3 pl-0">
@@ -84,7 +84,7 @@
             </div>
 
             <div class="col-lg-8 flex d-flex flex-column">
-                <section class="m-5 p-3">
+                <section class="mx-lg-5 my-5 p-3">
                     <h2 class="mt-2 text-center">Mon histoire</h2>
                     <div class="blockQuote">
                         <p>{{ user.brand.description }}</p>
@@ -92,10 +92,10 @@
                     </div>
                 </section>
 
-                <section class="carouselDiv align-self-center ml-lg-5 mr-lg-5">
+                <section class="carouselDiv align-self-center ml-lg-5 mr-lg-5 px-lg-3 mx-lg-5">
                     <h2 class="text-center mb-4">Mes produits</h2>
                     {% if user.brand.galleries is not empty %}
-                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <div id="carouselExampleIndicators" class="carousel slide w-100" data-ride="carousel">
                             <div>
                                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -111,7 +111,7 @@
                                     <span class="sr-only">Next</span>
                                 </a>
                             </div>
-                            <div class="carousel-inner">
+                            <div class="carousel-inner w-100">
                                 {% for gallery in user.brand.galleries %}
                                 <div class="w-100 carousel-item {% if loop.index == 1 %} active {% endif %}">
                                     <div class="flex d-flex justify-content-center w-100">
