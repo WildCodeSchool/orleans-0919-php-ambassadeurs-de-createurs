@@ -22,13 +22,17 @@
             </tr>
             </tbody>
         </table>
-        <a href="{{ path('admin_question_index') }}" class="btn btn-gold">
-            Retour
-        </a>
-
-        <a href="{{ path('admin_question_edit', {'id': question.id}) }}" class="btn btn-gold">
-            Modifier
-        </a>
-        {{ include('question/_delete_form.html.twig') }}
+        <div class="row justify-content-between">
+            <div class="col col-lg-4">
+                <a class="btn btn-dark m-5" href="{{ path('admin_question_index') }}">
+                    <i class="far fa-arrow-alt-circle-left"></i> Liste des questions
+                </a>
+            </div>
+            <div class="col col-lg-4">
+                <a class="btn btn-dark m-5" href="{{ path('admin_question_edit', {'id': question.id}) }}">
+                    <i class="fas fa-pencil-alt"></i> Modifier
+                </a>
+            </div>
+        </div>
     </div>
 {% endblock %}

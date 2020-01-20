@@ -17,6 +17,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use \DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class SecurityController extends AbstractController
 {
@@ -91,6 +92,7 @@ class SecurityController extends AbstractController
     }
     /**
      * @Route("/profil", name="app_profile")
+     * @IsGranted("ROLE_USER")
      */
     public function profile() :Response
     {
@@ -102,6 +104,7 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/profil/modification", name="app_profileEdit")
+     * @IsGranted("ROLE_USER")
      */
     public function editProfile(Request $request, CoordinateService $coordinateService) :Response
     {

@@ -28,16 +28,16 @@
 
     <div class="searchBg my-5 p-5">
         <h2 class="text-center p-3">Je recherche</h2>
-        <div class="d-flex justify-content-around">
+        <div class="d-flex flex-wrap">
 
-            <div class="buttonRole d-flex flex-column align-items-center">
+            <div class="col-md-6 col-sm-9 buttonRole d-flex flex-column align-items-center">
                 <h3 class="mt-3 mb-3 text-center d-none d-md-block">Un ambassadeur pour un créateur</h3>
-                <a class="btn btn-gold mb-4" href="{{ path('search_role', {'role': 'ambassadeur', 'page': 1}) }}">Ambassadeurs</a>
+                <a class="col-md-6 col-sm-12 btn btn-gold" href="{{ path('search_role', {'role': 'ambassadeur', 'page': 1}) }}">Ambassadeurs</a>
 
             </div>
-            <div class="buttonRole d-flex flex-column align-items-center">
+            <div class="col-md-6 col-sm-9 buttonRole d-flex flex-column align-items-center">
                 <h3 class="mt-3 mb-3 text-center d-none d-md-block">Une marque, un style</h3>
-                <a class="btn btn-gold mb-4"
+                <a class="col-md-6 col-sm-12 btn btn-gold"
                    href="{{ path('search_role', {'role': 'createur', 'page': 1}) }}">Créateurs</a>
             </div>
         </div>
@@ -100,7 +100,7 @@
             </div>
             <div>
                 <div class="row reasons">
-                    <h2 class="m-5"> Pourquoi devenir ambassadeur ?</h2>
+                    <h2 class="col-12 text-center m-5"> Pourquoi devenir ambassadeur ?</h2>
                 </div>
                 <div class="row reasons m-5">
                     <div class="col-12 col-md-6 col-lg-3 text-reasons">
@@ -195,7 +195,7 @@
                 {% endfor %}
                 <div>
                     <div class="row reasons">
-                        <h2 class="m-5"> Pourquoi devenir créateur ?</h2>
+                        <h2 class="col-12 text-center m-5"> Pourquoi devenir créateur ?</h2>
                     </div>
                     <div class="row reasons m-5">
                         <div class="col-12 col-md-6 col-lg-3 text-reasons">
@@ -231,7 +231,7 @@
     <div class="containerNewsletter row">
         <img class="imgNewsletter col-12" src="{{ asset('build/newsletter_placeholder.jpg') }}"
              alt="image newsletter">
-        <fieldset class="card cardNewsletter col-12">
+        <fieldset class="card cardNewsletter">
             <h2 class="text-center p-3">S'inscrire à la Newsletter </h2>
             {{ include('home/_form_newsletter.html.twig') }}
             <div class="w-100">

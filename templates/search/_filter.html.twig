@@ -1,16 +1,14 @@
 {{ form_start(form, {'action': path('search_role', {'role': role})}) }}
-<div class="row">
-    <div class="col-12 col-md-8 col-lg-6 col-xl-3 offset-1 select-element">
-        {{ form_row(form.department) }}
+<div class="row justify-content-center">
+    <div class="col-md-3 col-11 select-element">
+        {{ form_row(form.department, {'attr': {'class': 'form-search'}}) }}
     </div>
-    <div class="col-12 col-md-8 col-lg-6 col-xl-3">
-        {{ form_row(form.category) }}
+    <div class="col-md-3 col-11">
+        {{ form_row(form.category, {'attr': {'class': 'form-search'}}) }}
     </div>
-    <div class="col-12 col-md-8 col-lg-6 col-xl-3">
-        {{ form_row(form.duty) }}
+    <div class="col-md-3 col-11">
+        {{ form_row(form.duty, {'attr': {'class': 'form-search'}}) }}
     </div>
-
+    <button type="submit" class="btn btn-gold mb-5 ml-3 btnCardSearch">Filtrer</button>
 </div>
-<button type="submit" class="btn btn-gold offset-1">Filtrer</button>
-
 {{ form_end(form) }}
