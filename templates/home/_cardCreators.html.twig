@@ -1,0 +1,55 @@
+{% block cardCreators %}
+    <h2 class="ml-3 mr-3 mb-5 mt-5 m-md-5 show"> Nos Créateurs</h2>
+    <div class="container-fluid card-ambassador">
+        <div class="row no-gutters">
+            {% for keyCreator, creator in creators %}
+                <div class="col-10 col-md-4 col-lg-4 col-xl-3 m-5 p-0">
+                    <div class="star">
+                        <a href="{{ path('search_like', {'id' : creator.id}) }}" class="btn btn-link js-like">
+                            <div class="col-md-1 col-sm-12 mt-2">
+                                <span class="js-likes">{{ creator.user.followers | length }}</span>
+                                {% set class="far" %}
+                                {% if app.user %}
+                                    {% for favorites in app.user.followedUsers %}
+                                        {% if user == favorites.userFavorite %}
+                                            {% set class="fas" %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                <i class="{{ class }} fa-star ml-2"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="cardSearch">
+                        <div class="card-body text-center">
+                            <img class="avatarSearch rounded-circle" src="
+                                        {% if creator.user.picture is null %}
+                                {{ asset('build/placeholder_profil_grey.png') }}
+                                {% else %}
+                                {{ vich_uploader_asset(creator, 'pictureFile') }}
+                                {% endif %}" alt="image de {{ creator.name }}">
+                            <h4 class="card-title">{{ creator.name }}</h4>
+                            <p> Les univers dans lesquels je crée :
+                                {% for category in creator.user.categories %}
+                                    {{ category.description }},
+                                {% else %}
+                                    Aucun univers n'a été sélectioné
+                                {% endfor %}
+                            </p>
+                            <p>
+                                Je recherche :
+                                {% for duty in creator.user.duties %}
+                                    {{ duty.name }},
+                                {% else %}
+                                    Les préférences n'ont pas été sélectionées
+                                {% endfor %}
+                            </p>
+                            <a href="{{ path('user_show', {'id': creator.id}) }}"
+                               class="btn btn-gold btnCardSearch mt-3">Découvrir</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
