@@ -1,6 +1,23 @@
-.card-search .card {
-    border: $primary-color solid 1px;
-    width: 20%;
+.btn-link {
+    margin-top: 50px;
+    position: absolute;
+}
+
+.btnCardSearch {
+    font-size: 1rem;
+}
+
+.cardSearch {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: $third-color;
+    background-clip: border-box;
+    border: 1px solid
+    rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    min-height: 300px;
 }
 
 .star {
@@ -21,7 +38,7 @@ select {
 }
 
 .form-control {
-    border: 1px solid white;
+    border: 1px solid $third-color;
 }
 
 .btn-link:hover {
@@ -31,13 +48,18 @@ select {
 
 .btn-inactive {
     background-color: $background-primary;
-    color: white;
+    color: $third-color;
 
     &:hover{
         cursor: default;
     }
 }
 
-.card:hover {
-    box-shadow: 0 0 15px lightgrey;
+
+.avatarSearch {
+    margin-top: -6rem;
+    margin-bottom: 1rem;
+    max-width: 9rem;
+    min-height: 9rem;
 }
+

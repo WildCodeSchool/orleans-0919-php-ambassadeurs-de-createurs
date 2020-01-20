@@ -4,60 +4,46 @@
 
 {% block body %}
     <h1 class="text-center"> Recherche des {{ role }}s </h1>
-    <div class="container-fluid card-search">
+    <div class="container-fluid">
         {% include 'search/_filter.html.twig' with {form: form} %}
-        <h5 class="text-center">Nombre de résultats : {{ nbUsers }}</h5>
+        <h5 class="text-center mb-5">Nombre de résultats : {{ nbUsers }}</h5>
         <div class="row justify-content-center">
             {% for user in users %}
-                <div class="card col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">
-                    <a href="{{ path('user_show', {'id': user.id}) }}">
-                        <img
-                            src="
-                                {% if user.picture is null %}
-                                {{ asset('build/placeholder_profil_grey.png') }}
-                                {% else %}
-                                {{ vich_uploader_asset(user, 'pictureFile') }}
-                                {% endif %}"
-                            class="card-img-top" alt="image de {{ user.firstname }}">
-                    </a>
-                    <div class="card-body">
-                        <div class="star mb-4">
-                            <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">
-                                <div class="col-md-1 col-sm-12 mt-2">
-                                    <span class="js-likes">{{ user.followers | length }}</span>
-                                    {% set class="far" %}
-                                    {% if app.user %}
-                                        {% for favorites in app.user.followedUsers %}
-                                            {% if user == favorites.userFavorite %}
-                                                {% set class="fas" %}
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endif %}
-                                    <i class="{{ class }} fa-star ml-2"></i>
-                                </div>
-                            </a>
-                        </div>
-
-                        <a href="{{ path('user_show', {'id': user.id}) }}">
-                            <div>
-                                <h2 class="card-text text-handscript mb-3">{{ user.firstname }}</h2>
-                                <p class="card-text"><i class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}
-
-                                    {% if user.department.code is defined %}
-                                        ({{ user.department.code }})
-                                    {% endif %}</p>
-
-                                <hr>
-                                {% if user.roleLabel == 'Créateur' %}
-                                    <p>Recherche un :</p>
+                <div class="col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">
+                    <div class="star">
+                        <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">
+                            <div class="col-md-1 col-sm-12 mt-2">
+                                <span class="js-likes">{{ user.followers | length }}</span>
+                                {% set class="far" %}
+                                {% if app.user %}
+                                    {% for favorites in app.user.followedUsers %}
+                                        {% if user == favorites.userFavorite %}
+                                            {% set class="fas" %}
+                                        {% endif %}
+                                    {% endfor %}
                                 {% endif %}
-                                <p class="card-text">{{ user.dutiesToString }}</p>
+                                <i class="{{ class }} fa-star ml-2"></i>
                             </div>
                         </a>
                     </div>
+                    <div class="cardSearch">
+                        <div class="card-body text-center">
+                            <img class="avatarSearch rounded-circle" src="
+                                        {% if user.picture is null %}
+                                {{ asset('build/placeholder_profil_grey.png') }}
+                                {% else %}
+                                {{ vich_uploader_asset(user, 'pictureFile') }}
+                                {% endif %}" alt="image de {{ user.firstname }}">
+                            <h4 class="card-title">{{ user.firstname }}</h4>
+                            <h6 class="card-subtitle mb-2 mt-3 text-muted"><i
+                                        class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}</h6>
+                            <p class="card-text mt-3">{{ user.dutiesToString }}</p>
+
+                            <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-gold btnCardSearch mt-3">Découvrir</a>
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
-
         </div>
         <div class="text-center">
             <p class="m-3">Page : {{ page }}</p>
@@ -73,7 +59,6 @@
                     <i class="far fa-arrow-alt-circle-left"></i> Précédent
                 </a>
             {% endif %}
-
             {% if page < nbPages %}
                 <a class="btn btn-gold mx-5 mb-5"
                    href="{{ path('search_role', {'role': role, 'page': page+1}|merge(app.request.query.all)) }}">
