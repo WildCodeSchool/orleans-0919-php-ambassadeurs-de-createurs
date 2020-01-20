@@ -82,7 +82,6 @@ div.searchBg {
 }
 
 div.buttonRole {
-    width: 40vw;
     margin-bottom: 20px;
     opacity: 1;
 }
@@ -90,7 +89,6 @@ div.buttonRole {
 div.buttonRole a.btn {
     font-size: 1.5rem;
     font-family: $font-title;
-    width: 50%;
 
     &:hover {
         background-color: lighten($primary-color, 5);
@@ -272,6 +270,7 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     width: 100%;
     opacity: 0.6;
     padding: 0;
+    margin-left: 15px;
 }
 
 .cardNewsletter {
@@ -322,10 +321,13 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
         display: block;
         font-size: $font-size-second-title;
         margin: 0;
+        height: 0;
+        margin-bottom: 50px;
     }
 
     .filterImage {
         opacity: 0.6;
+        margin-bottom: 120px;
     }
 
     .mapTabs {
