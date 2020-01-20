@@ -57,14 +57,14 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $nbDuty = rand(0, 2);
             switch ($nbDuty) {
                 case 0:
-                    $user->addDuty($this->getReference('hôte'));
+                    $user->addDuty($this->getReference('Hôte'));
                     break;
                 case 1:
-                    $user->addDuty($this->getReference('vendeur'));
+                    $user->addDuty($this->getReference('Vendeur'));
                     break;
                 case 2:
-                    $user->addDuty($this->getReference('hôte'));
-                    $user->addDuty($this->getReference('vendeur'));
+                    $user->addDuty($this->getReference('Hôte'));
+                    $user->addDuty($this->getReference('Vendeur'));
                     break;
             }
             $user->setUrlFacebook($faker->url);
@@ -89,14 +89,14 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $nbDuty = rand(0, 2);
             switch ($nbDuty) {
                 case 0:
-                    $user->addDuty($this->getReference('hôte'));
+                    $user->addDuty($this->getReference('Hôte'));
                     break;
                 case 1:
-                    $user->addDuty($this->getReference('vendeur'));
+                    $user->addDuty($this->getReference('Vendeur'));
                     break;
                 case 2:
-                    $user->addDuty($this->getReference('hôte'));
-                    $user->addDuty($this->getReference('vendeur'));
+                    $user->addDuty($this->getReference('Hôte'));
+                    $user->addDuty($this->getReference('Vendeur'));
                     break;
             }
             $user->setUrlFacebook($faker->url);

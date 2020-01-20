@@ -1,5 +1,10 @@
 {% extends '/layout_admin.html.twig' %}
 
-{% block body %}
+{% block title %}Menu Administrateur{% endblock %}
 
+{% block body %}
+<div class="container-fluid user-manual p-5">
+    {% include 'admin/includes/_introduction.html.twig' %}
+    {% include 'admin/includes/_navigation-menu.html.twig' %}
+</div>
 {% endblock %}

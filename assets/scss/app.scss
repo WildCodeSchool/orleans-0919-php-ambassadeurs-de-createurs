@@ -20,12 +20,9 @@
 @import '~@fortawesome/fontawesome-free/scss/brands';
 
 
-* {
-    font-family: $font-body;
-}
-
 body {
     font-size: $font-size-body;
+    font-family: $font-body;
 }
 
 h1 {
@@ -33,6 +30,26 @@ h1 {
     font-size: $font-size-title;
     color: $primary-color;
     margin: 30px;
+
+    &:before{
+        content:'';
+        display:inline-block;
+        vertical-align: middle;
+        width: 1.5rem;
+        height: 2px;
+        background: $primary-color;
+        margin-right: 1rem;
+    }
+
+    &:after{
+        content:'';
+        display:inline-block;
+        vertical-align: middle;
+        width: 1.5rem;
+        height: 2px;
+        background: $primary-color;
+        margin-left: 1rem;
+    }
 }
 
 h2 {
