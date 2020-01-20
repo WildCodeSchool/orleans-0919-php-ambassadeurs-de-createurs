@@ -93,6 +93,7 @@ class AdminBrandController extends AbstractController
             $this->formChosenCreators($brandRepository, $request, $formChosenCreator, $brand);
             $this->formHasSubscribes($brandRepository, $request, $formHasSubscribe, $brand);
         }
+        dd($brands);
         return $this->render('brand/index.html.twig', [
             'brands' => $brands,
             'formsChosenCreators' => $viewsChosenCreator,
