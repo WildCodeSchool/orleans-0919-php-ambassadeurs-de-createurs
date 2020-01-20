@@ -1,12 +1,13 @@
 /****Navbar****/
 
+
 .navbar {
     box-shadow: 1px 1px 20px $navbar-border-color;
     background-color: $third-color;
 }
 
 .navbar-light .navbar-nav .nav-link {
-    font-family: $font-body;
+    font-family: $font-title;
     color: $secondary-color;
     font-size: $font-size-nav;
 }

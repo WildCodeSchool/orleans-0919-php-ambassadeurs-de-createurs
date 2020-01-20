@@ -20,12 +20,9 @@
 @import '~@fortawesome/fontawesome-free/scss/brands';
 
 
-* {
-    font-family: $font-body;
-}
-
 body {
     font-size: $font-size-body;
+    font-family: $font-body;
 }
 
 h1 {
