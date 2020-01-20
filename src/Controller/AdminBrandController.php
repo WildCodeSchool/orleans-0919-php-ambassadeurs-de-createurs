@@ -93,7 +93,6 @@ class AdminBrandController extends AbstractController
             $this->formChosenCreators($brandRepository, $request, $formChosenCreator, $brand);
             $this->formHasSubscribes($brandRepository, $request, $formHasSubscribe, $brand);
         }
-        dd($brands);
         return $this->render('brand/index.html.twig', [
             'brands' => $brands,
             'formsChosenCreators' => $viewsChosenCreator,
@@ -144,6 +143,6 @@ class AdminBrandController extends AbstractController
             $this->addFlash('danger', 'Votre marque a été supprimée');
         }
 
-        return $this->redirectToRoute('admin_brand_index');
+        return $this->redirectToRoute('brand_index');
     }
 }
