@@ -57,17 +57,34 @@ a#ambassadors.btn-gold.active, a#events.btn-gold.active {
     color: $primary-color;
     background-color: $third-color;
     border: $primary-color 1px solid;
+    font-size: 1.5rem;
 }
 
 //RECHERCHE
 
 div.searchBg {
-    background-color: $third-color;
+    width: 100%;
+
+    .carousel-caption
+    {
+
+    }
+
+    .searchImage
+    {
+        overflow: hidden;
+        height: 50vh;
+
+        img{
+            opacity: 0.5;
+        }
+    }
 }
 
 div.buttonRole {
     width: 40vw;
     margin-bottom: 20px;
+    opacity: 1;
 }
 
 div.buttonRole a.btn {
@@ -82,6 +99,65 @@ div.buttonRole a.btn {
 }
 
 //CARD
+
+.btnCardSearch {
+    font-size: 1rem;
+}
+
+.cardSearch {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: $third-color;
+    background-clip: border-box;
+    border: 1px solid
+    rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    min-height: 300px;
+
+    &:hover {
+        transition: all 0.2s ease-out;
+        box-shadow: 0px 1px 4px 1px rgba(38, 38, 38, 0.2);
+        top: -4px;
+        border: 1px solid #cccccc;
+        background-color: $third-color;
+    }
+}
+
+
+.star {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: $primary-color;
+}
+
+.avatarSearch {
+    margin-top: -6rem;
+    margin-bottom: 1rem;
+    max-width: 9rem;
+    min-height: 9rem;
+    background-color: $third-color;
+
+    &:hover {
+        transition: all 0.2s ease-out;
+        box-shadow: 0px 1px 4px 1px rgba(38, 38, 38, 0.2);
+        top: -4px;
+        border: 1px solid #cccccc;
+        background-color: $third-color;
+    }
+}
+
+
+.btn-link {
+    margin-top: 50px;
+    position: absolute;
+}
+
+.btnCardSearch {
+    font-size: 1rem;
+}
 
 div.picture {
     img {
@@ -135,23 +211,6 @@ div.card.mb-5.col-md-5.col-sm-12 {
 
 div.background-reason {
     background-color: $third-color;
-}
-
-div.card-body {
-    text-align: center;
-    margin: 0;
-}
-
-h5.card-title {
-    font-size: 20pt;
-}
-
-p.card-text {
-    font-size: 16pt;
-}
-
-svg.svg-inline--fa.fa-star.fa-w-18 {
-    font-size: 15pt;
 }
 
 div.d-flex.flex-column.mt-5.mapTabs.align-self-center {

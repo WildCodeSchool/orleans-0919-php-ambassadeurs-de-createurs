@@ -3,54 +3,38 @@
         <div class="container-fluid card-ambassador">
             <div class="row no-gutters">
                 {% for card in ambassadorCards %}
-                    <div class="card mb-5 col-md-5 col-sm-12">
-                        <div class="border-gold card-border">
-                        <div class="row no-gutters">
-                            <div class="col-md-1 col-sm-12 mt-2 ml-3">
-                                <div class="star_home">
-                                    <a href="{{ path('search_like', {'id' : card.id}) }}"
-                                       class="btn btn-link js-like">
-                                        <div class="col-md-1 col-sm-12 mt-2">
-                                            <span class="js-likes">{{ card.followers | length }}</span>
-                                            {% set class="far" %}
-                                            {% if app.user %}
-                                                {% for favorites in app.user.followedUsers %}
-                                                    {% if card == favorites.userFavorite %}
-                                                        {% set class="fas" %}
-                                                    {% endif %}
-                                                {% endfor %}
+                    <div class="col-10 col-md-4 col-lg-4 col-xl-3 m-5 p-0">
+                        <div class="star">
+                            <a href="{{ path('search_like', {'id' : card.id}) }}" class="btn btn-link js-like">
+                                <div class="col-md-1 col-sm-12 mt-2">
+                                    <span class="js-likes">{{ card.followers | length }}</span>
+                                    {% set class="far" %}
+                                    {% if app.user %}
+                                        {% for favorites in app.user.followedUsers %}
+                                            {% if user == favorites.userFavorite %}
+                                                {% set class="fas" %}
                                             {% endif %}
-                                            <i class="{{ class }} fa-star"></i>
-                                        </div>
-                                    </a>
+                                        {% endfor %}
+                                    {% endif %}
+                                    <i class="{{ class }} fa-star ml-2"></i>
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="card-body">
-                                    <a href="{{ path('user_show', {'id': card.id}) }}">
-                                        <h5 class="card-title">{{ card.firstname }}</h5>
-                                        {% if card.department.codeName is defined %}
-                                            <p class="card-text">J'habite dans le {{ card.department.codeName }}</p>
-                                        {% endif %}
-                                        <p class="card-text">
-                                            <small class="text-muted">Je suis un {{ card.roleLabel }}</small>
-                                        </p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-2 picture align-self-center py-3 ml-2">
-                                <a href="{{ path('user_show', {'id': card.id}) }}">
-                                    <img
-                                            src="
-                                            {% if card.picture is null %}
-                                            {{ asset('build/placeholder_profil_grey.png') }}
-                                            {% else %}
-                                            {{ vich_uploader_asset(card, 'pictureFile') }}
-                                            {% endif %}"
-                                            class="card-img rounded-circle align-self-center ml-2" alt="Image">
-                                </a>
-                            </div>
+                            </a>
                         </div>
+                        <div class="cardSearch">
+                            <div class="card-body text-center">
+                                <img class="avatarSearch rounded-circle" src="
+                                        {% if card.picture is null %}
+                                {{ asset('build/placeholder_profil_grey.png') }}
+                                {% else %}
+                                {{ vich_uploader_asset(card, 'pictureFile') }}
+                                {% endif %}" alt="image de {{ card.firstname }}">
+                                <h4 class="card-title">{{ card.firstname }}</h4>
+                                <h6 class="card-subtitle mb-2 mt-3 text-muted"><i
+                                            class="fas fa-map-marker-alt primary-color"></i> {{ card.city }}</h6>
+                                <p class="card-text mt-3">{{ card.dutiesToString }}</p>
+
+                                <a href="{{ path('user_show', {'id': card.id}) }}" class="btn btn-gold btnCardSearch mt-3">Découvrir</a>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
