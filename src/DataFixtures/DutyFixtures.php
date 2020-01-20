@@ -8,7 +8,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class DutyFixtures extends Fixture
 {
-    const DUTIES = ['hôte', 'vendeur'];
+    const DUTIES = ['Hôte', 'Vendeur'];
 
     public function load(ObjectManager $manager)
     {
