@@ -8,10 +8,9 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Id</th>
             <th>Lieu</th>
             <th>Date</th>
-            <th>Description</th>
+            <th>Marque</th>
             <th>Ambassadeur</th>
             <th>actions</th>
         </tr>
@@ -19,13 +18,12 @@
         <tbody>
         {% for event in events %}
             <tr>
-                <td>{{ event.id }}</td>
                 <td>{{ event.place }}</td>
                 <td>{{ event.dateTime ? event.dateTime|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ event.description }}</td>
+                <td>{{ event.brand.name }}</td>
                 <td><a href="{{ path('user_show', {'id': event.user.id}) }}">{{ event.user.firstname }}</a></td>
                 <td>
-                    {{ include('event/_delete_form.html.twig') }}
+                    {{ include('event/admin_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}

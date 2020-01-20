@@ -8,10 +8,9 @@
         <table class="table">
             <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
-                <th>Avantage des hôtes</th>
-                <th>Avantage des vendeurs</th>
+                <th>Créateur</th>
+                <th>Evènement</th>
                 <th>Mise en avant</th>
                 <th>Abonnement</th>
                 <th>Actions</th>
@@ -20,10 +19,13 @@
             <tbody>
             {% for keys, brand in brands %}
                 <tr>
-                    <td>{{ brand.id }}</td>
-                    <td>{{ brand.name }}</td>
-                    <td>{{ brand.hostAdvantage }}</td>
-                    <td>{{ brand.sellerAdvantage }}</td>
+                    <td> {{ brand.name }}</td>
+                    <td>{{ brand.user.lastname }} {{ brand.user.firstname }}</td>
+                    <td>{% for event in brand.sponsoredEvents %}
+                    <p>
+                        <a href="{{ path('admin_event_show', {'id': event.id}) }}">{{ event.dateTime ? event.dateTime|localizeddate('short', 'none') }}</a>
+                    </p>
+                    {% endfor %}
                     <td>
                         {{ form_start(formsChosenCreators[keys]) }}
                         {{ form_row(formsChosenCreators[keys].chosenCreator, { 'attr' : {'id' : keys ~ '_creator', 'name' : keys ~ '_creator'}}) }}
@@ -40,8 +42,8 @@
                         </div>
                         {{ form_end(formsHasSubscribes[keys]) }}
                     </td>
-                    <td>
-                        {{ include('brand/_delete_form.html.twig') }}
+                    <td class="">
+                        {{ include('brand/admin_delete_form.html.twig') }}
                     </td>
                 </tr>
             {% else %}
