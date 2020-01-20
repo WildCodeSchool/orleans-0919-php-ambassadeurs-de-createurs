@@ -1,103 +1,32 @@
+// CAROUSEL
+
 .filterImage {
     opacity: 0.8;
-    height: calc(100vh - 100px);
+    margin-top: -15vw;
 }
 
 div.carousel-caption {
     color: $secondary-color;
 }
 
-div.searchBg {
-    background-color: $third-color;
+.carousel-image {
+    height: calc(100vh - 100px);
+    overflow:hidden
 }
 
-div.buttonRole {
-    width: 40vw;
-    margin-bottom: 20px;
-}
+//MAP
 
-div.buttonRole a.btn {
-    font-size: 1.5rem;
-    font-family: $font-title;
-    width: 50%;
-
-    &:hover {
-        background-color: lighten($primary-color, 5);
-
-    }
-}
-
-div.ambassador {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .mt-5.show {
-        align-self: center;
-    }
-}
-
-div.container-fluid.card-ambassador {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
-
-    .card.mb-5:nth-of-type(even) {
-        .row.no-gutters {
-            flex-direction: row-reverse;
-            justify-content: space-between;
-
-            .col-md-1.col-sm-12.mt-2 {
-                flex-direction: row-reverse;
-            }
-        }
-    }
-}
-
-div.row.no-gutters {
-    justify-content: space-between;
-}
-
-div.col-md-1.col-sm-12.mt-2 {
-    display: flex;
-    flex-direction: row;
-    color: $primary-color;
-}
-
-div.card.mb-5 {
-    border: $primary-color solid 1px;
-}
-
-div.card-body {
-    text-align: center;
-    margin: 0;
-}
-
-h5.card-title {
-    font-size: 20pt;
-}
-
-p.card-text {
-    font-size: 16pt;
-}
-
-svg.svg-inline--fa.fa-star.fa-w-18 {
-    font-size: 15pt;
+.map-containeur
+{
+    overflow: hidden;
 }
 
 .mapTabs {
     width: 80vw;
 }
 
-.nav-link {
-    color: $secondary-color;
-    font-size: $font-size-nav;
-}
-
 #map {
-    width: 80vw;
+    width: 100%;
     height: calc(100vh - 45px);
 }
 
@@ -119,20 +48,114 @@ a.fb-ic-card {
     color: $secondary-color;
 }
 
-a.fb-ic-card:hover, .nav-link:hover {
-    color: $primary-color;
+a.fb-ic-card:hover {
+    color: lighten($primary-color, 20%);
     text-decoration: none;
 }
 
-a#ambassadors.nav-link, a#events.nav-link {
-    border-color: $background-primary;
-    border-bottom: none;
+a#ambassadors.btn-gold.active, a#events.btn-gold.active {
+    color: $primary-color;
+    background-color: $third-color;
+    border: $primary-color 1px solid;
 }
 
-a#ambassadors.nav-link.active, a#events.nav-link.active {
+//RECHERCHE
+
+div.searchBg {
+    background-color: $third-color;
+}
+
+div.buttonRole {
+    width: 40vw;
+    margin-bottom: 20px;
+}
+
+div.buttonRole a.btn {
+    font-size: 1.5rem;
+    font-family: $font-title;
+    width: 50%;
+
+    &:hover {
+        background-color: lighten($primary-color, 5);
+
+    }
+}
+
+//CARD
+
+div.picture {
+    img {
+        height: 120px;
+        width: 120px;
+        border: $primary-color 3px solid;
+        background-color: $third-color;
+    }
+}
+
+div.ambassador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: darken($background-secondary, 5%);
+    overflow-x: hidden;
+
+    .mt-5.show {
+        align-self: center;
+    }
+}
+
+div.container-fluid.card-ambassador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+}
+
+div.row.no-gutters {
+    justify-content: space-between;
+}
+
+div.col-md-1.col-sm-12.mt-2 {
+    display: flex;
+    flex-direction: row;
     color: $primary-color;
-    border-color: $secondary-color;
-    background-color: darken($third-color, 10%);
+}
+
+div.card.mb-5.col-md-5.col-sm-12 {
+    width: 200px;
+    border: $primary-color 2px solid;
+
+    div.card-border {
+        height: 100%;
+        margin: 5px;
+        border: $primary-color 1px solid;
+    }
+}
+
+div.background-reason {
+    background-color: $third-color;
+}
+
+div.card-body {
+    text-align: center;
+    margin: 0;
+}
+
+h5.card-title {
+    font-size: 20pt;
+}
+
+p.card-text {
+    font-size: 16pt;
+}
+
+svg.svg-inline--fa.fa-star.fa-w-18 {
+    font-size: 15pt;
+}
+
+div.d-flex.flex-column.mt-5.mapTabs.align-self-center {
+    width: 100%;
 }
 
 div.row.reasons {
@@ -149,7 +172,7 @@ div.row.reasons {
             width: 64px;
         }
 
-        .col-md-12.reasons  {
+        .col-md-12.reasons {
             text-align: center;
         }
     }
@@ -176,23 +199,23 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     color: $secondary-color;
 }
 
-.containerNewsletter{
+.containerNewsletter {
     position: relative;
     text-align: center;
     width: 100vw;
 
-    .card:hover{
+    .card:hover {
         box-shadow: none;
     }
 }
 
-.imgNewsletter{
+.imgNewsletter {
     width: 100%;
     opacity: 0.6;
     padding: 0;
 }
 
-.cardNewsletter{
+.cardNewsletter {
     position: absolute;
     padding: 20px;
     width: 50%;
@@ -203,17 +226,17 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
         text-align: right;
     }
 
-    input{
+    input {
         border-bottom: 1px solid $primary-color;
     }
 
 }
 
-.unsubscribeNewsletterBloc .form-group{
+.unsubscribeNewsletterBloc .form-group {
     text-align: left;
     margin: 0 2rem;
 
-    input{
+    input {
         border-bottom: 1px solid $primary-color;
     }
 
@@ -223,7 +246,6 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
 
     div.card.mb-5 {
         height: 232px;
-        border: $primary-color solid 1px;
     }
 
     img.card-img {
@@ -234,7 +256,7 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
 @media screen and (max-width: 768px) {
 
     div.carousel-caption {
-        bottom: 0px;
+        bottom: 0;
     }
 
     div h1.homeTitle {
@@ -256,14 +278,14 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
         height: 90vh;
     }
 
-    .cardNewsletter{
+    .cardNewsletter {
         position: relative;
         padding: 10px;
         width: 100vw;
         left: 15px;
         right: 0;
 
-        div{
+        div {
             text-align: center;
             margin-top: 30px;
         }
