@@ -2,6 +2,6 @@
       onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-    <button class="btn btn-dark p-0"><i class="far fa-times-circle"></i>Supprimer</button>
+    <button class="btn btn-dark"><i class="far fa-times-circle"></i> Supprimer</button>
 
 </form>

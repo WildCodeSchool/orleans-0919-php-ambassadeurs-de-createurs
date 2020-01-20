@@ -7,7 +7,7 @@
     <div class="container-fluid mt-5">
         <div class="text-center">
             <img class="rounded-circle img-profil"
-                 src="
+                src="
                 {% if user.picture is null %}
                 {{ asset('build/placeholder_profil_grey.png') }}
                 {% else %}
@@ -49,8 +49,7 @@
         <div class="row m-5">
             <div class="col-lg-5 pl-5">
                 <h2 class="mb-5">Mes informations</h2>
-                <p class="primary-color"><i class="fas fa-heart mr-3"></i> Les univers que je préfère :
-
+                <p><i class="fas fa-heart mr-3"></i> Les univers que je préfère :
                     {% for category in user.categories %}
                         {{ category.description }},
                     {% else %}

@@ -33,7 +33,7 @@ class AdminUserController extends AbstractController
 
 
     /**
-     * @Route("/{id}", name="user_show", methods={"GET"})
+     * @Route("/{id}", name="admin_user_show", methods={"GET"})
      */
     public function show(User $user, EventRepository $eventRepository): Response
     {
