@@ -6,14 +6,14 @@
 
     <div class="container-fluid mt-5">
         <div class="text-center">
-            <img class="rounded-circle img-profil" 
-              src="
+            <img class="rounded-circle img-profil"
+                 src="
                 {% if user.picture is null %}
                 {{ asset('build/placeholder_profil_grey.png') }}
                 {% else %}
                 {{ vich_uploader_asset(user, 'pictureFile') }}
                 {% endif %}"
-              alt="{{ user.firstname }}">
+                 alt="{{ user.firstname }}">
             <h2 class="text-center mt-3">{{ user.firstname }}</h2>
         </div>
         <div class="d-flex justify-content-center">
@@ -36,9 +36,14 @@
             </a>
         </div>
         <div class="text-center mt-4">
-        <a href="mailto:{{ user.mail }}">
-            <button type="button" class="btn btn-gold">Contacter cet Ambassadeur</button>
-             </a>
+            {% if app.user and app.user.brand.hasSubscribe == true %}
+            <a href="mailto:{{ user.mail }}">
+                <button type="button" class="btn btn-gold">Contacter cet Ambassadeur</button>
+            </a>
+            {% else %}
+                <a class="btn btn-inactive mb-3">Contacter cet Ambassadeur</a>
+                <p><em>Vous devez être abonné pour contacter cet ambassadeur</em></p>
+            {% endif %}
         </div>
 
         <div class="row m-5">
@@ -57,24 +62,24 @@
             <div class="col-lg-5 offset-1">
                 <h2 class="mt-2">Mes prochaines ventes privées</h2>
                 <div class="row">
-                {% for event in events %}
-                    <div class="col-xs-12 col-md-12 col-lg-6 event mt-3">
-                        <article class="card card-event card-inverse animated fadeInDown">
-                            <img class="img-fluid"
-                                 src="https://snap-photos.s3.amazonaws.com/img-thumbs/960w/SYC0YBA37V.jpg"
-                                 alt="Leaf on the street"/>
-                            <div class="card-img-overlay">
-                                <h4 class="card-title event">{{ event.place }}</h4>
-                                <p class="card-text event">{{ event.dateTime|date('d/m/Y à H:i') }}
-                                    - {{ event.user.firstname }}</p>
-                                <p class="card-text event">Présentant les poduits de {{ event.brand.name }}</p>
-                                <p class="card-text event">{{ event.description }}</p>
-                            </div>
-                        </article>
-                    </div>
+                    {% for event in events %}
+                        <div class="col-xs-12 col-md-12 col-lg-6 event mt-3">
+                            <article class="card card-event card-inverse animated fadeInDown">
+                                <img class="img-fluid"
+                                     src="https://snap-photos.s3.amazonaws.com/img-thumbs/960w/SYC0YBA37V.jpg"
+                                     alt="Leaf on the street"/>
+                                <div class="card-img-overlay">
+                                    <h4 class="card-title event">{{ event.place }}</h4>
+                                    <p class="card-text event">{{ event.dateTime|date('d/m/Y à H:i') }}
+                                        - {{ event.user.firstname }}</p>
+                                    <p class="card-text event">Présentant les poduits de {{ event.brand.name }}</p>
+                                    <p class="card-text event">{{ event.description }}</p>
+                                </div>
+                            </article>
+                        </div>
                     {% else %}
-                    <p class="pl-5">Pas de ventes privées à venir</p>
-                {% endfor %}
+                        <p class="pl-5">Pas de ventes privées à venir</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>
