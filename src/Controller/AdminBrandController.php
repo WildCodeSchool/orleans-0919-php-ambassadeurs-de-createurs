@@ -143,6 +143,6 @@ class AdminBrandController extends AbstractController
             $this->addFlash('danger', 'Votre marque a été supprimée');
         }
 
-        return $this->redirectToRoute('admin_brand_index');
+        return $this->redirectToRoute('brand_index');
     }
 }

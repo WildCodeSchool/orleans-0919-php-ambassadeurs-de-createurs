@@ -541,6 +541,11 @@ class User implements UserInterface, \Serializable
         return $role;
     }
 
+    public function hasRole(string $role): bool
+    {
+        return in_array($role, $this->getRoles());
+    }
+
     /**
      * @return Collection|Favorite[]
      */

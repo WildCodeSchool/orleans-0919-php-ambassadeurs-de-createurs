@@ -45,9 +45,12 @@ a
     color : $background-secondary;
 }
 
-
 .img-profil {
     width: 20rem;
+}
+
+.img-profil-creator {
+    width: 80%;
 }
 
 .img-fluid{
@@ -61,9 +64,117 @@ a
     object-fit: cover;
 }
 
-.profilPagePicture {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
+
+.leftPanel {
+    box-sizing: border-box;
+    border: 3px solid $primary-color;
+    outline: 1px solid $primary-color;
+    background-color: $third-color;
 }
 
+.imgProfilCreator {
+    width: 25vh;
+}
+
+.profilIcon {
+    font-size: $font-size-icon;
+    color: $secondary-color;
+    width: 35px;
+    height: 35px;
+
+    &hover {
+        color: $primary-color;
+        text-decoration: none;
+    }
+}
+
+.blockInfo {
+    padding:0.8rem 0.8rem 0.8rem 2.6rem;
+    border-left:8px solid $primary-color;
+    position: relative;
+    background: $third-color;
+}
+
+.blockHistory {
+    padding:0.8rem 2.6rem 0.8rem 0.8rem;
+    border-right:8px solid $primary-color;
+    position: relative;
+    background: $third-color;
+
+    p {
+        text-indent: 1.2rem;
+    }
+}
+
+.buttonContact {
+    width: 40vh;
+    font-size: 1.5rem;
+}
+
+/* Style the Image Used to Trigger the Modal */
+.myImg {
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+        opacity: 0.7;
+        box-shadow: 2px 2px 1px 2px $background-primary;
+    }
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: $secondary-color;
+}
+
+/* Modal Content (Image) */
+.modal-content {
+    display: block;
+    width: calc(100% - 4rem);
+    margin: 2rem;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)}
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}

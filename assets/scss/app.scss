@@ -20,22 +20,41 @@
 @import '~@fortawesome/fontawesome-free/scss/brands';
 
 
-* {
+body {
+    font-size: $font-size-body;
     font-family: $font-body;
 }
 
-body {
-    font-size: $font-size-body;
-}
-
 h1 {
+    font-weight: bold;
     font-family: $font-title;
     font-size: $font-size-title;
     color: $primary-color;
     margin: 30px;
+
+    &:before{
+        content:'';
+        display:inline-block;
+        vertical-align: middle;
+        width: 1.5rem;
+        height: 2px;
+        background: $primary-color;
+        margin-right: 1rem;
+    }
+
+    &:after{
+        content:'';
+        display:inline-block;
+        vertical-align: middle;
+        width: 1.5rem;
+        height: 2px;
+        background: $primary-color;
+        margin-left: 1rem;
+    }
 }
 
 h2 {
+    font-weight: bold;
     font-size: $font-size-second-title;
     font-family: $font-title;
     color: $primary-color;
@@ -74,4 +93,16 @@ a:hover {
 
 .titlePassword {
     margin-top: 15vh;
+}
+
+.montserrat {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.poiret {
+    font-family: 'Poiret One', cursive;
+}
+
+.adobe {
+    font-family: adobe-devanagari-regular, sans-serif;
 }

@@ -1,0 +1,19 @@
+{% block map %}
+
+    <div class="js-ambassadors" data-ambassadors="{{ ambassadors }}"></div>
+    <div class="d-flex w-100 justify-content-center map-containeur mt-3">
+        <div class="d-flex flex-column mt-5 mapTabs align-self-center">
+            <h2 class="align-self-center m-4"> Une communauté près de chez vous</h2>
+            <div class="row justify-content-around mb-3 mt-5">
+                <a class="btn btn-gold active col-lg-4 col-4 mb-4" id="events" href="#events">
+                    <i class="fas fa-map-marker-alt"></i>
+                      Prochaines ventes privées
+                </a>
+                <a class="btn btn-gold col-lg-4 col-4 mb-4" id="ambassadors" href="#ambassadors">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Ambassadeurs</a>
+            </div>
+            <div class="mb-5 mt-1" id="map"></div>
+        </div>
+    </div>
+{% endblock %}

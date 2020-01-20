@@ -32,7 +32,7 @@
                                 </p>
                                 <h3 class="card-title firstArticleTitle mt-3">{{ article.title }}</h3>
                                 <p class="textFirstArticle mt-4">{{ article.content|truncate(200,true)|raw }}</p>
-                                <a href="{{ path('blog_show', {'slug': article.slug}) }}" class="btn btn-gold mt-5">Voir l'article</a>
+                                <a href="{{ path('blog_show', {'slug': article.slug}) }}" class="btn btn-gold mt-2">Voir l'article</a>
                             </div>
                         </div>
                         <h2 class="col offset-2 mb-5">Nos articles</h2>
