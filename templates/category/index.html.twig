@@ -5,7 +5,7 @@
 {% block body %}
 <div class="container">
     <h1 class="text-center m-5">Les univers</h1>
-
+    <a href="{{ path('admin_category_new') }}" class="btn btn-gold mb-5">Créer un univers</a>
     <table class="table">
         <thead>
             <tr>
@@ -28,7 +28,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('admin_category_new') }}" class="btn btn-gold">Créer un univers</a>
 </div>
 {% endblock %}
