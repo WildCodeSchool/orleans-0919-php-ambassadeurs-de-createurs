@@ -271,6 +271,8 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     opacity: 0.6;
     padding: 0;
     margin-left: 15px;
+    transform: scaleX(-1);
+    margin-top: -200px;
 }
 
 .cardNewsletter {
