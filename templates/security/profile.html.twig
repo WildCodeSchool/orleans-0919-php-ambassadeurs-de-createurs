@@ -12,9 +12,9 @@
                       {% else %}
                          {{ vich_uploader_asset(user, 'pictureFile') }}
                       {% endif %}" alt="image de {{ user.firstname }}">
-                    <p class="card-title"><strong>Votre nom : </strong>{{ user.firstname }}</p>
+                    <p class="card-title"><strong>Votre prénom : </strong>{{ user.firstname }}</p>
                     <p class="card-title"><strong>Votre lieu : </strong>{{ user.city }}</p>
-                    <p class="card-title"><strong>Votre lien Facebook : </strong>{{ user.urlFacebook }}</p>
+                    <p class="card-title"><strong>Vos status selectionnés : </strong>{{ user.dutiesToString }}</p>
                     <p class="card-title"><strong>Vos univers selectionnés : </strong>
                         {% for category in user.categories %}
                             {{ category.description }},
@@ -22,6 +22,7 @@
                             Aucun univers n'a été sélectioné
                         {% endfor %}
                     </p>
+                    <p class="card-title"><strong>Votre lien Facebook : </strong>{{ user.urlFacebook }}</p>
                 </div>
                 <div class="text-left m-3">
                     <a href="{{ path('app_profileEdit') }}">
