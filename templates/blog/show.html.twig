@@ -18,6 +18,10 @@
             <span class="badge badge-pill badge-gold">{{ blog.articleTag.tag }}</span>
         </p>
         <p class="mt-5 text-center">{{ blog.content|raw }}</p>
-
+        <div class="col col-lg-4">
+            <a class="btn btn-dark m-5" href="{{ path('blog_index') }}">
+                <i class="far fa-arrow-alt-circle-left"></i> Retour aux news
+            </a>
+        </div>
     </div>
 {% endblock %}
