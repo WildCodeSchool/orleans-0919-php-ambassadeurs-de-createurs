@@ -19,7 +19,7 @@ final class Version20200121083508 extends AbstractMigration
 
     public function up(Schema $schema) : void
     {
-        $this->addSql("
+        $this->addSql('
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'1\', \'01\', \'Ain\');
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'2\', \'02\', \'Aisne\');
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'3\', \'03\', \'Allier\');
@@ -39,8 +39,8 @@ final class Version20200121083508 extends AbstractMigration
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'17\', \'17\', \'Charente-Maritime\');
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'18\', \'18\', \'Cher\');
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'19\', \'19\', \'Corrèze\');
-            INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'20\', \'21\', \'Côte-d\\' Or \');
-            INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'21\', \'22\', \'Côtes-d\\'Armor\');
+            INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'20\', \'21\', \'Côte-d\' Or \');
+            INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'21\', \'22\', \'Côtes-d\' Armor\');
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'22\', \'23\', \'Creuse\');
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'23\', \'24\', \'Dordogne\');
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'24\', \'25\', \'Doubs\');
@@ -115,26 +115,26 @@ final class Version20200121083508 extends AbstractMigration
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'93\', \'92\', \'Hauts-de-Seine\');
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'94\', \'93\', \'Seine-Saint-Denis\');
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'95\', \'94\', \'Val-de-Marne\');
-            INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'96\', \'95\', \'Val-d\\'Oise\');
+            INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'96\', \'95\', \'Val-d\' Oise\');
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'97\', \'971\', \'Guadeloupe\');
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'98\', \'972\', \'Martinique\');
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'99\', \'973\', \'Guyane\');
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'100\', \'974\', \'La Réunion\');
             INSERT INTO `lmco`.`department` (`id`, `code`, `name`) VALUES (\'101\', \'976\', \'Mayotte\');
-        ");
+        ');
 
-        $this->addSql("
+        $this->addSql('
             INSERT INTO `lmco`.`duty` (`id`, `name`) VALUES (\'1\', \'Hôte\');
             INSERT INTO `lmco`.`duty` (`id`, `name`) VALUES (\'2\', \'Vendeur\');
-        ");
+        ');
 
-        $this->addSql("
+        $this->addSql('
             INSERT INTO `lmco`.`question_category` (`id`, `category`) VALUES (\'1\', \'Général\');
             INSERT INTO `lmco`.`question_category` (`id`, `category`) VALUES (\'2\', \'Fonctionnement du site\');
             INSERT INTO `lmco`.`question_category` (`id`, `category`) VALUES (\'3\', \'Les différents onglets du site\');
-        ");
+        ');
 
-        $this->addSql("INSERT INTO `lmco`.`subscription` (`id`, `one_month, `six_month`, `one_year`) VALUES (\'1\', \'15\', \'10\', \'8\');");
+        $this->addSql('INSERT INTO `lmco`.`subscription` (`id`, `one_month, `six_month`, `one_year`) VALUES (\'1\', \'15\', \'10\', \'8\');');
     }
 
     public function down(Schema $schema) : void
