@@ -44,11 +44,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
 
         $query = $this->createQueryBuilder('u')
-            ->select(['u', 'b', 'fd', 'fr', 's'])
+            ->select(['u', 'b', 'fd', 'fr'])
             ->leftjoin('u.brand', 'b')
             ->leftjoin('u.followedUsers', 'fd')
-            ->leftjoin('u.followers', 'fr')
-            ->join('u.duties', 's');
+            ->leftjoin('u.followers', 'fr');
 
         if (!empty($search['roles'])) {
             $query->andWhere('u.roles LIKE :roles')
@@ -69,7 +68,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
 
         if (!empty($search['filters']['duty'])) {
-            $query->andWhere('s.id = :duty')
+            $query->join('u.duties', 's')
+                ->andWhere('s.id = :duty')
                 ->setParameter('duty', $search['filters']['duty']);
         }
 
