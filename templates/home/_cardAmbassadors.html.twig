@@ -1,9 +1,9 @@
 {% block cardAmbassadors %}
-        <h2 class="ml-3 mr-3 mb-5 mt-5 m-md-5 show"> Nos Ambassadeurs</h2>
+        <h2 class="ml-3 mr-3 mb-5 pt-4 pb-5 m-md-5 show homepageTitle"> Nos Ambassadeurs</h2>
         <div class="container-fluid card-ambassador">
             <div class="row no-gutters">
                 {% for card in ambassadorCards %}
-                    <div class="col-10 col-md-4 col-lg-4 col-xl-3 m-5 p-0">
+                    <div class="col-10 col-md-4 col-lg-4 col-xl-3 m-5 pt-5">
                         <div class="star">
                             <a href="{{ path('search_like', {'id' : card.id}) }}" class="btn btn-link js-like">
                                 <div class="col-md-1 col-sm-12 mt-2">
