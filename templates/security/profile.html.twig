@@ -23,13 +23,15 @@
                         {% endfor %}
                     </p>
                 </div>
+                <div class="text-left m-3">
+                    <a href="{{ path('app_profileEdit') }}">
+                        <button type="button" class="btn btn-gold">Modifier votre profil</button>
+                    </a>
+                </div>
             </div>
+
         </div>
-        <div class="text-center m-3">
-            <a href="{{ path('app_profileEdit') }}">
-                <button type="button" class="btn btn-gold">Modifier votre profil</button>
-            </a>
-        </div>
+
         {% include 'security/_ambassadorPartProfile.html.twig' %}
         {% include 'security/_creatorPartProfile.html.twig' %}
     </div>

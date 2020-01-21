@@ -1,9 +1,7 @@
 {% if is_granted('ROLE_CREATOR') %}
 
     <div class="cardProfil offset-2 col-lg-8 offset-2">
-
         <div class="card-body text-left">
-
             <h2>Votre marque</h2>
             {% if user.brand is not null %}
                 <p class="card-title"><strong>Nom de la marque : </strong>{{ user.brand.name }}</p>
@@ -20,27 +18,27 @@
                 <p class="card-title"><strong>Lien vers votre site : </strong>{{ user.brand.site }}</p>
                 <div class="col-3 text-center mt-3">
                     <a href="{{ path('brand_edit', {'id': user.brand.id}) }}">
-                        <button type="button" class="btn btn-gold">Modifier</button>
+                        <button type="button" class="btn btn-gold">Modifier votre marque</button>
                     </a>
                 </div>
             {% endif %}
+            {% if user.brand is null %}
+                <p class="card-title">Il n'y a pas de marque existante</p>
+                <a href="{{ path('brand_new', {'userId': user.id}) }}">
+                    <button type="button" class="btn btn-gold">Créer ma marque</button>
+                </a>
+            {% endif %}
         </div>
+
     </div>
 
-
-    <div class="text-center m-3">
-        {% if user.brand is null %}
-            <a href="{{ path('brand_new', {'userId': user.id}) }}">
-                <button type="button" class="btn btn-gold">Créer ma marque</button>
-            </a>
-        {% endif %}
-        <a href="{{ path('app_favorite') }}">
+    <div class="text-center m-4">
+        <a href="{{ path('app_favorite') }}" class="m-5">
             <button type="button" class="btn btn-gold">Mes favoris</button>
         </a>
 
-        <a href="{{ path('gallery_index') }}">
+        <a href="{{ path('gallery_index') }}" class="m-5">
             <button type="button" class="btn btn-gold">Ma galerie</button>
         </a>
     </div>
-
 {% endif %}
