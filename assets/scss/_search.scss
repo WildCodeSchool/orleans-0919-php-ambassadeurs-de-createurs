@@ -29,7 +29,7 @@
 }
 
 
-.star {
+.star_search {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -77,10 +77,6 @@ select {
         border: 1px solid #cccccc;
         background-color: $third-color;
     }
-}
-
-.boxSearch {
-    width: 100%;
 }
 
 .form-search {

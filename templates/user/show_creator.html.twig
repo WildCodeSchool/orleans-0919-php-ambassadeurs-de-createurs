@@ -11,7 +11,7 @@
                 <h2 class="text-center">{{ user.firstname }}</h2>
                 <div class="row blockInfo">
                     <div class="col-lg-6 flex d-flex flex-column my-4">
-                        <div class="star justify-content-center w-100 mb-3">
+                        <div class="star w-100 justify-content-start mb-3">
                             <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like p-0">
                                 <div class="col-md-1 col-sm-12 mt-2">
                                     <span class="js-likes">{{ user.followers | length }}</span>
@@ -61,17 +61,17 @@
                         {% endif %}
                         <ul class="flex d-flex justify-content-around list-unstyled w-75 align-self-center">
                             <li>
-                                <a class="profilIcon" href="{{ user.urlFacebook}}" target="_blank">
+                                <a class="profilIcon" href="{{ user.urlFacebook }}" target="_blank">
                                     <i class="fab fa-facebook-square"></i>
                                 </a>
                             </li>
                             <li>
-                                <a class="profilIcon" href="{{ user.brand.site}}" target="_blank">
+                                <a class="profilIcon" href="{{ user.brand.site }}" target="_blank">
                                     <i class="far fa-user"></i>
                                 </a>
                             </li>
                             <li>
-                                <a class="profilIcon" href="{{ user.brand.instagram}}" target="_blank">
+                                <a class="profilIcon" href="{{ user.brand.instagram }}" target="_blank">
                                     <i class="fab fa-instagram"></i>
                                 </a>
                             </li>
@@ -91,25 +91,26 @@
             </div>
         </section>
 
-        <section class="row my-5 flex d-flex justify-content-center">
+        <div class="row my-5 flex d-flex justify-content-center">
             <a class="btn btn-gold buttonContact" href="mailto:{{ user.mail }}">
                 Contacter
             </a>
-        </section>
+        </div>
 
         <h2 class="text-center mb-4">Mes produits</h2>
-        <section class="row">
+        <div class="row">
             {% for gallery in user.brand.galleries %}
                 <div class="w-100 col-lg-3 px-lg-4 py-4 divImg">
-                    <img class="w-100 myImg" src="{{ vich_uploader_asset(gallery, 'photoFile') }}" alt="{{ user.brand.name }}">
+                    <img class="w-100 myImg" src="{{ vich_uploader_asset(gallery, 'photoFile') }}"
+                         alt="{{ user.brand.name }}">
                 </div>
             {% endfor %}
             <!-- The Modal -->
             <div id="myModal" class="modal">
                 <span class="close">&times;</span>
-                <img class="modal-content" id="img01">
+                <img class="modal-content" id="img01" alt="{{ user.brand.name }}">
             </div>
-        </section>
+        </div>
     </div>
 {% endblock %}
 

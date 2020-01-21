@@ -26,7 +26,6 @@ body {
 }
 
 h1 {
-    font-weight: bold;
     font-family: $font-title;
     font-size: $font-size-title;
     color: $primary-color;
@@ -54,7 +53,6 @@ h1 {
 }
 
 h2 {
-    font-weight: bold;
     font-size: $font-size-second-title;
     font-family: $font-title;
     color: $primary-color;
@@ -105,4 +103,8 @@ a:hover {
 
 .adobe {
     font-family: adobe-devanagari-regular, sans-serif;
+}
+
+.thWidth{
+    width: 350px;
 }

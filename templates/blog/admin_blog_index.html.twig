@@ -3,13 +3,17 @@
 {% block title %}Admin news{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container-fluid">
         <h1 class="text-center m-5">Les news</h1>
+
+        <a href="{{ path('admin_blog_new') }}" class="btn btn-gold mb-5">
+            Créer un article
+        </a>
 
         <table class="table">
             <thead>
             <tr>
-                <th>Titre</th>
+                <th class="thWidth">Titre</th>
                 <th>Étiquette</th>
                 <th>Auteur</th>
                 <th>Date</th>
@@ -36,9 +40,5 @@
             {% endfor %}
             </tbody>
         </table>
-
-        <a href="{{ path('admin_blog_new') }}" class="btn btn-gold mb-5">
-            Créer un article
-        </a>
     </div>
 {% endblock %}

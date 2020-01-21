@@ -9,9 +9,9 @@
         <table class="table">
             <thead>
             <tr>
-                <th>Question</th>
+                <th class="thWidth">Question</th>
                 <th>Catégorie</th>
-                <th>Réponse</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -19,7 +19,6 @@
                 <tr>
                     <td><a href="{{ path('admin_question_show', {'id': question.id}) }}" class="titleForm">{{ question.question }}</a></td>
                     <td>{{ question.category.category }}</td>
-                    <td>{{ question.answer }}</td>
                     <td>
                         <a href="{{ path('admin_question_edit', {'id': question.id}) }}" class="">
                             <button class="btn btn-gold"><i class="fas fa-pencil-alt mr-2"></i>Modifier</button>

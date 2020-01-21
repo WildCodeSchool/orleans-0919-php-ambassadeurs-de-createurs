@@ -1,29 +1,44 @@
 {% if is_granted('ROLE_CREATOR') %}
-    <div class="text-center m-3">
-        <a href="{{ path('brand_new', {'userId': user.id}) }}">
-            <button type="button" class="btn btn-gold">Créer ma marque</button>
+
+    <div class="cardProfil offset-2 col-lg-8 offset-2">
+        <div class="card-body text-left">
+            <h2>Votre marque</h2>
+            {% if user.brand is not null %}
+                <p class="card-title"><strong>Nom de la marque : </strong>{{ user.brand.name }}</p>
+                <p class="card-title"><strong>Histoire de la marque : </strong>{{ user.brand.description }}</p>
+                {% if user.brand.hostAdvantage is not null %}
+                    <p class="card-title"><strong>Avantage proposé pour les hôtes
+                            : </strong>{{ user.brand.hostAdvantage }}</p>
+                {% endif %}
+                {% if user.brand.sellerAdvantage is not null %}
+                    <p class="card-title"><strong>Avantage proposé pour les vendeurs
+                            : </strong>{{ user.brand.hostAdvantage }}</p>
+                {% endif %}
+                <p class="card-title"><strong>Votre lien Instagram : </strong>{{ user.brand.instagram }}</p>
+                <p class="card-title"><strong>Lien vers votre site : </strong>{{ user.brand.site }}</p>
+                <div class="col-3 text-center mt-3">
+                    <a href="{{ path('brand_edit', {'id': user.brand.id}) }}">
+                        <button type="button" class="btn btn-gold">Modifier votre marque</button>
+                    </a>
+                </div>
+            {% endif %}
+            {% if user.brand is null %}
+                <p class="card-title">Il n'y a pas de marque existante</p>
+                <a href="{{ path('brand_new', {'userId': user.id}) }}">
+                    <button type="button" class="btn btn-gold">Créer ma marque</button>
+                </a>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div class="text-center m-4">
+        <a href="{{ path('app_favorite') }}" class="m-5">
+            <button type="button" class="btn btn-gold">Vos favoris</button>
         </a>
 
-        <a href="{{ path('app_favorite') }}">
-            <button type="button" class="btn btn-gold">Mes favoris</button>
-        </a>
-
-        <a href="{{ path('gallery_index') }}">
-            <button type="button" class="btn btn-gold">Ma galerie</button>
+        <a href="{{ path('gallery_index') }}" class="m-5">
+            <button type="button" class="btn btn-gold">Votre galerie</button>
         </a>
     </div>
-    {% if user.brand is not null %}
-        <div>
-            <h2 class="mt-4 text-center">Ma marque</h2>
-            <div class="col-3 text-center mt-4">
-                <a href="{{ path('brand_show', {'id': user.brand.id}) }}">
-                    {{ user.brand.name }}</a>
-            </div>
-            <div class="col-3 text-center mt-3">
-                <a href="{{ path('brand_edit', {'id': user.brand.id}) }}">
-                    <button type="button" class="btn btn-gold">Modifier</button>
-                </a>
-            </div>
-        </div>
-    {% endif %}
 {% endif %}

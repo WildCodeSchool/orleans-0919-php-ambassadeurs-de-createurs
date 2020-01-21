@@ -43,7 +43,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function findSearch(array $search, ?int $page = null): array
     {
 
-        $query = $this->createQueryBuilder('u');
+        $query = $this->createQueryBuilder('u')
+        ->select(['u', 'b'])
+            ->leftjoin('u.brand', 'b');
 
         if (!empty($search['roles'])) {
             $query->andWhere('u.roles LIKE :roles')
@@ -52,19 +54,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
 
         if (!empty($search['filters']['department'])) {
-            $query->join('u.department', 'd')
+            $query->leftjoin('u.department', 'd')
                 ->andWhere('d.id = :department')
                 ->setParameter('department', $search['filters']['department']);
         }
 
         if (!empty($search['filters']['category'])) {
-            $query->join('u.categories', 'c')
+            $query->leftjoin('u.categories', 'c')
                 ->andWhere('c.id = :category')
                 ->setParameter('category', $search['filters']['category']);
         }
 
         if (!empty($search['filters']['duty'])) {
-            $query->join('u.duties', 's')
+            $query->leftjoin('u.duties', 's')
                 ->andWhere('s.id = :duty')
                 ->setParameter('duty', $search['filters']['duty']);
         }
@@ -82,11 +84,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function findByRoles(string $roles): array
     {
         $query = $this->createQueryBuilder('u')
-            ->select(['u', 'b', 'c', 'd', 'e', 'fd', 'fr', 'du'])
+            ->select(['u', 'b', 'c', 'd', 'e', 'fd', 'fr', 'du', 'eb'])
             ->leftjoin('u.brand', 'b')
             ->leftjoin('u.categories', 'c')
             ->leftjoin('u.department', 'd')
             ->leftjoin('u.events', 'e')
+            ->leftjoin('e.brand', 'eb')
             ->leftjoin('u.followedUsers', 'fd')
             ->leftjoin('u.followers', 'fr')
             ->leftjoin('u.duties', 'du')

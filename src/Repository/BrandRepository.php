@@ -22,8 +22,12 @@ class BrandRepository extends ServiceEntityRepository
     public function findChosenCreator(): array
     {
         $query = $this->createQueryBuilder('b')
-            ->select('u, b')
+            ->select('u, b, c, du, fd, fr')
             ->leftJoin('b.user', 'u')
+            ->leftjoin('u.categories', 'c')
+            ->leftjoin('u.duties', 'du')
+            ->leftjoin('u.followedUsers', 'fd')
+            ->leftjoin('u.followers', 'fr')
             ->where("b.chosenCreator = 1")
             ->getQuery();
 
