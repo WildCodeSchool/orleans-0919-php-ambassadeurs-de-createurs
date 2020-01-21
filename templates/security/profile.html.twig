@@ -1,41 +1,33 @@
 {% extends 'layout.html.twig' %}
 {% block body %}
-    <h1 class="text-center mt-5">{{ user.firstname }}</h1>
+    <h1 class="text-center mt-5">Votre profil</h1>
+
     <div class="container-fluid">
         <div class="row text-center mt-5">
-            <div class="offset-1 col-4 mt-5">
-                <div class="pictureProfil">
-                    <img class="rounded-circle profilPagePicture"
-                         src="
-                            {% if user.picture is null %}
-                            {{ asset('build/placeholder_profil_grey.png') }}
-                            {% else %}
-                            {{ vich_uploader_asset(user, 'pictureFile') }}
-                            {% endif %}"
-                         alt="{{ user.firstname }}">
+            <div class="cardProfil offset-2 col-lg-8 offset-2">
+                <div class="card-body text-left">
+                    <img class="avatarProfil rounded-circle"
+                         src="{% if user.picture is null %}
+                         {{ asset('build/placeholder_profil_grey.png') }}
+                      {% else %}
+                         {{ vich_uploader_asset(user, 'pictureFile') }}
+                      {% endif %}" alt="image de {{ user.firstname }}">
+                    <p class="card-title"><strong>Votre nom : </strong>{{ user.firstname }}</p>
+                    <p class="card-title"><strong>Votre lieu : </strong>{{ user.city }}</p>
+                    <p class="card-title"><strong>Votre lien Facebook : </strong>{{ user.urlFacebook }}</p>
+                    <p class="card-title"><strong>Vos univers selectionnés : </strong>
+                        {% for category in user.categories %}
+                            {{ category.description }},
+                        {% else %}
+                            Aucun univers n'a été sélectioné
+                        {% endfor %}
+                    </p>
                 </div>
-                <br>
-                <h3 class="nameProfil">
-                    {{ user.firstname }}
-                </h3>
-                <br>
-            </div>
-            <div class="descriptionBloc col-4 offset-2 text-justify m-2 p-5 align-self-center ">
-                <p>J'habite à {{ user.city }}.</p>
-                <p>Les univers que j'aime sont : </p>
-                <ul>
-                    {% for category in user.categories %}
-                        <li>{{ category.description }}</li>
-                    {% else %}
-                        <li>Aucun univers n'a été sélectioné</li>
-                    {% endfor %}
-                </ul>
-                <p>Je suis intéressé par le status de : </p>
             </div>
         </div>
         <div class="text-center m-3">
             <a href="{{ path('app_profileEdit') }}">
-                <button type="button" class="btn btn-gold">Modifier</button>
+                <button type="button" class="btn btn-gold">Modifier votre profil</button>
             </a>
         </div>
         {% include 'security/_ambassadorPartProfile.html.twig' %}
