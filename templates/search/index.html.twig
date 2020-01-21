@@ -3,15 +3,15 @@
 {% block title %}Recherche des {{ role }}s{% endblock %}
 
 {% block body %}
-    <div class="row justify-content-center">
-        <div class="boxSearch bg-white">
+    <div class="row justify-content-center mx-0">
+        <div class="w-100 bg-white">
             <h1 class="text-center mt-5"> Recherche des {{ role }}s </h1>
             {% include 'search/_filter.html.twig' with {form: form} %}
             <p class="text-center mb-5">Nombre de résultats : {{ nbUsers }}</p>
         </div>
     </div>
 
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center mt-5 mx-0">
 
         {% for user in users %}
             <div class="col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">
