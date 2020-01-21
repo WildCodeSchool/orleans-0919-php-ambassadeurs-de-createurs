@@ -1,29 +1,35 @@
 {% if is_granted('ROLE_AMBASSADOR') %}
-    <div class="text-center m-3">
-        <a href="{{ path('event_new', {'userId': user.id}) }}">
-            <button type="button" class="btn btn-gold">Créer un événement</button>
-        </a>
 
-        <a href="{{ path('app_favorite') }}">
-            <button type="button" class="btn btn-gold">Mes favoris</button>
-        </a>
+    <div class="cardProfil offset-2 col-lg-8 offset-2">
+        <div class="card-body text-left">
+            <h2 class="mt-2 text-left">Vos prochaines ventes privées</h2>
+            {% for event in user.events %}
+                <div class="col-3 text-center mt-4">
 
-    </div>
-    <div>
-    <h2 class="mt-2 text-center">Mes prochaines ventes</h2>
-    {% for event in user.events %}
-        <div class="col-3 text-center mt-4">
-            <p>Marque : {{ event.brand.name }}</p>
+                    <p>Date : {{ event.dateTime|date('d/m/Y à H:i') }}</p>
+                    <p>Marque : {{ event.brand.name }}</p>
+                </div>
+                <div class="col-3 text-center">
+                    {% if  (event.user.id == user.id) or (is_granted('ROLE_ADMIN')) %}
+                        <a href="{{ path('event_edit', {'id': event.id}) }}">
+                            <button type="button" class="btn btn-gold">Modifier</button>
+                        </a>
+                    {% endif %}
+                </div>
+            {% else %}
+                <p class="card-title">Il n'y a pas de ventes privées à afficher</p>
+            {% endfor %}
+
+            <a href="{{ path('event_new', {'userId': user.id}) }}">
+                <button type="button" class="btn btn-gold mt-5">Créer un événement</button>
+            </a>
         </div>
-        <div class="col-3 text-center">
-            {% if  (event.user.id == user.id) or (is_granted('ROLE_ADMIN')) %}
-                <a href="{{ path('event_edit', {'id': event.id}) }}">
-                    <button type="button" class="btn btn-gold">Modifier</button>
-                </a>
-            {% endif %}
-        </div>
-        </div>
-    {% endfor %}
     </div>
+
+    <div class="text-center m-4">
+        <a href="{{ path('app_favorite') }}" class="m-5">
+            <button type="button" class="btn btn-gold">Vos favoris</button>
+        </a>
     </div>
+
 {% endif %}

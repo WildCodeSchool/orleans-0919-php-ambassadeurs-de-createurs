@@ -147,6 +147,23 @@ h2.searchTitle
     }
 }
 
+.cardProfil {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: $third-color;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    min-height: 300px;
+    margin-top: 50px;
+
+    .card-body{
+        background-color: $third-color;
+    }
+}
+
 
 .star {
     display: flex;
@@ -169,6 +186,14 @@ h2.searchTitle
         border: 1px solid #cccccc;
         background-color: $third-color;
     }
+}
+
+.avatarProfil {
+    margin-top: -6rem;
+    margin-bottom: 1rem;
+    max-width: 9rem;
+    min-height: 9rem;
+    background-color: $third-color;
 }
 
 
