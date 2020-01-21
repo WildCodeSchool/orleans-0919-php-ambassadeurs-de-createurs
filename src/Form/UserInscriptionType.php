@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -23,6 +24,17 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class UserInscriptionType extends AbstractType
 {
+
+    /**
+     * @var RouterInterface
+     */
+    private $router;
+
+    public function __construct(RouterInterface $router)
+    {
+        $this->router = $router;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -64,25 +76,13 @@ class UserInscriptionType extends AbstractType
             ])
             ->add('CGU', CheckboxType::class, [
                 'label' => "J'accepte les",
-                'help' => '<a href="#">CGU</a>',
+                'help' => '<a href="'.$this->router->generate('company_cgu').'">CGU</a>',
                 'help_html' => true,
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
                         'message' => 'Vous devez accepter les conditions générales
                          d\'utilisation pour continuer l\'inscription.',
-                    ]),
-                ],
-            ])
-            ->add('CGV', CheckboxType::class, [
-                'label' => "J'accepte les",
-                'help' => '<a href="#">CGV</a>',
-                'help_html' => true,
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devez accepter les conditions générales
-                         de vente pour continuer l\'inscription.',
                     ]),
                 ],
             ]);
