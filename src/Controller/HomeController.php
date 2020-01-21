@@ -70,6 +70,8 @@ class HomeController extends AbstractController
 
         $ambassadors = $userRepository->findByRoles(User::ROLE_AMBASSADOR);
         $ambassadorCards = $userRepository->findByMostFavorites(User::ROLE_AMBASSADOR);
+        $creators = $brandRepository->findChosenCreator();
+
         $context = [
             AbstractNormalizer::IGNORED_ATTRIBUTES => [
                 'users',
@@ -83,7 +85,6 @@ class HomeController extends AbstractController
             ],
         ];
         $ambassadorsJson = $serializer->serialize($ambassadors, 'json', $context);
-        $creators = $brandRepository->findChosenCreator();
 
         return $this->render('/home/index.html.twig', [
             'ambassadors' => $ambassadorsJson,
