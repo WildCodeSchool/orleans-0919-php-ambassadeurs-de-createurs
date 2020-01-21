@@ -43,7 +43,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function findSearch(array $search, ?int $page = null): array
     {
 
-        $query = $this->createQueryBuilder('u');
+        $query = $this->createQueryBuilder('u')
+            ->select(['u', 'b', 'fd', 'fr', 's'])
+            ->leftjoin('u.brand', 'b')
+            ->leftjoin('u.followedUsers', 'fd')
+            ->leftjoin('u.followers', 'fr')
+            ->join('u.duties', 's');
 
         if (!empty($search['roles'])) {
             $query->andWhere('u.roles LIKE :roles')
@@ -64,8 +69,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
 
         if (!empty($search['filters']['duty'])) {
-            $query->join('u.duties', 's')
-                ->andWhere('s.id = :duty')
+            $query->andWhere('s.id = :duty')
                 ->setParameter('duty', $search['filters']['duty']);
         }
 
@@ -82,11 +86,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function findByRoles(string $roles): array
     {
         $query = $this->createQueryBuilder('u')
-            ->select(['u', 'b', 'c', 'd', 'e', 'fd', 'fr', 'du'])
+            ->select(['u', 'b', 'c', 'd', 'e', 'fd', 'fr', 'du', 'eb'])
             ->leftjoin('u.brand', 'b')
             ->leftjoin('u.categories', 'c')
             ->leftjoin('u.department', 'd')
             ->leftjoin('u.events', 'e')
+            ->leftjoin('e.brand', 'eb')
             ->leftjoin('u.followedUsers', 'fd')
             ->leftjoin('u.followers', 'fr')
             ->leftjoin('u.duties', 'du')
