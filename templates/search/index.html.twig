@@ -15,7 +15,7 @@
 
         {% for user in users %}
             <div class="col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">
-                <div class="star">
+                <div class="star_search">
                     <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">
                         <div class="col-md-1 col-sm-12 mt-2">
                             <span class="js-likes">{{ user.followers | length }}</span>
