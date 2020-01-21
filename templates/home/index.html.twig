@@ -6,7 +6,7 @@
         <div class="carousel-image">
             <img class="w-100 filterImage" src="{{ asset('build/Homepage_AmbassadeurDeCreateurs.jpg') }}"
                  alt="Ambassadeurs de créateurs">
-            <div class="carousel-caption">
+            <div class="carousel-caption mb-3 ">
                 <h3 class="d-none d-md-block">REJOIGNEZ NOTRE COMMUNAUTÉ</h3>
                 <h3 class="d-none d-md-block">et développez vos ventes privées à domicile</h3>
             </div>
@@ -17,16 +17,15 @@
         {% include 'home/_map.html.twig' %}
     {% endblock %}
 
-    {% block search %}
-        {% include 'home/_search.html.twig' %}
-    {% endblock %}
-
     <div class="ambassador pt-5">
         {% block cardAmbassadors %}
             {% include 'home/_cardAmbassadors.html.twig' %}
         {% endblock %}
         {% block reasonAmbassador %}
             {% include 'home/_reasonAmbassador.html.twig' %}
+        {% endblock %}
+        {% block search %}
+            {% include 'home/_search.html.twig' %}
         {% endblock %}
         {% block cardCreators %}
             {% include 'home/_cardCreators.html.twig' %}
@@ -41,7 +40,7 @@
                 <img class="imgNewsletter col-12" src="{{ asset('build/Homepage_Newsletter.jpg') }}"
                      alt="image newsletter">
                 <fieldset class="card cardNewsletter col-12">
-                    <h2 class="text-center p-3">S'inscrire à la Newsletter </h2>
+                    <h2 class="text-center p-3 homepageTitle">S'inscrire à la Newsletter </h2>
                     {{ include('home/_form_newsletter.html.twig') }}
                     <div class="w-100">
                         <a class="text-muted font-italic" href="{{ path('home_unsubscribe_newsletter') }}">Se

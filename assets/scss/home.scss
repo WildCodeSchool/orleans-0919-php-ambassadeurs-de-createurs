@@ -1,3 +1,28 @@
+h2.homepageTitle
+{
+    font-size: $font-size-icon;
+
+    &:before{
+        content:'';
+        display:inline-block;
+        vertical-align: middle;
+        width: 1.5rem;
+        height: 2px;
+        background: $primary-color;
+        margin-right: 1rem;
+    }
+
+    &:after{
+        content:'';
+        display:inline-block;
+        vertical-align: middle;
+        width: 1.5rem;
+        height: 2px;
+        background: $primary-color;
+        margin-left: 1rem;
+    }
+}
+
 // CAROUSEL
 
 .filterImage {
@@ -57,18 +82,12 @@ a#ambassadors.btn-gold.active, a#events.btn-gold.active {
     color: $primary-color;
     background-color: $third-color;
     border: $primary-color 1px solid;
-    font-size: 1.5rem;
 }
 
 //RECHERCHE
 
 div.searchBg {
     width: 100%;
-
-    .carousel-caption
-    {
-
-    }
 
     .searchImage
     {
@@ -94,6 +113,11 @@ div.buttonRole a.btn {
         background-color: lighten($primary-color, 5);
 
     }
+}
+
+h2.searchTitle
+{
+    text-shadow: $third-color 0 0 5px;
 }
 
 //CARD
