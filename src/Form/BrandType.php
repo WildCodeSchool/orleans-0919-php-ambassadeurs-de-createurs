@@ -6,6 +6,7 @@ use App\Entity\Brand;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,8 +20,12 @@ class BrandType extends AbstractType
             ->add('description')
             ->add('site', UrlType::class)
             ->add('instagram', UrlType::class)
-            ->add('host_advantage')
-            ->add('seller_advantage')
+            ->add('host_advantage', TextType::class, [
+                'label' => 'Avantages pour les hôtes'
+            ])
+            ->add('seller_advantage', TextType::class, [
+                'label' => 'Avantages pour les vendeurs'
+            ])
         ;
     }
 
