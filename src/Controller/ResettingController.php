@@ -37,9 +37,9 @@ class ResettingController extends AbstractController
     ) {
         $form = $this->createFormBuilder()
             ->add('email', EmailType::class, [
-                'constraints' => [
-                    new NotBlank()
-                ]])
+                'constraints' => [new NotBlank()],
+                'label' => 'Email'
+            ])
             ->getForm();
         $form->handleRequest($request);
 
