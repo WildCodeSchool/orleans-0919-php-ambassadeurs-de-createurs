@@ -19,3 +19,25 @@
     margin-top: 8vh;
     margin-bottom: 15vh;
 }
+
+.form-login {
+    border-bottom: 1px solid $primary-color;
+    max-width: 70%;
+}
+
+.labelLogin {
+    min-width: 15%;
+    text-align: right;
+    margin-top: 9px;
+}
+
+.cardLogin {
+    padding: 20px;
+}
+
+.form-request {
+    border-bottom: 1px solid $primary-color;
+    max-width: 50%;
+    margin-top: -8px;
+    margin-left: 3px;
+}
