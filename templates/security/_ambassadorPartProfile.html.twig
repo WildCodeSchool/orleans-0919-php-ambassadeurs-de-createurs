@@ -1,35 +1,36 @@
 {% if is_granted('ROLE_AMBASSADOR') %}
 
-    <div class="cardProfil offset-2 col-lg-8 offset-2">
-        <div class="card-body text-left">
-            <h2 class="mt-2 text-left">Vos prochaines ventes privées</h2>
-            {% for event in user.events %}
-                <div class="col-3 text-center mt-4">
-
-                    <p>Date : {{ event.dateTime|date('d/m/Y à H:i') }}</p>
-                    <p>Marque : {{ event.brand.name }}</p>
+    <div class="row mb-5 flex d-flex justify-content-center">
+        <div class="cardProfil col-lg-8 col-10">
+            <div class="card-body text-center">
+                <h2 class="mt-2 text-center">Vos prochaines ventes privées</h2>
+                {% for event in user.events %}
+                    <div class="d-inline-flex">
+                        <div class="col-sm-12 text-center mt-4">
+                            <p>Date : {{ event.dateTime|date('d/m/Y à H:i') }}</p>
+                            <p>Marque : {{ event.brand.name }}</p>
+                            {% if  (event.user.id == user.id) or (is_granted('ROLE_ADMIN')) %}
+                                <a href="{{ path('event_edit', {'id': event.id}) }}">
+                                    <button type="button" class="btn btn-gold"><i class="fas fa-pencil-alt"></i>
+                                    </button>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="card-title">Il n'y a pas de ventes privées à afficher</p>
+                {% endfor %}
+                <div class="col-12">
+                    <a href="{{ path('event_new', {'userId': user.id}) }}">
+                        <button type="button" class="btn btn-gold mt-5">Créer un événement</button>
+                    </a>
                 </div>
-                <div class="col-3 text-center">
-                    {% if  (event.user.id == user.id) or (is_granted('ROLE_ADMIN')) %}
-                        <a href="{{ path('event_edit', {'id': event.id}) }}">
-                            <button type="button" class="btn btn-gold">Modifier</button>
-                        </a>
-                    {% endif %}
-                </div>
-            {% else %}
-                <p class="card-title">Il n'y a pas de ventes privées à afficher</p>
-            {% endfor %}
-
-            <a href="{{ path('event_new', {'userId': user.id}) }}">
-                <button type="button" class="btn btn-gold mt-5">Créer un événement</button>
-            </a>
+            </div>
         </div>
     </div>
-
     <div class="text-center m-4">
         <a href="{{ path('app_favorite') }}" class="m-5">
             <button type="button" class="btn btn-gold">Vos favoris</button>
         </a>
     </div>
-
 {% endif %}
