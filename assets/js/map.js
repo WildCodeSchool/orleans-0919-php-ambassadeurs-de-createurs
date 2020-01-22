@@ -99,8 +99,8 @@ function mapEvents(amb, mar) {
         // eslint-disable-next-line guard-for-in,no-restricted-syntax
         for (const j in amb[i].events) {
             const event = amb[i].events[j];
-            const long = (amb[i].longitude !== null) ? amb[i].longitude : centerFrance[0];
-            const lat = (amb[i].latitude !== null) ? amb[i].latitude : centerFrance[1];
+            const long = (event.longitude !== null) ? event.longitude : centerFrance[0];
+            const lat = (event.latitude !== null) ? event.latitude : centerFrance[1];
             // eslint-disable-next-line no-undef
             const m = L.marker([long, lat]);
 
