@@ -11,7 +11,7 @@
                                 {% set class="far" %}
                                 {% if app.user %}
                                     {% for favorites in app.user.followedUsers %}
-                                        {% if user == favorites.userFavorite %}
+                                        {% if creator == favorites.userFavorite %}
                                             {% set class="fas" %}
                                         {% endif %}
                                     {% endfor %}
