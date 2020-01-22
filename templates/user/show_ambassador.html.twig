@@ -51,15 +51,15 @@
                 <h2 class="mb-5">Mes informations</h2>
                 <p><i class="fas fa-heart mr-3"></i> Les univers que je préfère :
                     {% for category in user.categories %}
-                        {{ category.description }},
+                        <em>{{ category.description }}</em>,
                     {% else %}
-                        Aucun univers n'a été sélectioné
+                        <em>Aucun univers n'a été sélectioné</em>
                     {% endfor %}
                 </p>
-                <p><i class="fas fa-donate mr-3"></i> Je suis intéressé par le status de {{ user.dutiesToString }}</p>
+                <p><i class="fas fa-donate mr-3"></i> Je suis intéressé par le statut de : <em>{{ user.dutiesToString }}</em></p>
             </div>
             <div class="col-lg-5 offset-1">
-                <h2 class="mt-2">Mes prochaines ventes privées</h2>
+                <h2 class="mt-2">Présente les produits</h2>
                 <div class="row">
                     {% for event in events %}
                         <div class="col-xs-12 col-md-12 col-lg-6 event mt-3">
