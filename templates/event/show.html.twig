@@ -3,32 +3,41 @@
 {% block title %}Event{% endblock %}
 
 {% block body %}
-    <h1>Event</h1>
+    <div class="container-fluid">
+        <h1 class="text-center">Evénement</h1>
 
-    <table class="table">
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ event.id }}</td>
-        </tr>
-        <tr>
-            <th>Place</th>
-            <td>{{ event.place }}</td>
-        </tr>
-        <tr>
-            <th>DateTime</th>
-            <td>{{ event.dateTime ? event.dateTime|date('Y-m-d H:i:s') : '' }}</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td>{{ event.description }}</td>
-        </tr>
-        </tbody>
-    </table>
+        <table class="table m-5 p-5">
+            <tbody>
+            <tr>
+                <th>Marque</th>
+                <td>{{ event.brand.name }}</td>
+            </tr>
+            <tr>
+                <th>Créateur</th>
+                <td>{{ event.brand.user.firstname }} {{ event.brand.user.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Ambassadeur</th>
+                <td>{{ event.user.firstname }} {{ event.user.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ event.place }}</td>
+            </tr>
+            <tr>
+                <th>Date et Heure</th>
+                <td>{{ event.dateTime ? event.dateTime|date('d/m/Y à H:i') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ event.description }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="d-flex flex-row justify-content-between">
+            <a href="{{ path('brand_index') }}" class="btn btn-gold">Retour</a>
 
-    <a href="{{ path('admin_event_index') }}">back to list</a>
-
-    <a href="{{ path('admin_event_edit', {'id': event.id}) }}">edit</a>
-
-{{ include('event/admin_delete_form.html.twig') }}
+            {{ include('event/admin_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}
