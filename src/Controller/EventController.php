@@ -34,7 +34,7 @@ class EventController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $city = $form->getData()['place'];
+            $city = $request->request->get('event')['place'];
             $coordinates = $coordinateService->getCoordinates($city);
             if (!is_null($coordinates)) {
                 $event->setLatitude($coordinates[0]);
@@ -66,7 +66,7 @@ class EventController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
-                $city = $form->getData()->getPlace();
+                $city = $request->request->get('event')['place'];
                 $coordinates = $coordinateService->getCoordinates($city);
                 if (!is_null($coordinates)) {
                     $event->setLatitude($coordinates[0]);
