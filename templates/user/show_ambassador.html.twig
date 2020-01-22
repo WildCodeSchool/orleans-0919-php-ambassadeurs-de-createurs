@@ -46,8 +46,8 @@
             {% endif %}
         </div>
 
-        <div class="row m-5">
-            <div class="col-lg-5 pl-5">
+        <div class="row mx-lg-5 mx-3 my-5">
+            <div class="col-lg-5 pl-lg-5">
                 <h2 class="mb-5">Mes informations</h2>
                 <p><i class="fas fa-heart mr-3"></i> Les univers que je préfère :
                     {% for category in user.categories %}
@@ -58,7 +58,7 @@
                 </p>
                 <p><i class="fas fa-donate mr-3"></i> Je suis intéressé par le status de {{ user.dutiesToString }}</p>
             </div>
-            <div class="col-lg-5 offset-1">
+            <div class="col-lg-5 offset-lg-1">
                 <h2 class="mt-2">Mes prochaines ventes privées</h2>
                 <div class="row">
                     {% for event in events %}
