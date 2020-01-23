@@ -4,7 +4,7 @@
         <div class="row no-gutters">
             {% for keyCreator, creator in creators %}
             <div class="col-10 col-md-4 col-lg-4 col-xl-3 m-5 pt-5">
-                <a href="{{ path('user_show', {'id': card.id}) }}">
+                <a href="{{ path('user_show', {'id': creator.id}) }}">
                     <div class="card-home">
                         <div class="picture">
                             <img class="img-fluid" src="
