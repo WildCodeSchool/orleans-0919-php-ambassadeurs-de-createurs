@@ -636,6 +636,15 @@ class User implements UserInterface, \Serializable
         return implode(' et ', $dutyNames);
     }
 
+    public function getCategoriesToString(): string
+    {
+        $categoryNames = [];
+        foreach ($this->getCategories() as $category) {
+            $categoryNames[] = $category->getDescription();
+        }
+        return implode(', ', $categoryNames);
+    }
+
 
     /*
      * Get passwordRequestedAt

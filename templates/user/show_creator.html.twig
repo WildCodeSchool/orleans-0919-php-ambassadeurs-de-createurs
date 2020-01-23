@@ -35,26 +35,28 @@
                                 {{ vich_uploader_asset(user, 'pictureFile') }}
                                 {% endif %}"
                              alt="{{ user.brand.name }}">
+
                     </div>
                     <div class="col-lg-6 flex d-flex flex-column justify-content-between mt-4">
+                        <h4 class="my-3 text-center">Je recherche : {{ user.dutiesToString }}</h4>
                         {% if user.brand.hostAdvantage is not null %}
-                            <div class="row align-self-center">
-                                <div class="col-2">
+                            <div class="row flex-row ">
+                                <div>
                                     <i class="fas fa-home profilIcon"></i>
                                 </div>
-                                <div class="col-10">
-                                    <h4 class="text-center"> Pour les hôtes : </h4>
+                                <div>
+                                    <h4 class="mx-4"> Pour les hôtes : </h4>
                                     <p class="text-center">{{ user.brand.hostAdvantage }}</p>
                                 </div>
                             </div>
                         {% endif %}
                         {% if user.brand.sellerAdvantage is not null %}
-                            <div class="row align-self-center">
-                                <div class="col-2">
+                            <div class="row flex-row">
+                                <div>
                                     <i class="fas fa-hand-holding-usd profilIcon"></i>
                                 </div>
-                                <div class="col-10">
-                                    <h4 class="text-center"> Pour les vendeurs : </h4>
+                                <div>
+                                    <h4 class="mx-4"> Pour les vendeurs : </h4>
                                     <p class="text-center">{{ user.brand.sellerAdvantage }}</p>
                                 </div>
                             </div>
