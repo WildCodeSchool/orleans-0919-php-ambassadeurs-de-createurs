@@ -355,8 +355,13 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
 
 @media screen and (max-width: 768px) {
 
+    .carousel-image {
+        height: auto;
+    }
+
     div.carousel-caption {
         bottom: 0;
+        padding: 0;
     }
 
     div h1.homeTitle {
@@ -369,7 +374,6 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
 
     .filterImage {
         opacity: 0.6;
-        margin-bottom: 120px;
     }
 
     .mapTabs {
@@ -392,6 +396,20 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
             text-align: center;
             margin-top: 30px;
         }
+    }
+
+    .homepageTitle {
+        text-align: center;
+    }
+
+    div.row.no-gutters {
+        display: flex;
+        justify-content: center;
+    }
+
+    .searchImage {
+        height: auto;
+        margin-bottom: 6rem;
     }
 }
 
