@@ -4,12 +4,28 @@
 
 {% block body %}
     <h1 class="text-center"> Liste de mes favoris </h1>
-    <div class="container-fluid card-search">
-        <div class="row justify-content-center">
-            {% for favorite in favorites %}
-                <div class="card col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">
-                    <a href="{{ path('user_show', {'id': favorite.userFavorite.id}) }}">
-                        <img class="profilPagePicture"
+    <div class="row justify-content-center mt-5 mx-0">
+        {% for favorite in favorites %}
+            <div class="col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">
+                <div class="star_search">
+                    <a href="{{ path('user_show', {'id': favorite.userFavorite.id}) }}" class="btn btn-link js-like">
+                        <div class="col-md-1 col-sm-12 mt-2">
+                            <span class="js-likes">{{ favorite.userFavorite.followers | length }}</span>
+                            {% set class="far" %}
+                            {% if app.user %}
+                                {% for ConnectedUserFavorites in app.user.followedUsers %}
+                                    {% if favorite == ConnectedUserFavorites.userFavorite %}
+                                        {% set class="fas" %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            <i class="{{ class }} fa-star ml-2"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="cardSearch">
+                    <div class="card-body text-center">
+                        <img class="avatarSearch rounded-circle"
                              src="
                                 {% if favorite.userFavorite.picture is null %}
                                 {{ asset('build/placeholder_profil_grey.png') }}
@@ -17,35 +33,21 @@
                                 {{ vich_uploader_asset(favorite.userFavorite, 'pictureFile') }}
                                 {% endif %}"
                              alt="image de {{ favorite.userFavorite.firstname }}">
-                        <div class="card-body">
-                            <div class="star mb-4">
-                                <a href="{{ path('search_like', {'id' : favorite.userFavorite.id}) }}"
-                                   class="btn btn-link js-like">
-                                    <div class="col-md-1 col-sm-12 mt-2">
-                                        <span class="js-likes">{{ favorite.userFavorite.followers | length }}</span>
-                                        {% set class="fas" %}
-                                        {% for favorites in app.user.followedUsers %}
-                                            {% if favorite.user == favorites.userFavorite %}
-                                                {% set class="far" %}
-                                            {% endif %}
-                                        {% endfor %}
-                                        <i class="{{ class }} fa-star ml-2"></i>
-                                    </div>
-                                </a>
-                            </div>
-                            <h2 class="card-text text-handscript mb-3">{{ favorite.userFavorite.firstname }}</h2>
-                            <p class="card-text"><i
-                                        class="fas fa-map-marker-alt primary-color"></i> {{ favorite.userFavorite.city }}
-                                {% if favorite.userFavorite.department.code is defined %}
-                                    ({{ favorite.userFavorite.department.code }})
-                                {% endif %}</p>
-                            <hr>
-                            <p class="card-text">{{ favorite.userFavorite.dutiesToString }}</p>
-                        </div>
-                    </a>
+                        <h4 class="card-title">{{ favorite.userFavorite.firstname }}</h4>
+                        <h6 class="card-subtitle mb-2 mt-3 text-muted"><i
+                                    class="fas fa-map-marker-alt primary-color"></i> {{ favorite.userFavorite.city }}</h6>
+                        <p class="card-text mt-3">{{ favorite.userFavorite.dutiesToString }}</p>
+                        <a href="{{ path('user_show', {'id': favorite.userFavorite.id}) }}" class="btn btn-gold btnCardSearch mt-3">Découvrir</a>
+                    </div>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center m-3">
+        <a href="{{ path('app_profile') }}">
+            <button type="button" class="btn btn-gold">Retour au profil</button>
+        </a>
     </div>
 {% endblock %}
 
