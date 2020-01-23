@@ -46,20 +46,20 @@
             {% endif %}
         </div>
 
-        <div class="row m-5">
-            <div class="col-lg-5 pl-5">
+        <div class="row mx-lg-5 mx-3 my-5">
+            <div class="col-lg-5 pl-lg-5">
                 <h2 class="mb-5">Mes informations</h2>
-                <p><i class="fas fa-heart mr-3"></i> Les univers que je préfère :
-                    {% for category in user.categories %}
-                        {{ category.description }},
+                <p><i class="fas fa-heart mr-3"></i> Mes univers sont :
+                    {% if user.categories is not empty %}
+                        <em>{{ user.categoriesToString }}</em>
                     {% else %}
-                        Aucun univers n'a été sélectioné
-                    {% endfor %}
+                        <em>Aucun univers n'a été sélectioné</em>
+                    {% endif %}
                 </p>
-                <p><i class="fas fa-donate mr-3"></i> Je suis intéressé par le status de {{ user.dutiesToString }}</p>
+                <p><i class="fas fa-donate mr-3"></i> Je recherche des : <em>{{ user.dutiesToString }}</em></p>
             </div>
-            <div class="col-lg-5 offset-1">
-                <h2 class="mt-2">Mes prochaines ventes privées</h2>
+            <div class="col-lg-5 offset-lg-1">
+                <h2 class="mt-2">Présente les produits</h2>
                 <div class="row">
                     {% for event in events %}
                         <div class="col-xs-12 col-md-12 col-lg-6 event mt-3">

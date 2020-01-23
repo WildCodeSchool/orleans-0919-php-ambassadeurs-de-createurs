@@ -5,7 +5,11 @@
 {% block body %}
     <div class="row justify-content-center mx-0">
         <div class="w-100 bg-white">
-            <h1 class="text-center mt-5"> Recherche des {{ role }}s </h1>
+            <h1 class="text-center mt-5">{% if role == 'ambassadeur' %}
+                    Recherche d'ambassadeurs
+                {% else %}
+                    Recherche de créateurs
+                {% endif %}</h1>
             {% include 'search/_filter.html.twig' with {form: form} %}
             <p class="text-center mb-5">Nombre de résultats : {{ nbUsers }}</p>
         </div>

@@ -62,7 +62,7 @@ class User implements UserInterface, \Serializable
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * @Vich\UploadableField(mapping="users_image", fileNameProperty="picture")
      * @Assert\File(
-     *     maxSize = "100k",
+     *     maxSize = "200k",
      *     maxSizeMessage="La taille des images est limité à {{ limit }} {{ suffix }}",
      *     mimeTypes = {"image/jpeg", "image/png", "image/webp", "image/gif"},
      *     mimeTypesMessage = "Ce n'est pas un format d'image valide"
@@ -634,6 +634,15 @@ class User implements UserInterface, \Serializable
             $dutyNames[] = $duty->getName();
         }
         return implode(' et ', $dutyNames);
+    }
+
+    public function getCategoriesToString(): string
+    {
+        $categoryNames = [];
+        foreach ($this->getCategories() as $category) {
+            $categoryNames[] = $category->getDescription();
+        }
+        return implode(', ', $categoryNames);
     }
 
 
