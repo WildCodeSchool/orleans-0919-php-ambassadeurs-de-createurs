@@ -30,7 +30,7 @@ class Gallery
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * @Vich\UploadableField(mapping="galleries_image", fileNameProperty="photoName")
      * @Assert\File(
-     *     maxSize = "200k",
+     *     maxSize = "1M",
      *     maxSizeMessage="La taille des images est limité à {{ limit }} {{ suffix }}",
      *     mimeTypes = {"image/jpeg", "image/png", "image/webp", "image/gif"},
      *     mimeTypesMessage = "Ce n'est pas un format d'image valide"
