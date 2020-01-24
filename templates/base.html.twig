@@ -12,7 +12,7 @@
 <body>
 {% for label, messages in app.flashes %}
     {% for message in messages %}
-        <div class="alert alert-{{ label }}" role="alert">
+        <div class="alert alert-{{ label }} msgFlash" role="alert">
             {{ message }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

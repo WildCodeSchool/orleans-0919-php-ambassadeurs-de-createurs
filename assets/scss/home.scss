@@ -34,8 +34,13 @@ div.carousel-caption {
     color: $secondary-color;
 }
 
-.carousel-image {
+.carousel-image-newsletter {
     height: calc(70vh - 100px);
+    overflow:hidden
+}
+
+.carousel-image {
+    height: calc(100vh - 100px);
     overflow:hidden
 }
 
@@ -92,7 +97,7 @@ div.searchBg {
     .searchImage
     {
         overflow: hidden;
-        height: 50vh;
+        height: 500px;
 
         img{
             opacity: 0.5;
@@ -355,7 +360,7 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
 
 @media screen and (max-width: 768px) {
 
-    .carousel-image {
+    .carousel-image-newsletter {
         height: auto;
     }
 
