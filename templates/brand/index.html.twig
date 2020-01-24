@@ -27,18 +27,23 @@
                     </p>
                     {% endfor %}
                     <td>
-                        {{ form_start(formsChosenCreators[keys]) }}
-                        {{ form_row(formsChosenCreators[keys].chosenCreator, { 'attr' : {'id' : keys ~ '_creator', 'name' : keys ~ '_creator'}}) }}
-                        <div class="flex d-flex justify-content-around">
-                            <button class="btn btn-gold">{{ button_label|default('Enregistrer') }}</button>
+                        {{ form_start(formsChosenCreators[keys], { 'attr' :{'class' : 'form'}}) }}
+                        <div class="onoffswitch">
+                        {{ form_row(formsChosenCreators[keys].chosenCreator, { 'attr' :
+                            {'class' : 'onoffswitch-checkbox',},
+                            'label_attr' : {'class' : 'onoffswitch-label'
+                            },
+                        }) }}
                         </div>
                         {{ form_end(formsChosenCreators[keys]) }}
                     </td>
                     <td>
-                        {{ form_start(formsHasSubscribes[keys]) }}
-                        {{ form_row(formsHasSubscribes[keys].hasSubscribe, { 'attr' : {'id' : keys ~ '_creator', 'name' : keys ~ '_creator'}}) }}
-                        <div class="flex d-flex justify-content-around">
-                            <button class="btn btn-gold">{{ button_label|default('Enregistrer') }}</button>
+                        {{ form_start(formsHasSubscribes[keys], { 'attr' :{'class' : 'form'}}) }}
+                        <div class="onoffswitch">
+                            {{ form_row(formsHasSubscribes[keys].hasSubscribe, { 'attr' :
+                                {'class' : 'onoffswitch-checkbox',},
+                                'label_attr' : {'class' : 'onoffswitch-label'},
+                            }) }}
                         </div>
                         {{ form_end(formsHasSubscribes[keys]) }}
                     </td>
@@ -55,4 +60,8 @@
         </table>
     </div>
 
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('adminforms') }}
 {% endblock %}
