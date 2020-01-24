@@ -3,9 +3,9 @@
     <div class="container-fluid card-ambassador">
         <div class="row no-gutters">
             {% for keyCreator, creator in creators %}
-            <div class="col-10 col-md-4 col-lg-4 col-xl-3 m-5 pt-5">
+            <div class="col-10 col-md-4 col-lg-4 col-xl-3 m-3 pt-5">
                 <a href="{{ path('user_show', {'id': creator.user.id}) }}">
-                    <div class="card-home">
+                    <div class="card-home-creator">
                         <div class="picture">
                             <img class="img-fluid" src="
                                                     {% if creator.user.picture is null %}
@@ -33,19 +33,21 @@
                         <div class="card-infos">
                             <h4 class="card-title">{{ creator.name }}</h4>
                             <p> Mes univers de création :
-                                {% for category in creator.user.categories %}
+                                <p>{% for category in creator.user.categories %}
                                     {{ category.description }},
                                 {% else %}
                                     Aucun univers n'a été sélectioné
                                 {% endfor %}
                             </p>
+                            </p>
                             <p>
                                 Je recherche :
-                                {% for duty in creator.user.duties %}
+                                <p>{% for duty in creator.user.duties %}
                                     {{ duty.name }},
                                 {% else %}
                                     Les préférences n'ont pas été sélectionées
                                 {% endfor %}
+                            </p>
                             </p>
                         </div>
                         <ul class="btn-discover">
