@@ -94,7 +94,6 @@ class AdminBrandController extends AbstractController
             $this->formHasSubscribes($brandRepository, $request, $formHasSubscribe, $brand);
             $viewsHasSubscribe[] = $formHasSubscribe->createView();
         }
-        dump($viewsChosenCreator, $viewsHasSubscribe);
         return $this->render('brand/index.html.twig', [
             'brands' => $brands,
             'formsChosenCreators' => $viewsChosenCreator,
