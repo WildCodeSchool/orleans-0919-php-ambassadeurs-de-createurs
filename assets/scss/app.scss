@@ -63,6 +63,14 @@ h3 {
     font-size: 1.5rem;
 }
 
+.second-title-size {
+    font-size: $font-size-second-title;
+}
+
+.primary-title-size {
+    font-size: $font-size-title;
+}
+
 .primary-color {
     color: $primary-color;
 }
@@ -110,6 +118,6 @@ a:hover {
 }
 
 .img-new-user{
-    width: 30vw;
+    width: 35vw;
 }
 

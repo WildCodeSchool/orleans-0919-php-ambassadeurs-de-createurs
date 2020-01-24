@@ -66,20 +66,21 @@ function mapAmbasadors(amb, mar) {
         // eslint-disable-next-line no-undef
         const m = L.marker([long, lat]);
 
-        const customPopup = `<div class="d-flex flex-row popup"><div class="w-50">
-            <img class="img-fluid" src=${picture} alt="${amb[i].firstname} ${amb[i].lastname}">
+        let customPopup = `<div class="d-flex flex-row popup"><div class="w-50">
+            <img class="img-fluid" src=${picture} alt="${amb[i].firstname}">
             </div> <div class="w-50 d-flex flex-column">
-            <h4 class="text-center popupTitle">${amb[i].firstname} ${amb[i].lastname}</h4>
+            <h4 class="text-center popupTitle">${amb[i].firstname}</h4>
             <p class="m-0 ml-3 popupText">Lieu : ${amb[i].city}</p>
             <p class="m-0 ml-3 popupText">Rôles : ${duties.join(', ')}</p>
             <p class="m-0 ml-3 popupText"> Univers : ${categories.join(', ')}</p>
             <div class="d-flex justify-content-around">
             <a class="fb-ic-card" href="/user/${amb[i].id}">
-            <i class="far fa-user"></i></a>
-            <a class="fb-ic-card" href="${amb[i].urlFacebook}">
-            <i class="fab fa-facebook-square "></i></a>
-            </div> </div> </div>`;
-
+            <i class="far fa-user"></i></a>`;
+        if (amb[i].urlFacebook) {
+            customPopup += `<a class="fb-ic-card" href="${amb[i].urlFacebook}">
+            <i class="fab fa-facebook-square "></i></a>`;
+        }
+        customPopup += '</div> </div> </div>';
         m.bindPopup(customPopup, { minWidth: 320 });
         mar.addLayer(m);
     }
@@ -98,8 +99,8 @@ function mapEvents(amb, mar) {
         // eslint-disable-next-line guard-for-in,no-restricted-syntax
         for (const j in amb[i].events) {
             const event = amb[i].events[j];
-            const long = (amb[i].longitude !== null) ? amb[i].longitude : centerFrance[0];
-            const lat = (amb[i].latitude !== null) ? amb[i].latitude : centerFrance[1];
+            const long = (event.longitude !== null) ? event.longitude : centerFrance[0];
+            const lat = (event.latitude !== null) ? event.latitude : centerFrance[1];
             // eslint-disable-next-line no-undef
             const m = L.marker([long, lat]);
 
@@ -108,7 +109,7 @@ function mapEvents(amb, mar) {
                 weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
             };
             const optionsTime = { hour: '2-digit', minute: '2-digit' };
-            const customPopup = `<div class="d-flex flex-row popup">
+            let customPopup = `<div class="d-flex flex-row popup">
             <div class="d-flex flex-column">
             <h4 class="text-center popupTitle">${event.description}</h4>
             <p class="m-0 ml-3 popupText">Lieu : ${event.place}</p>
@@ -119,10 +120,16 @@ function mapEvents(amb, mar) {
             <p class="m-0 ml-3 popupText"> Univers : ${categories.join(', ')}</p>
             <div class="d-flex justify-content-around">
             <a class="fb-ic-card" href="/user/${amb[i].id}">
-            <i class="far fa-user"></i></a>
-            <a class="fb-ic-card" href="${amb[i].urlFacebook}">
-            <i class="fab fa-facebook-square "></i></a>
-            </div> </div> </div>`;
+            <i class="far fa-user"></i></a>`;
+            if (amb[i].urlFacebook) {
+                customPopup += `<a class="fb-ic-card" href="${amb[i].urlFacebook}">
+                    <i class="fab fa-facebook-square "></i></a>`;
+            }
+            if (event.brand.instagram) {
+                customPopup += `<a class="fb-ic-card" href="${event.brand.instagram}">
+                    <i class="fab fa-instagram"></i></a>`;
+            }
+            customPopup += '</div> </div> </div>';
 
             m.bindPopup(customPopup);
             mar.addLayer(m);

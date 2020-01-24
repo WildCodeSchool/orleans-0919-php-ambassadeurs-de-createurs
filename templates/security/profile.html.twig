@@ -1,20 +1,22 @@
 {% extends 'layout.html.twig' %}
 {% block body %}
-    <h1 class="text-center mt-5">Votre profil</h1>
+    <h1 class="text-center mt-5 mb-5">Votre profil</h1>
 
     <div class="container-fluid">
-        <div class="row text-center mt-5">
-            <div class="cardProfil offset-2 col-lg-8 offset-2">
-                <div class="card-body text-left">
+        <div class="row mb-5 flex d-flex justify-content-center">
+            <div class="cardProfil col-lg-8 col-10">
+                <div class="d-flex justify-content-center mt-3">
                     <img class="avatarProfil rounded-circle"
                          src="{% if user.picture is null %}
                          {{ asset('build/placeholder_profil_grey.png') }}
                       {% else %}
                          {{ vich_uploader_asset(user, 'pictureFile') }}
                       {% endif %}" alt="image de {{ user.firstname }}">
+                </div>
+                <div class="card-body text-center">
                     <p class="card-title"><strong>Votre prénom : </strong>{{ user.firstname }}</p>
                     <p class="card-title"><strong>Votre lieu : </strong>{{ user.city }}</p>
-                    <p class="card-title"><strong>Vos status selectionnés : </strong>{{ user.dutiesToString }}</p>
+                    <p class="card-title"><strong>Vos statuts selectionnés : </strong>{{ user.dutiesToString }}</p>
                     <p class="card-title"><strong>Vos univers selectionnés : </strong>
                         {% for category in user.categories %}
                             {{ category.description }},
@@ -24,7 +26,7 @@
                     </p>
                     <p class="card-title"><strong>Votre lien Facebook : </strong>{{ user.urlFacebook }}</p>
                 </div>
-                <div class="text-left m-3">
+                <div class="text-center m-3">
                     <a href="{{ path('app_profileEdit') }}">
                         <button type="button" class="btn btn-gold">Modifier votre profil</button>
                     </a>

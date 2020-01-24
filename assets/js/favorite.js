@@ -9,13 +9,17 @@ function onClickBtnLike(event) {
 
     axios.get(url)
         .then((response) => {
-            // eslint-disable-next-line no-empty
             if (response.status === 403) {
-                spanCount.textContent = response.data.favorites;
-            } else if (icone.dataset.prefix === 'far') {
-                icone.dataset.prefix = 'fas';
+                // eslint-disable-next-line no-alert
+                window.alert("Une erreur s'est produite, réessayez plus tard !");
             } else {
-                icone.dataset.prefix = 'far';
+                spanCount.textContent = response.data.favorites;
+
+                if (icone.dataset.prefix === 'far') {
+                    icone.dataset.prefix = 'fas';
+                } else {
+                    icone.dataset.prefix = 'far';
+                }
             }
             // eslint-disable-next-line no-unused-vars
         }).catch((error) => {

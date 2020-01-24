@@ -49,14 +49,14 @@
         <div class="row mx-lg-5 mx-3 my-5">
             <div class="col-lg-5 pl-lg-5">
                 <h2 class="mb-5">Mes informations</h2>
-                <p><i class="fas fa-heart mr-3"></i> Les univers que je préfère :
-                    {% for category in user.categories %}
-                        <em>{{ category.description }}</em>,
+                <p><i class="fas fa-heart mr-3"></i> Mes univers sont :
+                    {% if user.categories is not empty %}
+                        <em>{{ user.categoriesToString }}</em>
                     {% else %}
                         <em>Aucun univers n'a été sélectioné</em>
-                    {% endfor %}
+                    {% endif %}
                 </p>
-                <p><i class="fas fa-donate mr-3"></i> Je suis intéressé par le statut de : <em>{{ user.dutiesToString }}</em></p>
+                <p><i class="fas fa-donate mr-3"></i> Je recherche des : <em>{{ user.dutiesToString }}</em></p>
             </div>
             <div class="col-lg-5 offset-lg-1">
                 <h2 class="mt-2">Présente les produits</h2>
