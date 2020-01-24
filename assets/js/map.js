@@ -1,3 +1,7 @@
+const Entities = require('html-entities').XmlEntities;
+
+const entities = new Entities();
+
 // Saint Palais in Cher, center of France
 const centerFrance = [47.242419, 2.408616];
 
@@ -69,15 +73,15 @@ function mapAmbasadors(amb, mar) {
         let customPopup = `<div class="d-flex flex-row popup"><div class="w-50">
             <img class="img-fluid" src=${picture} alt="${amb[i].firstname}">
             </div> <div class="w-50 d-flex flex-column">
-            <h4 class="text-center popupTitle">${amb[i].firstname}</h4>
-            <p class="m-0 ml-3 popupText">Lieu : ${amb[i].city}</p>
-            <p class="m-0 ml-3 popupText">Rôles : ${duties.join(', ')}</p>
-            <p class="m-0 ml-3 popupText"> Univers : ${categories.join(', ')}</p>
+            <h4 class="text-center popupTitle">${entities.encode(amb[i].firstname)}</h4>
+            <p class="m-0 ml-3 popupText">Lieu : ${entities.encode(amb[i].city)}</p>
+            <p class="m-0 ml-3 popupText">Rôles : ${entities.encode(duties.join(', '))}</p>
+            <p class="m-0 ml-3 popupText"> Univers : ${entities.encode(categories.join(', '))}</p>
             <div class="d-flex justify-content-around">
             <a class="fb-ic-card" href="/user/${amb[i].id}">
             <i class="far fa-user"></i></a>`;
         if (amb[i].urlFacebook) {
-            customPopup += `<a class="fb-ic-card" href="${amb[i].urlFacebook}">
+            customPopup += `<a class="fb-ic-card" href="${entities.encode(amb[i].urlFacebook)}">
             <i class="fab fa-facebook-square "></i></a>`;
         }
         customPopup += '</div> </div> </div>';
@@ -111,22 +115,22 @@ function mapEvents(amb, mar) {
             const optionsTime = { hour: '2-digit', minute: '2-digit' };
             let customPopup = `<div class="d-flex flex-row popup">
             <div class="d-flex flex-column">
-            <h4 class="text-center popupTitle">${event.description}</h4>
-            <p class="m-0 ml-3 popupText">Lieu : ${event.place}</p>
+            <h4 class="text-center popupTitle">${entities.encode(event.description)}</h4>
+            <p class="m-0 ml-3 popupText">Lieu : ${entities.encode(event.place)}</p>
             <p class="m-0 ml-3 popupText">Date : ${dateEvent.toLocaleDateString('fr-FR', optionsDate)}</p>
             <p class="m-0 ml-3 popupText">Heure : ${dateEvent.toLocaleTimeString('fr-FR', optionsTime)}</p>
-            <p class="m-0 ml-3 popupText">Hôte : ${amb[i].firstname} ${amb[i].lastname}</p>
-            <p class="m-0 ml-3 popupText">Créateur : ${event.brand.name}</p>
-            <p class="m-0 ml-3 popupText"> Univers : ${categories.join(', ')}</p>
+            <p class="m-0 ml-3 popupText">Hôte : ${entities.encode(amb[i].firstname)} ${entities.encode(amb[i].lastname)}</p>
+            <p class="m-0 ml-3 popupText">Créateur : ${entities.encode(event.brand.name)}</p>
+            <p class="m-0 ml-3 popupText"> Univers : ${entities.encode(categories.join(', '))}</p>
             <div class="d-flex justify-content-around">
             <a class="fb-ic-card" href="/user/${amb[i].id}">
             <i class="far fa-user"></i></a>`;
             if (amb[i].urlFacebook) {
-                customPopup += `<a class="fb-ic-card" href="${amb[i].urlFacebook}">
+                customPopup += `<a class="fb-ic-card" href="${entities.encode(amb[i].urlFacebook)}">
                     <i class="fab fa-facebook-square "></i></a>`;
             }
             if (event.brand.instagram) {
-                customPopup += `<a class="fb-ic-card" href="${event.brand.instagram}">
+                customPopup += `<a class="fb-ic-card" href="${entities.encode(event.brand.instagram)}">
                     <i class="fab fa-instagram"></i></a>`;
             }
             customPopup += '</div> </div> </div>';
