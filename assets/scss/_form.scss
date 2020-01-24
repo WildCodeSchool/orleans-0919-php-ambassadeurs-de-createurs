@@ -23,9 +23,11 @@ a.titleForm:hover {
     position: relative; width: 87px;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
+
 .onoffswitch-checkbox {
     display: none;
 }
+
 .onoffswitch-label {
     display: block; overflow: hidden; cursor: pointer;
     height: 20px; padding: 0; line-height: 20px;
@@ -33,6 +35,7 @@ a.titleForm:hover {
     background-color: $third-color;
     transition: background-color 0.3s ease-in;
 }
+
 .onoffswitch-label:before {
     content: "";
     display: block; width: 30px; margin: 0;
@@ -42,12 +45,15 @@ a.titleForm:hover {
     border: 2px solid  $secondary-color; border-radius: 20px;
     transition: all 0.3s ease-in 0s;
 }
+
 .onoffswitch-checkbox:checked + .onoffswitch-label {
     background-color: $primary-color;
 }
+
 .onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
     border-color: $primary-color;
 }
+
 .onoffswitch-checkbox:checked + .onoffswitch-label:before {
     right: 0;
 }
