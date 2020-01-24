@@ -60,11 +60,11 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     $user->addDuty($this->getReference('Hôte'));
                     break;
                 case 1:
-                    $user->addDuty($this->getReference('Vendeur'));
+                    $user->addDuty($this->getReference('Vendeur indépendant'));
                     break;
                 case 2:
                     $user->addDuty($this->getReference('Hôte'));
-                    $user->addDuty($this->getReference('Vendeur'));
+                    $user->addDuty($this->getReference('Vendeur indépendant'));
                     break;
             }
             $user->setUrlFacebook($faker->url);
@@ -92,11 +92,11 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     $user->addDuty($this->getReference('Hôte'));
                     break;
                 case 1:
-                    $user->addDuty($this->getReference('Vendeur'));
+                    $user->addDuty($this->getReference('Vendeur indépendant'));
                     break;
                 case 2:
                     $user->addDuty($this->getReference('Hôte'));
-                    $user->addDuty($this->getReference('Vendeur'));
+                    $user->addDuty($this->getReference('Vendeur indépendant'));
                     break;
             }
             $user->setUrlFacebook($faker->url);

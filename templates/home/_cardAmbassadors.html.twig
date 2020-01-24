@@ -3,7 +3,7 @@
     <div class="container-fluid card-ambassador">
         <div class="row no-gutters">
             {% for card in ambassadorCards %}
-                <div class="col-10 col-md-4 col-lg-4 col-xl-3 m-5 pt-5">
+                <div class="col-10 col-md-4 col-lg-4 col-xl-3 m-2 pt-5">
                     <a href="{{ path('user_show', {'id': card.id}) }}">
                         <div class="card-home">
                             <div class="picture">
@@ -13,22 +13,22 @@
                                             {% else %}
                                             {{ vich_uploader_asset(card, 'pictureFile') }}
                                             {% endif %}" alt="image de {{ card.firstname }}">
-                            </div>
-                            <div class="star">
-                                <a href="{{ path('search_like', {'id' : card.id}) }}" class="btn btn-link js-like">
-                                    <div class="col-md-1 col-sm-12 mt-2">
-                                        <span class="js-likes">{{ card.followers | length }}</span>
-                                        {% set class="far" %}
-                                        {% if app.user %}
-                                            {% for favorites in app.user.followedUsers %}
-                                                {% if card == favorites.userFavorite %}
-                                                    {% set class="fas" %}
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endif %}
-                                        <i class="{{ class }} fa-star ml-2"></i>
-                                    </div>
-                                </a>
+                                <div class="star">
+                                    <a href="{{ path('search_like', {'id' : card.id}) }}" class="btn btn-link js-like">
+                                        <div class="col-md-1 col-sm-12 mt-2">
+                                            <span class="js-likes">{{ card.followers | length }}</span>
+                                            {% set class="far" %}
+                                            {% if app.user %}
+                                                {% for favorites in app.user.followedUsers %}
+                                                    {% if card == favorites.userFavorite %}
+                                                        {% set class="fas" %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                            <i class="{{ class }} fa-star ml-2"></i>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                             <div class="card-infos">
                                 <h4 class="card-title">{{ card.firstname }}</h4>
@@ -37,7 +37,7 @@
                                 <p class="card-text mt-3">{{ card.dutiesToString }}</p>
                             </div>
                             <ul class="btn-discover">
-                                <li><a href="{{ path('user_show', {'id': card.id}) }}" class="btn btn-gold btnCardSearch">Découvrir</a></li>
+                                <li><a href="{{ path('user_show', {'id': card.id}) }}">Découvrir</a></li>
                             </ul>
                         </div>
                     </a>
