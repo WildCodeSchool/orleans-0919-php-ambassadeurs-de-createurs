@@ -11,7 +11,7 @@
                                                     {% if creator.user.picture is null %}
                                 {{ asset('build/placeholder_profil_grey.png') }}
                                 {% else %}
-                                {{ vich_uploader_asset(creator, 'pictureFile') }}
+                                {{ vich_uploader_asset(creator.user, 'pictureFile') }}
                                 {% endif %}" alt="image de {{ creator.name }}">
                             <div class="star">
                                 <a href="{{ path('search_like', {'id' : creator.user.id}) }}" class="btn btn-link js-like">
