@@ -15,45 +15,89 @@
         </div>
     </div>
 
-    <div class="row justify-content-center mt-5 mx-0">
+<div class="container-fluid card-ambassador">
+    <div class="row no-gutters">
 
         {% for user in users %}
-            <div class="col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">
-                <div class="star_search">
-                    <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">
-                        <div class="col-md-1 col-sm-12 mt-2">
-                            <span class="js-likes">{{ user.followers | length }}</span>
-                            {% set class="far" %}
-                            {% if app.user %}
-                                {% for favorites in app.user.followedUsers %}
-                                    {% if user == favorites.userFavorite %}
-                                        {% set class="fas" %}
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                            <i class="{{ class }} fa-star ml-2"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="cardSearch">
-                    <div class="card-body text-center">
-                        <img class="avatarSearch rounded-circle" src="
-                                        {% if user.picture is null %}
+
+            <div class="col-md-2 col-10 m-5 pt-5">
+                <a href="{{ path('user_show', {'id': user.id}) }}">
+                    <div class="card-search">
+                        <div class="picture">
+                            <img class="img-fluid" src="
+                                                    {% if user.picture is null %}
                                 {{ asset('build/placeholder_profil_grey.png') }}
                                 {% else %}
                                 {{ vich_uploader_asset(user, 'pictureFile') }}
                                 {% endif %}" alt="image de {{ user.firstname }}">
-                        <h4 class="card-title">{{ user.firstname }}</h4>
-                        <h6 class="card-subtitle mb-2 mt-3 text-muted"><i
-                                    class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}</h6>
-                        <p class="card-text mt-3">{{ user.dutiesToString }}</p>
-
-                        <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-gold btnCardSearch mt-3">Découvrir</a>
+                            <div class="star">
+                                <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">
+                                    <div class="col-md-1 col-sm-12 mt-2">
+                                        <span class="js-likes">{{ user.followers | length }}</span>
+                                        {% set class="far" %}
+                                        {% if app.user %}
+                                            {% for favorites in app.user.followedUsers %}
+                                                {% if user == favorites.userFavorite %}
+                                                    {% set class="fas" %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        <i class="{{ class }} fa-star ml-2"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-infos">
+                            <h4 class="card-title">{{ user.firstname }}</h4>
+                            <h6 class="card-subtitle mb-2 mt-3 text-muted"><i
+                                        class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}</h6>
+                            <p class="card-text mt-3">{{ user.dutiesToString }}</p>
+                        </div>
+                        <ul class="btn-discover">
+                            <li><a href="{{ path('user_show', {'id': user.id}) }}">Découvrir</a></li>
+                        </ul>
                     </div>
-                </div>
+                </a>
             </div>
+
+{#            <div class="col-10 col-md-4 col-lg-3 col-xl-2 m-5 p-0">#}
+{#                <div class="star_search">#}
+{#                    <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like">#}
+{#                        <div class="col-md-1 col-sm-12 mt-2">#}
+{#                            <span class="js-likes">{{ user.followers | length }}</span>#}
+{#                            {% set class="far" %}#}
+{#                            {% if app.user %}#}
+{#                                {% for favorites in app.user.followedUsers %}#}
+{#                                    {% if user == favorites.userFavorite %}#}
+{#                                        {% set class="fas" %}#}
+{#                                    {% endif %}#}
+{#                                {% endfor %}#}
+{#                            {% endif %}#}
+{#                            <i class="{{ class }} fa-star ml-2"></i>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </div>#}
+{#                <div class="cardSearch">#}
+{#                    <div class="card-body text-center">#}
+{#                        <img class="avatarSearch rounded-circle" src="#}
+{#                                        {% if user.picture is null %}#}
+{#                                {{ asset('build/placeholder_profil_grey.png') }}#}
+{#                                {% else %}#}
+{#                                {{ vich_uploader_asset(user, 'pictureFile') }}#}
+{#                                {% endif %}" alt="image de {{ user.firstname }}">#}
+{#                        <h4 class="card-title">{{ user.firstname }}</h4>#}
+{#                        <h6 class="card-subtitle mb-2 mt-3 text-muted"><i#}
+{#                                    class="fas fa-map-marker-alt primary-color"></i> {{ user.city }}</h6>#}
+{#                        <p class="card-text mt-3">{{ user.dutiesToString }}</p>#}
+
+{#                        <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-gold btnCardSearch mt-3">Découvrir</a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+
         {% endfor %}
     </div>
+</div>
     <div class="text-center">
         <p class="m-3">Page : {{ page }}</p>
     </div>
