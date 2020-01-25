@@ -25,11 +25,10 @@ class EventRepository extends ServiceEntityRepository
 
         $qb = $this->createQueryBuilder('e');
         $query = $qb
-            ->select('e, u, b, c, d')
+            ->select('e, u, b, c')
             ->leftjoin('e.user', 'u')
             ->leftjoin('e.brand', 'b')
             ->leftjoin('u.categories', 'c')
-            ->leftjoin('u.duties', 'd')
             ->where($qb->expr()->gt('e.dateTime', 'CURRENT_TIMESTAMP()'))
             ->getQuery();
         $dataEvents = $query->getResult();

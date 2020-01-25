@@ -84,14 +84,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function findMapInfoUsers(string $roles): array
     {
         $query = $this->createQueryBuilder('u')
-            ->select(['u', 'b', 'c', 'du'])
+            ->select(['u', 'b', 'c', 'd'])
             ->leftjoin('u.brand', 'b')
             ->leftjoin('u.categories', 'c')
-            ->leftjoin('u.department', 'd')
-            ->leftjoin('u.events', 'e')
-            ->leftjoin('u.followedUsers', 'fd')
-            ->leftjoin('u.followers', 'fr')
-            ->leftjoin('u.duties', 'du')
+            ->leftjoin('u.duties', 'd')
             ->where('u.roles LIKE :roles')
             ->setParameter('roles', '%' . $roles . '%')
             ->getQuery();

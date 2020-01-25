@@ -51,8 +51,12 @@ $('#ambassadors').on('click', function () {
 function mapAmbasadors(amb, mar) {
     // eslint-disable-next-line guard-for-in,no-restricted-syntax
     for (const i in amb) {
-        const long = (amb[i].longitude !== null) ? amb[i].longitude : centerFrance[0];
-        const lat = (amb[i].latitude !== null) ? amb[i].latitude : centerFrance[1];
+        const long = amb[i].longitude;
+        const lat = amb[i].latitude;
+        if (!long || !lat) {
+            // eslint-disable-next-line no-continue
+            continue;
+        }
         const picture = (amb[i].picture !== null) ? `/uploads/user/${amb[i].picture}` : '/build/placeholder_profil_grey.png';
         // eslint-disable-next-line no-undef
         const m = L.marker([long, lat]);
@@ -81,8 +85,12 @@ function mapAmbasadors(amb, mar) {
 function mapEvents(ev, mar) {
     // eslint-disable-next-line guard-for-in,no-restricted-syntax
     for (const i in ev) {
-        const long = (ev[i].longitude !== null) ? ev[i].longitude : centerFrance[0];
-        const lat = (ev[i].latitude !== null) ? ev[i].latitude : centerFrance[1];
+        const long = ev[i].longitude;
+        const lat = ev[i].latitude;
+        if (!long || !lat) {
+            // eslint-disable-next-line no-continue
+            continue;
+        }
         // eslint-disable-next-line no-undef
         const m = L.marker([long, lat]);
         let customPopup = `<div class="d-flex flex-row popup">
