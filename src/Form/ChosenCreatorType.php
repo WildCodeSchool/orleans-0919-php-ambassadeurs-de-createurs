@@ -17,7 +17,7 @@ class ChosenCreatorType extends AbstractType
     {
         $builder
             ->add('chosenCreator', CheckboxType::class, [
-                'label' => 'Mise en avant?',
+                'label' => ' ',
                 'required' => false,]);
     }
 

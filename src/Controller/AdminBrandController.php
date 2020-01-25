@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminBrandController extends AbstractController
 {
 
-    private function formChosenCreators(
+    public function formChosenCreators(
         BrandRepository $brandRepository,
         Request $request,
         $formChosenCreator,
@@ -40,15 +40,15 @@ class AdminBrandController extends AbstractController
 
             if ($brand->getChosenCreator() === false) {
                 $this->addFlash('success', 'Votre créateur a été retiré de la page d\'accueil');
+                $this->getDoctrine()->getManager()->flush();
             } else {
                 $this->addFlash(
                     'success',
                     'Votre créateur a été mis en avant et sera affiché sur la page d\'accueil'
                 );
+                $this->getDoctrine()->getManager()->flush();
+                return $this->redirectToRoute('brand_index');
             }
-
-            $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('brand_index');
         }
     }
 
@@ -67,6 +67,7 @@ class AdminBrandController extends AbstractController
             return $this->redirectToRoute('brand_index');
         }
     }
+
     const MAX_ON_HOMEPAGE = 5;
 
     /**
@@ -87,11 +88,11 @@ class AdminBrandController extends AbstractController
 
         foreach ($brands as $key => $brand) {
             $formChosenCreator = $formFactory->createNamed('chosen_creator_' . $key, ChosenCreatorType::class, $brand);
+            $this->formChosenCreators($brandRepository, $request, $formChosenCreator, $brand);
             $viewsChosenCreator[] = $formChosenCreator->createView();
             $formHasSubscribe = $formFactory->createNamed('has_subscribe_' . $key, HasSubscribeType::class, $brand);
-            $viewsHasSubscribe[] = $formHasSubscribe->createView();
-            $this->formChosenCreators($brandRepository, $request, $formChosenCreator, $brand);
             $this->formHasSubscribes($brandRepository, $request, $formHasSubscribe, $brand);
+            $viewsHasSubscribe[] = $formHasSubscribe->createView();
         }
         return $this->render('brand/index.html.twig', [
             'brands' => $brands,
@@ -136,7 +137,7 @@ class AdminBrandController extends AbstractController
      */
     public function delete(Request $request, Brand $brand): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$brand->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $brand->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($brand);
             $entityManager->flush();
