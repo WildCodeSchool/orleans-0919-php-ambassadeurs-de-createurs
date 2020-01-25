@@ -81,24 +81,34 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
 
-    public function findByRoles(string $roles): array
+    public function findMapInfoUsers(string $roles): array
     {
-        $qb = $this->createQueryBuilder('u');
-        $query = $qb
-            ->select(['u', 'b', 'c', 'd', 'e', 'fd', 'fr', 'du', 'eb'])
+        $query = $this->createQueryBuilder('u')
+            ->select(['u', 'b', 'c', 'du'])
             ->leftjoin('u.brand', 'b')
             ->leftjoin('u.categories', 'c')
             ->leftjoin('u.department', 'd')
             ->leftjoin('u.events', 'e')
-            ->leftjoin('e.brand', 'eb')
             ->leftjoin('u.followedUsers', 'fd')
             ->leftjoin('u.followers', 'fr')
             ->leftjoin('u.duties', 'du')
             ->where('u.roles LIKE :roles')
-            ->andWhere($qb->expr()->gt('e.dateTime', 'CURRENT_TIMESTAMP()'))
             ->setParameter('roles', '%' . $roles . '%')
             ->getQuery();
-        return $query->getResult();
+        $dataAmbassadors = $query->getResult();
+        $ambassadors = [];
+        foreach ($dataAmbassadors as $key => $dataAmbassador) {
+            $ambassadors[$key]['firstname'] = $dataAmbassador->getFirstname();
+            $ambassadors[$key]['city'] = $dataAmbassador->getCity();
+            $ambassadors[$key]['picture'] = $dataAmbassador->getPicture();
+            $ambassadors[$key]['duty'] = $dataAmbassador->getDutiesToString();
+            $ambassadors[$key]['category'] = $dataAmbassador->getCategoriesToString();
+            $ambassadors[$key]['urlFacebook'] = $dataAmbassador->getUrlFacebook();
+            $ambassadors[$key]['id'] = $dataAmbassador->getId();
+            $ambassadors[$key]['latitude'] = $dataAmbassador->getLatitude();
+            $ambassadors[$key]['longitude'] = $dataAmbassador->getLongitude();
+        }
+        return $ambassadors;
     }
 
     public function findByMostFavorites(string $roles): array
