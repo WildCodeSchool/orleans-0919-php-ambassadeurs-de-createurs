@@ -36,13 +36,15 @@ class EventController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $city = $request->request->get('event')['place'];
             $coordinates = $coordinateService->getCoordinates($city);
-            if (!is_null($coordinates)) {
-                $event->setLatitude($coordinates[0]);
-                $event->setLongitude($coordinates[1]);
-            }
+            $event->setLatitude($coordinates[0]);
+            $event->setLongitude($coordinates[1]);
             $entityManager->persist($event);
             $entityManager->flush();
-            $this->addFlash('success', 'Votre événement a été créé');
+            if (!isset($coordinates[0]) || !isset($coordinates[1])) {
+                $this->addFlash('danger', 'Les coordonnées de votre ville n\'ont paa pu être trouvées.');
+            } else {
+                $this->addFlash('success', 'Votre événement a été créé');
+            }
             return $this->redirectToRoute('app_profile');
         }
 
@@ -68,13 +70,15 @@ class EventController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $city = $request->request->get('event')['place'];
                 $coordinates = $coordinateService->getCoordinates($city);
-                if (!is_null($coordinates)) {
-                    $event->setLatitude($coordinates[0]);
-                    $event->setLongitude($coordinates[1]);
-                }
+                $event->setLatitude($coordinates[0]);
+                $event->setLongitude($coordinates[1]);
                 $entityManager->persist($event);
                 $entityManager->flush();
-                $this->addFlash('success', 'Votre événement a été mofifié.');
+                if (!isset($coordinates[0]) || !isset($coordinates[1])) {
+                    $this->addFlash('danger', 'Les coordonnées de votre ville n\'ont paa pu être trouvées.');
+                } else {
+                    $this->addFlash('success', 'Votre événement a été modifié');
+                }
                 return $this->redirectToRoute('app_profile');
             }
 

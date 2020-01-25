@@ -76,7 +76,9 @@ class SecurityController extends AbstractController
             );
             $entityManager->persist($user);
             $entityManager->flush();
-
+            if (!isset($coordinates[0]) || !isset($coordinates[1])) {
+                $this->addFlash('danger', 'Les coordonnées de votre ville n\'ont paa pu être trouvées.');
+            }
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
@@ -119,8 +121,11 @@ class SecurityController extends AbstractController
             $user->setLongitude($coordinates[1]);
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();
-
-            $this->addFlash('success', 'Votre profil a été modifié.');
+            if (!isset($coordinates[0]) || !isset($coordinates[1])) {
+                $this->addFlash('danger', 'Les coordonnées de votre ville n\'ont paa pu être trouvées.');
+            } else {
+                $this->addFlash('success', 'Votre profil a été modifié');
+            }
             return $this->redirectToRoute('app_profile');
         }
         return $this->render('security/editProfile.html.twig', [
