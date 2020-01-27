@@ -21,16 +21,16 @@
                     <p class="card-title">Il n'y a pas de ventes privées à afficher</p>
                 {% endfor %}
                 <div class="col-12">
-                    <a href="{{ path('event_new', {'userId': user.id}) }}">
-                        <button type="button" class="btn btn-gold mt-5">Créer un événement</button>
+                    <a href="{{ path('event_new', {'userId': user.id}) }}" class="btn btn-gold mt-5">
+                        Créer un événement
                     </a>
                 </div>
             </div>
         </div>
     </div>
     <div class="text-center m-4">
-        <a href="{{ path('app_favorite') }}" class="m-5">
-            <button type="button" class="btn btn-gold">Vos favoris</button>
+        <a href="{{ path('app_favorite') }}" class="btn btn-gold m-5">
+            Vos favoris
         </a>
     </div>
 {% endif %}

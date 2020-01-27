@@ -23,6 +23,7 @@
 body {
     font-size: $font-size-body;
     font-family: $font-body;
+    overflow-x: hidden ;
 }
 
 h1 {
@@ -61,6 +62,14 @@ h2 {
 
 h3 {
     font-size: 1.5rem;
+}
+
+.second-title-size {
+    font-size: $font-size-second-title;
+}
+
+.primary-title-size {
+    font-size: $font-size-title;
 }
 
 .primary-color {
@@ -111,5 +120,11 @@ a:hover {
 
 .img-new-user{
     width: 35vw;
+}
+
+.msgFlash{
+    position: absolute;
+    z-index: 5;
+    width: 100%;
 }
 

@@ -37,7 +37,7 @@ class SearchType extends AbstractType
                 'choice_value' => 'description',
                 'required' => false,
                 'label' => false,
-                'placeholder' => 'Univers',
+                'placeholder' => 'Tous nos univers',
                 'query_builder' => function (CategoryRepository $categoryRepository) {
                     return $categoryRepository->createQueryBuilder('c')
                         ->orderBy('c.description', 'ASC');

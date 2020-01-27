@@ -7,8 +7,8 @@
             <img class="w-100 filterImage" src="{{ asset('build/Homepage_AmbassadeurDeCreateurs.webp') }}"
                  alt="Ambassadeurs de créateurs">
             <div class="carousel-caption mb-3 ">
-                <h3 class="d-none d-md-block">REJOIGNEZ NOTRE COMMUNAUTÉ</h3>
-                <h3 class="d-none d-md-block">et développez vos ventes privées à domicile</h3>
+                <h3 class="d-none d-md-block second-title-size">REJOIGNEZ NOTRE COMMUNAUTÉ</h3>
+                <h3 class="d-none d-md-block second-title-size mt-3">et développez vos ventes privées à domicile</h3>
             </div>
         </div>
     </div>
@@ -36,10 +36,10 @@
     </div>
     {% block newsletter %}
         <div class="containerNewsletter row">
-            <div class="carousel-image">
+            <div class="carousel-image-newsletter">
                 <img class="imgNewsletter col-12" src="{{ asset('build/Homepage_Newsletter.webp') }}"
                      alt="image newsletter">
-                <fieldset class="card cardNewsletter col-12">
+                <fieldset class="card cardNewsletter col-12 col-sm-9 col-lg-9">
                     <h2 class="text-center p-3 homepageTitle">S'inscrire à la Newsletter </h2>
                     {{ include('home/_form_newsletter.html.twig') }}
                     <div class="w-100">

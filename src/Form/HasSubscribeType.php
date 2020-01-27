@@ -17,7 +17,7 @@ class HasSubscribeType extends AbstractType
     {
         $builder
             ->add('hasSubscribe', CheckboxType::class, [
-                'label' => 'Abonné',
+                'label' => ' ',
                 'required' => false,]);
     }
 
