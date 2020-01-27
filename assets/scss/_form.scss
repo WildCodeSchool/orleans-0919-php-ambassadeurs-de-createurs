@@ -57,3 +57,11 @@ a.titleForm:hover {
 .onoffswitch-checkbox:checked + .onoffswitch-label:before {
     right: 0;
 }
+
+.vich-image .custom-file-input {
+    opacity: 1;
+}
+
+.vich-image .custom-file {
+    display: ruby;
+}

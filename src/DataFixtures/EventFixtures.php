@@ -24,7 +24,7 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
             $event->setUser($user);
             $event->setBrand($brand);
             $event->setDescription($faker->sentence(6));
-            $event->setDateTime($faker->dateTime);
+            $event->setDateTime($faker->dateTimeBetween('now', '+1 years'));
             $manager->persist($event);
         }
         $manager->flush();

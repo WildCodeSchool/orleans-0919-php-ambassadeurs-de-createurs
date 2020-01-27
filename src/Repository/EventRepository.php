@@ -47,10 +47,7 @@ class EventRepository extends ServiceEntityRepository
                 'fr_FR'
             );
             $events[$key]['host'] = $dataEvent->getUser()->getFirstname();
-            $events[$key]['creator'] = $dataEvent->getBrand()->getName();
             $events[$key]['category'] = $dataEvent->getUser()->getCategoriesToString();
-            $events[$key]['urlFacebook'] = $dataEvent->getUser()->getUrlFacebook();
-            $events[$key]['urlInstagram'] = $dataEvent->getBrand()->getInstagram();
             $events[$key]['id'] = $dataEvent->getUser()->getId();
             $events[$key]['latitude'] = $dataEvent->getLatitude();
             $events[$key]['longitude'] = $dataEvent->getLongitude();

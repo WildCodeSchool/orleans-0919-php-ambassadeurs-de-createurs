@@ -52,8 +52,7 @@ class Brand
     private $instagram;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="La récompense pour les hôtes est obligatoire")
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
      *      max = 255,
      *      maxMessage = "Votre recompense ne doit pas depasser {{limit}} caractères de long")
@@ -61,8 +60,7 @@ class Brand
     private $hostAdvantage;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="La récompense pour les vendeurs est obligatoire")
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
      *      max = 255,
      *      maxMessage = "Votre recompense ne doit pas depasser {{limit}} caractères de long")
