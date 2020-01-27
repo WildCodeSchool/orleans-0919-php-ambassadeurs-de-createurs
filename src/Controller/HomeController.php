@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Repository\BrandRepository;
+use App\Repository\EventRepository;
 use App\Repository\FavoriteRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,8 +12,6 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\SerializerInterface;
 use \DrewM\MailChimp\MailChimp;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -24,18 +23,15 @@ class HomeController extends AbstractController
      * @Route("/", name="home_index")
      * @param Request $request
      * @param UserRepository $userRepository
-     * @param SerializerInterface $serializer
      * @param BrandRepository $brandRepository
-     * @param FavoriteRepository $favoriteRepository
      * @return Response
      * @throws \Exception
      */
     public function index(
         Request $request,
         UserRepository $userRepository,
-        SerializerInterface $serializer,
-        BrandRepository $brandRepository,
-        FavoriteRepository $favoriteRepository
+        EventRepository $eventRepository,
+        BrandRepository $brandRepository
     ): Response {
         $form = $this->createFormBuilder()
             ->add('firstname', TextType::class, [
@@ -51,10 +47,8 @@ class HomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $newsletterData = $form->getData();
-
             $mailChimp = new MailChimp($this->getParameter('mailchimp_api_key'));
             $listId = $mailChimp->get('lists')['lists'][0]['id'];
-
             $mailChimp->post('lists/' . $listId . '/members', [
                 'email_address' => $newsletterData['mail'],
                 'merge_fields' => ['FNAME' => $newsletterData['firstname']],
@@ -68,26 +62,14 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('home_index');
         }
 
-        $ambassadors = $userRepository->findByRoles(User::ROLE_AMBASSADOR);
+        $ambassadors = $userRepository->findMapInfoUsers(User::ROLE_AMBASSADOR);
+        $events = $eventRepository->findMapInfoEvents();
         $ambassadorCards = $userRepository->findByMostFavorites(User::ROLE_AMBASSADOR);
         $creators = $brandRepository->findChosenCreator();
 
-        $context = [
-            AbstractNormalizer::IGNORED_ATTRIBUTES => [
-                'users',
-                'user',
-                'sponsoredEvents',
-                'userFavorite',
-                'pictureFile',
-                'updatedAt',
-                'galleryOwner',
-                'galleries',
-            ],
-        ];
-        $ambassadorsJson = $serializer->serialize($ambassadors, 'json', $context);
-
         return $this->render('/home/index.html.twig', [
-            'ambassadors' => $ambassadorsJson,
+            'ambassadors' => $ambassadors,
+            'events' => $events,
             'ambassadorCards' => $ambassadorCards,
             'creators' => $creators,
             'form' => $form->createView(),
