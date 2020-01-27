@@ -68,10 +68,20 @@ div.carousel-caption {
     font-size: $font-size-body;
 }
 
-.popup div img {
-    height: 250px;
+.leaflet-popup-content-wrapper:hover {
+    box-shadow: 0 0 2px 2px $primary-color;
+}
+
+.popup  img {
+    height: 200px;
     object-fit: cover;
 }
+
+.mapPopupLink p {
+    text-decoration: none;
+    color: $secondary-color;
+}
+
 
 a.fb-ic-card {
     font-size: $font-size-icon;
