@@ -10,6 +10,7 @@
         <div class="row justify-content-center m-0">
             {% for article in articles %}
                 {% if loop.first and page == 1 %}
+                    <div class="col-12">
                     <h2 class="col offset-1 oneArticle">À la une</h2>
                     <div class="row justify-content-center">
                         <div class="col-md-5 card-img-block">
@@ -31,15 +32,15 @@
                                     <span class="badge badge-pill badge-gold">{{ article.articleTag.tag }}</span>
                                 </p>
                                 <h3 class="card-title firstArticleTitle mt-3">{{ article.title }}</h3>
-                                <p class="textFirstArticle mt-4">{{ article.content|truncate(200,true)|raw }}</p>
+                                <p class="textFirstArticle mt-4">{{ article.content|striptags|truncate(80)|raw }}</p>
                                 <a href="{{ path('blog_show', {'slug': article.slug}) }}" class="btn btn-gold mt-2">Voir l'article</a>
                             </div>
                         </div>
                         <h2 class="col offset-2 mb-5">Nos articles</h2>
                     </div>
-
+                    </div>
                 {% else %}
-                    <div class="col-md-4 m-4 mb-5">
+                        <div class="col-md-4 col-lg-5 m-4 mb-5">
                         <div class="card-img-block">
                             <img class="card-img-top bodyimage"
                                  src="
@@ -57,7 +58,7 @@
                                     <span class="badge badge-pill badge-gold">{{ article.articleTag.tag }}</span>
                                 </p>
                                 <h5 class="card-title">{{ article.title }}</h5>
-                                <p class="">{{ article.content|truncate(150,true)|raw }}</p>
+                                <p class="">{{ article.content|striptags|truncate(80)|raw }}</p>
                                 <a href="{{ path('blog_show', {'slug': article.slug}) }}" class="btn btn-gold">Voir l'article</a>
                             </div>
                         </div>
