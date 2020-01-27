@@ -1,6 +1,26 @@
 {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+
+<div class="form-group row">
+    {{ form_label(form.firstname, 'Prénom', {
+        'label_attr': {'class': 'col-form-label col-sm-5 col-md-4 required'}}) }}
+    <div class="col-sm-7 col-md-8">
+        {{ form_widget(form.firstname) }}
+    </div>
+    {{ form_errors(form.firstname) }}
+    {{ form_help(form.firstname) }}
+</div>
+
+<div class="form-group row">
+    {{ form_label(form.mail, 'E-mail', {
+        'label_attr': {'class': 'col-form-label col-sm-5 col-md-4 required'}}) }}
+    <div class="col-sm-7 col-md-8">
+        {{ form_widget(form.mail) }}
+    </div>
+    {{ form_errors(form.mail) }}
+    {{ form_help(form.mail) }}
+</div>
+
 
 <div class="flex d-flex justify-content-around">
     <button class="btn btn-gold">
