@@ -58,11 +58,12 @@ class UserInscriptionType extends AbstractType
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'label' => 'Mot de passe',
                 'invalid_message' => 'Veuillez entrer le même mot de passe.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
                 'first_options' => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Confirmation'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez entrer un mot de passe.',
