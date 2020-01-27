@@ -10,8 +10,8 @@
             <div class="col-lg-8">
                 <h2 class="text-center">{{ user.firstname }}</h2>
                 <div class="row blockInfo">
-                    <div class="col-lg-6 flex d-flex flex-column my-4">
-                        <div class="star w-100 justify-content-start mb-3">
+                    <div class="col-lg-4 flex d-flex flex-column my-4 p-0">
+                        <div class="star w-100 justify-content-end mb-3">
                             <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like p-0">
                                 <div class="col-md-1 col-sm-12 mt-2">
                                     <span class="js-likes">{{ user.followers | length }}</span>
@@ -27,7 +27,7 @@
                                 </div>
                             </a>
                         </div>
-                        <img class="rounded-circle imgProfilCreator align-self-center"
+                        <img class="rounded-circle imgProfilCreator ml-5"
                              src="
                                 {% if user.picture is null %}
                                 {{ asset('build/placeholder_profil_grey.png') }}
@@ -37,8 +37,8 @@
                              alt="{{ user.brand.name }}">
 
                     </div>
-                    <div class="col-lg-6 flex d-flex flex-column justify-content-between mt-4">
-                        <h4 class="my-3 text-center">Je recherche : {{ user.dutiesToString }}</h4>
+                    <div class="col-lg-8 flex d-flex flex-column justify-content-between mt-4 px-5">
+                        <h4 class="my-3">Je recherche principalement : {{ user.dutiesToString }}</h4>
                         {% if user.brand.hostAdvantage is not null %}
                             <div class="row flex-row ">
                                 <div>
@@ -56,12 +56,12 @@
                                     <i class="fas fa-hand-holding-usd profilIcon"></i>
                                 </div>
                                 <div>
-                                    <h4 class="mx-4"> Pour les vendeurs : </h4>
+                                    <h4 class="mx-4"> Pour les vendeurs indépendant: </h4>
                                     <p class="text-center">{{ user.brand.sellerAdvantage }}</p>
                                 </div>
                             </div>
                         {% endif %}
-                        <ul class="flex d-flex justify-content-around list-unstyled w-75 align-self-center">
+                        <ul class="flex d-flex justify-content-between list-unstyled w-75">
                             <li>
                                 <a class="profilIcon" href="{{ user.urlFacebook }}" target="_blank">
                                     <i class="fab fa-facebook-square"></i>
@@ -83,6 +83,12 @@
             </div>
         </section>
 
+        <div class="row my-5 flex d-flex justify-content-center">
+            <a class="btn btn-gold buttonContact" href="mailto:{{ user.mail }}">
+                Contacter
+            </a>
+        </div>
+
         <section class="row mb-5 flex d-flex flex-column">
             <h2 class="text-center">Mon histoire</h2>
             <div class="col-lg-8 flex d-flex flex-column blockHistory align-self-center">
@@ -92,12 +98,6 @@
                 </div>
             </div>
         </section>
-
-        <div class="row my-5 flex d-flex justify-content-center">
-            <a class="btn btn-gold buttonContact" href="mailto:{{ user.mail }}">
-                Contacter
-            </a>
-        </div>
         {% if user.brand.galleries is not empty %}
             <h2 class="text-center mb-4">Mes produits</h2>
             <div class="row">
