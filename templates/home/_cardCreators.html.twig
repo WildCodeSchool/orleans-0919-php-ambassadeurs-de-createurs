@@ -32,20 +32,19 @@
                                 </div>
                             </div>
                             <div class="card-infos">
-                                <h4 class="card-title">{{ creator.name }}</h4>
-                                <p> Mes univers de création :</p>
-                                <p>{% for category in creator.user.categories %}
-                                        {{ category.description }},
-                                    {% else %}
-                                        Aucun univers n'a été sélectioné
-                                    {% endfor %}
-                                </p>
-                                <p>
-                                    Je recherche :
-                                </p>
-                                <p>
-                                    {{ creator.user.dutiesToString }}
-                                </p>
+                                <a href="{{ path('user_show', {'id': creator.user.id}) }}">
+                                    <h4 class="card-title">{{ creator.name }}</h4>
+                                    <p> Mes univers de création :</p>
+                                    <p>
+                                        {{ creator.user.getCategoriesToString }}
+                                    </p>
+                                    <p>
+                                        Je recherche :
+                                    </p>
+                                    <p>
+                                        {{ creator.user.dutiesToString }}
+                                    </p>
+                                </a>
                             </div>
                             <ul class="btn-discover">
                                 <li><a href="{{ path('user_show', {'id': creator.user.id}) }}">Découvrir</a></li>
