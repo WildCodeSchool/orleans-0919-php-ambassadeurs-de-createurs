@@ -16,15 +16,23 @@ class BrandType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', TextType::class, [
+                'label' => 'Nom'
+            ])
             ->add('description')
-            ->add('site', UrlType::class)
-            ->add('instagram', UrlType::class)
+            ->add('site', UrlType::class, [
+                'required' => false,
+            ])
+            ->add('instagram', UrlType::class, [
+                'required' => false,
+            ])
             ->add('host_advantage', TextType::class, [
-                'label' => 'Avantages pour les hôtes'
+                'label' => 'Avantages pour les hôtes',
+                'required' => false,
             ])
             ->add('seller_advantage', TextType::class, [
-                'label' => 'Avantages pour les vendeurs'
+                'label' => 'Avantages pour les vendeurs',
+                'required' => false,
             ])
         ;
     }
