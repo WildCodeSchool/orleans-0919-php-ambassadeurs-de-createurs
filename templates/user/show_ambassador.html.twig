@@ -7,7 +7,7 @@
     <div class="container-fluid mt-5">
         <div class="text-center">
             <img class="rounded-circle img-profil"
-                src="
+                 src="
                 {% if user.picture is null %}
                 {{ asset('build/placeholder_profil_grey.png') }}
                 {% else %}
@@ -35,55 +35,58 @@
                 </div>
             </a>
         </div>
-        <div class="text-center mt-5">
-            {% if user.roleLabel == 'Créateur' and app.user.brand.hasSubscribe == true %}
-            <a href="mailto:{{ user.mail }}">
-                <button type="button" class="btn btn-gold">Contacter cet Ambassadeur</button>
-            </a>
+        <div class="d-flex justify-content-center mt-5">
+            <p><i class="fas fa-heart mr-3"></i> Mes univers sont :
+                {% if user.categories is not empty %}
+                    <em>{{ user.categoriesToString }}</em>
+                {% else %}
+                    <em>Aucun univers n'a été sélectionné</em>
+                {% endif %}
+            </p>
+        </div>
+        <div class="d-flex justify-content-center">
+            <p class="text-center"><i class="fas fa-donate mr-3 mb-2"></i> Je recherche : <em>{{ user.dutiesToString }}.</em></p>
+        </div>
+        <div class="text-center m-2">
+            {% if user.roleLabel == 'Créateur' and app.user.brand.hasSubscribe == true or app.user.roleLabel == 'Ambassadeur' %}
+                <a href="mailto:{{ user.mail }}">
+                    <button type="button" class="btn btn-gold">Contacter cet Ambassadeur</button>
+                </a>
             {% else %}
                 <a class="btn btn-inactive mb-3">Contacter cet Ambassadeur</a>
-                <p><em>Vous devez être abonné pour contacter cet ambassadeur</em></p>
+                <p><em>Vous devez être abonné pour contacter cet ambassadeur.</em></p>
             {% endif %}
         </div>
-
-        <div class="row mx-lg-5 mx-3 my-5">
-            <div class="col-lg-5 pl-lg-5">
-                <h2 class="mb-5">Mes informations</h2>
-                <p><i class="fas fa-heart mr-3"></i> Mes univers sont :
-                    {% if user.categories is not empty %}
-                        <em>{{ user.categoriesToString }}</em>
-                    {% else %}
-                        <em>Aucun univers n'a été sélectioné</em>
-                    {% endif %}
-                </p>
-                <p><i class="fas fa-donate mr-3"></i> Je recherche des : <em>{{ user.dutiesToString }}</em></p>
-            </div>
-            <div class="col-lg-5 offset-lg-1">
-                <h2 class="mt-2">Présente les produits</h2>
-                <div class="row">
-                    {% for event in events %}
-                        <div class="col-xs-12 col-md-12 col-lg-6 event mt-3">
-                            <article class="card card-event card-inverse animated fadeInDown">
-                                <img class="img-fluid"
-                                     src="https://snap-photos.s3.amazonaws.com/img-thumbs/960w/SYC0YBA37V.jpg"
-                                     alt="Leaf on the street"/>
-                                <div class="card-img-overlay">
-                                    <h4 class="card-title event">{{ event.place }}</h4>
-                                    <p class="card-text event">{{ event.dateTime|date('d/m/Y à H:i') }}
-                                        - {{ event.user.firstname }}</p>
-                                    <p class="card-text event">Présentant les poduits de {{ event.brand.name }}</p>
-                                    <p class="card-text event">{{ event.description }}</p>
+        {% if events is not empty %}
+            <div class="row mb-5 flex d-flex justify-content-center">
+                <div class="cardProfil col-lg-8 col-10">
+                    <div class="card-body text-center">
+                        <h2 class="mt-2 text-center">Les prochaines ventes privées :</h2>
+                        {% for event in events %}
+                            <div class="d-inline-flex m-3">
+                                <div class="col-sm-12 text-center mt-4 border-bottom m-2">
+                                    <p>
+                                        <i class="fas fa-map-marker-alt primary-color"></i>
+                                        {{ event.place }}
+                                    </p>
+                                    <p>
+                                        <i class="fas fa-calendar-week primary-color "></i>
+                                        {{ event.dateTime|date('d/m/Y à H:i') }}.
+                                    </p>
+                                    <p>
+                                        <i class="fas fa-award primary-color"></i>
+                                        {{ event.brand.name }}
+                                    </p>
                                 </div>
-                            </article>
-                        </div>
-                    {% else %}
-                        <p class="pl-5">Pas de ventes privées à venir</p>
-                    {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-        </div>
+        {% else %}
+            <p class="font-italic text-center m-5">Cet ambassadeur n'a pas de vente actuellement.</p>
+        {% endif %}
     </div>
-
 {% endblock %}
 
 {% block javascripts %}

@@ -90,7 +90,7 @@
         </div>
 
         <section class="row mb-5 flex d-flex flex-column">
-            <h2 class="text-center">Mon histoire</h2>
+            <h2 class="text-center">Ma marque</h2>
             <div class="col-lg-8 flex d-flex flex-column blockHistory align-self-center">
                 <div class="w-100">
                     <p class="p-3 m-0">{{ user.brand.description }}</p>
@@ -98,22 +98,24 @@
                 </div>
             </div>
         </section>
-
-        <h2 class="text-center mb-4">Mes produits</h2>
-        <div class="row">
-            {% for gallery in user.brand.galleries %}
-                <div class="w-100 col-lg-3 px-lg-4 py-4 divImg">
-                    <img class="w-100 myImg" src="{{ vich_uploader_asset(gallery, 'photoFile') }}"
-                         alt="{{ user.brand.name }}">
+        {% if user.brand.galleries is not empty %}
+            <h2 class="text-center mb-4">Mes produits</h2>
+            <div class="row">
+                {% for gallery in user.brand.galleries %}
+                    <div class="w-100 col-lg-3 px-lg-4 py-4 divImg">
+                        <img class="w-100 myImg" src="{{ vich_uploader_asset(gallery, 'photoFile') }}"
+                             alt="{{ user.brand.name }}">
+                    </div>
+                {% endfor %}
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+                    <span class="close">&times;</span>
+                    <img class="modal-content" id="img01" alt="{{ user.brand.name }}">
                 </div>
-            {% endfor %}
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
-                <span class="close">&times;</span>
-                <img class="modal-content" id="img01" alt="{{ user.brand.name }}">
             </div>
-        </div>
+        {% endif %}
     </div>
+
 {% endblock %}
 
 {% block javascripts %}
