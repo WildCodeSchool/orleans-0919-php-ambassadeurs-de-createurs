@@ -38,7 +38,7 @@
 
                     </div>
                     <div class="col-lg-8 flex d-flex flex-column justify-content-between mt-4 px-5">
-                        <h4 class="my-3">Je recherche principalement : {{ user.dutiesToString }}</h4>
+                        <h4 class="my-3">Je recherche principalement : <em>{{ user.dutiesToString }}</em></h4>
                         {% if user.brand.hostAdvantage is not null %}
                             <div class="row flex-row ">
                                 <div>
@@ -46,7 +46,7 @@
                                 </div>
                                 <div>
                                     <h4 class="mx-4"> Pour les hôtes : </h4>
-                                    <p class="text-center">{{ user.brand.hostAdvantage }}</p>
+                                    <p class="mx-4"><em>{{ user.brand.hostAdvantage }}</em></p>
                                 </div>
                             </div>
                         {% endif %}
@@ -57,7 +57,7 @@
                                 </div>
                                 <div>
                                     <h4 class="mx-4"> Pour les vendeurs indépendant: </h4>
-                                    <p class="text-center">{{ user.brand.sellerAdvantage }}</p>
+                                    <p class="mx-4"><em>{{ user.brand.sellerAdvantage }}</em></p>
                                 </div>
                             </div>
                         {% endif %}
