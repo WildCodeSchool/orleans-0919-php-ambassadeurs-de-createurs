@@ -41,7 +41,7 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
             if (!isset($coordinates[0]) || !isset($coordinates[1])) {
-                $this->addFlash('danger', 'Les coordonnées de votre ville n\'ont paa pu être trouvées.');
+                $this->addFlash('danger', 'Les coordonnées de votre ville n\'ont pas pu être trouvées.');
             } else {
                 $this->addFlash('success', 'Votre événement a été créé');
             }
@@ -75,7 +75,7 @@ class EventController extends AbstractController
                 $entityManager->persist($event);
                 $entityManager->flush();
                 if (!isset($coordinates[0]) || !isset($coordinates[1])) {
-                    $this->addFlash('danger', 'Les coordonnées de votre ville n\'ont paa pu être trouvées.');
+                    $this->addFlash('danger', 'Les coordonnées de votre ville n\'ont pas pu être trouvées.');
                 } else {
                     $this->addFlash('success', 'Votre événement a été modifié');
                 }

@@ -77,7 +77,7 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             if (!isset($coordinates[0]) || !isset($coordinates[1])) {
-                $this->addFlash('danger', 'Les coordonnées de votre ville n\'ont paa pu être trouvées.');
+                $this->addFlash('danger', 'Les coordonnées de votre ville n\'ont pas pu être trouvées.');
             }
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
@@ -122,7 +122,7 @@ class SecurityController extends AbstractController
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();
             if (!isset($coordinates[0]) || !isset($coordinates[1])) {
-                $this->addFlash('danger', 'Les coordonnées de votre ville n\'ont paa pu être trouvées.');
+                $this->addFlash('danger', 'Les coordonnées de votre ville n\'ont pas pu être trouvées.');
             } else {
                 $this->addFlash('success', 'Votre profil a été modifié');
             }
