@@ -125,7 +125,7 @@ final class Version20200121083508 extends AbstractMigration
 
         $this->addSql("
             INSERT INTO duty (name) VALUES ('Hôte');
-            INSERT INTO duty (name) VALUES ('Vendeur');
+            INSERT INTO duty (name) VALUES ('Vendeur indépendant');
         ");
 
         $this->addSql("

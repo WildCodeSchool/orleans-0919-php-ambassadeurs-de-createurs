@@ -28,7 +28,7 @@ class QuestionFixtures extends Fixture
             $question = new Question();
             $question->setQuestion($faker->sentence);
             $question->setAnswer($faker->paragraph(12));
-            $question->setCategory(array_rand($categories));
+            $question->setCategory($categories[array_rand($categories)]);
             $manager->persist($question);
         }
         $manager->flush();
