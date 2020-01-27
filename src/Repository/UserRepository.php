@@ -99,7 +99,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $ambassadors[$key]['picture'] = $dataAmbassador->getPicture();
             $ambassadors[$key]['duty'] = $dataAmbassador->getDutiesToString();
             $ambassadors[$key]['category'] = $dataAmbassador->getCategoriesToString();
-            $ambassadors[$key]['urlFacebook'] = $dataAmbassador->getUrlFacebook();
             $ambassadors[$key]['id'] = $dataAmbassador->getId();
             $ambassadors[$key]['latitude'] = $dataAmbassador->getLatitude();
             $ambassadors[$key]['longitude'] = $dataAmbassador->getLongitude();

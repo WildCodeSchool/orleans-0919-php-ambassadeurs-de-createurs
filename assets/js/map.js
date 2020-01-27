@@ -60,22 +60,15 @@ function mapAmbasadors(amb, mar) {
         const picture = (amb[i].picture !== null) ? `/uploads/user/${amb[i].picture}` : '/build/placeholder_profil_grey.png';
         // eslint-disable-next-line no-undef
         const m = L.marker([long, lat]);
-        let customPopup = `<div class="d-flex flex-row popup"><div class="w-50">
-            <img class="img-fluid" src=${picture} alt="${entities.encode(amb[i].firstname)}">
-            </div> <div class="w-50 d-flex flex-column">
+        const customPopup = `<div class="text-break popup">
+            <a class="mapPopupLink d-flex flex-column" href="/user/${amb[i].id}">
+            <img class="img-fluid rounded-circle align-self-center m-4" src=${picture} alt="${entities.encode(amb[i].firstname)}">
             <h4 class="text-center popupTitle">${entities.encode(amb[i].firstname)}</h4>
-            <p class="m-0 ml-3 popupText">Lieu : ${entities.encode(amb[i].city)}</p>
-            <p class="m-0 ml-3 popupText">Rôles : ${entities.encode(amb[i].duty)}</p>
-            <p class="m-0 ml-3 popupText"> Univers : ${entities.encode(amb[i].category)}</p>
-            <div class="d-flex justify-content-around">
-            <a class="fb-ic-card" href="/user/${amb[i].id}">
-            <i class="far fa-user"></i></a>`;
-        if (amb[i].urlFacebook) {
-            customPopup += `<a class="fb-ic-card" href="${entities.encode(amb[i].urlFacebook)}">
-            <i class="fab fa-facebook-square "></i></a>`;
-        }
-        customPopup += '</div> </div> </div>';
-        m.bindPopup(customPopup, { minWidth: 320 });
+            <p class="m-0 popupText">Lieu : ${entities.encode(amb[i].city)}</p>
+            <p class="m-0 popupText">Rôle : ${entities.encode(amb[i].duty)}</p>
+            <p class="m-0 popupText"> Univers : ${entities.encode(amb[i].category)}</p>
+            </a> </div>`;
+        m.bindPopup(customPopup, { minWidth: 300 });
         mar.addLayer(m);
     }
     map.addLayer(markers);
@@ -93,29 +86,17 @@ function mapEvents(ev, mar) {
         }
         // eslint-disable-next-line no-undef
         const m = L.marker([long, lat]);
-        let customPopup = `<div class="d-flex flex-row popup">
-        <div class="d-flex flex-column">
-        <h4 class="text-center popupTitle">${entities.encode(ev[i].description)}</h4>
-        <p class="m-0 ml-3 popupText">Lieu : ${entities.encode(ev[i].city)}</p>
-        <p class="m-0 ml-3 popupText">Date : ${entities.encode(ev[i].date)}</p>
-        <p class="m-0 ml-3 popupText">Heure : ${entities.encode(ev[i].time)}</p>
-        <p class="m-0 ml-3 popupText">Hôte : ${entities.encode(ev[i].host)}</p>
-        <p class="m-0 ml-3 popupText">Créateur : ${entities.encode(ev[i].creator)}</p>
-        <p class="m-0 ml-3 popupText"> Univers : ${entities.encode(ev[i].category)}</p>
-        <div class="d-flex justify-content-around">
-        <a class="fb-ic-card" href="/user/${entities.encode(ev[i].id)}">
-        <i class="far fa-user"></i></a>`;
-        if (ev[i].urlFacebook) {
-            customPopup += `<a class="fb-ic-card" href="${entities.encode(ev[i].urlFacebook)}">
-                <i class="fab fa-facebook-square "></i></a>`;
-        }
-        if (ev[i].urlInstagram) {
-            customPopup += `<a class="fb-ic-card" href="${entities.encode(ev[i].urlInstagram)}">
-                <i class="fab fa-instagram"></i></a>`;
-        }
-        customPopup += '</div> </div> </div>';
+        const customPopup = `<div class="d-flex flex-column text-break popup">
+        <a class="mapPopupLink" href="/user/${ev[i].id}">
+        <h4 class="text-center popupTitle">${entities.encode(ev[i].host)}</h4>
+        <p class="m-0 popupText">Lieu : ${entities.encode(ev[i].city)}</p>
+        <p class="m-0 popupText">Date : ${entities.encode(ev[i].date)}</p>
+        <p class="m-0 popupText">Heure : ${entities.encode(ev[i].time)}</p>
+        <p class="m-0 popupText">Univers : ${entities.encode(ev[i].category)}</p>
+        <p class="m-0 my-3 popupText">${entities.encode(ev[i].description)}</p>
+        </a> </div>`;
 
-        m.bindPopup(customPopup);
+        m.bindPopup(customPopup, { minWidth: 300 });
         mar.addLayer(m);
     }
     map.addLayer(markers);

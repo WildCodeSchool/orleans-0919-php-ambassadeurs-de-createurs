@@ -89,7 +89,7 @@ a
 }
 
 .blockInfo {
-    padding:0.8rem 0.8rem 0.8rem 2.6rem;
+    padding:0.8rem;
     border-left:8px solid $primary-color;
     position: relative;
     background: $third-color;
@@ -139,7 +139,9 @@ a
 /* Modal Content (Image) */
 .modal-content {
     display: block;
-    width: calc(100% - 4rem);
+    max-width: calc(100% - 4rem);
+    max-height: calc(100vh - 4rem - 100px);
+    object-fit: contain;
     margin: 2rem;
 }
 
