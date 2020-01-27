@@ -83,9 +83,15 @@ a.fb-ic-card:hover {
     text-decoration: none;
 }
 
-a#ambassadors.btn-gold.active, a#events.btn-gold.active {
+.btn-search {
     color: $primary-color;
     background-color: $third-color;
+    border: $primary-color 1px solid;
+}
+
+a#ambassadors.btn-search.active, a#events.btn-search.active {
+    color: $third-color;
+    background-color: $primary-color;
     border: $primary-color 1px solid;
 }
 
