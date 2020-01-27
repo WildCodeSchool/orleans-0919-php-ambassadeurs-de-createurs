@@ -3,10 +3,12 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use App\Repository\DepartmentRepository;
+use App\Repository\DutyRepository;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use \DateTime;
 
@@ -32,15 +34,24 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     ];
 
     private $passwordEncoder;
+    private $dutyRepository;
+    private $departmentRepository;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
-    {
+    public function __construct(
+        UserPasswordEncoderInterface $passwordEncoder,
+        DutyRepository $dutyRepository,
+        DepartmentRepository $departmentRepository
+    ) {
         $this->passwordEncoder = $passwordEncoder;
+        $this->dutyRepository = $dutyRepository;
+        $this->departmentRepository = $departmentRepository;
     }
 
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
+        $duties = $this->dutyRepository->findAll();
+        $departments = $this->departmentRepository->findAll();
         for ($i = 0; $i < 100; $i++) {
             $user = new User();
             $user->setFirstname($faker->firstName);
@@ -52,19 +63,19 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setUpdatedAt(new DateTime());
             $user->setMail($faker->email);
             $user->setRoles([self::ROLES[0]]);
-            $user->setDepartment($this->getReference("00" . rand(1, 7)));
+            $user->setDepartment($departments[array_rand($departments)]);
             $user->addCategory($this->getReference('category_' . rand(0, 5)));
             $nbDuty = rand(0, 2);
             switch ($nbDuty) {
                 case 0:
-                    $user->addDuty($this->getReference('Hôte'));
+                    $user->addDuty($duties[0]);
                     break;
                 case 1:
-                    $user->addDuty($this->getReference('Vendeur'));
+                    $user->addDuty($duties[1]);
                     break;
                 case 2:
-                    $user->addDuty($this->getReference('Hôte'));
-                    $user->addDuty($this->getReference('Vendeur'));
+                    $user->addDuty($duties[0]);
+                    $user->addDuty($duties[1]);
                     break;
             }
             $user->setUrlFacebook($faker->url);
@@ -84,19 +95,19 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setUpdatedAt(new DateTime());
             $user->setMail($faker->email);
             $user->setRoles([self::ROLES[1]]);
-            $user->setDepartment($this->getReference("00" . rand(1, 7)));
+            $user->setDepartment($departments[array_rand($departments)]);
             $user->addCategory($this->getReference('category_' . rand(0, 5)));
             $nbDuty = rand(0, 2);
             switch ($nbDuty) {
                 case 0:
-                    $user->addDuty($this->getReference('Hôte'));
+                    $user->addDuty($duties[0]);
                     break;
                 case 1:
-                    $user->addDuty($this->getReference('Vendeur'));
+                    $user->addDuty($duties[1]);
                     break;
                 case 2:
-                    $user->addDuty($this->getReference('Hôte'));
-                    $user->addDuty($this->getReference('Vendeur'));
+                    $user->addDuty($duties[0]);
+                    $user->addDuty($duties[1]);
                     break;
             }
             $user->setUrlFacebook($faker->url);
@@ -115,7 +126,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $admin->setUpdatedAt(new DateTime());
         $admin->setMail('admin@admin.com');
         $admin->setRoles(['ROLE_ADMIN']);
-        $admin->setDepartment($this->getReference("00" . rand(1, 7)));
+        $user->setDepartment($departments[array_rand($departments)]);
         $admin->setPassword($this->passwordEncoder->encodePassword(
             $admin,
             'admin'
@@ -125,8 +136,14 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
+    /**
+     * This method must return an array of fixtures classes
+     * on which the implementing class depends on
+     *
+     * @return array
+     */
     public function getDependencies()
     {
-        return [DepartmentFixtures::class, DutyFixtures::class];
+        return [ CategoryFixtures::class];
     }
 }

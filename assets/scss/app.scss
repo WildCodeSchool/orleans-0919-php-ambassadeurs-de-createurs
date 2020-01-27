@@ -23,6 +23,7 @@
 body {
     font-size: $font-size-body;
     font-family: $font-body;
+    overflow-x: hidden ;
 }
 
 h1 {
@@ -119,5 +120,11 @@ a:hover {
 
 .img-new-user{
     width: 35vw;
+}
+
+.msgFlash{
+    position: absolute;
+    z-index: 5;
+    width: 100%;
 }
 

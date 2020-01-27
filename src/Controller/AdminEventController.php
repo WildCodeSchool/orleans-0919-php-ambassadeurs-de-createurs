@@ -57,7 +57,11 @@ class AdminEventController extends AbstractController
             }
             $entityManager->persist($event);
             $entityManager->flush();
-            $this->addFlash('success', 'Votre événement a été mofifié');
+            if (!isset($coordinates[0]) || !isset($coordinates[1])) {
+                $this->addFlash('danger', 'Les coordonnées de votre ville n\'ont pas pu être trouvées.');
+            } else {
+                $this->addFlash('success', 'Votre événement a été modifié');
+            }
             return $this->redirectToRoute('admin_event_index');
         }
 

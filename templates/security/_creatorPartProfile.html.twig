@@ -1,10 +1,10 @@
 {% if is_granted('ROLE_CREATOR') %}
 
-<div class="col-12 mb-5 text-center">
-    <a href="{{ path('app_favorite') }}">
-        <button type="button" class="btn btn-gold">Vos favoris</button>
-    </a>
-</div>
+    <div class="col-12 mb-5 text-center">
+        <a href="{{ path('app_favorite') }}" class="btn btn-gold">
+            Vos favoris
+        </a>
+    </div>
     <div class="row mb-5 flex d-flex justify-content-center">
         <div class="cardProfil col-lg-8 col-10">
             <div class="card-body text-center">
@@ -23,16 +23,16 @@
                     <p class="card-title"><strong>Votre lien Instagram : </strong>{{ user.brand.instagram }}</p>
                     <p class="card-title"><strong>Lien vers votre site : </strong>{{ user.brand.site }}</p>
                     <div class="col-12 text-center mt-3">
-                        <a href="{{ path('brand_edit', {'id': user.brand.id}) }}">
-                            <button type="button" class="btn btn-gold">Modifier votre marque</button>
+                        <a href="{{ path('brand_edit', {'id': user.brand.id}) }}" class="btn btn-gold">
+                            Modifier votre marque
                         </a>
                     </div>
                 {% endif %}
                 {% if user.brand is null %}
                     <div class="col-12">
-                    <p class="card-title">Il n'y a pas de marque existante</p>
-                        <a href="{{ path('brand_new', {'userId': user.id}) }}">
-                            <button type="button" class="btn btn-gold">Créer ma marque</button>
+                        <p class="card-title">Il n'y a pas de marque existante</p>
+                        <a href="{{ path('brand_new', {'userId': user.id}) }}" class="btn btn-gold mt-5">
+                            Créer ma marque
                         </a>
                     </div>
                 {% endif %}
@@ -40,10 +40,11 @@
         </div>
 
     </div>
-
-    <div class="col-12 mb-5 text-center">
-        <a href="{{ path('gallery_index') }}">
-            <button type="button" class="btn btn-gold">Votre galerie</button>
-        </a>
-    </div>
+    {% if user.brand is not null %}
+        <div class="col-12 mb-5 text-center">
+            <a href="{{ path('gallery_index') }}" class="btn btn-gold">
+                Votre galerie
+            </a>
+        </div>
+    {% endif %}
 {% endif %}

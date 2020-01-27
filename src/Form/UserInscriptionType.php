@@ -76,7 +76,7 @@ class UserInscriptionType extends AbstractType
             ])
             ->add('CGU', CheckboxType::class, [
                 'label' => "J'accepte les",
-                'help' => '<a href="'.$this->router->generate('company_cgu').'">CGU</a>',
+                'help' => '<a href="'.$this->router->generate('company_cgu').'" target="_blank">CGU</a>',
                 'help_html' => true,
                 'mapped' => false,
                 'constraints' => [

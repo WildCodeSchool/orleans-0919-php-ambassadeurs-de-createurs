@@ -1,12 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Renouvellement du mot de passe{% endblock %}
 
 {% block body %}
-    <h1>Renouvellement du mot de passe</h1>
-    {{form_start(form)}}
-    {{form_row(form.plainPassword.first)}}
-    {{form_row(form.plainPassword.second)}}
-    <button class=""  type="submit">Envoyer</button>
-    {{form_end(form)}}
+    <div class="container mt-5">
+        <h1 class="text-center mt-5">Renouvellement du mot de passe</h1>
+        {{form_start(form)}}
+        {{form_row(form.plainPassword.first)}}
+        {{form_row(form.plainPassword.second)}}
+        <div class="flex d-flex justify-content-around">
+            <button class="btn btn-gold mt-5 mb-5"  type="submit">Envoyer</button>
+        </div>
+        {{form_end(form)}}
+    </div>
+
 {% endblock %}

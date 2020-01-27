@@ -19,3 +19,41 @@ a.titleForm:hover {
     text-decoration: none;
 }
 
+.onoffswitch {
+    position: relative; width: 87px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+
+.onoffswitch-checkbox {
+    display: none;
+}
+
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    height: 20px; padding: 0; line-height: 20px;
+    border: 2px solid $secondary-color; border-radius: 20px;
+    background-color: $third-color;
+    transition: background-color 0.3s ease-in;
+}
+
+.onoffswitch-label:before {
+    content: "";
+    display: block; width: 30px; margin: 0;
+    background: $third-color;
+    position: absolute; top: 0; bottom: 0;
+    right: 37px;
+    border: 2px solid  $secondary-color; border-radius: 20px;
+    transition: all 0.3s ease-in 0s;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label {
+    background-color: $primary-color;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    border-color: $primary-color;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    right: 0;
+}
