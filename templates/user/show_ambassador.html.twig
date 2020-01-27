@@ -48,7 +48,7 @@
             <p class="text-center"><i class="fas fa-donate mr-3 mb-2"></i> Je recherche : <em>{{ user.dutiesToString }}.</em></p>
         </div>
         <div class="text-center m-2">
-            {% if user.roleLabel == 'Créateur' and app.user.brand.hasSubscribe == true %}
+            {% if user.roleLabel == 'Créateur' and app.user.brand.hasSubscribe == true or app.user.roleLabel == 'Ambassadeur' %}
                 <a href="mailto:{{ user.mail }}">
                     <button type="button" class="btn btn-gold">Contacter cet Ambassadeur</button>
                 </a>
