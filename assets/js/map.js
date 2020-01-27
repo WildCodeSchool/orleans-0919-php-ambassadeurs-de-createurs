@@ -68,7 +68,7 @@ function mapAmbasadors(amb, mar) {
             <p class="m-0 popupText">Rôle : ${entities.encode(amb[i].duty)}</p>
             <p class="m-0 popupText"> Univers : ${entities.encode(amb[i].category)}</p>
             </a> </div>`;
-        m.bindPopup(customPopup, {minWidth: 300});
+        m.bindPopup(customPopup, { minWidth: 300 });
         mar.addLayer(m);
     }
     map.addLayer(markers);
@@ -96,7 +96,7 @@ function mapEvents(ev, mar) {
         <p class="m-0 my-3 popupText">${entities.encode(ev[i].description)}</p>
         </a> </div>`;
 
-        m.bindPopup(customPopup, {minWidth: 300});
+        m.bindPopup(customPopup, { minWidth: 300 });
         mar.addLayer(m);
     }
     map.addLayer(markers);
