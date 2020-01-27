@@ -138,6 +138,7 @@ select {
     border-radius: 50%;
     transform: scale(1);
     transition: all 0.9s ease 0s;
+    background-color: $third-color;
 }
 
 .card-search:hover .picture img {
