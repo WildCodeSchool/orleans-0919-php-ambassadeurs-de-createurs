@@ -1,9 +1,9 @@
 {% extends 'layout.html.twig' %}
 {% block body %}
-    <div class="container-fluid">
-        <h1>Modification de votre profil</h1>
-        <h3>Vos informations </h3>
+    <div class="container">
+        <h1 class="text-center m-5">Modification de votre profil</h1>
+        <h2 class="text-center m-5">Vos informations </h2>
         {{ include('security/_formProfile.html.twig', {'button_label': 'Enregistrer'}) }}
-        <a class="btn btn-dark" href="{{ path('home_index') }}">Retour</a>
+        <a class="btn btn-dark m-5" href="{{ path('home_index') }}">Retour</a>
     </div>
 {% endblock %}
