@@ -68,10 +68,20 @@ div.carousel-caption {
     font-size: $font-size-body;
 }
 
-.popup div img {
-    height: 250px;
+.leaflet-popup-content-wrapper:hover {
+    box-shadow: 0 0 2px 2px $primary-color;
+}
+
+.popup  img {
+    height: 200px;
     object-fit: cover;
 }
+
+.mapPopupLink p {
+    text-decoration: none;
+    color: $secondary-color;
+}
+
 
 a.fb-ic-card {
     font-size: $font-size-icon;
@@ -83,9 +93,15 @@ a.fb-ic-card:hover {
     text-decoration: none;
 }
 
-a#ambassadors.btn-gold.active, a#events.btn-gold.active {
+.btn-search {
     color: $primary-color;
     background-color: $third-color;
+    border: $primary-color 1px solid;
+}
+
+a#ambassadors.btn-search.active, a#events.btn-search.active {
+    color: $third-color;
+    background-color: $primary-color;
     border: $primary-color 1px solid;
 }
 
@@ -334,7 +350,6 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     input {
         border-bottom: 1px solid $primary-color;
     }
-
 }
 
 .unsubscribeNewsletterBloc .form-group {
@@ -390,32 +405,10 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
         height: 90vh;
     }
 
-    .cardNewsletter {
-        position: relative;
-        padding: 10px;
-        width: 100vw;
-        left: 15px;
-        right: 0;
+}
 
-        div {
-            text-align: center;
-            margin-top: 30px;
-        }
-    }
+.js-likes {
 
-    .homepageTitle {
-        text-align: center;
-    }
-
-    div.row.no-gutters {
-        display: flex;
-        justify-content: center;
-    }
-
-    .searchImage {
-        height: auto;
-        margin-bottom: 6rem;
-    }
 }
 
 /**card-home-ambassador**/
@@ -548,7 +541,7 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     right: 0;
     left: 0;
     opacity: 0.9;
-    transform: scale(3.4);
+    transform: scale(3);
     transition: all 0.3s linear 0s;
 }
 
@@ -573,6 +566,7 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     border-radius: 50%;
     transform: scale(1);
     transition: all 0.9s ease 0s;
+    background-color: $third-color;
 }
 
 .card-home-creator:hover .picture img {
@@ -611,4 +605,129 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
 .card-home-creator .btn-discover li a:hover {
     color: $primary-color;
     background-color: $third-color;
+}
+
+//NEWSLETTER
+
+.mailIcon {
+    font-size: $font-size-icon;
+    color: $third-color;
+}
+
+.mailIcon:hover {
+    color: $secondary-color;
+}
+
+button.flex.d-flex.flex-column.btn.btn-gold.mb-4 {
+    font-size: $font-size-body;
+}
+
+button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
+    color: $secondary-color;
+}
+
+.containerNewsletter {
+    position: relative;
+    text-align: center;
+    width: 100vw;
+
+    .card:hover {
+        box-shadow: none;
+    }
+}
+
+.imgNewsletter {
+    width: 100%;
+    opacity: 0.6;
+    padding: 0;
+    margin-left: 15px;
+    transform: scaleX(-1);
+    margin-top: -350px;
+}
+
+.cardNewsletter {
+    position: absolute;
+    padding: 20px;
+    width: 50%;
+    bottom: 10%;
+    right: 5%;
+
+    div {
+        text-align: right;
+    }
+
+    input {
+        border-bottom: 1px solid $primary-color;
+    }
+
+}
+
+.unsubscribeNewsletterBloc .form-group {
+    text-align: left;
+    margin: 0 2rem;
+
+    input {
+        border-bottom: 1px solid $primary-color;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .carousel-image-newsletter {
+        height: auto;
+    }
+
+    div.carousel-caption {
+        bottom: 0;
+        padding: 0;
+    }
+
+    div h1.homeTitle {
+        display: block;
+        font-size: $font-size-second-title;
+        margin: 0;
+        height: 0;
+        margin-bottom: 50px;
+    }
+
+    .filterImage {
+        opacity: 0.6;
+    }
+
+    .mapTabs {
+        width: 100vw;
+    }
+
+    #map {
+        width: 100vw;
+        height: 90vh;
+    }
+
+    .cardNewsletter {
+        position: relative;
+        padding: 10px;
+        width: 100vw;
+        left: 15px;
+        right: 0;
+
+        div {
+            text-align: center;
+            margin-top: 30px;
+        }
+    }
+
+    .homepageTitle {
+        text-align: center;
+    }
+
+    div.row.no-gutters {
+        display: flex;
+        justify-content: center;
+    }
+
+    .searchImage {
+        height: auto;
+        margin-bottom: 6rem;
+    }
 }

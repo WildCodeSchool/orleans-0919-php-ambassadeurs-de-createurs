@@ -32,10 +32,6 @@ class ProfilType extends UserInscriptionType
         $builder->remove('role');
         $builder->remove('CGU');
         $builder->remove('CGV');
-        $builder->add('description', TextareaType::class, [
-            'label' => 'Biographie',
-            'required' => false,
-        ]);
         $builder->add('urlFacebook', TextType::class, [
             'label' => 'Compte Facebook',
             'required' => false,
