@@ -1,9 +1,9 @@
 {% block cardAmbassadors %}
     <h2 class="ml-3 mr-3 mb-5 pt-4 pb-5 m-md-5 show homepageTitle"> Nos Ambassadeurs</h2>
     <div class="container-fluid card-ambassador m-0">
-        <div class="row no-gutters">
+        <div class="row justify-content-around">
             {% for card in ambassadorCards %}
-                <div class="col-10 col-md-4 col-lg-4 col-xl-3 m-2 pt-5">
+                <div class="col-10 col-md-4 col-lg-4 col-xl-4 pt-5">
                     <a href="{{ path('user_show', {'id': card.id}) }}">
                         <div class="card-home">
                             <div class="picture">

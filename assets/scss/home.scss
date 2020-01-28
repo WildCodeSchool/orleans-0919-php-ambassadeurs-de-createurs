@@ -668,40 +668,40 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
 
 }
 
-@media screen and (min-width: 1200px) {
-
-    .card-home , .card-home-creator {
-        width : 350px;
-    }
-
-    .card-home-creator .picture::before , .card-home  .picture::before {
-        transform: scale(3);
-    }
-}
-
-@media screen and (max-width: 1200px) and (min-width: 950px) {
-
-    .card-home , .card-home-creator {
-        width : 350px;
-        margin-left : -30px;
-    }
-
-    .card-home-creator .picture::before , .card-home  .picture::before {
-        transform: scale(3);
-    }
-}
-
-@media screen and (max-width: 950px) and (min-width: 770px) {
-
-    .card-home , .card-home-creator {
-        width : 300px;
-        margin-left : -30px;
-    }
-
-    .card-home-creator .picture::before , .card-home  .picture::before {
-        transform: scale(2.8);
-    }
-}
+//@media screen and (min-width: 1200px) {
+//
+//    .card-home , .card-home-creator {
+//        width : 350px;
+//    }
+//
+//    .card-home-creator .picture::before , .card-home  .picture::before {
+//        transform: scale(3);
+//    }
+//}
+//
+//@media screen and (max-width: 1200px) and (min-width: 950px) {
+//
+//    .card-home , .card-home-creator {
+//        width : 350px;
+//        margin-left : -30px;
+//    }
+//
+//    .card-home-creator .picture::before , .card-home  .picture::before {
+//        transform: scale(3);
+//    }
+//}
+//
+//@media screen and (max-width: 950px) and (min-width: 770px) {
+//
+//    .card-home , .card-home-creator {
+//        width : 300px;
+//        margin-left : -30px;
+//    }
+//
+//    .card-home-creator .picture::before , .card-home  .picture::before {
+//        transform: scale(2.8);
+//    }
+//}
 
 @media screen and (max-width: 768px) {
 
