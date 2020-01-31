@@ -15,16 +15,15 @@
         </div>
     </div>
 
-    <div class="container-fluid card-ambassador">
-        <div class="row no-gutters">
-
-            {% for user in users %}
-                <div class="col-md-2 col-10 m-5 py-4 pt-5">
-                    <a href="{{ path('user_show', {'id': user.id}) }}">
-                        <div class="card-search">
-                            <div class="picture">
-                                <img class="img-fluid" src="
-                                                    {% if user.picture is null %}
+<div class="container-fluid card-ambassador">
+    <div class="row no-gutters">
+        {% for user in users %}
+            <div class="col-md-2 col-10 mx-0 mx-lg-5 pt-5">
+                <a href="{{ path('user_show', {'id': user.id}) }}">
+                    <div class="card-search">
+                        <div class="picture">
+                            <img class="img-fluid" src="
+                                {% if user.picture is null %}
                                 {{ asset('build/placeholder_profil_grey.png') }}
                                 {% else %}
                                 {{ vich_uploader_asset(user, 'pictureFile') }}
