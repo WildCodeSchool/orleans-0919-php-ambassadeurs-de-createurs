@@ -64,9 +64,9 @@ function mapAmbasadors(amb, mar) {
             <a class="mapPopupLink d-flex flex-column" href="/user/${amb[i].id}">
             <img class="img-fluid rounded-circle align-self-center m-4" src=${picture} alt="${entities.encode(amb[i].firstname)}">
             <h4 class="text-center popupTitle">${entities.encode(amb[i].firstname)}</h4>
-            <p class="m-0 popupText">Lieu : ${entities.encode(amb[i].city)}</p>
-            <p class="m-0 popupText">Rôle : ${entities.encode(amb[i].duty)}</p>
-            <p class="m-0 popupText"> Univers : ${entities.encode(amb[i].category)}</p>
+            <p class="m-0 popupText"><i class="fas fa-map-marker-alt primary-color mr-3"></i> ${entities.encode(amb[i].city)}</p>
+            <p class="m-0 popupText"><i class="fas fa-donate primary-color mr-3"></i> ${entities.encode(amb[i].duty)}</p>
+            <p class="m-0 popupText"><i class="fas fa-heart primary-color mr-3"></i> ${entities.encode(amb[i].category)}</p>
             </a> </div>`;
         m.bindPopup(customPopup, { minWidth: 300 });
         mar.addLayer(m);
@@ -89,10 +89,10 @@ function mapEvents(ev, mar) {
         const customPopup = `<div class="d-flex flex-column text-break popup">
         <a class="mapPopupLink" href="/user/${ev[i].id}">
         <h4 class="text-center popupTitle">${entities.encode(ev[i].host)}</h4>
-        <p class="m-0 popupText">Lieu : ${entities.encode(ev[i].city)}</p>
-        <p class="m-0 popupText">Date : ${entities.encode(ev[i].date)}</p>
-        <p class="m-0 popupText">Heure : ${entities.encode(ev[i].time)}</p>
-        <p class="m-0 popupText">Univers : ${entities.encode(ev[i].category)}</p>
+        <p class="m-0 popupText"><i class="fas fa-map-marker-alt primary-color mr-3"></i> ${entities.encode(ev[i].city)}</p>
+        <p class="m-0 popupText"><i class="fas fa-calendar-week primary-color mr-3"></i> ${entities.encode(ev[i].date)}</p>
+        <p class="m-0 popupText"><i class="far fa-clock primary-color mr-3"></i> ${entities.encode(ev[i].time)}</p>
+        <p class="m-0 popupText"><i class="fas fa-heart primary-color mr-3"></i> ${entities.encode(ev[i].category)}</p>
         <p class="m-0 my-3 popupText">${entities.encode(ev[i].description)}</p>
         </a> </div>`;
 

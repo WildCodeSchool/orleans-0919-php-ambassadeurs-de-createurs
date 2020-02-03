@@ -63,7 +63,7 @@ class ProfilType extends UserInscriptionType
             },
         ]);
         $builder->add('categories', EntityType::class, [
-            'label' => 'Univers',
+            'label' => 'Univers préférés',
             'class' => Category::class,
             'choice_label' => 'description',
             'multiple' => true,

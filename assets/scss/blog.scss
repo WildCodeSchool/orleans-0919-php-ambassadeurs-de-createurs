@@ -40,7 +40,7 @@ h5.card-title {
 }
 
 .firstblog {
-    margin: 50px -50px 80px -50px;
+    margin: 0px -50px 80px -50px;
     height: 400px;
 }
 
@@ -54,9 +54,6 @@ h5.card-title {
     object-fit: cover;
 }
 
-.card-img-block-top {
-    margin: 50px 0 80px;
-}
 
 .firstSentence {
     font-style: italic;
@@ -66,9 +63,6 @@ h3.card-title {
     color: $primary-color;
 }
 
-.oneArticle {
-    padding-left: 50px;
-}
 
 .badge-gold {
     background-color: $primary-color;
@@ -89,3 +83,4 @@ h3.card-title {
     width: 100%;
     object-fit: cover;
 }
+
