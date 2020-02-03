@@ -664,6 +664,30 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
 
 }
 
+.card-home, .card-home-creator {
+    --card-width:350px;
+    --card-margin:0;
+    width : var(--card-width);
+    margin-left: var(--card-margin);
+}
+
+.card-home-creator .picture::before , .card-home  .picture::before {
+    --card-scale:3;
+    transform: scale(var(--card-scale));
+}
+
+@media screen and (max-width: 1200px) and (min-width: 950px) {
+    --card-width:350px;
+    --card-margin:-30px;
+    --card-scale:3;
+}
+
+@media screen and (max-width: 950px) and (min-width: 770px) {
+    --card-width:300px;
+    --card-margin:-30px;
+    --card-scale:2.8;
+}
+
 @media screen and (max-width: 768px) {
 
     .carousel-image-newsletter {
