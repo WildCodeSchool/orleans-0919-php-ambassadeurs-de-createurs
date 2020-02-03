@@ -187,14 +187,14 @@ select {
 }
 
 .card-search .picture::before {
-    --card-scale-search:2.6;
+    --card-scale-search:2.1;
     transform: scale(var(--card-scale-search));
 }
 
 @media screen and (max-width: 1200px) and (min-width: 950px) {
     --card-width-search:200px;
     --card-margin-search:0;
-    --card-scale-search:2.4;
+    --card-scale-search:2.1;
 }
 
 @media screen and (max-width: 950px) and (min-width: 770px) {
