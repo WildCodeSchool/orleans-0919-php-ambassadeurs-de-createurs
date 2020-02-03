@@ -11,10 +11,10 @@
             {% for article in articles %}
                 {% if loop.first and page == 1 %}
                     <div class="col-12">
-                    <h2 class="col offset-1 oneArticle">À la une</h2>
+                    <h2 class="col text-center">À la une</h2>
                     <div class="row justify-content-center">
                         <div class="col-md-5 card-img-block">
-                            <div class="card-img-block-top">
+                            <div>
                                 <img class="card-img-top firstimage"
                                      src="
                                         {% if article.image is null %}
