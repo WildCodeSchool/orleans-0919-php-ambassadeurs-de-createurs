@@ -23,7 +23,7 @@
                     <td>{{ brand.user.lastname }} {{ brand.user.firstname }}</td>
                     <td>{% for event in brand.sponsoredEvents %}
                     <p>
-                        <a href="{{ path('admin_event_show', {'id': event.id}) }}">{{ event.dateTime ? event.dateTime|localizeddate('short', 'none') }}</a>
+                        <a href="{{ path('admin_event_show', {'id': event.id}) }}" class="dateAdmin">{{ event.dateTime ? event.dateTime|localizeddate('short', 'none') }}</a>
                     </p>
                     {% endfor %}
                     <td>

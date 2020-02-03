@@ -34,13 +34,9 @@
             <li class="nav-item avatar">
                 {% if app.user %}
                 <a class="nav-link" href="{{ path('app_logout') }}"><span class="nav-effect">DÉCONNEXION</span>
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" class="rounded-circle z-depth-0"
-                         alt="avatar image" height="50">
                 </a>
                 {% else %}
                 <a class="nav-link" href="{{ path('app_login') }}"><span class="nav-effect">CONNEXION</span>
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" class="rounded-circle z-depth-0"
-                         alt="avatar image" height="50">
                 </a>
                 {% endif %}
             </li>
