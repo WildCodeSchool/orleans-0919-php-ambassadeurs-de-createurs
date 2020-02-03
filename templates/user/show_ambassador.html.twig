@@ -14,27 +14,35 @@
                 {{ vich_uploader_asset(user, 'pictureFile') }}
                 {% endif %}"
                  alt="{{ user.firstname }}">
+            <div class="d-flex justify-content-center">
             <h2 class="text-center mt-3">{{ user.firstname }}</h2>
+                <div class="star justify-content-center mb-3">
+                    <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like mb-3">
+                        <div class="col-md-1 col-sm-12 mt-2 flex-row-reverse starAmb">
+                            <span class="js-likes">{{ user.followers | length }}</span>
+                            {% set class="far" %}
+                            {% if app.user %}
+                                {% for favorites in app.user.followedUsers %}
+                                    {% if user == favorites.userFavorite %}
+                                        {% set class="fas" %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            <i class="{{ class }} fa-star ml-2"></i>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
         </div>
         <div class="d-flex justify-content-center">
             <p class="m-0"><i class="fas fa-map-marker-alt primary-color mr-3"></i>{{ user.city }}</p>
         </div>
-        <div class="star justify-content-center mb-3">
-            <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like mb-3">
-                <div class="col-md-1 col-sm-12 mt-2">
-                    <span class="js-likes">{{ user.followers | length }}</span>
-                    {% set class="far" %}
-                    {% if app.user %}
-                        {% for favorites in app.user.followedUsers %}
-                            {% if user == favorites.userFavorite %}
-                                {% set class="fas" %}
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                    <i class="{{ class }} fa-star ml-2"></i>
-                </div>
+        <div class="text-center mt-5">
+            {% if user.roleLabel == 'Créateur' and app.user.brand.hasSubscribe == true or is_granted('ROLE_AMBASSADOR')%}
+            <a href="mailto:{{ user.mail }}">
+                <button type="button" class="btn btn-gold">Contacter cet Ambassadeur</button>
             </a>
-        </div>
         <div class="d-flex justify-content-center mt-5">
             <p><i class="fas fa-heart mr-3"></i> Mes univers sont :
                 {% if user.categories is not empty %}
@@ -47,11 +55,6 @@
         <div class="d-flex justify-content-center">
             <p class="text-center"><i class="fas fa-donate mr-3 mb-2"></i> Je recherche : <em>{{ user.dutiesToString }}.</em></p>
         </div>
-        <div class="text-center m-2">
-            {% if user.roleLabel == 'Créateur' and app.user.brand.hasSubscribe == true or app.user.roleLabel == 'Ambassadeur' %}
-                <a href="mailto:{{ user.mail }}">
-                    <button type="button" class="btn btn-gold">Contacter cet Ambassadeur</button>
-                </a>
             {% else %}
                 <a class="btn btn-inactive mb-3">Contacter cet Ambassadeur</a>
                 <p><em>Vous devez être abonné pour contacter cet ambassadeur.</em></p>

@@ -18,7 +18,7 @@
                     {% endif %}
                     {% if user.brand.sellerAdvantage is not null %}
                         <p class="card-title"><strong>Avantage proposé pour les vendeurs
-                                : </strong>{{ user.brand.hostAdvantage }}</p>
+                                : </strong>{{ user.brand.sellerAdvantage }}</p>
                     {% endif %}
                     <p class="card-title"><strong>Votre lien Instagram : </strong>{{ user.brand.instagram }}</p>
                     <p class="card-title"><strong>Lien vers votre site : </strong>{{ user.brand.site }}</p>
@@ -42,8 +42,16 @@
     </div>
     {% if user.brand is not null %}
         <div class="col-12 mb-5 text-center">
+            <div class="row">
+                {% for gallery in user.brand.galleries %}
+                    <div class="w-100 col-lg-3 px-lg-4 py-4">
+                        <img class="w-100 galleryImg" src="{{ vich_uploader_asset(gallery, 'photoFile') }}"
+                        alt="{{ user.brand.name }}">
+                    </div>
+                {% endfor %}
+            </div>
             <a href="{{ path('gallery_index') }}" class="btn btn-gold">
-                Votre galerie
+                Modifier votre galerie
             </a>
         </div>
     {% endif %}

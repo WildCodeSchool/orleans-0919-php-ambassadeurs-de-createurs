@@ -276,24 +276,9 @@ div.d-flex.flex-column.mt-5.mapTabs.align-self-center {
     width: 100%;
 }
 
-div.row.reasons {
-    display: flex;
-    justify-content: center;
-
-    .text-reasons {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        .icons-reasons {
-            width: 64px;
-        }
-
-        .col-md-12.reasons {
-            text-align: center;
-        }
-    }
+.icons-reasons {
+    width: 64px;
+    height: 64px;
 }
 
 .star_home {
@@ -375,7 +360,7 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
 
 @media screen and (max-width: 768px) {
 
-    .carousel-image-newsletter {
+    .carousel-image-newsletter, .carousel-image {
         height: auto;
     }
 
@@ -403,6 +388,17 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     #map {
         width: 100vw;
         height: 90vh;
+    }
+
+}
+
+.js-likes {
+
+    div.searchBg {
+        .searchImage {
+            height: auto;
+            margin-bottom: 6rem;
+        }
     }
 
 }
