@@ -35,8 +35,14 @@ $ php bin/console doctrine:database:create
 ```
 -  Mettre à jour la base de données, avec la commande :
 ```sh
+$ php bin/console make:migration
 $ php bin/console doctrine:schema:update --force
 ```
+-  Charger les fixtures : 
+```sh
+$ php bin/console doctrine:fixture:load --append
+```
+
 -  Exécuter Webpack, avec la commande :
 ```sh
 $ yarn encore dev –watch (pour un environnement de développement)
