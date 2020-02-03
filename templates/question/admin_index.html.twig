@@ -5,7 +5,9 @@
 {% block body %}
     <div class="container">
         <h1 class="text-center m-5">Les Questions</h1>
-
+        <a href="{{ path('admin_question_new') }}" class="btn btn-gold mb-5">
+            Créer une question
+        </a>
         <table class="table">
             <thead>
             <tr>
@@ -32,9 +34,5 @@
             {% endfor %}
             </tbody>
         </table>
-
-        <a href="{{ path('admin_question_new') }}" class="btn btn-gold mb-5">
-            Créer une question
-        </a>
     </div>
 {% endblock %}
