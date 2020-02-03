@@ -178,3 +178,27 @@ select {
     color: $primary-color;
     background-color: $third-color;
 }
+
+.card-search {
+    --card-width-search:220px;
+    --card-margin-search:0;
+    width : var(--card-width-search);
+    margin: var(--card-margin-search);
+}
+
+.card-search .picture::before {
+    --card-scale-search:2.6;
+    transform: scale(var(--card-scale-search));
+}
+
+@media screen and (max-width: 1200px) and (min-width: 950px) {
+    --card-width-search:200px;
+    --card-margin-search:0;
+    --card-scale-search:2.4;
+}
+
+@media screen and (max-width: 950px) and (min-width: 770px) {
+    --card-width-search:300px;
+    --card-margin-search:-30px;
+    --card-scale-search:2.8;
+}
