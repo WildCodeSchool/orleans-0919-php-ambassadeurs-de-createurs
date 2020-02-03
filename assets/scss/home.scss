@@ -232,7 +232,7 @@ div.ambassador {
     flex-direction: column;
     align-items: center;
     background-color: darken($background-secondary, 5%);
-    overflow-x: hidden;
+    overflow: hidden;
 
     .mt-5.show {
         align-self: center;
@@ -494,11 +494,6 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     color: white;
     transition: all 0.3s ease 0s;
     text-decoration: none;
-}
-
-.card-home .btn-discover li a:hover {
-    color: $primary-color;
-    background-color: $third-color;
 }
 
 /**card-home-creator**/
