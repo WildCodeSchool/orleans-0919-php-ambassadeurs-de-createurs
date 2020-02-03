@@ -11,8 +11,8 @@
             <tr>
                 <th>Prénom</th>
                 <th>Nom</th>
-                <th>Ville</th>
                 <th>Email</th>
+                <th>Évènement</th>
                 <th>Rôle</th>
                 <th>Actions</th>
             </tr>
@@ -22,8 +22,12 @@
                 <tr>
                     <td>{{ user.firstname }}</td>
                     <td>{{ user.lastname }}</td>
-                    <td>{{ user.city }}</td>
                     <td>{{ user.mail }}</td>
+                    <td>{% for event in user.events %}
+                            <p>
+                                <a href="{{ path('admin_event_show', {'id': event.id}) }}" class="dateAdmin">{{ event.dateTime ? event.dateTime|localizeddate('short', 'none') }}</a>
+                            </p>
+                        {% endfor %}
                     <td>{{ user.roleLabel }}</td>
                     <td>
                         <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-gold mb-1"><i

@@ -139,12 +139,12 @@ class User implements UserInterface, \Serializable
     private $urlFacebook;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="user", cascade={"remove"})
      */
     private $followedUsers;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="userFavorite")
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="userFavorite", cascade={"remove"})
      */
     private $followers;
 
