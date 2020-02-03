@@ -44,16 +44,6 @@ class BrandController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="brand_show", methods={"GET"})
-     */
-    public function show(Brand $brand): Response
-    {
-        return $this->render('brand/show.html.twig', [
-            'brand' => $brand,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="brand_edit", methods={"GET","POST"})
      * @IsGranted("ROLE_CREATOR")
      */
