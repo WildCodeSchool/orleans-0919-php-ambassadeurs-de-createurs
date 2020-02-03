@@ -7,50 +7,50 @@
     <div class="row justify-content-center mt-5 mx-0">
         {% for favorite in favorites %}
             <div class="col-lg-2 col-md-4 col-sm-6 col-10 m-5 pt-5">
-                <a href="{{ path('user_show', {'id': favorite.userFavorite.id}) }}">
-                    <div class="card-search">
-                        <div class="picture">
-                            <img class="img-fluid" src="
+                <div class="card-search">
+                    <div class="picture">
+                        <img class="img-fluid" src="
                                 {% if favorite.userFavorite.picture is null %}
                                 {{ asset('build/placeholder_profil_grey.png') }}
                                 {% else %}
                                 {{ vich_uploader_asset(favorite.userFavorite, 'pictureFile') }}
                                 {% endif %}"
-                                 alt="image de {{ favorite.userFavorite.firstname }}">
-                            <div class="star">
-                                <a href="{{ path('search_like', {'id' : favorite.userFavorite.id}) }}" class="btn btn-link js-like">
-                                    <div class="col-md-1 col-sm-12 mt-2">
-                                        <span class="js-likes">{{ favorite.userFavorite.followers | length }}</span>
-                                        {% set class="far" %}
-                                        {% if app.user %}
-                                            {% for ConnectedUserFavorites in app.user.followedUsers %}
-                                                {% if favorite == ConnectedUserFavorites.userFavorite %}
-                                                    {% set class="fas" %}
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endif %}
-                                        <i class="{{ class }} fa-star ml-2"></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="card-infos">
-                            <a href="{{ path('user_show', {'id': favorite.userFavorite.id}) }}">
-                                <h4 class="card-title">{% if favorite.userFavorite.roles.0 == 'ROLE_CREATOR' %}
-                                        {{ favorite.userFavorite.brand.name}}
-                                    {% else %}
-                                        {{ favorite.userFavorite.firstname }}
-                                    {% endif %}</h4>
-                                <h6 class="card-subtitle mb-2 mt-3 text-muted"><i
-                                            class="fas fa-map-marker-alt primary-color"></i>{{ favorite.userFavorite.city }}</h6>
-                                <p class="card-text mt-3">{{ favorite.userFavorite.dutiesToString }}</p>
+                             alt="image de {{ favorite.userFavorite.firstname }}">
+                        <div class="star">
+                            <a href="{{ path('search_like', {'id' : favorite.userFavorite.id}) }}"
+                               class="btn btn-link js-like">
+                                <div class="col-md-1 col-sm-12 mt-2">
+                                    <span class="js-likes">{{ favorite.userFavorite.followers | length }}</span>
+                                    {% set class="far" %}
+                                    {% if app.user %}
+                                        {% for ConnectedUserFavorites in app.user.followedUsers %}
+                                            {% if favorite == ConnectedUserFavorites.userFavorite %}
+                                                {% set class="fas" %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    <i class="{{ class }} fa-star ml-2"></i>
+                                </div>
                             </a>
                         </div>
-                        <ul class="btn-discover">
-                            <li><a href="{{ path('user_show', {'id': favorite.userFavorite.id}) }}">Découvrir</a></li>
-                        </ul>
                     </div>
-                </a>
+                    <div class="card-infos">
+                        <a href="{{ path('user_show', {'id': favorite.userFavorite.id}) }}">
+                            <h4 class="card-title">{% if favorite.userFavorite.roles.0 == 'ROLE_CREATOR' %}
+                                    {{ favorite.userFavorite.brand.name }}
+                                {% else %}
+                                    {{ favorite.userFavorite.firstname }}
+                                {% endif %}</h4>
+                            <h6 class="card-subtitle mb-2 mt-3 text-muted"><i
+                                        class="fas fa-map-marker-alt primary-color"></i>{{ favorite.userFavorite.city }}
+                            </h6>
+                            <p class="card-text mt-3">{{ favorite.userFavorite.dutiesToString }}</p>
+                        </a>
+                    </div>
+                    <ul class="btn-discover">
+                        <li><a href="{{ path('user_show', {'id': favorite.userFavorite.id}) }}">Découvrir</a></li>
+                    </ul>
+                </div>
             </div>
         {% endfor %}
     </div>
