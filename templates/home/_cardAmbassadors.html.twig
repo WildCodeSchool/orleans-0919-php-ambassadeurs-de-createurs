@@ -1,49 +1,47 @@
 {% block cardAmbassadors %}
-    <h2 class="ml-3 mr-3 mb-5 pt-4 pb-5 m-md-5 show homepageTitle"> Nos Ambassadeurs</h2>
-    <div class="container-fluid card-ambassador m-0">
+    <h2 class="mx-0 mx-lg-3 mb-lg-5 py-4 show homepageTitle"> Nos Ambassadeurs</h2>
+    <div class="container-fluid card-ambassador mx-0 px-0 mx-lg-2 px-lg-2 w-100">
         <div class="row justify-content-around">
             {% for card in ambassadorCards %}
-                <div class="col-10 col-md-4 col-lg-4 col-xl-4 pt-5">
-                    <a href="{{ path('user_show', {'id': card.id}) }}">
-                        <div class="card-home">
-                            <div class="picture">
-                                <img class="img-fluid" src="
+                <div class="col-10 col-md-6 col-lg-4 col-xl-4 pt-5 d-flex justify-content-center">
+                    <div class="card-home">
+                        <div class="picture">
+                            <img class="img-fluid" src="
                                                     {% if card.picture is null %}
                                             {{ asset('build/placeholder_profil_grey.png') }}
                                             {% else %}
                                             {{ vich_uploader_asset(card, 'pictureFile') }}
                                             {% endif %}" alt="image de {{ card.firstname }}">
-                                <div class="star mr-1">
-                                    <a href="{{ path('search_like', {'id' : card.id}) }}" class="btn btn-link js-like">
-                                        <div class="col-md-1 col-sm-12 mt-2">
-                                            <span class="js-likes mb-2">{{ card.followers | length }}</span>
-                                            {% set class="far" %}
-                                            {% if app.user %}
-                                                {% for favorites in app.user.followedUsers %}
-                                                    {% if card == favorites.userFavorite %}
-                                                        {% set class="fas" %}
-                                                    {% endif %}
-                                                {% endfor %}
-                                            {% endif %}
-                                            <i class="{{ class }} fa-star ml-2"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="card-infos">
-                                <a href="{{ path('user_show', {'id' : card.id}) }}">
-                                    <h4 class="card-title">{{ card.firstname }}</h4>
-                                    <h6 class="card-subtitle mb-2 mt-3 text-muted"><i
-                                                class="fas fa-map-marker-alt primary-color"></i> {{ card.city }}</h6>
-                                    <p class="card-text mt-3">{{ card.dutiesToString }}</p>
+                            <div class="star mr-1">
+                                <a href="{{ path('search_like', {'id' : card.id}) }}" class="btn btn-link js-like">
+                                    <div class="col-md-1 col-sm-12 mt-2">
+                                        <span class="js-likes mb-2">{{ card.followers | length }}</span>
+                                        {% set class="far" %}
+                                        {% if app.user %}
+                                            {% for favorites in app.user.followedUsers %}
+                                                {% if card == favorites.userFavorite %}
+                                                    {% set class="fas" %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        <i class="{{ class }} fa-star ml-2"></i>
+                                    </div>
                                 </a>
                             </div>
-                            <ul class="btn-discover">
-                                <li><a href="{{ path('user_show', {'id': card.id}) }}">Découvrir</a></li>
-                            </ul>
                         </div>
-                    </a>
+
+                        <div class="card-infos">
+                            <a href="{{ path('user_show', {'id' : card.id}) }}">
+                                <h4 class="card-title">{{ card.firstname }}</h4>
+                                <h6 class="card-subtitle mb-2 mt-3 text-muted"><i
+                                            class="fas fa-map-marker-alt primary-color"></i> {{ card.city }}</h6>
+                                <p class="card-text mt-3">{{ card.dutiesToString }}</p>
+                            </a>
+                        </div>
+                        <ul class="btn-discover">
+                            <li><a href="{{ path('user_show', {'id': card.id}) }}">Découvrir</a></li>
+                        </ul>
+                    </div>
                 </div>
             {% endfor %}
         </div>

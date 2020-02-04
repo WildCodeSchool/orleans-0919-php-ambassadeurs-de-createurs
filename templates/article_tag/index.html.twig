@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container">
         <h1 class="text-center m-5">Les étiquettes des articles</h1>
-
+        <a href="{{ path('admin_article_tag_new') }}" class="btn btn-gold mb-5">Créer une étiquette</a>
         <table class="table">
             <thead>
             <tr>
@@ -28,7 +28,5 @@
             {% endfor %}
             </tbody>
         </table>
-
-        <a href="{{ path('admin_article_tag_new') }}" class="btn btn-gold">Créer une étiquette</a>
     </div>
 {% endblock %}

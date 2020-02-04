@@ -232,7 +232,7 @@ div.ambassador {
     flex-direction: column;
     align-items: center;
     background-color: darken($background-secondary, 5%);
-    overflow-x: hidden;
+    overflow: hidden;
 
     .mt-5.show {
         align-self: center;
@@ -276,24 +276,9 @@ div.d-flex.flex-column.mt-5.mapTabs.align-self-center {
     width: 100%;
 }
 
-div.row.reasons {
-    display: flex;
-    justify-content: center;
-
-    .text-reasons {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        .icons-reasons {
-            width: 64px;
-        }
-
-        .col-md-12.reasons {
-            text-align: center;
-        }
-    }
+.icons-reasons {
+    width: 64px;
+    height: 64px;
 }
 
 .star_home {
@@ -375,7 +360,7 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
 
 @media screen and (max-width: 768px) {
 
-    .carousel-image-newsletter {
+    .carousel-image-newsletter, .carousel-image {
         height: auto;
     }
 
@@ -408,6 +393,13 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
 }
 
 .js-likes {
+
+    div.searchBg {
+        .searchImage {
+            height: auto;
+            margin-bottom: 6rem;
+        }
+    }
 
 }
 
@@ -502,11 +494,6 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     color: white;
     transition: all 0.3s ease 0s;
     text-decoration: none;
-}
-
-.card-home .btn-discover li a:hover {
-    color: $primary-color;
-    background-color: $third-color;
 }
 
 /**card-home-creator**/
@@ -672,6 +659,30 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
 
 }
 
+.card-home, .card-home-creator {
+    --card-width:350px;
+    --card-margin:0;
+    width : var(--card-width);
+    margin-left: var(--card-margin);
+}
+
+.card-home-creator .picture::before , .card-home  .picture::before {
+    --card-scale:3;
+    transform: scale(var(--card-scale));
+}
+
+@media screen and (max-width: 1200px) and (min-width: 950px) {
+    --card-width:350px;
+    --card-margin:-30px;
+    --card-scale:3;
+}
+
+@media screen and (max-width: 950px) and (min-width: 770px) {
+    --card-width:300px;
+    --card-margin:-30px;
+    --card-scale:2.8;
+}
+
 @media screen and (max-width: 768px) {
 
     .carousel-image-newsletter {
@@ -731,3 +742,12 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
         margin-bottom: 6rem;
     }
 }
+@media screen and (max-width: 1200px) and (min-width: 768px) {
+    .carousel-caption {
+        position: relative;
+        right: 0;
+        left: 0;
+        bottom: 150px;
+    }
+}
+
