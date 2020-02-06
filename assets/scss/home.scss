@@ -458,6 +458,7 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    object-fit: cover;
     transform: scale(1);
     transition: all 0.9s ease 0s;
     background-color: $third-color;
@@ -554,6 +555,7 @@ button.flex.d-flex.flex-column.btn.btn-gold.mb-4:hover {
     transform: scale(1);
     transition: all 0.9s ease 0s;
     background-color: $third-color;
+    object-fit: cover;
 }
 
 .card-home-creator:hover .picture img {
