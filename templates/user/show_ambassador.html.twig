@@ -15,7 +15,7 @@
                 {% endif %}"
                  alt="{{ user.firstname }}">
             <div class="d-flex justify-content-center">
-            <h2 class="text-center mt-3">{{ user.firstname }}</h2>
+                <h2 class="text-center mt-3">{{ user.firstname }}</h2>
                 <div class="star justify-content-center mb-3">
                     <a href="{{ path('search_like', {'id' : user.id}) }}" class="btn btn-link js-like mb-3">
                         <div class="col-md-1 col-sm-12 mt-2 flex-row-reverse starAmb">
@@ -48,13 +48,17 @@
             </p>
         </div>
         <div class="d-flex justify-content-center">
-            <p class="text-center"><i class="fas fa-donate mr-3 mb-2"></i> Statut souhaité : <em>{{ user.dutiesToString }}.</em></p>
+            <p class="text-center"><i class="fas fa-donate mr-3 mb-2"></i> Statut souhaité :
+                <em>{{ user.dutiesToString }}.</em></p>
         </div>
         <div class="text-center mt-5">
-            {% if user.roleLabel == 'Créateur' and app.user.brand.hasSubscribe == true or is_granted('ROLE_AMBASSADOR')%}
-            <a href="mailto:{{ user.mail }}">
-                <button type="button" class="btn btn-gold">Contacter cet Ambassadeur</button>
-            </a>
+            {% if app.user
+                and app.user.roleLabel == 'Créateur'
+                and app.user.brand.hasSubscribe == true
+                or is_granted('ROLE_AMBASSADOR') %}
+                <a href="mailto:{{ user.mail }}" class="btn btn-gold">
+                    Contacter cet Ambassadeur
+                </a>
             {% else %}
                 <a class="btn btn-inactive mb-3">Contacter cet Ambassadeur</a>
                 <p><em>Vous devez être abonné pour contacter cet ambassadeur.</em></p>
